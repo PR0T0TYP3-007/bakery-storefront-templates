@@ -105,7 +105,7 @@ export function renderHeader(active) {
     openDatePicker({
       leadDays: 0,
       selected: session.state.when,
-      note: `Order before ${merchant.cutoffHour}am and you can collect the same day.`,
+      note: `Order by ${merchant.cutoffHour} and it's yours today.`,
       onSelect: (d) => session.setWhen(d),
     });
   });

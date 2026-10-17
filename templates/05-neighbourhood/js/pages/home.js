@@ -29,6 +29,12 @@ renderHeader('Shop');
 renderFooter();
 mountMobileTicket();
 
+// The homepage title describes the shop, so it has to come from the merchant.
+// chrome.js only swaps the name in front of the dash, which left Corner Crumb
+// advertising Hazel & Rye's bread. Trimmed at the first sentence, because a
+// tagline may be two and a title should not be.
+document.title = `${session.state.merchant.name} — ${session.state.merchant.tagline.split('.')[0]}`;
+
 /* -------------------------------------------------------------------------
    The board
    ------------------------------------------------------------------------- */
@@ -48,7 +54,7 @@ function paintBoard() {
     boardHead() +
     (everyday.length
       ? everyday.map((p) => renderRow(p, { when })).join('')
-      : `<p class="board__empty">Nothing on the board for this day.</p>`);
+      : `<p class="board__empty">Nothing on the board for that day.</p>`);
 
   // The heading must match what the numbers underneath actually mean.
   $('[data-board-foot]').textContent = isToday
@@ -96,7 +102,7 @@ function paintCapabilities() {
   if (!copy) return;
   copy.textContent = merchant.capabilities.delivery
     ? merchant.delivery.note
-    : `We're collection only — from ${merchant.locations.map((l) => l.name).join(' and ')}. No delivery, and we won't pretend otherwise.`;
+    : `Collection only, from ${merchant.locations.map((l) => l.name).join(' and ')}. We'd rather hand it to you over the counter.`;
   copy.previousElementSibling.textContent = merchant.capabilities.delivery
     ? '4 — Or we’ll bike it'
     : '4 — Collection only';

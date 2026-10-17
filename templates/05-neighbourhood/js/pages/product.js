@@ -207,7 +207,7 @@ function run() {
     const check = validateInscription(state.inscription);
     if (!check.ok) {
       $('[data-insc]').focus();
-      toast({ title: 'Check the message', detail: check.reason, tone: 'bad' });
+      toast({ title: 'Have a look at the message', detail: check.reason, tone: 'bad' });
       return;
     }
 
@@ -280,7 +280,7 @@ function run() {
     const btn = $('[data-add-configured]');
     btn.disabled = soldOut;
     btn.textContent = soldOut
-      ? 'Sold out for this day'
+      ? 'Gone for that day'
       : `Add to basket — ${money(price.total)}`;
 
     $('[data-buy-note]').textContent = merchant.capabilities.delivery

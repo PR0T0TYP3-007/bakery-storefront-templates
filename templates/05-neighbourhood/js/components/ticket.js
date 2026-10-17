@@ -42,7 +42,7 @@ export function renderTicket(mount, opts = {}) {
           <span class="label">Your ticket</span>
         </div>
         <div class="ticket__body">
-          <p class="ticket__empty">Nothing on it yet.<br>Add something from the board.</p>
+          <p class="ticket__empty">Nothing on it yet.<br>Pick something off the board.</p>
         </div>
       </div>`;
     lastSignatures = new Set();

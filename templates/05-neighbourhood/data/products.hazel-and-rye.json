@@ -87,7 +87,7 @@
       "occasions": ["everyday"],
       "popular": true,
       "allergens": ["gluten"],
-      "description": "The loaf we built the shop on. Flour, water, salt and a starter that's been going since the week we opened. Out of the oven at five, on the shelf by half seven, usually gone by eleven on a Saturday.",
+      "description": "The loaf we built the shop on. Flour, water, salt and a starter that's been going since the week we opened. Out of the oven at five and on the shelf by half seven — so if you want one on a Saturday, order it the night before.",
       "options": [],
       "defaults": {}
     },
@@ -153,7 +153,7 @@
       "occasions": ["everyday"],
       "popular": true,
       "allergens": ["gluten", "dairy"],
-      "description": "Three days from first fold to the counter. We make about sixty a day and have never once had any left at closing.",
+      "description": "Three days from first fold to the counter. If you want one in the afternoon, order it in the morning.",
       "options": [],
       "defaults": {}
     },
@@ -187,7 +187,7 @@
       "image": "photo-1551024601-bec78aea704b",
       "occasions": ["everyday", "birthday"],
       "allergens": ["gluten", "dairy", "egg"],
-      "description": "Not sophisticated and not trying to be. Friday to Sunday only, because they're a treat and we'd like them to stay that way.",
+      "description": "Not sophisticated and not trying to be. Friday to Sunday only, so they stay a treat.",
       "options": [],
       "defaults": {}
     },

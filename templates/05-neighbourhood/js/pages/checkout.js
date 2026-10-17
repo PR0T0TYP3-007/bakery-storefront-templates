@@ -234,11 +234,11 @@ function run() {
     phone: (v) =>
       v.replace(/\D/g, '').length >= 7 ? null : 'We need a number we can reach you on.',
     email: (v) =>
-      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? null : 'Check the email address.',
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) ? null : 'Have another look at the email — the receipt goes there.',
     card: (v) =>
-      v.replace(/\s/g, '').length >= 15 ? null : 'Enter the long number on the card.',
+      v.replace(/\s/g, '').length >= 15 ? null : 'The long number across the front of the card.',
     expiry: (v) => (/^\d{2}\s*\/?\s*\d{2}$/.test(v.trim()) ? null : 'Use MM / YY.'),
-    cvc: (v) => (/^\d{3,4}$/.test(v.trim()) ? null : 'Three or four digits.'),
+    cvc: (v) => (/^\d{3,4}$/.test(v.trim()) ? null : 'Three digits on the back of the card.'),
   };
 
   function validate() {
@@ -258,19 +258,19 @@ function run() {
     if (state.method === 'pickup' && !state.slot) {
       const el = $('[data-slot-error]');
       el.style.display = 'flex';
-      el.innerHTML = `${icons.alert}<span>Choose a collection time.</span>`;
-      problems.push({ id: 'postcode', label: 'Collection time', msg: 'Choose a collection time.' });
+      el.innerHTML = `${icons.alert}<span>Pick a collection time as well as a day.</span>`;
+      problems.push({ id: 'postcode', label: 'Collection time', msg: 'Pick a collection time as well as a day.' });
     }
 
     if (state.method === 'delivery') {
       if (!state.zone) {
-        problems.push({ id: 'postcode', label: 'Postcode', msg: 'Check your postcode first.' });
+        problems.push({ id: 'postcode', label: 'Postcode', msg: "Pop your postcode in and we'll check we come to you." });
         $('[data-postcode-field]').dataset.invalid = 'true';
         $('[data-postcode-error]').innerHTML = `${icons.alert}<span>Check your postcode first.</span>`;
       }
       const addr = form.elements.address;
       if (state.zone && !addr.value.trim()) {
-        problems.push({ id: 'address', label: 'Address', msg: 'We need somewhere to bring it.' });
+        problems.push({ id: 'address', label: 'Address', msg: 'Where should we bring it?' });
         $('[data-address-field]').dataset.invalid = 'true';
         $('[data-address-error]').innerHTML = `${icons.alert}<span>We need somewhere to bring it.</span>`;
       }
@@ -316,7 +316,7 @@ function run() {
     $('[data-payment-error]').innerHTML = '';
 
     if (!validate()) {
-      toast({ title: 'Some details are missing', detail: 'They are listed at the top.', tone: 'bad' });
+      toast({ title: 'Some details are missing', detail: "They're listed at the top.", tone: 'bad' });
       return;
     }
 
@@ -388,7 +388,7 @@ function run() {
           <div>
             <p><strong>${esc(err.message)}</strong></p>
             <p style="margin-top:var(--s-2)">Your ticket is exactly as you left it and nothing has
-            been charged. Try a different card, or call us on
+            been charged. Try another card, or give us a ring on
             <a class="link" href="tel:${esc(loc.phone.replace(/[^0-9+]/g, ''))}">${esc(loc.phone)}</a>.</p>
           </div>
         </div>`;

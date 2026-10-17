@@ -190,3 +190,42 @@ only join between the two vocabularies — option ids and drawing modes — is `
 no DOM, no jsdom and no transpiler. One `innerHTML` of a three-tier sprinkle-coated cake
 measures around 1.1ms, well under a frame, so diffing would be more code for no gain the
 customer could feel.
+
+---
+
+### D11 — Voice is part of the identity, and it is checked separately
+
+**Decision.** Template 05's customer-facing copy was rewritten from a craftsperson
+explaining their constraints to the person behind the counter telling you what you can
+have. Palette, typography and layout were not touched.
+
+**Why.** D8 added a numeric distance check — ground, display type class, accent chroma,
+separation method — and Template 05's re-skin passed it comfortably. The client still
+had a point, because the thing that made 01 and 05 feel like siblings was never only
+the colours. Strip the styling from either and both said: *we are a small, serious
+bakery, we make a limited amount, and we are strict about our rules.* Almost every
+operational sentence put the bakery in the subject position and stated a limit — "we
+don't ship, and we're not going to pretend otherwise", "the morning's baking is already
+spoken for", "we cap how many orders we take".
+
+That posture is identity. The numeric check cannot see it, so it is now checked on its
+own, with three questions per line:
+
+1. Is the subject the customer or the bakery?
+2. Does the sentence state a limit, or what is possible inside the limit?
+3. Would it survive being said out loud across a counter?
+
+Every fact was kept. The cutoff, the three-mile radius, the capacity caps and the
+allergen statement all still say exactly what they said before.
+
+**The guard that matters.** No jokes, no exclamation marks, no whimsy. That is Template
+02's register, and the entire point of the exercise is not to recreate the problem one
+template to the right. A grep for exclamation marks is part of the check.
+
+**What this does not cover.** The board still reports future-day availability as a
+production count — "40 a day". That is the loudest remaining piece of the old voice,
+but changing it is a behaviour change, not a copy change: D5 deliberately distinguishes
+what is *on the shelf today* from *the size of tomorrow's batch*, and replacing a future
+count with "Plenty left" would invent precisely the precision D5 exists to avoid. Doing
+it properly means availability bands for today, a capability phrasing for future days,
+and thresholds in merchant config.

@@ -44,7 +44,7 @@
       "occasions": ["everyday"],
       "popular": true,
       "allergens": ["gluten", "dairy"],
-      "description": "Three days from first fold to the counter. Gone by ten most mornings.",
+      "description": "Three days from first fold to the counter. They go by ten most mornings, so order one and we'll keep it back for you.",
       "options": [],
       "defaults": {}
     },
@@ -126,7 +126,7 @@
       "image": "photo-1486427944299-d1955d23e34d",
       "occasions": ["everyday"],
       "allergens": ["gluten", "dairy", "egg"],
-      "description": "Divisive, and we're keeping them.",
+      "description": "Divisive. The people who like them really like them.",
       "options": ["pack"],
       "defaults": { "pack": "4" }
     },

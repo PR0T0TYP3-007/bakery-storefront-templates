@@ -83,7 +83,7 @@
   "maxDaysAhead": 60,
   "dailyCapacity": 40,
   "delivery": {
-    "note": "By bike, within three miles of the shop, between 8am and midday.",
+    "note": "Round the corner only — three miles, by bike, mornings, still warm.",
     "freeOver": 40,
     "zones": [
       {
@@ -114,10 +114,10 @@
     "soya",
     "sesame"
   ],
-  "allergenStatement": "Everything is made in one small kitchen that handles gluten, dairy, egg, nuts, soya and sesame. We cannot guarantee any item is free from them.",
+  "allergenStatement": "It's one small kitchen, and it handles gluten, dairy, egg, nuts, soya and sesame. We can't promise anything is free from them — so tell us about an allergy and we'll talk it through with you.",
   "voice": {
     "kicker": "Bellevue Road, London · Since 2014",
-    "headline": "Bread out by half seven.",
-    "lede": "Order before 11am and collect the same day. The board below shows what we're baking — and, when it's today, how much of it is left."
+    "headline": "Your bread's out by half seven.",
+    "lede": "Order by 11 and it's yours today. The board below shows what's baking — and if you're collecting today, how much is left."
   }
 }
