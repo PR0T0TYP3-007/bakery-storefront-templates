@@ -26,94 +26,63 @@ A `.claude/launch.json` is included so the preview pane can start it by name
 
 ## Hosting
 
-Everything here is static — no build step, no server, no environment variables. Any
-static host works.
+**Live: <https://pr0t0typ3-007.github.io/bakery-storefront-templates/>**
 
-**Deploy the whole repository, not one template folder.** Template 01 loads its
-photography and commerce layer from `shared/` via `../../shared/`, so it cannot be
-uploaded on its own. The repo is ~11MB tracked (the walkthrough video is gitignored).
+The deployed site is **Template 01 only**, with its pages at the root. There is no
+chooser and no Template 05 — both are still in the repo, they are just not published.
 
-Once deployed, the URLs are:
+### How it deploys
 
-| | |
-|---|---|
-| Template chooser | `/` |
-| **Template 01 — Editorial Atelier** | `/templates/01-editorial-atelier/` |
-| Template 05 — The Counter | `/templates/05-neighbourhood/` |
-| Template 05, second merchant | `/templates/05-neighbourhood/?merchant=corner-crumb` |
+Push to `main`. [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) runs
+`node build.mjs` and publishes the result to GitHub Pages. No install step: `build.mjs`
+uses only the Node standard library.
 
-All internal paths are relative, so the site works unchanged at a domain root or under a
-sub-path like `user.github.io/repo-name/`.
+`build.mjs` assembles `dist/` from one template — copying its pages to the root, the
+shared commerce JavaScript, and only the photographs that template references (30 of 63
+files, 4.2MB instead of 9.9MB). It rewrites `../../shared/` to `shared/`, strips the
+"All templates" footer link, injects `noindex`, and writes `_headers`, `404.html` and
+`.nojekyll`.
 
-### GitHub Pages
+To publish the other template instead, change the `--template` argument in the workflow:
 
 ```bash
-gh repo create bakery-storefront-templates --private --source=. --remote=origin --push
+node build.mjs --template 05-neighbourhood
 ```
 
-Then in the repository: **Settings → Pages → Source: Deploy from a branch → `main` / `/`
-(root)**. The site appears at `https://<user>.github.io/bakery-storefront-templates/`
-within a minute or two.
+### Three things a project Pages site needs
 
-**`.nojekyll` must stay at the repository root.** GitHub Pages runs Jekyll by default, and
-Jekyll silently skips every path beginning with an underscore. Without that file,
-`templates/05-neighbourhood/js/pages/_page.js` is never published and every Template 05
-page breaks with a module error. It is committed — just do not delete it.
+Worth knowing before changing any of this, because each fails quietly:
 
-Private repositories need a paid GitHub plan to publish Pages. If the account is on the
-free plan, create the repo `--public` instead, or use Netlify below.
+1. **It is served from `/<repo>/`, not a domain root.** Any `href="/"` navigates off the
+   site entirely. The workflow fails the build if one reappears.
+2. **Pages cannot send response headers.** `X-Robots-Tag` in `_headers` does nothing
+   there, so `noindex` is injected into every page's markup instead.
+3. **Jekyll silently drops paths starting with an underscore.** `.nojekyll` prevents it.
 
-### Cloudflare Pages, behind a login *(recommended for a private demo)*
+`_headers` and `_redirects` are kept in the repo. They are inert on GitHub Pages and
+correct again if this moves to Cloudflare or Netlify —
+[docs/deploy-cloudflare.md](docs/deploy-cloudflare.md) has those steps, and
+`functions/_middleware.js` is a Cloudflare Pages password gate that is unused here.
 
-Free, deploys from the private repo, and Cloudflare Access puts real email
-authentication in front of it — the only option here that gives a genuinely private URL
-at no cost. Step-by-step, including the preview-deployment leak to close:
-**[docs/deploy-cloudflare.md](docs/deploy-cloudflare.md)**.
+### Running it locally
 
-Build settings are the same everywhere: **no build command**, **output directory `/`**.
-
-Don't want to hand Cloudflare a card to onboard Zero Trust? `functions/_middleware.js` is a password gate that needs neither — set two environment variables and redeploy. It is inert until configured, so it is already committed and changes nothing.
-
-Once live, `_redirects` gives you short links — `/t1` for Template 01, `/t5` for
-Template 05, `/t5-us` for its second merchant.
-
-### Netlify or Vercel
-
-Connect the repository and leave the build settings empty:
-
-- **Build command:** *(blank)*
-- **Publish directory:** `.`
-
-Or, with no git at all, drag the project folder onto <https://app.netlify.com/drop>.
-
-### Pointing a domain straight at Template 01
-
-If the live site should open on Template 01 rather than the chooser, the cleanest option
-is a host-level redirect rather than moving files, so nothing else breaks.
-
-Netlify — create `_redirects` at the repository root:
-
-```
-/   /templates/01-editorial-atelier/   302
+```bash
+python devserver.py 4321           # the whole repo, both templates
+node build.mjs
+python devserver.py 4322 dist      # exactly what gets deployed
 ```
 
-Vercel — create `vercel.json`:
-
-```json
-{ "redirects": [{ "source": "/", "destination": "/templates/01-editorial-atelier/" }] }
-```
-
-GitHub Pages has no redirect support, so there the chooser stays at `/` and Template 01
-is linked from it. For a client demo the chooser is arguably the better landing page
-anyway — it shows the range.
+`devserver.py` is `http.server` plus `Cache-Control: no-store` and a custom 404, so local
+behaviour matches the host instead of serving stale modules from cache.
 
 ### Before anyone outside the team sees it
 
-- The photography is Unsplash stock standing in for merchant photography.
-- Both bakeries, their staff, press quotes and copy are invented.
-- Payment is simulated; no provider is connected and no money can move.
-- Add `<meta name="robots" content="noindex">` to the template pages, or password-protect
-  the deploy, if it should not be indexed while it is a demo.
+- The repository is **public** and the site has no access control — anyone with the link
+  can open it. It sends `noindex`, which keeps it out of search results but is not
+  protection.
+- Photography is Unsplash stock standing in for merchant photography.
+- The bakery, its staff, press quotes and copy are invented.
+- Checkout is simulated. No provider is connected and no money can move.
 
 ---
 
