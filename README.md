@@ -24,6 +24,85 @@ A `.claude/launch.json` is included so the preview pane can start it by name
 
 ---
 
+## Hosting
+
+Everything here is static — no build step, no server, no environment variables. Any
+static host works.
+
+**Deploy the whole repository, not one template folder.** Template 01 loads its
+photography and commerce layer from `shared/` via `../../shared/`, so it cannot be
+uploaded on its own. The repo is ~11MB tracked (the walkthrough video is gitignored).
+
+Once deployed, the URLs are:
+
+| | |
+|---|---|
+| Template chooser | `/` |
+| **Template 01 — Editorial Atelier** | `/templates/01-editorial-atelier/` |
+| Template 05 — The Counter | `/templates/05-neighbourhood/` |
+| Template 05, second merchant | `/templates/05-neighbourhood/?merchant=corner-crumb` |
+
+All internal paths are relative, so the site works unchanged at a domain root or under a
+sub-path like `user.github.io/repo-name/`.
+
+### GitHub Pages
+
+```bash
+gh repo create bakery-storefront-templates --private --source=. --remote=origin --push
+```
+
+Then in the repository: **Settings → Pages → Source: Deploy from a branch → `main` / `/`
+(root)**. The site appears at `https://<user>.github.io/bakery-storefront-templates/`
+within a minute or two.
+
+**`.nojekyll` must stay at the repository root.** GitHub Pages runs Jekyll by default, and
+Jekyll silently skips every path beginning with an underscore. Without that file,
+`templates/05-neighbourhood/js/pages/_page.js` is never published and every Template 05
+page breaks with a module error. It is committed — just do not delete it.
+
+Private repositories need a paid GitHub plan to publish Pages. If the account is on the
+free plan, create the repo `--public` instead, or use Netlify below.
+
+### Netlify or Vercel
+
+Connect the repository and leave the build settings empty:
+
+- **Build command:** *(blank)*
+- **Publish directory:** `.`
+
+Or, with no git at all, drag the project folder onto <https://app.netlify.com/drop>.
+
+### Pointing a domain straight at Template 01
+
+If the live site should open on Template 01 rather than the chooser, the cleanest option
+is a host-level redirect rather than moving files, so nothing else breaks.
+
+Netlify — create `_redirects` at the repository root:
+
+```
+/   /templates/01-editorial-atelier/   302
+```
+
+Vercel — create `vercel.json`:
+
+```json
+{ "redirects": [{ "source": "/", "destination": "/templates/01-editorial-atelier/" }] }
+```
+
+GitHub Pages has no redirect support, so there the chooser stays at `/` and Template 01
+is linked from it. For a client demo the chooser is arguably the better landing page
+anyway — it shows the range.
+
+### Before anyone outside the team sees it
+
+- The photography is Unsplash stock standing in for merchant photography.
+- Both bakeries, their staff, press quotes and copy are invented.
+- Payment is simulated; no provider is connected and no money can move.
+- Add `<meta name="robots" content="noindex">` to the template pages, or password-protect
+  the deploy, if it should not be indexed while it is a demo.
+
+---
+
 ## Structure
 
 ```
