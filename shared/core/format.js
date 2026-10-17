@@ -86,3 +86,22 @@ export function list(items, type = 'conjunction') {
   if (typeof Intl.ListFormat !== 'function') return items.join(', ');
   return new Intl.ListFormat(cfg.locale, { style: 'long', type }).format(items);
 }
+
+/**
+ * `whenPhrase` for use in the middle of a sentence.
+ *
+ * Only "Today" and "Tomorrow" are lowercased. The weekday and the month are
+ * proper nouns in English and stay capitalised, so a blanket `.toLowerCase()`
+ * on the result of `whenPhrase` produces "thursday 22 october".
+ * @param {Date} d
+ */
+export function whenPhraseMid(d) {
+  const w = dayWord(d);
+  return w === 'Today' || w === 'Tomorrow' ? `${w.toLowerCase()}, ${dateLong(d)}` : dateLong(d);
+}
+
+/** `dayWord` for use mid-sentence, for the same reason. */
+export function dayWordMid(d) {
+  const w = dayWord(d);
+  return w === 'Today' || w === 'Tomorrow' ? w.toLowerCase() : w;
+}

@@ -6,7 +6,7 @@
  */
 
 import { icons, wheatMark } from './icons.js';
-import { duration, dayWord, date as fmtDate } from '../../../../shared/core/format.js';
+import { duration, dayWord, date as fmtDate, dayWordMid } from '../../../../shared/core/format.js';
 import { msUntilHour, today, sameDay } from '../../../../shared/core/dates.js';
 import { earliestFor } from '../../../../shared/core/fulfilment.js';
 import * as session from '../services/session.js';
@@ -152,7 +152,7 @@ function startCutoff() {
     const soonest = earliestFor(merchant, 0);
     forEl.textContent = sameDay(soonest, today())
       ? 'for collection today'
-      : `for ${dayWord(soonest).toLowerCase()}`;
+      : `for ${dayWordMid(soonest)}`;
   };
 
   tick();

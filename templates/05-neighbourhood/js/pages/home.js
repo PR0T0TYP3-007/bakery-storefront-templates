@@ -13,7 +13,7 @@ import {
 } from '../components/board.js';
 import { renderTicket, bindTicket, mountMobileTicket } from '../components/ticket.js';
 import { toast } from '../components/toast.js';
-import { dayWord, date as fmtDate, whenPhrase } from '../../../../shared/core/format.js';
+import { dayWord, date as fmtDate, whenPhrase, dayWordMid } from '../../../../shared/core/format.js';
 import { today, sameDay, dateKey } from '../../../../shared/core/dates.js';
 import { shelf } from '../../../../shared/core/fulfilment.js';
 
@@ -150,7 +150,7 @@ bindAdd(document, (product, movedTo) => {
     title: `${product.name} added`,
     detail: movedTo
       ? `Needs more notice — set for ${whenPhrase(movedTo)}.`
-      : `Collect ${dayWord(session.state.when).toLowerCase()}.`,
+      : `Collect ${dayWordMid(session.state.when)}.`,
   });
 });
 
