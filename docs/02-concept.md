@@ -1,6 +1,7 @@
-# Template 05 — "The Counter"
+# Template 05 — The Modern Neighbourhood Bakery
 
-Concept and art direction for the Modern Neighbourhood Bakery.
+Concept and art direction. The brief names this direction; **"The Counter"** is our
+concept for it, the way "every cake, catalogued" is Template 01's.
 
 ---
 

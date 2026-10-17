@@ -1,7 +1,7 @@
-# Template 05 — The Counter
+# Template 05 — The Modern Neighbourhood Bakery
 
-**The Modern Neighbourhood Bakery.** A static storefront built as a board you read and a
-ticket that builds.
+The brief's fifth direction. Our concept for it is **The Counter**: a static storefront
+built as a board you read and a ticket that builds.
 
 Plain HTML, CSS and ES modules. No framework, no build step, no backend.
 

@@ -35,7 +35,7 @@ the working storefront.
 | | | |
 |---|---|---|
 | Template 01 | The Editorial Atelier | Crumb Atelier, Brooklyn |
-| Template 05 | The Counter | Hazel & Rye, London |
+| Template 05 | The Modern Neighbourhood Bakery | Hazel & Rye, London |
 
 ### How it deploys
 
@@ -149,10 +149,10 @@ Where the direction came from, and how to defend it:
 Made-to-order only. Multi-day lead times (1–7 days), full configuration on every cake,
 gifting with recipient details, delivery zones, NYC sales tax.
 
-## Template 05 — The Counter
+## Template 05 — The Modern Neighbourhood Bakery
 
-**Hazel & Rye**, London. The Modern Neighbourhood Bakery: a shop you use weekly, built as
-a board you read and a ticket that builds.
+**Hazel & Rye**, London. Our concept for this direction is **The Counter**: a shop you
+use weekly, built as a board you read and a ticket that builds.
 
 | | |
 |---|---|

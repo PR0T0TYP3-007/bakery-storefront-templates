@@ -216,7 +216,7 @@ export function renderFooter() {
         </div>
 
         <div class="foot__end">
-          <p>© ${new Date().getFullYear()} ${esc(merchant.name)} — Template 05, The Counter</p>
+          <p>© ${new Date().getFullYear()} ${esc(merchant.name)} — Template 05, The Modern Neighbourhood Bakery</p>
           <p><a href="../../index.html">All templates</a> · Demonstration shop, no orders are processed</p>
         </div>
       </div>

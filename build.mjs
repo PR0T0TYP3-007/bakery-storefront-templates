@@ -44,6 +44,13 @@ if (ONLY && !ALL_TEMPLATES.includes(ONLY)) {
 
 const TEMPLATES = ONLY ? [ONLY] : ALL_TEMPLATES;
 
+/* Display names come from the brief, not from the folder slug. "The Counter"
+   is Template 05's creative concept, not its name. */
+const TEMPLATE_NAMES = {
+  '01-editorial-atelier': 'The Editorial Atelier',
+  '05-neighbourhood': 'The Modern Neighbourhood Bakery',
+};
+
 /* Files inside a template that exist for development only. */
 const TEMPLATE_JUNK = ['package.json', 'tests', 'README.md', 'node_modules'];
 
@@ -202,7 +209,7 @@ if (ONLY) {
     `<a class="btn" href="${BASE}">All templates</a>` +
     TEMPLATES.map(
       (t) =>
-        `\n      <a class="btn btn--quiet" href="${BASE}templates/${t}/">${t.replace(/^\d+-/, '').replace(/-/g, ' ')}</a>`
+        `\n      <a class="btn btn--quiet" href="${BASE}templates/${t}/">${TEMPLATE_NAMES[t] ?? t}</a>`
     ).join('');
 
   console.log(`  templates ${TEMPLATES.join(', ')}`);
