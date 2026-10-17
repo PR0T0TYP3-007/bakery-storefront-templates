@@ -28,26 +28,35 @@ A `.claude/launch.json` is included so the preview pane can start it by name
 
 **Live: <https://pr0t0typ3-007.github.io/bakery-storefront-templates/>**
 
-The deployed site is **Template 01 only**, with its pages at the root. There is no
-chooser and no Template 05 — both are still in the repo, they are just not published.
+The deployed site is a **Listed Templates** page with an entry for each template —
+a screenshot, the template name and the company it is built for — linking through to
+the working storefront.
+
+| | | |
+|---|---|---|
+| Template 01 | The Editorial Atelier | Crumb Atelier, Brooklyn |
+| Template 05 | The Counter | Hazel & Rye, London |
 
 ### How it deploys
 
 Push to `main`. [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) runs
-`node build.mjs` and publishes the result to GitHub Pages. No install step: `build.mjs`
-uses only the Node standard library.
+`build.mjs` and publishes the result. No install step: it uses only the Node standard
+library.
 
-`build.mjs` assembles `dist/` from one template — copying its pages to the root, the
-shared commerce JavaScript, and only the photographs that template references (30 of 63
-files, 4.2MB instead of 9.9MB). It rewrites `../../shared/` to `shared/`, strips the
-"All templates" footer link, injects `noindex`, and writes `_headers`, `404.html` and
-`.nojekyll`.
-
-To publish the other template instead, change the `--template` argument in the workflow:
+`build.mjs` assembles `dist/`, leaving development files behind, and has two modes:
 
 ```bash
-node build.mjs --template 05-neighbourhood
+node build.mjs                                  # listing page + every template
+node build.mjs --template 01-editorial-atelier  # one template, flattened to the root
+node build.mjs --base /repo-name/               # for a project Pages sub-path
 ```
+
+The workflow passes `--base` from `GITHUB_REPOSITORY`. It also fails the build if a
+template is missing, a preview is missing, `_page.js` did not ship, or a `package.json`
+or `tests` directory leaked into the public output.
+
+Preview screenshots live in `assets/previews/`. Regenerate them after a visual change —
+they are real captures, so a stale one misrepresents the template.
 
 ### Three things a project Pages site needs
 
