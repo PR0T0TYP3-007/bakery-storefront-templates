@@ -167,14 +167,38 @@
 .occasions {
   display: flex;
   gap: var(--s-2);
-  overflow-x: auto;
-  scrollbar-width: thin;
   padding-block: var(--s-3);
-  /* Scroll-snap so a thumb flick lands on a whole chip, not half of one. */
-  scroll-snap-type: x proximity;
-  -webkit-overflow-scrolling: touch;
 }
-.occasions > * { scroll-snap-align: start; flex: none; }
+/* Chips keep their natural width in both modes — a squashed filter chip is
+   unreadable, and these carry a count as well as a label. */
+.occasions > * { flex: none; }
+
+/* Wide enough to wrap: there are eight occasion chips and they need about
+   1300px, which is more than the page is ever given. So they wrap onto a
+   second line rather than hiding behind a scrollbar. Two rows of pills is a
+   filter bar; a horizontal scrollbar across the top of the page is a defect. */
+@media (min-width: 48rem) {
+  .occasions { flex-wrap: wrap; }
+}
+
+/* Narrow: one swipeable line, because wrapping eight chips on a phone costs
+   three or four rows before anything that is actually for sale. The scrollbar
+   is hidden — a partly visible chip at the trailing edge is the affordance,
+   and it is the one that survives on a touch screen, where the scrollbar is
+   not drawn until you are already scrolling. */
+@media (max-width: 47.99rem) {
+  .occasions {
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* Keeps the focus ring on a chip from being clipped by the scroll box. */
+    padding-inline: 3px;
+    margin-inline: -3px;
+  }
+  .occasions::-webkit-scrollbar { display: none; }
+  .occasions > * { scroll-snap-align: start; }
+}
 
 /* --------------------------------------------------------------------------
    Footer
