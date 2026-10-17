@@ -151,6 +151,9 @@ cake is a numbered plate with a maker, a year and a provenance.
 
 Pages: `index` · `collection` · `product` · `cart` · `checkout`
 
+Where the direction came from, and how to defend it:
+[docs/01-editorial-atelier-rationale.md](docs/01-editorial-atelier-rationale.md).
+
 Made-to-order only. Multi-day lead times (1–7 days), full configuration on every cake,
 gifting with recipient details, delivery zones, NYC sales tax.
 
