@@ -1,0 +1,27 @@
+# Cloudflare Pages redirects (Netlify uses the same file and syntax).
+#
+# Short links, so a URL can be pasted into a message or read out in a meeting
+# without anyone mistyping "01-editorial-atelier".
+
+/t1      /templates/01-editorial-atelier/        302
+/t5      /templates/05-neighbourhood/            302
+/t5-us   /templates/05-neighbourhood/?merchant=corner-crumb   302
+
+# Friendlier aliases for the same two things.
+/editorial      /templates/01-editorial-atelier/   302
+/counter        /templates/05-neighbourhood/       302
+/styleguide     /templates/05-neighbourhood/styleguide.html   302
+
+# The chooser stays at / by design: it shows both directions side by side,
+# which is usually the better thing to land a reviewer on.
+#
+# To make the site open straight on Template 01 instead, uncomment the line
+# below. Keep it LAST — these rules are matched top to bottom, and a rule on
+# "/" placed earlier would shadow nothing but is clearer at the end.
+#
+# /   /templates/01-editorial-atelier/   302
+
+# No catch-all splat rule here on purpose. A `/*` rule can shadow static asset
+# serving on Cloudflare Pages, which would be a miserable thing to discover
+# from a live demo. Both Cloudflare and Netlify serve /404.html automatically
+# for unmatched paths, so that file does the job with no rule at all.

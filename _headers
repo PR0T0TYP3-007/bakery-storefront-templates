@@ -1,0 +1,65 @@
+# Cloudflare Pages headers
+# Read from the build output directory (the repo root for this project).
+# Netlify uses the same file and syntax, so this works on either host.
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: SAMEORIGIN
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+
+  # This is a demonstration build. Remove this line when it becomes a real
+  # storefront, or search engines will keep ignoring it after launch.
+  X-Robots-Tag: noindex, nofollow
+
+# --- HTML -------------------------------------------------------------------
+# Always revalidate. These pages are the thing most likely to change between
+# one person looking at the demo and the next.
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/
+  Cache-Control: public, max-age=0, must-revalidate
+
+# --- CSS, JS and data -------------------------------------------------------
+# Deliberately NOT long-cached: these filenames carry no content hash, so a
+# long max-age would serve stale modules after an edit with no way to bust it.
+# Revalidation is cheap (304s) and this project has no build step to add
+# hashing. If a bundler is introduced later and filenames become hashed, switch
+# these to `max-age=31536000, immutable`.
+/*.css
+  Cache-Control: public, max-age=0, must-revalidate
+
+/*.js
+  Cache-Control: public, max-age=0, must-revalidate
+
+/*.json
+  Cache-Control: public, max-age=0, must-revalidate
+
+# --- Fonts and photography --------------------------------------------------
+# Stable filenames that effectively never change, so cache them hard.
+/templates/05-neighbourhood/assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+
+/shared/img/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# --- Content Security Policy ------------------------------------------------
+# Left commented because it cannot be verified before deploying, and one of the
+# directives has a real trade-off worth making knowingly.
+#
+# `style-src` needs 'unsafe-inline': both templates use inline style attributes
+# and the chooser page has a <style> block.
+#
+# `script-src 'self'` will block the inline JSON-LD block in
+# templates/05-neighbourhood/index.html. Nothing breaks visually — the page
+# just loses its structured data for search engines. Since this build is
+# already noindex, that is an acceptable trade for not needing
+# 'unsafe-inline' on scripts. Revisit when it goes live for real.
+#
+# To enable, uncomment the two lines below and redeploy, then check the
+# browser console on Template 01 and Template 05 before sharing the link.
+#
+# /*
+#   Content-Security-Policy: default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; script-src 'self'; connect-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'

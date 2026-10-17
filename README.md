@@ -63,6 +63,18 @@ page breaks with a module error. It is committed — just do not delete it.
 Private repositories need a paid GitHub plan to publish Pages. If the account is on the
 free plan, create the repo `--public` instead, or use Netlify below.
 
+### Cloudflare Pages, behind a login *(recommended for a private demo)*
+
+Free, deploys from the private repo, and Cloudflare Access puts real email
+authentication in front of it — the only option here that gives a genuinely private URL
+at no cost. Step-by-step, including the preview-deployment leak to close:
+**[docs/deploy-cloudflare.md](docs/deploy-cloudflare.md)**.
+
+Build settings are the same everywhere: **no build command**, **output directory `/`**.
+
+Once live, `_redirects` gives you short links — `/t1` for Template 01, `/t5` for
+Template 05, `/t5-us` for its second merchant.
+
 ### Netlify or Vercel
 
 Connect the repository and leave the build settings empty:
