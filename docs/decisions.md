@@ -77,19 +77,40 @@ becomes a designed monogram rather than a broken tile.
 
 ---
 
-### D5 — Honest availability: live counts today, batch sizes later
+### D5 — Honest availability: a banded count today, a capability statement later
 
-**Decision.** `shelf()` returns a live falling count only for today. For any future day it
-returns the batch size and whether the day is mostly pre-ordered.
+**Decision.** `shelf()` bands the live count for today — *Plenty left · Going fast · Last
+few · Sold out* — and for any day still to come says only what the shop does: it bakes
+these that morning. Thresholds are fractions of the morning's batch and live in merchant
+config.
 
 **Why.** A shop cannot know how many baguettes will be left next Tuesday. Printing
 "15 left" for a future date is invented precision, and the board stops being worth reading
-the moment a customer notices. The board's heading and footnote change to match what the
-numbers mean.
+the moment a customer notices.
 
-**Consequence.** The low-stock and sold-out states are only visible when browsing today,
-which is correct but means they are easy to miss in a demo. `styleguide.html` shows all
-four states side by side.
+**Revised after the voice work (D11).** The original version answered the honesty problem
+and created a framing one. For future days it printed the batch size — "40 a day" — which
+is a fact about the bakery rather than an answer to the question the customer is asking,
+and it made every future day read as a scarcity notice. It also claimed "Mostly
+pre-ordered" on a hashed one day in eight, which was a specific claim about a specific
+Tuesday invented from a hash: exactly the false precision the rest of the function exists
+to prevent.
+
+Both are gone. Where a product genuinely does go early, that is a property of the product
+(`popular`) and it is said once, in the long label on the product page, as advice rather
+than as a warning — on the board it would put an urgency notice on half the rows.
+
+**Two ways to get fake scarcity, both now guarded by tests.** The first was an absolute
+low-stock threshold, which made half a small shelf say "Only 3 left"; thresholds are
+proportional. The second is subtler: the simulated live count ran to about half the batch,
+which modelled a permanent late afternoon and once put seven of nine rows in an urgent
+band. It now runs to about 80%, and a test asserts that across four batch sizes most of
+the board reads *Plenty left*.
+
+**Consequence.** Today's bands are only visible when browsing today. `styleguide.html`
+renders every band by searching for a product id whose hash lands in it, so the
+demonstration stays on the real code path rather than hand-writing labels that could
+drift away from it.
 
 ---
 
@@ -222,10 +243,12 @@ allergen statement all still say exactly what they said before.
 02's register, and the entire point of the exercise is not to recreate the problem one
 template to the right. A grep for exclamation marks is part of the check.
 
-**What this does not cover.** The board still reports future-day availability as a
-production count — "40 a day". That is the loudest remaining piece of the old voice,
-but changing it is a behaviour change, not a copy change: D5 deliberately distinguishes
-what is *on the shelf today* from *the size of tomorrow's batch*, and replacing a future
-count with "Plenty left" would invent precisely the precision D5 exists to avoid. Doing
-it properly means availability bands for today, a capability phrasing for future days,
-and thresholds in merchant config.
+**What this did not cover, and what happened next.** The board still reported future-day
+availability as a production count — "40 a day" — which was the loudest remaining piece of
+the old voice. It was left alone in the copy pass because changing it is a behaviour
+change: D5 deliberately distinguishes what is *on the shelf today* from *the size of
+tomorrow's batch*, and replacing a future count with "Plenty left" would have invented
+precisely the precision D5 exists to avoid.
+
+It has since been done properly — bands for today, a capability statement for future days,
+thresholds in merchant config — and D5 is revised to match.

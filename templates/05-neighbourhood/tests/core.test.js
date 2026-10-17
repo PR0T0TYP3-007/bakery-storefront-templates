@@ -342,19 +342,116 @@ test('capacity varies across days rather than clustering', () => {
   assert.ok((states.closed ?? 0) > 0, 'Mondays should be closed');
 });
 
-test('shelf tells the truth per day: a count today, a batch size later', () => {
+test('shelf tells the truth per day: a band today, a capability later', () => {
   const now = shelf(merchant, loaf, today());
   assert.equal(now.mode, 'live');
   assert.equal(typeof now.n, 'number');
-  assert.match(now.label, /left today|Sold out today/);
+  assert.ok(['plenty', 'going', 'last', 'gone'].includes(now.band), `unexpected band ${now.band}`);
 
   const later = shelf(merchant, loaf, addDays(today(), 6));
   assert.equal(later.mode, 'batch');
   assert.equal(later.n, undefined, 'never invents a count for a future day');
+  assert.equal(later.short, 'Baked fresh');
 
   const made = shelf(merchant, cake, addDays(today(), 6));
   assert.equal(made.mode, 'made');
   assert.match(made.label, /2 days notice/);
+});
+
+test('a future day never quotes a number, not even the batch size', () => {
+  // The old board said "40 a day" — a fact about the bakery rather than an
+  // answer to "can I have one", and it made every future day read as scarcity.
+  for (let i = 1; i <= 30; i++) {
+    const s = shelf(merchant, loaf, addDays(today(), i));
+    if (s.mode !== 'batch') continue;
+    assert.ok(!/\d/.test(s.short), `short quoted a number: ${s.short}`);
+    assert.ok(!s.short.includes('a day'), `short brought back the production count: ${s.short}`);
+    assert.ok(!s.label.includes(String(loaf.batchSize)), `label leaked the batch size: ${s.label}`);
+  }
+});
+
+test('today bands run in the right order and are all reachable', () => {
+  // Walk a year of today-shaped days by hashing different product ids, which
+  // is how the mock varies the live count.
+  const seen = new Set();
+  for (let i = 0; i < 400; i++) {
+    const s = shelf(merchant, { ...loaf, id: `loaf-${i}` }, today());
+    seen.add(s.band);
+    // Thresholds are a whole number of items, not a raw fraction: a shelf
+    // holds loaves, and "8.8 left" is not a thing anyone can hand over.
+    const lastFew = Math.max(2, Math.ceil(loaf.batchSize * 0.08));
+    const goingFast = Math.ceil(loaf.batchSize * 0.22);
+    if (s.band === 'gone') assert.equal(s.n, 0);
+    if (s.band === 'last') assert.ok(s.n > 0 && s.n <= lastFew);
+    if (s.band === 'going') assert.ok(s.n > lastFew && s.n <= goingFast);
+    if (s.band === 'plenty') assert.ok(s.n > goingFast);
+  }
+  for (const band of ['gone', 'last', 'going', 'plenty']) {
+    assert.ok(seen.has(band), `band ${band} was never reachable`);
+  }
+});
+
+test('the board does not cry wolf: most of it is plenty, at any batch size', () => {
+  // This project has already shipped fake scarcity once, when an absolute
+  // threshold made half a small shelf say "Only 3 left". The second route to
+  // the same bug is a live-count formula that simulates a permanent late
+  // afternoon, which once put seven of nine rows in an urgent band. Guard the
+  // outcome rather than either mechanism.
+  for (const batchSize of [10, 24, 40, 60]) {
+    const tally = {};
+    for (let i = 0; i < 3000; i++) {
+      const s = shelf(merchant, { ...loaf, id: `p-${i}`, batchSize }, today());
+      tally[s.band] = (tally[s.band] ?? 0) + 1;
+    }
+    const share = (k) => (tally[k] ?? 0) / 3000;
+    assert.ok(share('plenty') > 0.45, `batch ${batchSize}: only ${(share('plenty') * 100).toFixed(0)}% plenty`);
+    assert.ok(share('last') < 0.25, `batch ${batchSize}: ${(share('last') * 100).toFixed(0)}% last few is scarcity theatre`);
+    assert.ok(share('gone') < 0.2, `batch ${batchSize}: ${(share('gone') * 100).toFixed(0)}% sold out`);
+  }
+});
+
+test('only the last-few band quotes the remaining count', () => {
+  for (let i = 0; i < 400; i++) {
+    const s = shelf(merchant, { ...loaf, id: `loaf-${i}` }, today());
+    if (s.band === 'last') assert.match(s.label, new RegExp(`Only ${s.n} left today`));
+    else assert.ok(!/\d/.test(s.label), `${s.band} quoted a number: ${s.label}`);
+  }
+});
+
+test('thresholds come from merchant config', () => {
+  const generous = { ...merchant, availability: { lastFewAt: 0.5, lastFewMin: 2, goingFastAt: 0.9 } };
+  let moved = 0;
+  for (let i = 0; i < 200; i++) {
+    const p = { ...loaf, id: `loaf-${i}` };
+    const a = shelf(merchant, p, today()).band;
+    const b = shelf(generous, p, today()).band;
+    if (a !== b) moved++;
+    // A more generous "last few" can only ever widen the urgent bands.
+    if (a === 'plenty') assert.ok(['plenty', 'going', 'last'].includes(b));
+  }
+  assert.ok(moved > 0, 'merchant thresholds had no effect');
+});
+
+test('lastFewMin keeps the band usable on a small batch', () => {
+  // 8% of a batch of ten is 0.8, so a pure fraction would mean "Last few"
+  // could never fire for a product the shop only makes ten of.
+  const small = { ...loaf, batchSize: 10 };
+  let sawLast = false;
+  for (let i = 0; i < 300; i++) {
+    const s = shelf(merchant, { ...small, id: `s-${i}` }, today());
+    if (s.band === 'last') { sawLast = true; assert.ok(s.n <= 2); }
+  }
+  assert.ok(sawLast, 'a batch of ten never reached the last-few band');
+});
+
+test('a popular product gets advice in the long label only', () => {
+  const day = addDays(today(), 5);
+  const plain = shelf(merchant, loaf, day);
+  const popular = shelf(merchant, { ...loaf, popular: true }, day);
+
+  assert.equal(plain.short, popular.short, 'the board stays identical');
+  assert.ok(!plain.label.includes('worth ordering ahead'));
+  assert.match(popular.label, /worth ordering ahead/);
 });
 
 test('shelf reports a product not baked that day', () => {

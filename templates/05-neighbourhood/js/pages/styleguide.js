@@ -11,6 +11,7 @@ import { openDatePicker } from '../components/datepicker.js';
 import { toast } from '../components/toast.js';
 import { icons } from '../components/icons.js';
 import { today, addDays } from '../../../../shared/core/dates.js';
+import { shelf } from '../../../../shared/core/fulfilment.js';
 
 await startPage({ nav: null, mobileTicket: false });
 
@@ -45,9 +46,28 @@ $('[data-swatches]').innerHTML = TOKENS.map(([token, role]) => {
 const real = session.state.catalogue.products;
 const base = real.find((p) => p.kind === 'everyday') ?? real[0];
 
-/** Forces a product into a given shelf state for display purposes. */
+/**
+ * Today's availability band comes from a hash of the product id and the date,
+ * so a fixture cannot simply declare which band it wants. Searching for an id
+ * that lands in the requested band keeps the demonstration on the real code
+ * path — these rows are rendered by the same `shelf()` the shop uses, not by
+ * a hand-written label that could drift away from it.
+ */
+function inBand(band, product) {
+  for (let i = 0; i < 8000; i++) {
+    const id = `sg-${band}-${i}`;
+    if (shelf(session.state.merchant, { ...product, id }, today()).band === band) {
+      return { ...product, id };
+    }
+  }
+  return { ...product, id: `sg-${band}` };
+}
+
 const fixtures = [
-  { ...base, id: 'sg-ok', name: 'Country Sourdough', subtitle: 'Naturally leavened, 48-hour ferment' },
+  { ...inBand('plenty', base), name: 'Plenty left', subtitle: 'Most of the morning’s batch is still on the shelf' },
+  { ...inBand('going', base), name: 'Going fast', subtitle: 'Under a fifth left — the threshold is in merchant config' },
+  { ...inBand('last', base), name: 'Last few', subtitle: 'The only band that quotes the number, because now it matters' },
+  { ...inBand('gone', base), name: 'Sold out today', subtitle: 'Dimmed, but never hidden' },
   {
     ...base,
     id: 'sg-long',
@@ -56,11 +76,29 @@ const fixtures = [
       'A deliberately overlong description, to prove a merchant cannot break the row rhythm by writing too much about their bread.',
   },
   { ...base, id: 'sg-nophoto', name: 'No photograph', subtitle: 'Falls back to a drawn monogram', image: null },
-  { ...base, id: 'sg-out', name: 'Sold out today', subtitle: 'Dimmed, but never hidden', batchSize: 1 },
+  // Any weekday but today's, or the fixture would simply be available and
+  // fall through to a hashed band instead of demonstrating the state.
+  {
+    ...base,
+    id: 'sg-notbaked',
+    name: 'Not baked that day',
+    subtitle: 'A product the shop only makes on other days',
+    availableWeekdays: [(today().getDay() + 2) % 7],
+  },
 ];
 
 $('[data-board]').innerHTML =
-  boardHead() + fixtures.map((p) => renderRow(p, { when: today() })).join('');
+  boardHead(today()) + fixtures.map((p) => renderRow(p, { when: today() })).join('');
+
+/* A future day says what the shop does rather than how many it makes. */
+$('[data-board]').innerHTML += `
+  <p class="sm" style="margin-top:var(--s-4)">And the same board for a day still to come,
+  where there is no shelf yet to count:</p>` +
+  boardHead(addDays(today(), 5)) +
+  [{ ...base, id: 'sg-future', name: 'Baked fresh', subtitle: 'The honest statement for any future day' },
+   { ...base, id: 'sg-future-pop', name: 'Baked fresh, and popular', subtitle: 'Advice appears in the long label on the product page, not here', popular: true }]
+    .map((p) => renderRow(p, { when: addDays(today(), 5) }))
+    .join('');
 
 const cakes = real.filter((p) => p.kind === 'cake').slice(0, 2);
 $('[data-tiles]').innerHTML = cakes.length

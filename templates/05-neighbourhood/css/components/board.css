@@ -223,6 +223,17 @@
   border-radius: 1px;
 }
 
+/* A future day: the shop bakes these that morning. A statement, not a badge. */
+.status[data-state='baked'] {
+  color: var(--ink-3);
+}
+
+.status[data-state='baked']::before {
+  background: none;
+  border: 1.5px solid currentColor;
+  opacity: 0.65;
+}
+
 .status[data-state='made'] {
   color: var(--ink-3);
 }

@@ -93,6 +93,7 @@
   "maxDaysAhead": 30,
   "dailyCapacity": 25,
   "delivery": null,
+  "availability": { "lastFewAt": 0.10, "lastFewMin": 1, "goingFastAt": 0.28 },
   "allergens": [
     "gluten",
     "dairy",

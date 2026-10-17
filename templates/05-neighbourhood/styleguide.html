@@ -103,15 +103,27 @@
 
       <!-- Status -->
       <section class="sg" id="status">
-        <h2 class="t-2">Stock states</h2>
-        <p class="sm">A live count only for today; batch size for any day still to come.
-        Claiming "15 left next Tuesday" would be invented precision.</p>
+        <h2 class="t-2">Availability</h2>
+        <p class="sm">Today the shop knows its shelf, so the live count is banded. For any day
+        still to come there is no shelf yet, so the only honest statement is what the shop
+        does &mdash; it bakes these that morning. Claiming &ldquo;15 left next Tuesday&rdquo;
+        would be invented precision, and a production count (&ldquo;40 a day&rdquo;) answers
+        a question nobody asked.</p>
+        <p class="sm">Thresholds are fractions of the morning&rsquo;s batch and live in merchant
+        config, so a shop that bakes ten and one that bakes sixty get the same meaning rather
+        than the same number.</p>
         <div class="sg__demo cluster--3 cluster">
-          <span class="status" data-state="in">28 left</span>
-          <span class="status" data-state="low">2 left</span>
+          <span class="status" data-state="in">Plenty left</span>
+          <span class="status" data-state="low">Going fast</span>
+          <span class="status" data-state="low">Last few</span>
           <span class="status" data-state="out">Sold out</span>
+          <span class="status" data-state="baked">Baked fresh</span>
+          <span class="status" data-state="out">Not that day</span>
           <span class="status" data-state="made">2 days notice</span>
         </div>
+        <p class="sm" style="margin-top:var(--s-3)">Only the last band quotes a number
+        &mdash; &ldquo;Only 2 left today&rdquo; on the product page &mdash; because that is
+        the point at which the number is the actionable part.</p>
       </section>
 
       <!-- Board -->
@@ -260,7 +272,7 @@
         <a class="link" href="#colour">Colour</a>
         <a class="link" href="#type">Type</a>
         <a class="link" href="#buttons">Buttons</a>
-        <a class="link" href="#status">Stock states</a>
+        <a class="link" href="#status">Availability</a>
         <a class="link" href="#board">The board</a>
         <a class="link" href="#tiles">Cake tiles</a>
         <a class="link" href="#loading">Loading</a>

@@ -106,6 +106,7 @@
       }
     ]
   },
+  "availability": { "lastFewAt": 0.08, "lastFewMin": 1, "goingFastAt": 0.22 },
   "allergens": [
     "gluten",
     "dairy",

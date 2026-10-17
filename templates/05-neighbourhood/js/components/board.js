@@ -113,13 +113,22 @@ export function renderTile(product, { when }) {
   `;
 }
 
-/** Column headings — what makes the board read as a board. */
-export function boardHead() {
+/**
+ * Column headings — what makes the board read as a board.
+ *
+ * The availability column is headed with the day it describes. It used to say
+ * "Today" whatever day was selected, so picking Friday gave a column headed
+ * Today full of statements about Friday.
+ *
+ * @param {Date} [when] the day the board is showing
+ */
+export function boardHead(when) {
+  const heading = when ? dayWord(when) : 'Today';
   return `
     <div class="board__head" aria-hidden="true">
       <span></span>
       <span class="label">Item</span>
-      <span class="label">Today</span>
+      <span class="label">${esc(heading)}</span>
       <span class="label">Price</span>
       <span></span>
     </div>

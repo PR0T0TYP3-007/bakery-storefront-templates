@@ -15,9 +15,12 @@ import {
 } from '../components/board.js';
 import { renderTicket, bindTicket } from '../components/ticket.js';
 import { toast } from '../components/toast.js';
-import { dayWord, date as fmtDate, whenPhrase, dayWordMid } from '../../../../shared/core/format.js';
+import { dayWord, date as fmtDate, whenPhrase, dayWordMid, list } from '../../../../shared/core/format.js';
 import { shelf } from '../../../../shared/core/fulfilment.js';
 import { icons } from '../components/icons.js';
+
+/** Weekday names for the "not baked on a Thursday" notice. */
+const WEEKDAY = new Intl.DateTimeFormat(undefined, { weekday: 'long' });
 
 const boardEl = $('[data-board]');
 boardEl.innerHTML = boardHead() + skeletonRows(8);
@@ -119,7 +122,7 @@ function paintBoard() {
   }
 
   boardEl.innerHTML =
-    boardHead() +
+    boardHead(when) +
     sorted.map((p) => renderRow(p, { when })).join('') +
     (cakes.length
       ? `<div class="section--tight">
@@ -128,13 +131,39 @@ function paintBoard() {
          </div>`
       : '');
 
-  const soldOut = sorted.filter((p) => shelf(merchant, p, when).state === 'out').length;
-  $('[data-note]').innerHTML = soldOut
-    ? `<p class="note note--warn" style="margin-bottom:var(--s-4)">${icons.alert}
-         <span><strong>${soldOut} ${soldOut === 1 ? 'item has' : 'items have'} sold out for
-         ${esc(dayWordMid(when))}.</strong> Pick a later day at the top of the page
-         and they come back.</span></p>`
-    : '';
+  // "Sold out" and "we don't bake that on a Thursday" are different facts and
+  // need different sentences. Before the availability rewrite both arrived as
+  // state 'out', so a future day could claim things had sold out when the
+  // shop simply does not make them that day.
+  const gone = sorted.filter((p) => {
+    const s = shelf(merchant, p, when);
+    return s.mode === 'live' && s.state === 'out';
+  }).length;
+
+  const notBaked = sorted.filter((p) => shelf(merchant, p, when).mode === 'off');
+
+  const notes = [];
+
+  if (gone) {
+    notes.push(`<strong>${gone} ${gone === 1 ? 'thing has' : 'things have'} sold out for
+      ${esc(dayWordMid(when))}.</strong> Pick a later day at the top of the page and
+      they come back.`);
+  }
+
+  if (notBaked.length) {
+    const names = list(notBaked.map((p) => p.name));
+    const bakedOn = list(
+      [...new Set(notBaked.flatMap((p) => p.availableWeekdays ?? []))]
+        .sort((a, b) => ((a + 6) % 7) - ((b + 6) % 7))
+        .map((n) => WEEKDAY.format(new Date(2026, 10, 1 + n)))
+    );
+    notes.push(`<strong>We don&rsquo;t bake ${esc(names)} on a ${esc(dayWordMid(when))}.</strong>
+      ${notBaked.length === 1 ? 'It&rsquo;s' : 'They&rsquo;re'} back on ${esc(bakedOn)}.`);
+  }
+
+  $('[data-note]').innerHTML = notes
+    .map((n) => `<p class="note note--warn" style="margin-bottom:var(--s-4)">${icons.alert}<span>${n}</span></p>`)
+    .join('');
 }
 
 document.addEventListener('click', (e) => {

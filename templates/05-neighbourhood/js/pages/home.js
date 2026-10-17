@@ -51,15 +51,15 @@ function paintBoard() {
   const everyday = catalogue.products.filter((p) => p.kind === 'everyday');
 
   boardEl.innerHTML =
-    boardHead() +
+    boardHead(when) +
     (everyday.length
       ? everyday.map((p) => renderRow(p, { when })).join('')
       : `<p class="board__empty">Nothing on the board for that day.</p>`);
 
-  // The heading must match what the numbers underneath actually mean.
+  // The note under the board has to match what the column above it means.
   $('[data-board-foot]').textContent = isToday
-    ? 'Counts are what is on the shelf right now, and fall through the day as things sell.'
-    : "We haven't baked this yet — these are the batch sizes we plan for.";
+    ? "What's left is what's on the shelf right now, and it goes down through the day."
+    : "We haven't baked these yet. Everything here is made fresh that morning.";
 }
 
 /* -------------------------------------------------------------------------
