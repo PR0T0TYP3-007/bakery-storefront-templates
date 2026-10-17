@@ -96,6 +96,64 @@ happy path tells you the login screen appeared, not that the policy works.
 
 ---
 
+## If you would rather not give Cloudflare a card
+
+Zero Trust's **Free** plan is genuinely free — 50 users, $0/month — but Cloudflare asks
+for a payment method during onboarding as a verification step. If that is a blocker,
+there is a second option already in this repo that needs no Zero Trust and no card.
+
+`functions/_middleware.js` is a Cloudflare Pages Function that puts HTTP Basic Auth in
+front of every path. Pages Functions are on the free plan (100,000 requests/day).
+
+**It is inert until you configure it**, so it is already committed and has changed
+nothing about your live site.
+
+### Turning it on
+
+1. **Pages project → Settings → Variables and Secrets → Production**
+
+   | Variable | Value |
+   |---|---|
+   | `DEMO_USER` | `bakery` — plain text is fine |
+   | `DEMO_PASS` | something long — click **Encrypt** |
+
+2. Add the **same two** under **Preview**, or branch and PR builds stay open while
+   production is locked.
+3. **Deployments → latest → Retry deployment.** Pages only picks up variable changes on
+   a new deployment; editing them alone does nothing.
+4. Open the site in a private window. You should get a browser password prompt.
+
+Also check that `https://<your-project>.pages.dev/functions/_middleware.js` returns a
+404 rather than the source of the file. Cloudflare treats `functions/` as code rather
+than static assets, and this confirms it.
+
+### How it behaves
+
+| Variables set | Result |
+|---|---|
+| Neither | Site served normally — safe to commit without configuring |
+| Only one | Everything refused with an explanation, because that is always a typo |
+| Both | Password prompt on every path |
+
+### Which of the two to use
+
+| | Basic Auth | Cloudflare Access |
+|---|---|---|
+| Card needed | No | Yes, to onboard Zero Trust |
+| Credentials | One password, shared | Per-person email login |
+| Revoke one person | Change it for everyone | Remove them from the policy |
+| Who viewed it | Not recorded | Logged per user |
+| Setup | Two variables, one redeploy | ~5 minutes of dashboard |
+
+For getting an unfinished demo in front of a handful of colleagues, Basic Auth is
+proportionate. If you need to know who opened it, or to cut off one person later, use
+Access.
+
+The logic is covered by `tests/middleware.test.mjs` — run it with
+`node --test tests/middleware.test.mjs`.
+
+---
+
 ## The preview-deployment leak
 
 Cloudflare Pages builds **every branch and every pull request** to its own URL, like

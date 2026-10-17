@@ -72,6 +72,8 @@ at no cost. Step-by-step, including the preview-deployment leak to close:
 
 Build settings are the same everywhere: **no build command**, **output directory `/`**.
 
+Don't want to hand Cloudflare a card to onboard Zero Trust? `functions/_middleware.js` is a password gate that needs neither — set two environment variables and redeploy. It is inert until configured, so it is already committed and changes nothing.
+
 Once live, `_redirects` gives you short links — `/t1` for Template 01, `/t5` for
 Template 05, `/t5-us` for its second merchant.
 
