@@ -1,8 +1,8 @@
-name: Deploy Template 01 to GitHub Pages
+name: Deploy to GitHub Pages
 
 # Pages can serve a branch directly, but this project has a build step:
-# build.mjs assembles a site containing only Template 01, with its pages at the
-# root. So the site is built here and the result published, rather than
+# build.mjs assembles the listing page plus every template, leaving development
+# files behind. So the site is built here and the result published, rather than
 # committing dist/ to the repo.
 
 on:
@@ -32,24 +32,40 @@ jobs:
 
       # No dependencies to install — build.mjs uses only the Node standard
       # library, and the templates themselves have no build step at all.
-      - name: Build Template 01
-        run: node build.mjs
+      # --base is what makes the 404 page's links correct: a project Pages
+      # site is served from /<repo>/, not the domain root.
+      - name: Build
+        run: node build.mjs --base "/${GITHUB_REPOSITORY#*/}/"
 
       - name: Check the build produced something usable
         run: |
-          test -f dist/index.html        || { echo "::error::dist/index.html missing"; exit 1; }
-          test -f dist/404.html          || { echo "::error::dist/404.html missing"; exit 1; }
-          test -f dist/.nojekyll         || { echo "::error::dist/.nojekyll missing"; exit 1; }
-          test -d dist/shared/img        || { echo "::error::photography missing"; exit 1; }
-          # A project Pages site is served from /<repo>/, so a root-relative
-          # link would leave the site entirely.
-          if grep -rn 'href="/"' dist --include=*.html; then
-            echo "::error::root-relative link found; it breaks on a project Pages sub-path"
+          test -f dist/index.html  || { echo "::error::listing page missing"; exit 1; }
+          test -f dist/404.html    || { echo "::error::404 missing"; exit 1; }
+          test -f dist/.nojekyll   || { echo "::error::.nojekyll missing"; exit 1; }
+          test -d dist/shared/img  || { echo "::error::photography missing"; exit 1; }
+
+          for t in 01-editorial-atelier 05-neighbourhood; do
+            test -f "dist/templates/$t/index.html"               || { echo "::error::template $t missing"; exit 1; }
+          done
+
+          # The listing page shows a screenshot of each template.
+          test -f dist/assets/previews/template-01.jpg || { echo "::error::preview 01 missing"; exit 1; }
+          test -f dist/assets/previews/template-05.jpg || { echo "::error::preview 05 missing"; exit 1; }
+
+          # Underscore paths are what Jekyll would drop; .nojekyll prevents it,
+          # but confirm the file actually shipped.
+          test -f dist/templates/05-neighbourhood/js/pages/_page.js             || { echo "::error::_page.js missing — Template 05 will not boot"; exit 1; }
+
+          # Development files must not reach the public site.
+          if find dist \( -name package.json -o -name tests -o -name node_modules \) | grep .; then
+            echo "::error::development files leaked into dist"
             exit 1
           fi
-          echo "pages:  $(ls dist/*.html | wc -l)"
-          echo "images: $(ls dist/shared/img | wc -l)"
-          echo "size:   $(du -sh dist | cut -f1)"
+
+          echo "pages:     $(find dist -name '*.html' | wc -l)"
+          echo "templates: $(ls dist/templates | paste -sd' ')"
+          echo "images:    $(ls dist/shared/img | wc -l)"
+          echo "size:      $(du -sh dist | cut -f1)"
 
       - uses: actions/configure-pages@v5
 

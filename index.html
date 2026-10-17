@@ -3,145 +3,282 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cake Themes — Storefront Templates</title>
-<meta name="description" content="Five storefront templates for independent cake and bakery brands. Two built so far.">
+<title>Listed Templates — Cake &amp; Bakery Storefronts</title>
+<meta name="description" content="Storefront templates for independent cake and bakery brands.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Listed Templates">
+<meta property="og:description" content="Storefront templates for independent cake and bakery brands.">
+<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --paper: #f3efe8;
+    --surface: #fbf8f3;
     --ink: #17140f;
     --ink-2: #574f44;
     --ink-3: #857b6e;
-    --line: rgba(23,20,15,.14);
+    --line: rgba(23, 20, 15, 0.14);
+    --line-2: rgba(23, 20, 15, 0.3);
     --accent: #8a3e2c;
+    --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  * { margin: 0; padding: 0; }
+
   body {
     background: var(--paper);
     color: var(--ink);
-    font-family: Inter, system-ui, sans-serif;
+    font-family: Inter, system-ui, -apple-system, sans-serif;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
+
   img { display: block; max-width: 100%; }
   a { color: inherit; text-decoration: none; }
-  .wrap { max-width: 1180px; margin-inline: auto; padding-inline: clamp(1.25rem,4vw,3rem); }
+  ul { list-style: none; }
+
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; border-radius: 2px; }
+
+  .wrap {
+    width: 100%;
+    max-width: 1160px;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 4vw, 3rem);
+  }
+
   .meta {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: .6875rem; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3);
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--ink-3);
   }
+
+  /* ---------------------------------------------------------------- head */
+  header { padding-block: clamp(3rem, 8vw, 5.5rem) clamp(2rem, 4vw, 3rem); }
+
   h1 {
-    font-family: 'Instrument Serif', serif; font-weight: 400;
-    font-size: clamp(2.5rem,7vw,5rem); line-height: .95; letter-spacing: -.03em;
-    margin-top: 1rem; text-wrap: balance;
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(2.75rem, 8vw, 5rem);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-top: 0.75rem;
   }
-  .lede { max-width: 56ch; margin-top: 1.25rem; color: var(--ink-2); font-size: clamp(1rem,1.4vw,1.1875rem); }
-  header { padding-block: clamp(3rem,8vw,6rem) clamp(2rem,4vw,3rem); }
-  .grid { display: grid; gap: clamp(1.25rem,3vw,2rem); padding-bottom: clamp(3rem,7vw,6rem); }
-  @media (min-width: 820px) { .grid { grid-template-columns: 1fr 1fr; } }
-  .card {
-    display: flex; flex-direction: column;
-    border: 1px solid var(--line); background: #fbf8f3;
-    transition: transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .25s cubic-bezier(.2,.7,.2,1);
+
+  .count {
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--ink);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 2rem;
   }
-  .card--live:hover { transform: translateY(-3px); box-shadow: 0 10px 34px rgba(23,20,15,.12); }
-  .card__shot { aspect-ratio: 16/10; overflow: hidden; background: #e7dfd2; border-bottom: 1px solid var(--line); }
-  .card__shot img { width: 100%; height: 100%; object-fit: cover; }
-  .card__body { padding: clamp(1.25rem,2.5vw,1.75rem); flex: 1; display: flex; flex-direction: column; }
-  .card h2 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 2rem; line-height: 1.02; letter-spacing: -.02em; margin-top: .5rem; }
-  .card p { color: var(--ink-2); margin-top: .6rem; font-size: .9375rem; }
-  .tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1.1rem; }
-  .tag { font-family: 'IBM Plex Mono', monospace; font-size: .625rem; letter-spacing: .1em; text-transform: uppercase;
-         padding: .3rem .6rem; border: 1px solid var(--line); border-radius: 999px; color: var(--ink-2); }
-  .card__foot { margin-top: auto; padding-top: 1.5rem; }
-  .btn {
-    display: inline-flex; align-items: center; gap: .5rem;
-    padding: .85rem 1.4rem; background: var(--ink); color: var(--paper);
-    border-radius: 999px; font-family: 'IBM Plex Mono', monospace;
-    font-size: .75rem; letter-spacing: .12em; text-transform: uppercase;
+
+  /* --------------------------------------------------------------- list */
+  .listing {
+    display: grid;
+    gap: clamp(1.5rem, 3vw, 2.25rem);
+    padding-bottom: clamp(3rem, 7vw, 6rem);
   }
-  .btn:hover { background: var(--accent); }
-  .card--soon { opacity: .62; }
-  .card--soon .card__shot { display: grid; place-items: center; }
-  .soonmark { font-family: 'Instrument Serif', serif; font-size: 3.5rem; color: var(--ink-3); opacity: .45; }
-  footer { border-top: 1px solid var(--line); padding-block: 2rem 3rem; }
+
+  @media (min-width: 56rem) {
+    .listing { grid-template-columns: 1fr 1fr; }
+  }
+
+  .entry {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease),
+      border-color 0.25s var(--ease);
+  }
+
+  .entry:hover {
+    transform: translateY(-3px);
+    border-color: var(--line-2);
+    box-shadow: 0 12px 36px rgba(23, 20, 15, 0.13);
+  }
+
+  .entry:focus-within {
+    border-color: var(--ink);
+  }
+
+  /* The preview is a real screenshot of the template, so the ratio is fixed
+     and the image is taken out of flow — otherwise its intrinsic height
+     stretches the flex item past the ratio and the two entries go uneven. */
+  .entry__preview {
+    position: relative;
+    aspect-ratio: 8 / 5;
+    overflow: hidden;
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .entry__preview img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+  }
+
+  .entry__body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  }
+
+  .entry__name {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin-top: 0.6rem;
+  }
+
+  .entry__company {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    color: var(--ink-2);
+  }
+
+  .entry__company dt {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 0.625rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+  }
+
+  .entry__company dd { font-weight: 500; }
+
+  .entry__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: auto;
+    padding-top: 1.5rem;
+  }
+
+  .view {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    padding: 0.7rem 1.3rem;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 999px;
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: background 0.2s var(--ease);
+  }
+
+  .entry:hover .view { background: var(--accent); }
+
+  /* The whole entry is the link; the button is the visible affordance. */
+  .entry__link::after { content: ''; position: absolute; inset: 0; z-index: 1; }
+  .entry { position: relative; }
+
+  /* -------------------------------------------------------------- footer */
+  footer {
+    border-top: 1px solid var(--line);
+    padding-block: 2rem 3rem;
+  }
+
+  .footnote { max-width: 60ch; margin-top: 0.75rem; color: var(--ink-3); font-size: 0.875rem; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { transition-duration: 0.01ms !important; }
+    .entry:hover { transform: none; }
+  }
 </style>
 </head>
 <body>
 
 <header>
   <div class="wrap">
-    <p class="meta">Cake Themes Templates · Phase 1</p>
-    <h1>Five storefronts.<br>Two of them built.</h1>
-    <p class="lede">Each template is a different answer to what ordering a cake online could feel like. They share the same commerce rules — dates, product-specific lead times, capacity, pricing and cart — and almost nothing else.</p>
+    <p class="meta">Cake &amp; bakery storefronts</p>
+    <h1>Listed Templates</h1>
+    <div class="count">
+      <p class="meta">Two templates available</p>
+      <p class="meta">Select one to view it</p>
+    </div>
   </div>
 </header>
 
 <main class="wrap">
-  <div class="grid">
+  <ul class="listing">
 
-    <a class="card card--live" href="templates/01-editorial-atelier/index.html">
-      <div class="card__shot">
-        <img src="shared/img/photo-1588195538326-c5b1e9f80a1b-md.jpg" alt="" width="800" height="500">
+    <li class="entry">
+      <div class="entry__preview">
+        <img src="assets/previews/template-01.jpg"
+             alt="Preview of The Editorial Atelier: an oversized serif headline reading “Every cake, catalogued” set over a photograph of a chocolate-glazed cake."
+             width="1120" height="700" loading="eager" decoding="async">
       </div>
-      <div class="card__body">
-        <p class="meta">Template 01 · Crumb Atelier</p>
-        <h2>The Editorial Atelier</h2>
-        <p>A cake studio presented as a catalogue raisonné. Plate numbers, makers, provenance. Art-directed, typography-led, premium perception.</p>
-        <div class="tags">
-          <span class="tag">Instrument Serif</span>
-          <span class="tag">Date-first</span>
-          <span class="tag">Full configuration</span>
-          <span class="tag">Gifting</span>
+      <div class="entry__body">
+        <p class="meta">Template 01</p>
+        <h2 class="entry__name">
+          <a class="entry__link" href="templates/01-editorial-atelier/index.html">The Editorial Atelier</a>
+        </h2>
+        <dl class="entry__company">
+          <dt>Company</dt>
+          <dd>Crumb Atelier</dd>
+        </dl>
+        <div class="entry__foot">
+          <span class="meta">Brooklyn, New York</span>
+          <span class="view">View template <span aria-hidden="true">→</span></span>
         </div>
-        <div class="card__foot"><span class="btn">Open template →</span></div>
       </div>
-    </a>
+    </li>
 
-    <a class="card card--live" href="templates/05-neighbourhood/index.html">
-      <div class="card__shot">
-        <img src="shared/img/photo-1549931319-a545dcf3bc73-md.jpg" alt="" width="800" height="500">
+    <li class="entry">
+      <div class="entry__preview">
+        <img src="assets/previews/template-05.jpg"
+             alt="Preview of The Counter: a ruled board listing bread and pastry with prices and stock, beside an order ticket panel."
+             width="1120" height="700" loading="eager" decoding="async">
       </div>
-      <div class="card__body">
-        <p class="meta">Template 05 · Hazel &amp; Rye</p>
-        <h2>The Counter</h2>
-        <p>A board you read and a ticket that builds. Ruled rows for everyday stock, photography only where it sells. Two merchant configs, pure testable core, simulated payment with real failure paths.</p>
-        <div class="tags">
-          <span class="tag">Fraunces</span>
-          <span class="tag">ES modules</span>
-          <span class="tag">Honest stock</span>
-          <span class="tag">37 unit tests</span>
+      <div class="entry__body">
+        <p class="meta">Template 05</p>
+        <h2 class="entry__name">
+          <a class="entry__link" href="templates/05-neighbourhood/index.html">The Counter</a>
+        </h2>
+        <dl class="entry__company">
+          <dt>Company</dt>
+          <dd>Hazel &amp; Rye</dd>
+        </dl>
+        <div class="entry__foot">
+          <span class="meta">Bellevue Road, London</span>
+          <span class="view">View template <span aria-hidden="true">→</span></span>
         </div>
-        <div class="card__foot"><span class="btn">Open template →</span></div>
       </div>
-    </a>
+    </li>
 
-    <div class="card card--soon">
-      <div class="card__shot"><span class="soonmark">02</span></div>
-      <div class="card__body">
-        <p class="meta">Template 02</p>
-        <h2>The Playful Celebration</h2>
-        <p>Joyful, expressive, memorable interactions. Not started — its value lives in bespoke animation, which is not a one-night build.</p>
-      </div>
-    </div>
-
-    <div class="card card--soon">
-      <div class="card__shot"><span class="soonmark">03 · 04</span></div>
-      <div class="card__body">
-        <p class="meta">Templates 03 &amp; 04</p>
-        <h2>Romantic Boutique · Contemporary Studio</h2>
-        <p>Deep personalisation and gifting, and the most experimental of the five. Both still to come.</p>
-      </div>
-    </div>
-
-  </div>
+  </ul>
 </main>
 
 <footer>
   <div class="wrap">
-    <p class="meta">Demonstration storefronts · No orders are processed · Photography is stock, for layout only</p>
+    <p class="meta">Demonstration storefronts · No orders are processed</p>
+    <p class="footnote">
+      Both bakeries, their staff and their copy are invented, and the photography is stock
+      standing in for merchant photography.
+    </p>
   </div>
 </footer>
 

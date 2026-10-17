@@ -8,7 +8,7 @@
       "port": 4321
     },
     {
-      "name": "template-01-dist",
+      "name": "built-site",
       "runtimeExecutable": "python",
       "runtimeArgs": ["devserver.py", "4322", "dist"],
       "port": 4322
