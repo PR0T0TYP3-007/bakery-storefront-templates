@@ -12,10 +12,10 @@ import { imgSrc, qsFirst } from '../components/board.js';
 import { renderTicket, bindTicket } from '../components/ticket.js';
 import { toast } from '../components/toast.js';
 import { icons } from '../components/icons.js';
-import { money, moneyExact, whenPhrase } from '../core/format.js';
-import { describeSelections } from '../core/rules.js';
-import { keyToDate } from '../core/dates.js';
-import { shelf } from '../core/fulfilment.js';
+import { money, moneyExact, whenPhrase } from '../../../../shared/core/format.js';
+import { describeSelections } from '../../../../shared/core/rules.js';
+import { keyToDate } from '../../../../shared/core/dates.js';
+import { shelf } from '../../../../shared/core/fulfilment.js';
 
 await startPage({ nav: null, mobileTicket: false });
 

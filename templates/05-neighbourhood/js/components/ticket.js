@@ -6,8 +6,8 @@
  * exactly what they are buying, when it is ready, and what it costs.
  */
 
-import { money, moneyExact, whenPhrase } from '../core/format.js';
-import { describeSelections } from '../core/rules.js';
+import { money, moneyExact, whenPhrase } from '../../../../shared/core/format.js';
+import { describeSelections } from '../../../../shared/core/rules.js';
 import * as session from '../services/session.js';
 import { icons } from './icons.js';
 import { qsFirst } from './board.js';

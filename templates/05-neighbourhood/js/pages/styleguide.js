@@ -10,7 +10,7 @@ import { renderRow, renderTile, boardHead, skeletonRows } from '../components/bo
 import { openDatePicker } from '../components/datepicker.js';
 import { toast } from '../components/toast.js';
 import { icons } from '../components/icons.js';
-import { today, addDays } from '../core/dates.js';
+import { today, addDays } from '../../../../shared/core/dates.js';
 
 await startPage({ nav: null, mobileTicket: false });
 

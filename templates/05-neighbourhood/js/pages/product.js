@@ -12,15 +12,15 @@ import { imgSrc, qsFirst } from '../components/board.js';
 import { toast } from '../components/toast.js';
 import { openDatePicker } from '../components/datepicker.js';
 import { icons } from '../components/icons.js';
-import { money, whenPhrase, dayWord, list } from '../core/format.js';
-import { shelf, earliestFor, dayState } from '../core/fulfilment.js';
+import { money, whenPhrase, dayWord, list } from '../../../../shared/core/format.js';
+import { shelf, earliestFor, dayState } from '../../../../shared/core/fulfilment.js';
 import {
   optionAvailable,
   reconcileSelections,
   validateInscription,
   allergensFor,
   INSCRIPTION_MAX,
-} from '../core/rules.js';
+} from '../../../../shared/core/rules.js';
 
 await startPage({ nav: 'Shop' });
 

@@ -6,9 +6,9 @@
  */
 
 import { icons, wheatMark } from './icons.js';
-import { duration, dayWord, date as fmtDate } from '../core/format.js';
-import { msUntilHour, today, sameDay } from '../core/dates.js';
-import { earliestFor } from '../core/fulfilment.js';
+import { duration, dayWord, date as fmtDate } from '../../../../shared/core/format.js';
+import { msUntilHour, today, sameDay } from '../../../../shared/core/dates.js';
+import { earliestFor } from '../../../../shared/core/fulfilment.js';
 import * as session from '../services/session.js';
 import { openDatePicker } from './datepicker.js';
 import { qsFirst } from './board.js';

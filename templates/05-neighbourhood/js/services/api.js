@@ -11,8 +11,8 @@
  * placement must move server-side — the client cannot be trusted with them.
  */
 
-import * as fulfilment from '../core/fulfilment.js';
-import { keyToDate, dateKey } from '../core/dates.js';
+import * as fulfilment from '../../../../shared/core/fulfilment.js';
+import { keyToDate, dateKey } from '../../../../shared/core/dates.js';
 
 const BASE = new URL('../../data/', import.meta.url);
 

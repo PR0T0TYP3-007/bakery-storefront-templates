@@ -8,9 +8,9 @@
  */
 
 import { icons } from './icons.js';
-import { date as fmtDate, dateLong, whenPhrase } from '../core/format.js';
-import { startOfDay, today, addDays, dateKey, keyToDate, sameDay } from '../core/dates.js';
-import { dayState, earliestFor, DAY_REASON } from '../core/fulfilment.js';
+import { date as fmtDate, dateLong, whenPhrase } from '../../../../shared/core/format.js';
+import { startOfDay, today, addDays, dateKey, keyToDate, sameDay } from '../../../../shared/core/dates.js';
+import { dayState, earliestFor, DAY_REASON } from '../../../../shared/core/fulfilment.js';
 import * as session from '../services/session.js';
 
 const DOW = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];

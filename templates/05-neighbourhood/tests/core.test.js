@@ -1,5 +1,5 @@
 /**
- * Unit tests for js/core/ — the pure, DOM-free commerce layer.
+ * Unit tests for shared/core/ — the pure, DOM-free commerce layer.
  * Run with: npm test   (node --test tests/)
  */
 
@@ -9,16 +9,16 @@ import assert from 'node:assert/strict';
 import {
   startOfDay, today, addDays, dateKey, keyToDate, sameDay, daysBetween,
   msUntilHour, cutoffPassed,
-} from '../js/core/dates.js';
+} from '../../../shared/core/dates.js';
 
 import {
   leadDaysFor, optionAvailable, reconcileSelections, validateInscription,
   allergensFor, soldOnDay, describeSelections, INSCRIPTION_MAX,
-} from '../js/core/rules.js';
+} from '../../../shared/core/rules.js';
 
-import { priceLine, orderTotals } from '../js/core/pricing.js';
-import { dayState, earliestFor, isClosed, capacityFor, findZone, shelf, slotsFor } from '../js/core/fulfilment.js';
-import { emptyCart, addLine, setQty, removeLine, count, readyBy, staleLines, signature } from '../js/core/cart.js';
+import { priceLine, orderTotals } from '../../../shared/core/pricing.js';
+import { dayState, earliestFor, isClosed, capacityFor, findZone, shelf, slotsFor } from '../../../shared/core/fulfilment.js';
+import { emptyCart, addLine, setQty, removeLine, count, readyBy, staleLines, signature } from '../../../shared/core/cart.js';
 
 /* ---------------------------------------------------------------------------
    Fixtures

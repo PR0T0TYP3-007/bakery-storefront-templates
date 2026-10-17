@@ -6,13 +6,13 @@
  */
 
 import * as api from './api.js';
-import * as cartOps from '../core/cart.js';
-import { namespaced } from '../core/storage.js';
-import { configureFormat } from '../core/format.js';
-import { dateKey, keyToDate } from '../core/dates.js';
-import { earliestFor, dayState } from '../core/fulfilment.js';
-import { leadDaysFor } from '../core/rules.js';
-import { priceLine } from '../core/pricing.js';
+import * as cartOps from '../../../../shared/core/cart.js';
+import { namespaced } from '../../../../shared/core/storage.js';
+import { configureFormat } from '../../../../shared/core/format.js';
+import { dateKey, keyToDate } from '../../../../shared/core/dates.js';
+import { earliestFor, dayState } from '../../../../shared/core/fulfilment.js';
+import { leadDaysFor } from '../../../../shared/core/rules.js';
+import { priceLine } from '../../../../shared/core/pricing.js';
 
 /** @type {{merchant:object, catalogue:object, cart:object, when:Date, locationId:string, store:object}} */
 export const state = {

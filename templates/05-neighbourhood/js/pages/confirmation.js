@@ -8,9 +8,9 @@
 
 import { startPage, $, esc } from './_page.js';
 import * as session from '../services/session.js';
-import { moneyExact, whenPhrase, date as fmtDate } from '../core/format.js';
-import { describeSelections } from '../core/rules.js';
-import { keyToDate } from '../core/dates.js';
+import { moneyExact, whenPhrase, date as fmtDate } from '../../../../shared/core/format.js';
+import { describeSelections } from '../../../../shared/core/rules.js';
+import { keyToDate } from '../../../../shared/core/dates.js';
 
 await startPage({ nav: null, mobileTicket: false });
 

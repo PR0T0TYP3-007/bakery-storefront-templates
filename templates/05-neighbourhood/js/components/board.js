@@ -7,8 +7,8 @@
  */
 
 import { icons } from './icons.js';
-import { money, dayWord } from '../core/format.js';
-import { shelf, earliestFor } from '../core/fulfilment.js';
+import { money, dayWord } from '../../../../shared/core/format.js';
+import { shelf, earliestFor } from '../../../../shared/core/fulfilment.js';
 import * as session from '../services/session.js';
 
 /** Photography lives in the shared store at three widths. */

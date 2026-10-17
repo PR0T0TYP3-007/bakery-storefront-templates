@@ -10,10 +10,10 @@ import * as api from '../services/api.js';
 import { renderTicket } from '../components/ticket.js';
 import { toast } from '../components/toast.js';
 import { icons } from '../components/icons.js';
-import { money, moneyExact, whenPhrase } from '../core/format.js';
-import { orderTotals } from '../core/pricing.js';
-import { slotsFor } from '../core/fulfilment.js';
-import { dateKey } from '../core/dates.js';
+import { money, moneyExact, whenPhrase } from '../../../../shared/core/format.js';
+import { orderTotals } from '../../../../shared/core/pricing.js';
+import { slotsFor } from '../../../../shared/core/fulfilment.js';
+import { dateKey } from '../../../../shared/core/dates.js';
 
 await startPage({ nav: null, mobileTicket: false });
 
