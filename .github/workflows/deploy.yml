@@ -1,0 +1,68 @@
+name: Deploy Template 01 to GitHub Pages
+
+# Pages can serve a branch directly, but this project has a build step:
+# build.mjs assembles a site containing only Template 01, with its pages at the
+# root. So the site is built here and the result published, rather than
+# committing dist/ to the repo.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # lets you redeploy from the Actions tab without a commit
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let a running deploy finish rather than cancelling it half-published.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # No dependencies to install — build.mjs uses only the Node standard
+      # library, and the templates themselves have no build step at all.
+      - name: Build Template 01
+        run: node build.mjs
+
+      - name: Check the build produced something usable
+        run: |
+          test -f dist/index.html        || { echo "::error::dist/index.html missing"; exit 1; }
+          test -f dist/404.html          || { echo "::error::dist/404.html missing"; exit 1; }
+          test -f dist/.nojekyll         || { echo "::error::dist/.nojekyll missing"; exit 1; }
+          test -d dist/shared/img        || { echo "::error::photography missing"; exit 1; }
+          # A project Pages site is served from /<repo>/, so a root-relative
+          # link would leave the site entirely.
+          if grep -rn 'href="/"' dist --include=*.html; then
+            echo "::error::root-relative link found; it breaks on a project Pages sub-path"
+            exit 1
+          fi
+          echo "pages:  $(ls dist/*.html | wc -l)"
+          echo "images: $(ls dist/shared/img | wc -l)"
+          echo "size:   $(du -sh dist | cut -f1)"
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
