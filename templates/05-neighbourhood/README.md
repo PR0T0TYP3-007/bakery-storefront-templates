@@ -86,7 +86,7 @@ data/
   merchant.*.json         What this bakery offers
   products.*.json         Catalogue, option groups, add-ons
 
-assets/fonts/             Fraunces + Public Sans, variable WOFF2, latin subset
+assets/fonts/             Bricolage Grotesque + Public Sans, variable WOFF2, latin
 tests/core.test.js
 ```
 
@@ -130,7 +130,8 @@ machine-generated, and it was also poor merchandising.
 
 ### Type and colour
 
-Display is **Fraunces** (variable, `SOFT 40 / WONK 1`), interface is **Public Sans** —
+Display is **Bricolage Grotesque** (variable, `wdth 92 / opsz 48`), interface is
+**Public Sans** —
 both self-hosted, 148KB total, no third-party connection. Body never below 16px, numerals
 tabular throughout.
 

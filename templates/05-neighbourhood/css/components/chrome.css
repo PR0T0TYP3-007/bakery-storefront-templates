@@ -162,9 +162,18 @@
 /* --------------------------------------------------------------------------
    Collection bar — when you can have it, and how long you have to ask
    -------------------------------------------------------------------------- */
+/* The brand colour, not a tint of the ground. This bar runs across every page,
+   so it is the fastest way to tell this template apart from Template 01 at a
+   glance — and it puts the green somewhere it actually carries the identity
+   rather than only marking status. */
 .collect {
-  background: var(--paper-2);
-  border-bottom: 1px solid var(--rule);
+  background: var(--green);
+  color: #fff;
+  border-bottom: 1px solid var(--green-dark);
+}
+
+.collect .label {
+  color: rgba(255, 255, 255, 0.72);
 }
 
 .collect__inner {
@@ -181,16 +190,23 @@
   gap: var(--s-2);
   min-height: var(--tap);
   padding: 0 0.8rem;
-  background: var(--surface);
-  border: 1.5px solid var(--rule-2);
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
   border-radius: var(--r);
   font-weight: 600;
   font-size: var(--t-sm);
-  transition: border-color var(--t-fast) var(--ease);
+  transition: background var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease);
 }
 
 .collect__btn:hover {
-  border-color: var(--ink);
+  background: rgba(255, 255, 255, 0.24);
+  border-color: #fff;
+}
+
+.collect__btn:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 2px;
 }
 
 .cutoff {
@@ -198,16 +214,18 @@
   align-items: center;
   gap: var(--s-2);
   font-size: var(--t-sm);
-  color: var(--ink-2);
+  color: rgba(255, 255, 255, 0.82);
 }
 
 .cutoff b {
   font-weight: 700;
-  color: var(--ink);
+  color: #fff;
 }
 
+/* Urgency has to stay readable on green, so it brightens rather than turning
+   the clay red that works on the pale ground elsewhere. */
 .cutoff[data-urgent='true'] b {
-  color: var(--clay);
+  color: #ffd79a;
 }
 
 /* --------------------------------------------------------------------------

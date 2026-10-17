@@ -96,7 +96,9 @@ table {
 .t-3 {
   font-family: var(--font-display);
   font-variation-settings: var(--display-settings);
-  font-weight: 600;
+  /* Heavier than the serif wanted. A grotesque needs weight to carry a
+     headline, and the signage register this template is after depends on it. */
+  font-weight: 700;
   letter-spacing: -0.02em;
   text-wrap: balance;
 }
