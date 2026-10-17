@@ -1,6 +1,10 @@
 # Dependencies — nothing here ships to the browser
 node_modules/
 
+# Build output. Cloudflare runs `node build.mjs` on every deploy, so this is
+# regenerated rather than versioned.
+dist/
+
 # Generated demo artefacts.
 # walkthrough.mp4 is ~14MB and regenerable. Git stores binaries in full on
 # every change, so committing it would roughly double the clone size forever.

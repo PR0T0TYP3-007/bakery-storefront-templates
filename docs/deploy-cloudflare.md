@@ -11,6 +11,25 @@ Repo: `PR0T0TYP3-007/bakery-storefront-templates` (private)
 
 ---
 
+## Pages or Workers — they are not the same thing
+
+Cloudflare will deploy a static site either as a **Pages** project
+(`<name>.pages.dev`) or as a **Worker with static assets**
+(`<name>.<account>.workers.dev`). Check which one you have, because one feature below
+differs.
+
+`_headers`, `_redirects` and `404.html` work on both.
+
+**`functions/_middleware.js` is a Pages convention and does nothing on a Worker.** On a
+Workers deployment that file is not executed — and if the whole repo is being served, its
+source is readable at `/functions/_middleware.js`. Using `build.mjs` with an output
+directory of `dist` removes it from the deploy entirely, since it is never copied there.
+
+If you are on Workers and want a password gate, say so — it needs a `_worker.js` at the
+output root rather than the `functions/` directory, which is a different piece of work.
+
+---
+
 ## 1 — Connect the repo
 
 1. <https://dash.cloudflare.com> → **Compute (Workers & Pages)** → **Create** →
@@ -26,13 +45,25 @@ There is no build. The settings must say so, or Cloudflare will try to run one a
 
 | Field | Value |
 |---|---|
-| Project name | `bakery-storefront-templates` (becomes the subdomain) |
+| Project name | becomes the subdomain |
 | Production branch | `main` |
 | Framework preset | **None** |
-| Build command | **leave empty** |
-| Build output directory | `/` |
+| Build command | `node build.mjs` |
+| Build output directory | `dist` |
 
 Nothing goes in environment variables.
+
+`build.mjs` assembles a site containing **only Template 01**, with its pages at the root
+so the bare domain opens on the storefront. It copies the template, the shared JavaScript
+and just the photographs that template references — about 4MB rather than 10 — rewrites
+`../../shared/` to `shared/`, and writes a tailored `_headers` and `404.html`.
+
+The repo is untouched: the chooser page and Template 05 stay in version control and are
+simply not deployed. To publish a different one:
+
+```bash
+node build.mjs --template 05-neighbourhood
+```
 
 ## 3 — Deploy
 
@@ -44,15 +75,12 @@ Site: `https://bakery-storefront-templates.pages.dev`
 
 | Check | Why this one |
 |---|---|
-| `/` shows the chooser | Root serving works |
-| `/t1` lands on Template 01 | `_redirects` was picked up |
-| Template 01 shows photographs | `shared/img/` resolved through `../../` |
-| `/t5` loads and the board fills | `js/pages/_page.js` was published — an underscore path, which is what breaks this on GitHub Pages |
-| `/nonsense` shows "No such plate." | Root `404.html` is being served |
-| Browser console is clean on both | No module or CORS surprises |
-
-If Template 05 renders a bare page with a module error in the console, the underscore file
-was dropped. That should not happen on Cloudflare, but it is the first thing to suspect.
+| `/` opens Template 01 itself | The build flattened it to the root |
+| Photographs load | `shared/img/` resolved after the path rewrite |
+| `/product.html?id=noir` configures and prices | The shared commerce layer came across |
+| `/nonsense` shows "No such plate." | `404.html` is being served |
+| Footer has no "All templates" link | The chooser reference was stripped |
+| Browser console is clean | No module or path surprises |
 
 ---
 

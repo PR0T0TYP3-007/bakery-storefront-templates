@@ -6,6 +6,12 @@
       "runtimeExecutable": "python",
       "runtimeArgs": ["devserver.py", "4321"],
       "port": 4321
+    },
+    {
+      "name": "template-01-dist",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["devserver.py", "4322", "dist"],
+      "port": 4322
     }
   ]
 }
