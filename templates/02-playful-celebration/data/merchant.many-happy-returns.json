@@ -1,0 +1,62 @@
+{
+  "id": "many-happy-returns",
+  "name": "Many Happy Returns",
+  "shortName": "MHR",
+  "tagline": "Celebration cakes, built by you, baked by us",
+  "since": "2017",
+  "locale": "en-GB",
+  "currency": "GBP",
+  "timeZone": "Europe/London",
+  "taxRate": 0,
+  "taxNote": "Most bakery food is zero-rated for VAT in the UK.",
+  "capabilities": {
+    "pickup": true,
+    "delivery": true,
+    "customCakes": true,
+    "inscriptions": true,
+    "gifting": true,
+    "giftPackaging": true,
+    "guestCheckout": true
+  },
+  "locations": [
+    {
+      "id": "northdown",
+      "name": "The Cake Room",
+      "address": "14 Northdown Road, Margate CT9 2RN",
+      "phone": "01843 555 118",
+      "default": true,
+      "slots": ["09:00–11:00", "11:00–13:00", "13:00–15:00", "15:00–17:00"]
+    }
+  ],
+  "email": "hello@manyhappyreturns.co.uk",
+  "hours": [
+    { "day": "Monday", "open": null },
+    { "day": "Tuesday", "open": "09:00", "close": "17:00" },
+    { "day": "Wednesday", "open": "09:00", "close": "17:00" },
+    { "day": "Thursday", "open": "09:00", "close": "17:00" },
+    { "day": "Friday", "open": "09:00", "close": "18:00" },
+    { "day": "Saturday", "open": "08:30", "close": "18:00" },
+    { "day": "Sunday", "open": "10:00", "close": "16:00" }
+  ],
+  "closedWeekdays": [1],
+  "closedDates": ["2026-12-25", "2026-12-26", "2027-01-01"],
+  "cutoffHour": 14,
+  "maxDaysAhead": 120,
+  "dailyCapacity": 14,
+  "delivery": {
+    "note": "Boxed, belted into the van and driven flat. Thanet and Canterbury, mornings only.",
+    "freeOver": 85,
+    "zones": [
+      { "id": "ct9", "label": "Margate & Cliftonville", "prefixes": ["CT9", "CT10"], "fee": 4.5 },
+      { "id": "ct11", "label": "Ramsgate & Broadstairs", "prefixes": ["CT11", "CT12"], "fee": 6.5 },
+      { "id": "ct1", "label": "Canterbury", "prefixes": ["CT1", "CT2", "CT3"], "fee": 9.5 }
+    ]
+  },
+  "allergens": ["gluten", "dairy", "egg", "nuts", "soya", "sesame"],
+  "allergenStatement": "Every cake is made in one kitchen that handles gluten, dairy, egg, nuts, soya and sesame. We cannot promise any cake is free from them, so please tell us about allergies when you order and we will talk it through with you.",
+  "voice": {
+    "kicker": "Northdown Road, Margate · Since 2017",
+    "headline": "Draw the cake. We'll bake that exact one.",
+    "lede": "Pick the tiers, the sponge, the icing and what goes on top, and watch it get built in front of you. Four days' notice, collected from the shop or driven to your door."
+  }
+}

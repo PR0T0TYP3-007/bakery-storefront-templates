@@ -1,0 +1,230 @@
+/* ==========================================================================
+   The cake.
+
+   This is the template's reason to exist. Research for Template 02 found no
+   bakery storefront with a live visual cake preview — the real "build your
+   own cake" pages in the category are plain form selectors that show the
+   customer nothing until the cake arrives. So the configuration step, which
+   is a form in both of our other templates, is a drawing here.
+
+   It is one inline SVG, redrawn by js/components/cake.js. No canvas, no 3D,
+   no dependencies, and it prints and scales because it is vector.
+   ========================================================================== */
+
+.stage {
+  position: relative;
+  background: var(--sun-3);
+  border: var(--stroke);
+  border-radius: var(--r);
+  box-shadow: var(--pop);
+  padding: var(--s-4);
+  overflow: hidden;
+}
+
+/* Confetti behind the cake, drawn with repeating gradients so it costs no
+   requests and no DOM. Deliberately low contrast: it must never compete
+   with the cake or reduce the legibility of the price sitting on it. */
+.stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 12% 18%, var(--berry) 0 3px, transparent 3px),
+    radial-gradient(circle at 82% 12%, var(--grape) 0 3px, transparent 3px),
+    radial-gradient(circle at 68% 76%, var(--mint) 0 3px, transparent 3px),
+    radial-gradient(circle at 24% 84%, var(--tangerine) 0 3px, transparent 3px),
+    radial-gradient(circle at 46% 8%, var(--grape) 0 2px, transparent 2px);
+  background-size: 180px 180px;
+  opacity: 0.16;
+  pointer-events: none;
+}
+
+.stage__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  position: relative;
+  /* The drawing is the hero, so it is allowed to be tall on a phone. */
+  max-height: 62vh;
+  margin-inline: auto;
+}
+
+/* Every moving part of the cake transitions, which is what makes the
+   rebuilding legible rather than a flicker. Transform-only, so it stays off
+   the main thread. */
+.stage__svg [data-anim] {
+  transition: transform var(--mid) var(--ease-pop), opacity var(--mid) linear;
+  transform-box: fill-box;
+  transform-origin: center bottom;
+}
+
+/* A tier arriving pops up from nothing; one leaving is removed outright, so
+   there is no ghost to explain. */
+@keyframes tier-in {
+  from { transform: translateY(14px) scaleY(0.6); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+.stage__svg [data-tier-new] { animation: tier-in var(--slow) var(--ease-pop) both; }
+
+/* Candle flames flicker. This is the one piece of purely delightful motion
+   in the template, and it stops dead under prefers-reduced-motion. */
+@keyframes flicker {
+  0%, 100% { transform: scale(1) translateY(0); opacity: 1; }
+  40% { transform: scale(0.82, 1.14) translateY(-0.5px); opacity: 0.85; }
+  70% { transform: scale(1.08, 0.92); opacity: 1; }
+}
+.flame { animation: flicker 900ms ease-in-out infinite; transform-box: fill-box; transform-origin: center bottom; }
+@media (prefers-reduced-motion: reduce) {
+  .flame { animation: none; }
+  .stage__svg [data-tier-new] { animation: none; }
+}
+
+/* The price, sitting on the stage rather than beside it, because the whole
+   point of a live preview is that the number moves with the drawing. */
+.stage__price {
+  position: absolute;
+  top: var(--s-4);
+  right: var(--s-4);
+  background: var(--surface);
+  border: var(--stroke);
+  border-radius: var(--r-sm);
+  box-shadow: var(--pop-sm);
+  padding: var(--s-2) var(--s-4);
+  text-align: right;
+  rotate: 2deg;
+}
+.stage__amount {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.6rem;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  display: block;
+}
+/* The number flashes when it changes, so a price rise is never silent. */
+@keyframes bumped { 0% { scale: 1; } 40% { scale: 1.14; color: var(--berry); } 100% { scale: 1; } }
+.stage__amount[data-bumped] { animation: bumped var(--slow) var(--ease-pop); }
+
+/* Below the drawing rather than over it: the cake is bottom-heavy once the
+   SVG is capped at 62vh, and an absolutely positioned caption landed on the
+   plate. */
+.stage__caption {
+  position: relative;
+  margin-top: var(--s-3);
+  padding-top: var(--s-3);
+  border-top: var(--stroke-2);
+  font-size: var(--xs);
+  font-weight: 700;
+  color: var(--ink-2);
+  text-wrap: balance;
+}
+
+/* --------------------------------------------------------------------------
+   The choice column
+   -------------------------------------------------------------------------- */
+.choices { display: grid; gap: var(--s-4); }
+
+/* Each step is a numbered panel. The number is drawn, so the sequence is
+   readable without relying on reading order alone. */
+.stepcard {
+  background: var(--surface);
+  border: var(--stroke);
+  border-radius: var(--r);
+  box-shadow: var(--pop-sm);
+  padding: var(--s-4);
+}
+.stepcard__head {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin-bottom: var(--s-4);
+}
+.stepcard__n {
+  flex: none;
+  width: 34px; height: 34px;
+  display: grid;
+  place-items: center;
+  background: var(--grape);
+  color: #fff;
+  border: var(--stroke-2);
+  border-radius: var(--r-pill);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+}
+.stepcard__title { font-family: var(--font-display); font-weight: 600; font-size: var(--t-3); line-height: 1.1; }
+.stepcard__why { font-size: var(--sm); color: var(--ink-2); font-weight: 600; margin-top: 2px; }
+
+/* Tier chooser: three big targets, each a little drawing of what you get. */
+.tiers { display: grid; gap: var(--s-3); grid-template-columns: repeat(3, 1fr); }
+.tier { position: relative; }
+.tier input { position: absolute; inset: 0; opacity: 0; cursor: pointer; margin: 0; }
+.tier__face {
+  display: grid;
+  gap: var(--s-2);
+  justify-items: center;
+  padding: var(--s-3) var(--s-2);
+  background: var(--sun-3);
+  border: var(--stroke-2);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  text-align: center;
+  transition: border-width var(--fast), box-shadow var(--fast), translate var(--fast), background var(--fast);
+}
+.tier input:hover + .tier__face { background: var(--grape-wash); }
+.tier input:focus-visible + .tier__face { outline: 3px solid var(--grape); outline-offset: 3px; }
+.tier input:checked + .tier__face {
+  background: var(--surface);
+  border-width: var(--line);
+  box-shadow: var(--pop-sm);
+  translate: -1px -1px;
+}
+.tier__face svg { display: block; }
+.tier__n { font-family: var(--font-display); font-weight: 600; font-size: var(--sm); }
+.tier__serves { font-size: var(--xs); color: var(--ink-2); font-weight: 700; }
+
+/* The inscription field previews itself on the cake, so it is capped to the
+   number of characters that physically fit on a band of icing. */
+.inscription { display: grid; gap: var(--s-2); }
+
+/* Add-ons: a checkbox list, priced, with the price aligned so the column
+   can be read as a column. */
+.addons { display: grid; gap: var(--s-2); }
+.addon {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-3);
+  background: var(--sun-3);
+  border: var(--stroke-2);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  font-weight: 700;
+  font-size: var(--sm);
+  min-height: 48px;
+  transition: background var(--fast), border-color var(--fast);
+}
+.addon:hover { background: var(--grape-wash); }
+.addon:has(input:checked) { background: var(--surface); border-color: var(--ink); border-width: var(--line); }
+.addon:has(input:focus-visible) { outline: 3px solid var(--grape); outline-offset: 3px; }
+.addon input { width: 22px; height: 22px; flex: none; accent-color: var(--grape); cursor: pointer; }
+.addon__price { margin-inline-start: auto; font-variant-numeric: tabular-nums; font-weight: 800; }
+
+/* The sticky commit bar on the builder. On a phone the cake scrolls away,
+   so the price has to come with the button. */
+.commit {
+  position: sticky;
+  bottom: 0;
+  z-index: 30;
+  background: var(--sun);
+  border-top: var(--stroke);
+  padding-block: var(--s-3);
+  margin-top: var(--s-5);
+}
+.commit__in { display: flex; align-items: center; gap: var(--s-4); flex-wrap: wrap; }
+.commit__price { font-family: var(--font-display); font-weight: 600; font-size: var(--t-3); font-variant-numeric: tabular-nums; }
+.commit__when { font-size: var(--xs); font-weight: 700; color: var(--ink-2); }
+.commit .btn { margin-inline-start: auto; }
+@media (max-width: 34rem) {
+  .commit .btn { margin-inline-start: 0; width: 100%; }
+}

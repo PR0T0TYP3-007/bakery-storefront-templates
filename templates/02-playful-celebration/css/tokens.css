@@ -1,0 +1,127 @@
+/* ==========================================================================
+   Template 02 — The Playful Celebration
+   Tokens. The only file that states a raw value; everything else refers.
+
+   The identity is deliberately distant from the two shipped templates. The
+   check that produced these numbers is in docs/02-playful-celebration.md:
+   ground, display type class, accent chroma and separation method each had
+   to differ from both Template 01 and Template 05.
+
+     ground      sun yellow, not off-white  (192 / 207 channels away)
+     display     rounded geometric, not serif and not grotesque
+     accent      grape violet                (214 / 302 channels away)
+     separation  3px ink outline + solid offset shadow, never a hairline
+   ========================================================================== */
+
+@font-face {
+  font-family: 'Fredoka';
+  src: url('../assets/fonts/fredoka.woff2') format('woff2-variations');
+  font-weight: 300 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Nunito';
+  src: url('../assets/fonts/nunito.woff2') format('woff2-variations');
+  font-weight: 400 800;
+  font-display: swap;
+}
+
+:root {
+  /* ---- Colour -----------------------------------------------------------
+     Discipline note: five bright colours would be a circus. The page runs on
+     sun + ink + grape. Berry, lemon, mint and tangerine are confined to the
+     cake itself, to illustration, and to status — never to decoration. */
+  --sun: #ffd84d;
+  --sun-2: #ffc928;
+  --sun-3: #fff4d1;
+  --surface: #ffffff;
+
+  --ink: #2a1233;
+  --ink-2: #5c4368;
+  --ink-3: #8a7596;
+
+  --grape: #6b2fd4;
+  --grape-dark: #5324ac;
+  --grape-wash: #efe6ff;
+
+  --berry: #e6197a;
+  --lemon: #ffc527;
+  --mint: #0fb880;
+  --tangerine: #ff6b35;
+
+  /* Cake palette. Named after what a customer would call them, because these
+     strings are shown in the builder and read back on the order. */
+  --sponge-vanilla: #f7e2a8;
+  --sponge-chocolate: #6b4328;
+  --sponge-red-velvet: #a8252f;
+  --sponge-lemon: #f6d94a;
+  --sponge-funfetti: #fbeed0;
+
+  --ice-buttercream: #fff6e6;
+  --ice-strawberry: #ffb3cd;
+  --ice-chocolate: #7a4a2b;
+  --ice-mint: #bdf0dc;
+  --ice-lilac: #ded0ff;
+
+  /* ---- Shape ------------------------------------------------------------
+     Two radii, and they mean different things: --r is a panel, --r-pill is a
+     control you press. Template 05's post-mortem found uniform rounding to
+     be the absence of a decision, so there are only two here and they do
+     not overlap. */
+  --r: 18px;
+  --r-sm: 10px;
+  --r-pill: 999px;
+
+  /* The separation method. One ink outline, one solid offset shadow. No
+     blur anywhere in the template — a blurred shadow is what the other two
+     templates avoid by having no shadow at all, and this one avoids by
+     having a shadow that is plainly a drawn shape. */
+  --line: 3px;
+  --stroke: var(--line) solid var(--ink);
+  --stroke-2: 2px solid var(--ink);
+  --pop: 5px 5px 0 var(--ink);
+  --pop-sm: 3px 3px 0 var(--ink);
+  --pop-grape: 5px 5px 0 var(--grape);
+
+  /* ---- Type ------------------------------------------------------------- */
+  --font-display: 'Fredoka', 'Trebuchet MS', 'Segoe UI', sans-serif;
+  --font-body: 'Nunito', 'Segoe UI', system-ui, sans-serif;
+
+  --t-1: clamp(2.6rem, 7vw, 4.6rem);
+  --t-2: clamp(2rem, 4.4vw, 2.9rem);
+  --t-3: clamp(1.3rem, 2.4vw, 1.6rem);
+  --t-4: 1.1rem;
+  --sm: 0.875rem;
+  --xs: 0.78rem;
+
+  /* ---- Space ------------------------------------------------------------
+     A four-step scale. Anything between two steps was a guess. */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.875rem;
+  --s-4: 1.25rem;
+  --s-5: 2rem;
+  --s-6: 3rem;
+  --s-7: 4.5rem;
+  --s-8: 7rem;
+
+  --page: 1200px;
+  --prose: 62ch;
+
+  /* ---- Motion -----------------------------------------------------------
+     "Memorable interactions" is in the brief for this direction, so motion
+     is a feature here rather than a garnish. It is still all opt-out. */
+  --fast: 120ms;
+  --mid: 240ms;
+  --slow: 480ms;
+  --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --fast: 1ms;
+    --mid: 1ms;
+    --slow: 1ms;
+    --ease-pop: linear;
+  }
+}

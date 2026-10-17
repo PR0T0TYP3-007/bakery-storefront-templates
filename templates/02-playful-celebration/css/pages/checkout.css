@@ -1,0 +1,170 @@
+/* ==========================================================================
+   Checkout and confirmation.
+
+   The research this template was built on (Baymard's gifting and checkout
+   work) produced three structural decisions that show up here:
+
+     1. Gift ordering is a first-class branch, not a checkbox at the end.
+        46% of benchmarked sites offer no gift flow at all, and some test
+        participants abandoned orders when they could not mark one.
+     2. The recipient is a different person from the buyer, so their fields
+        are a separate, visually separate group.
+     3. A declined card must not lose the basket. The failure state here
+        keeps every field and says plainly that nothing was charged.
+   ========================================================================== */
+
+/* Numbered groups, so the form reads as a sequence rather than a wall. */
+.group { margin-bottom: var(--s-5); }
+.group__head { display: flex; align-items: center; gap: var(--s-3); margin-bottom: var(--s-4); }
+.group__n {
+  flex: none;
+  width: 32px; height: 32px;
+  display: grid;
+  place-items: center;
+  background: var(--ink);
+  color: var(--sun);
+  border-radius: var(--r-pill);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--sm);
+}
+.group__title { font-family: var(--font-display); font-weight: 600; font-size: var(--t-3); line-height: 1.1; }
+
+/* Two fields on a line where both are short, one where it is not. Never a
+   three-column row — a mobile keyboard makes that a scroll. */
+.pair { display: grid; gap: var(--s-4); }
+@media (min-width: 38rem) { .pair { grid-template-columns: 1fr 1fr; } }
+
+/* The method switch: collect or deliver. Big, drawn, and it says the price
+   of each on the control itself. */
+.methods { display: grid; gap: var(--s-3); }
+@media (min-width: 34rem) { .methods { grid-template-columns: 1fr 1fr; } }
+.method { position: relative; }
+.method input { position: absolute; inset: 0; opacity: 0; cursor: pointer; margin: 0; }
+.method__face {
+  display: grid;
+  gap: var(--s-1);
+  padding: var(--s-4);
+  min-height: 48px;
+  background: var(--sun-3);
+  border: var(--stroke-2);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+}
+.method input:hover + .method__face { background: var(--grape-wash); }
+.method input:focus-visible + .method__face { outline: 3px solid var(--grape); outline-offset: 3px; }
+.method input:checked + .method__face {
+  background: var(--surface);
+  border-color: var(--ink);
+  border-width: var(--line);
+  box-shadow: var(--pop-sm);
+}
+.method__name { font-family: var(--font-display); font-weight: 600; font-size: var(--t-4); }
+.method__meta { font-size: var(--sm); font-weight: 700; color: var(--ink-2); }
+.method__fee { font-variant-numeric: tabular-nums; }
+
+/* The gift branch. Revealed, not hidden-and-shown with display:none, so the
+   fields inside are properly removed from the tab order when closed. */
+.gift { margin-top: var(--s-4); }
+.gift[hidden] { display: none; }
+
+/* A gift note previews itself in the shape of the card it will be written
+   on, because "will my message fit" is the actual question. */
+.giftcard {
+  background: var(--sun-3);
+  border: var(--stroke-2);
+  border-radius: var(--r-sm);
+  padding: var(--s-4);
+  min-height: 92px;
+  font-weight: 700;
+  text-wrap: pretty;
+  white-space: pre-wrap;
+  rotate: -0.8deg;
+}
+.giftcard:empty::before { content: "Your message appears here."; color: var(--ink-3); font-weight: 600; }
+.giftcard__from { display: block; margin-top: var(--s-3); font-size: var(--sm); color: var(--ink-2); }
+
+/* Payment. A simulated card field, clearly labelled as such — the template
+   must never look like it takes real money. */
+.paybox { background: var(--sun-3); border: var(--stroke-2); border-radius: var(--r-sm); padding: var(--s-4); }
+.paybox__head { display: flex; align-items: center; gap: var(--s-3); margin-bottom: var(--s-3); }
+.paybox__sim {
+  font-size: var(--xs);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--ink);
+  color: var(--sun);
+  padding: 2px var(--s-2);
+  border-radius: 4px;
+}
+.paybox__cards { display: flex; gap: var(--s-2); flex-wrap: wrap; margin-inline-start: auto; }
+.paybox__test { margin-top: var(--s-3); font-size: var(--xs); font-weight: 700; color: var(--ink-2); }
+.paybox__test code { background: var(--surface); border: 1px solid var(--ink-3); border-radius: 4px; padding: 1px 4px; }
+
+/* The order summary beside the form. Collapsible on a phone, where it would
+   otherwise push the first field below the fold. */
+.summary__lines { display: grid; gap: var(--s-3); }
+.summary__line { display: grid; grid-template-columns: 1fr auto; gap: var(--s-3); align-items: start; }
+.summary__name { font-weight: 800; font-size: var(--sm); }
+.summary__spec { font-size: var(--xs); color: var(--ink-2); font-weight: 600; }
+
+.summary__toggle {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: var(--s-3);
+  background: none;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  min-height: 44px;
+}
+.summary__toggle svg { transition: rotate var(--fast); }
+.summary__toggle[aria-expanded="true"] svg { rotate: 180deg; }
+@media (min-width: 60rem) {
+  .summary__toggle { display: none; }
+  .summary__body[hidden] { display: revert !important; }
+}
+
+/* --------------------------------------------------------------------------
+   Confirmation
+   -------------------------------------------------------------------------- */
+.done { text-align: center; padding-block: var(--s-6) var(--s-5); }
+.done__ref {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--t-3);
+  background: var(--surface);
+  border: var(--stroke);
+  border-radius: var(--r-sm);
+  box-shadow: var(--pop-sm);
+  padding: var(--s-2) var(--s-4);
+  rotate: -1.5deg;
+  margin-bottom: var(--s-4);
+}
+.done h1 { text-wrap: balance; }
+.done p { max-width: 54ch; margin-inline: auto; }
+
+/* Confetti burst on arrival. Pure CSS, twelve spans, and it runs once. */
+.burst { position: relative; height: 0; }
+.burst i {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 9px; height: 14px;
+  border-radius: 2px;
+  background: var(--c, var(--berry));
+  animation: fly 1100ms var(--ease-pop) both;
+  animation-delay: var(--d, 0ms);
+}
+@keyframes fly {
+  from { translate: 0 0; rotate: 0deg; opacity: 1; }
+  to { translate: var(--x) var(--y); rotate: var(--r2); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) { .burst { display: none; } }
+
+.receipt { margin-top: var(--s-5); }
+.receipt__lines { margin-top: var(--s-4); }

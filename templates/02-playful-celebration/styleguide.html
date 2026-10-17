@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Style guide — Many Happy Returns</title>
+<meta name="robots" content="noindex">
+
+<link rel="preload" href="assets/fonts/fredoka.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/nunito.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/card.css">
+<link rel="stylesheet" href="css/components/cake.css">
+<link rel="stylesheet" href="css/components/overlay.css">
+<link rel="stylesheet" href="css/pages/checkout.css">
+</head>
+<body>
+
+<header class="chrome" data-chrome></header>
+
+<main id="main">
+  <div class="shell section--tight">
+    <h1 class="t-2">Style guide</h1>
+    <p class="lede quiet" style="margin-top:var(--s-2);max-width:60ch">
+      Every component against deliberately awkward content, so the states that only
+      appear on the wrong day — or with the wrong text in them — are all visible in
+      one place rather than discovered in production.
+    </p>
+  </div>
+
+  <section class="shell section--tight">
+    <h2 class="t-3">Colour</h2>
+    <p class="sm quiet" style="margin-top:var(--s-2);max-width:56ch">
+      The page runs on sun, ink and grape. The confetti colours are confined to the
+      cake, to illustration and to status — never to decoration.
+    </p>
+    <div class="grid" style="margin-top:var(--s-4)" data-swatches></div>
+  </section>
+
+  <section class="shell section--tight">
+    <h2 class="t-3">Contrast</h2>
+    <p class="sm quiet" style="margin-top:var(--s-2)">
+      Measured live from the tokens, not copied from a spreadsheet. Anything below
+      4.5:1 for body text is a bug.
+    </p>
+    <div class="panel panel--flat" style="margin-top:var(--s-4);overflow-x:auto" data-contrast></div>
+  </section>
+
+  <section class="shell section--tight">
+    <h2 class="t-3">Type</h2>
+    <div class="panel" style="margin-top:var(--s-4)">
+      <p class="t-1">Draw the cake</p>
+      <p class="t-2">Draw the cake</p>
+      <p class="t-3">Draw the cake</p>
+      <p class="t-4">Draw the cake</p>
+      <p style="margin-top:var(--s-3)">Body. Nunito at 500, because 400 reads thin on a saturated ground.</p>
+      <p class="sm">Small — captions, notes, the things under a price.</p>
+      <p class="xs">Extra small — counts, legal, the allergen line in a footer.</p>
+      <p class="label" style="margin-top:var(--s-3)">Label, uppercase</p>
+      <p style="margin-top:var(--s-3)">A <span class="marked">crayon underline</span> for emphasis, which survives a monochrome print.</p>
+    </div>
+  </section>
+
+  <section class="shell section--tight">
+    <h2 class="t-3">Buttons</h2>
+    <div class="panel" style="margin-top:var(--s-4)">
+      <div class="row">
+        <button class="btn btn--loud" type="button">Add to basket</button>
+        <button class="btn btn--primary" type="button">Primary</button>
+        <button class="btn" type="button">Default</button>
+        <button class="btn btn--ink" type="button">Ink</button>
+        <button class="btn btn--quiet" type="button">Quiet</button>
+        <button class="btn btn--sm" type="button">Small</button>
+        <button class="btn" type="button" disabled>Disabled</button>
+        <button class="btn btn--primary" type="button" aria-busy="true"><span>Working…</span></button>
+      </div>
+      <p class="sm quiet" style="margin-top:var(--s-4)">
+        Everything pressable carries an ink outline and a solid offset shadow, and pressing
+        it moves the element onto its own shadow. There is no blur anywhere in the template.
+      </p>
+    </div>
+  </section>
+
+  <section class="shell section--tight">
+    <h2 class="t-3">The cake, in every finish</h2>
+    <p class="sm quiet" style="margin-top:var(--s-2)">
+      One renderer, six option groups. These are drawn from the same data the builder uses.
+    </p>
+    <div class="grid" style="margin-top:var(--s-4)" data-cakes></div>
+  </section>
+
+  <section class="shell section--tight">
+    <h2 class="t-3">Cards, against hostile content</h2>
+    <div class="grid" style="margin-top:var(--s-4)" data-cards></div>
+  </section>
+
+  <section class="shell section--tight">
+    <h2 class="t-3">Controls</h2>
+    <div class="grid grid--2" style="margin-top:var(--s-4)">
+      <div class="panel">
+        <p class="label" style="margin-bottom:var(--s-3)">Swatches</p>
+        <div data-swatch-demo></div>
+      </div>
+      <div class="panel">
+        <p class="label" style="margin-bottom:var(--s-3)">Fields</p>
+        <label class="field">
+          <span class="field__label" for="sg-ok">Normal</span>
+          <input class="input" id="sg-ok" value="Nour">
+        </label>
+        <label class="field">
+          <span class="field__label" for="sg-bad">With an error</span>
+          <input class="input" id="sg-bad" value="nour@" aria-invalid="true">
+          <span class="err" data-demo-err></span>
+        </label>
+        <p class="label" style="margin:var(--s-4) 0 var(--s-2)">Quantity</p>
+        <div class="step" role="group" aria-label="Demo quantity">
+          <button type="button" disabled>−</button><output>1</output><button type="button">+</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="shell section--tight">
+    <h2 class="t-3">Notices</h2>
+    <div class="stack" style="margin-top:var(--s-4)" data-notes></div>
+  </section>
+
+  <section class="shell section--tight">
+    <h2 class="t-3">Overlays</h2>
+    <div class="panel" style="margin-top:var(--s-4)">
+      <div class="row">
+        <button class="btn" type="button" data-demo-picker>Open the date picker</button>
+        <button class="btn" type="button" data-demo-slots>Picker with collection windows</button>
+        <button class="btn" type="button" data-demo-toast>Toast</button>
+        <button class="btn" type="button" data-demo-toast-bad>Toast, bad news</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="shell section--tight">
+    <h2 class="t-3">Empty state</h2>
+    <div style="margin-top:var(--s-4)">
+      <div class="empty">
+        <p class="t-3">Nothing matches that</p>
+        <p class="sm" style="margin-top:var(--s-2)">An empty state names the way out, and links to it.</p>
+        <div class="row" style="justify-content:center;margin-top:var(--s-4)">
+          <a class="btn btn--primary" href="build.html">Build it yourself</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer" data-footer></footer>
+
+<script type="module" src="js/pages/styleguide.js"></script>
+</body>
+</html>

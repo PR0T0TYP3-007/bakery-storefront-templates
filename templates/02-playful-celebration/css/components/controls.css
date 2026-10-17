@@ -1,0 +1,364 @@
+/* ==========================================================================
+   Controls — panels, buttons, chips, fields, swatches, steppers, notices.
+
+   One rule governs everything pressable: it carries an ink outline and a
+   solid offset shadow, and pressing it moves the element onto its own
+   shadow. Nothing fades, nothing floats, nothing blurs.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Panel — the only container.
+   -------------------------------------------------------------------------- */
+.panel {
+  background: var(--surface);
+  border: var(--stroke);
+  border-radius: var(--r);
+  box-shadow: var(--pop);
+  padding: var(--s-5);
+}
+.panel--tight { padding: var(--s-4); }
+.panel--flat { box-shadow: none; }
+.panel--cream { background: var(--sun-3); }
+.panel--grape { background: var(--grape); color: var(--surface); box-shadow: 5px 5px 0 var(--ink); }
+.panel__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-3);
+  margin-bottom: var(--s-4);
+}
+
+/* --------------------------------------------------------------------------
+   Buttons
+   -------------------------------------------------------------------------- */
+.btn {
+  --btn-bg: var(--surface);
+  --btn-fg: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  min-height: 48px;
+  padding: var(--s-3) var(--s-5);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  border: var(--stroke);
+  border-radius: var(--r-pill);
+  box-shadow: var(--pop-sm);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition: translate var(--fast), box-shadow var(--fast), background var(--fast);
+}
+.btn:hover:not(:disabled) { translate: -1px -1px; box-shadow: 4px 4px 0 var(--ink); }
+.btn:active:not(:disabled) { translate: 3px 3px; box-shadow: 0 0 0 var(--ink); }
+
+.btn--primary { --btn-bg: var(--grape); --btn-fg: #fff; }
+.btn--primary:hover:not(:disabled) { --btn-bg: var(--grape-dark); }
+.btn--loud { --btn-bg: var(--berry); --btn-fg: #fff; font-size: 1.1rem; padding-inline: var(--s-6); min-height: 56px; }
+.btn--loud:hover:not(:disabled) { --btn-bg: #c7126a; }
+.btn--ink { --btn-bg: var(--ink); --btn-fg: var(--sun); }
+.btn--sm { min-height: 44px; padding: var(--s-2) var(--s-4); font-size: var(--sm); }
+.btn--block { width: 100%; }
+
+/* A quiet button is still outlined — "quiet" changes the fill, never the
+   affordance. A borderless button is a link in disguise. */
+.btn--quiet { --btn-bg: transparent; box-shadow: none; }
+.btn--quiet:hover:not(:disabled) { --btn-bg: color-mix(in oklab, var(--ink) 7%, transparent); translate: 0; box-shadow: none; }
+.btn--quiet:active:not(:disabled) { translate: 0; box-shadow: none; }
+
+.btn:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: var(--pop-sm); }
+
+/* Busy state. The label is swapped for a pulsing word rather than a spinner,
+   because a spinner says "something" and a word says what. */
+.btn[aria-busy="true"] { cursor: progress; }
+.btn[aria-busy="true"] > * { animation: pulse 1.1s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: 0.45; } }
+
+/* A plain text link styled as an action, for destructive secondaries. */
+.linkish {
+  background: none;
+  border: 0;
+  padding: var(--s-2);
+  min-height: 44px;
+  font: inherit;
+  font-weight: 700;
+  font-size: var(--sm);
+  color: var(--ink-2);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  border-radius: var(--r-sm);
+}
+.linkish:hover { color: var(--berry); }
+
+/* --------------------------------------------------------------------------
+   Chips — filters and occasions.
+   -------------------------------------------------------------------------- */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: 44px;
+  padding: var(--s-2) var(--s-4);
+  background: var(--surface);
+  border: var(--stroke-2);
+  border-radius: var(--r-pill);
+  font-weight: 700;
+  font-size: var(--sm);
+  text-decoration: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--fast), color var(--fast), border-color var(--fast);
+}
+.chip:hover { background: var(--sun-3); }
+.chip[aria-pressed="true"],
+.chip[aria-current="true"] {
+  background: var(--ink);
+  color: var(--sun);
+  border-color: var(--ink);
+}
+.chip__count { font-variant-numeric: tabular-nums; opacity: 0.65; font-weight: 600; }
+.chip__emoji { font-size: 1.05em; }
+
+/* --------------------------------------------------------------------------
+   Fields
+   -------------------------------------------------------------------------- */
+.field { display: block; margin-bottom: var(--s-4); }
+.field > .field__label {
+  display: block;
+  font-weight: 800;
+  font-size: var(--sm);
+  margin-bottom: var(--s-2);
+}
+.field__hint { display: block; font-size: var(--sm); color: var(--ink-2); margin-bottom: var(--s-2); font-weight: 500; }
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  min-height: 48px;
+  padding: var(--s-3) var(--s-4);
+  background: var(--surface);
+  border: var(--stroke-2);
+  border-radius: var(--r-sm);
+  font-weight: 600;
+  transition: border-color var(--fast), box-shadow var(--fast);
+}
+.input:hover, .select:hover, .textarea:hover { border-color: var(--grape); }
+.input:focus, .select:focus, .textarea:focus {
+  border-color: var(--grape);
+  box-shadow: inset 0 0 0 1px var(--grape);
+  outline-offset: 2px;
+}
+.textarea { min-height: 110px; resize: vertical; line-height: 1.5; }
+.select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%232a1233' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right var(--s-4) center;
+  padding-right: var(--s-6);
+}
+
+[aria-invalid="true"].input,
+[aria-invalid="true"].select,
+[aria-invalid="true"].textarea {
+  border-color: var(--tangerine);
+  box-shadow: inset 0 0 0 1px var(--tangerine);
+}
+
+/* Errors name the field and say what to do. They are never colour-only: the
+   icon and the wording carry the message if the hue does not land. */
+.err {
+  display: flex;
+  gap: var(--s-2);
+  align-items: flex-start;
+  margin-top: var(--s-2);
+  font-size: var(--sm);
+  font-weight: 700;
+  color: #b8350d;
+}
+.err:empty { display: none; }
+.err svg { flex: none; margin-top: 2px; }
+
+.counter { font-size: var(--xs); color: var(--ink-2); font-variant-numeric: tabular-nums; text-align: right; margin-top: var(--s-1); }
+.counter[data-over="true"] { color: #b8350d; font-weight: 800; }
+
+/* --------------------------------------------------------------------------
+   Swatches — the builder's choice control.
+
+   Radio inputs under the hood, so arrow keys move within a group and the
+   browser handles the roving tabindex. The visible swatch is the label.
+   -------------------------------------------------------------------------- */
+.swatches {
+  display: grid;
+  gap: var(--s-3);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 112px), 1fr));
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+.swatches legend {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--t-4);
+  padding: 0;
+  margin-bottom: var(--s-3);
+}
+
+.sw { position: relative; }
+.sw input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  margin: 0;
+}
+.sw__face {
+  display: grid;
+  gap: var(--s-2);
+  padding: var(--s-3);
+  min-height: 44px;
+  background: var(--surface);
+  border: var(--stroke-2);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  transition: border-color var(--fast), box-shadow var(--fast), translate var(--fast);
+}
+.sw input:hover + .sw__face { border-color: var(--grape); }
+.sw input:focus-visible + .sw__face { outline: 3px solid var(--grape); outline-offset: 3px; }
+.sw input:checked + .sw__face {
+  border-color: var(--ink);
+  border-width: var(--line);
+  box-shadow: var(--pop-sm);
+  translate: -1px -1px;
+}
+.sw input:disabled + .sw__face { opacity: 0.4; cursor: not-allowed; }
+
+/* The colour dot. Its hue comes from a custom property set in markup, which
+   is the one place a raw value legitimately reaches the DOM — it is data,
+   the colour of a buttercream, not a design decision. */
+.sw__dot {
+  width: 100%;
+  aspect-ratio: 5 / 3;
+  border: var(--stroke-2);
+  border-radius: 6px;
+  background: var(--dot, var(--sun-3));
+}
+.sw__name { font-weight: 800; font-size: var(--sm); line-height: 1.25; }
+.sw__meta { font-size: var(--xs); color: var(--ink-2); font-variant-numeric: tabular-nums; font-weight: 700; }
+
+/* A checked swatch gets a drawn tick, so selection is not carried by border
+   weight alone. */
+.sw input:checked + .sw__face .sw__name::after {
+  content: "";
+  display: inline-block;
+  width: 0.62em; height: 0.34em;
+  margin-left: 0.4em;
+  border-left: 2.5px solid var(--grape);
+  border-bottom: 2.5px solid var(--grape);
+  rotate: -45deg;
+  translate: 0 -0.12em;
+}
+
+/* --------------------------------------------------------------------------
+   Quantity stepper
+   -------------------------------------------------------------------------- */
+.step {
+  display: inline-flex;
+  align-items: center;
+  border: var(--stroke-2);
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  overflow: hidden;
+}
+.step button {
+  width: 44px; height: 44px;
+  display: grid;
+  place-items: center;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1;
+}
+.step button:hover:not(:disabled) { background: var(--sun-3); }
+.step button:disabled { opacity: 0.35; cursor: not-allowed; }
+.step output {
+  min-width: 2.4ch;
+  text-align: center;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  border-inline: var(--stroke-2);
+  align-self: stretch;
+  display: grid;
+  place-items: center;
+  padding-inline: var(--s-2);
+}
+
+/* --------------------------------------------------------------------------
+   Notices
+   -------------------------------------------------------------------------- */
+.note {
+  display: flex;
+  gap: var(--s-3);
+  align-items: flex-start;
+  padding: var(--s-3) var(--s-4);
+  background: var(--grape-wash);
+  border: var(--stroke-2);
+  border-radius: var(--r-sm);
+  font-size: var(--sm);
+  font-weight: 600;
+  margin: 0;
+}
+.note svg { flex: none; margin-top: 2px; }
+.note--good { background: #ddf7ed; }
+.note--warn { background: #fff0cf; }
+.note--bad { background: #ffe5db; }
+.note--flat { background: var(--sun-3); }
+
+/* A pill that states a fact, not a decoration. Used for lead time and the
+   like, where the value is the point. */
+.fact {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  padding: var(--s-1) var(--s-3);
+  background: var(--sun-3);
+  border: var(--stroke-2);
+  border-radius: var(--r-pill);
+  font-size: var(--xs);
+  font-weight: 800;
+}
+.fact--mint { background: #ddf7ed; }
+.fact--berry { background: #ffe0ee; }
+.fact--out { background: #eee9f0; color: var(--ink-2); }
+
+/* Definition lists used for order and delivery detail. */
+.facts {
+  display: grid;
+  gap: var(--s-3);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr));
+}
+.facts dt { font-size: var(--xs); font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-2); }
+.facts dd { font-weight: 700; margin-top: 2px; }
+
+/* The running total row. */
+.sum { display: flex; justify-content: space-between; gap: var(--s-3); padding-block: var(--s-2); }
+.sum--total {
+  border-top: var(--stroke);
+  margin-top: var(--s-3);
+  padding-top: var(--s-3);
+  font-family: var(--font-display);
+  font-size: var(--t-3);
+  font-weight: 600;
+}
+
+/* Skeletons. Shaped like the thing that is coming, not a generic grey bar. */
+.skel { background: color-mix(in oklab, var(--ink) 9%, transparent); border-radius: 6px; animation: shimmer 1.4s ease-in-out infinite; }
+@keyframes shimmer { 50% { opacity: 0.45; } }

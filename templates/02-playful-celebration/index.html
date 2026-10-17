@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Many Happy Returns — celebration cakes, built by you</title>
+<meta name="description" content="Draw your cake and we bake that exact one. Tiers, sponge, filling, colour, finish and topper, all chosen on screen. Margate.">
+
+<link rel="preload" href="assets/fonts/fredoka.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/nunito.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/card.css">
+<link rel="stylesheet" href="css/components/cake.css">
+<link rel="stylesheet" href="css/components/overlay.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to the cakes</a>
+
+<header class="chrome" data-chrome></header>
+<div class="allergen" data-allergens></div>
+
+<main id="main">
+
+  <!-- Hero. The claim on the left, a drawn cake on the right, nothing else. -->
+  <section class="hero shell">
+    <div class="hero__grid">
+      <div>
+        <p class="label" data-kicker></p>
+        <h1 style="margin-top:var(--s-3)" data-headline></h1>
+        <p class="lede hero__claim" data-lede></p>
+        <div class="hero__cta">
+          <a class="btn btn--loud" href="build.html" data-build-link>Build your cake</a>
+          <a class="btn" href="shop.html" data-shop-link>Or see ours</a>
+        </div>
+        <p class="sm quiet" style="margin-top:var(--s-4)" data-cutoff></p>
+      </div>
+
+      <div class="hero__frame" data-hero-cake>
+        <div class="skel" style="aspect-ratio:9/11"></div>
+      </div>
+    </div>
+
+    <!-- Three facts with numbers in them. Not three decorative pills. -->
+    <div class="promises" data-promises></div>
+  </section>
+
+  <div class="zig" aria-hidden="true"></div>
+
+  <!-- What it is. The one explanatory section, because a live cake builder
+       is not a pattern anyone has seen before. -->
+  <section class="band band--grape section on-grape">
+    <div class="shell">
+      <div class="sec-head">
+        <div>
+          <h2 class="t-2">Nobody else lets you see it first</h2>
+          <p>Every other cake shop gives you a form and a surprise. Pick a thing here and the
+             cake on screen changes. That drawing goes to the kitchen with your order.</p>
+        </div>
+        <a class="btn btn--ink" href="build.html" data-build-link-2>Have a go</a>
+      </div>
+
+      <ol class="grid grid--roomy" style="list-style:none;padding:0;margin:0" data-how></ol>
+    </div>
+  </section>
+
+  <!-- Occasions. This is how people arrive: they know the event, not the
+       flavour. Research for this direction put discovery by occasion above
+       discovery by category. -->
+  <section class="band section">
+    <div class="shell">
+      <div class="sec-head">
+        <div>
+          <h2 class="t-2">What is it for?</h2>
+          <p>Start from the day rather than the sponge.</p>
+        </div>
+      </div>
+      <div class="grid" data-occasions></div>
+    </div>
+  </section>
+
+  <!-- The cakes we already make. -->
+  <section class="band band--white section">
+    <div class="shell">
+      <div class="sec-head">
+        <div>
+          <h2 class="t-2">Or one of ours</h2>
+          <p>Our recipes, decorated to your message. Less to decide.</p>
+        </div>
+        <a class="btn" href="shop.html" data-shop-link-2>See all nine</a>
+      </div>
+      <div class="grid" data-popular></div>
+    </div>
+  </section>
+
+  <!-- By the box. A different grid width, so the page has a shape. -->
+  <section class="band band--cream section">
+    <div class="shell--narrow">
+      <div class="sec-head">
+        <div>
+          <h2 class="t-2">For a table, not a candle</h2>
+          <p>When thirty people need a piece and nobody needs a tier.</p>
+        </div>
+      </div>
+      <div class="grid grid--2" data-boxes></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer" data-footer></footer>
+
+<script type="module" src="js/pages/home.js"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Build your cake — Many Happy Returns</title>
+<meta name="description" content="Choose the tiers, sponge, filling, colour, finish and topper, and watch your cake get drawn as you go.">
+
+<link rel="preload" href="assets/fonts/fredoka.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/nunito.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/card.css">
+<link rel="stylesheet" href="css/components/cake.css">
+<link rel="stylesheet" href="css/components/overlay.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to the cake</a>
+
+<header class="chrome" data-chrome></header>
+<div class="allergen" data-allergens></div>
+
+<main id="main">
+  <div class="shell section--tight">
+
+    <nav aria-label="Where you are" class="sm quiet crumbs" style="margin-bottom:var(--s-4)">
+      <a href="index.html" data-home-link>Home</a> → <span data-crumb>Build your cake</span>
+    </nav>
+
+    <div class="studio">
+
+      <!-- The drawing. Sticky on a desktop so it stays visible while the
+           choices scroll past it. -->
+      <div class="studio__stage">
+        <div class="stage">
+          <div class="stage__price">
+            <span class="label" style="font-size:0.6rem">Your cake</span>
+            <output class="stage__amount" data-price aria-live="polite">—</output>
+          </div>
+          <div data-stage-media></div>
+          <p class="stage__caption" data-caption></p>
+        </div>
+
+        <p class="note note--flat" style="margin-top:var(--s-3)" data-allergen-note hidden></p>
+      </div>
+
+      <!-- The choices. -->
+      <div>
+        <h1 class="t-2" data-name>Build your cake</h1>
+        <p class="lede quiet" style="margin-top:var(--s-2)" data-blurb></p>
+
+        <div class="choices" style="margin-top:var(--s-5)" data-choices>
+          <!-- Rendered by js/pages/build.js. Skeleton below so the column
+               has height before the catalogue lands. -->
+          <div class="stepcard" aria-hidden="true">
+            <div class="skel" style="height:1.4em;width:40%"></div>
+            <div class="skel" style="height:5em;margin-top:var(--s-4)"></div>
+          </div>
+          <div class="stepcard" aria-hidden="true">
+            <div class="skel" style="height:1.4em;width:30%"></div>
+            <div class="skel" style="height:7em;margin-top:var(--s-4)"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- The commit bar. Sticky, because on a phone the price scrolls away
+       from the button otherwise. -->
+  <div class="commit" data-commit hidden>
+    <div class="shell commit__in">
+      <div>
+        <p class="commit__price" data-commit-price>—</p>
+        <p class="commit__when" data-commit-when></p>
+      </div>
+      <button class="btn btn--loud" type="button" data-add>
+        <span>Add to basket</span>
+      </button>
+    </div>
+  </div>
+
+  <section class="band band--white section" style="border-top:var(--stroke)">
+    <div class="shell">
+      <h2 class="t-3">Goes well with it</h2>
+      <p class="sm quiet" style="margin-top:var(--s-2);max-width:48ch">
+        Chosen because they travel in the same box, not because they cost the most.
+      </p>
+      <div class="grid" style="margin-top:var(--s-4)" data-also></div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer" data-footer></footer>
+
+<script type="module" src="js/pages/build.js"></script>
+</body>
+</html>

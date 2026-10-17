@@ -1,0 +1,149 @@
+/* ==========================================================================
+   Base. Element defaults and the type scale.
+   ========================================================================== */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--sun);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  font-weight: 500;
+  /* The ground is saturated, so the text sitting directly on it is set a
+     little heavier than it would be on white. 400 on yellow looks thin. */
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  margin: 0;
+  /* Fredoka's rounded terminals swallow a little optical weight at large
+     sizes; 600 reads as the 500 of a normal sans. */
+}
+
+h1 { font-size: var(--t-1); }
+h2 { font-size: var(--t-2); }
+h3 { font-size: var(--t-3); }
+
+p { margin: 0 0 var(--s-4); }
+p:last-child { margin-bottom: 0; }
+
+a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in oklab, currentColor 35%, transparent);
+  transition: text-decoration-color var(--fast);
+}
+a:hover { text-decoration-color: currentColor; }
+
+/* The `hidden` attribute has to beat any class that sets `display`. The UA
+   sheet's [hidden]{display:none} loses to a class selector, so a hidden
+   .note — which is display:flex — still draws as an empty outlined box. */
+[hidden] { display: none !important; }
+
+img, svg { max-width: 100%; }
+img { display: block; }
+
+ul, ol { margin: 0 0 var(--s-4); padding-left: 1.3em; }
+li { margin-bottom: var(--s-2); }
+
+dl { margin: 0; }
+dt, dd { margin: 0; }
+
+button, input, select, textarea { font: inherit; color: inherit; }
+
+code, .mono {
+  font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+  font-size: 0.9em;
+}
+
+:focus-visible {
+  outline: 3px solid var(--grape);
+  outline-offset: 3px;
+  border-radius: var(--r-sm);
+}
+/* On grape surfaces a grape ring is invisible, so it flips to sun. */
+.on-grape :focus-visible,
+.btn--primary:focus-visible { outline-color: var(--sun); }
+
+/* Breadcrumbs and other small standalone links. Same 24px floor as the
+   footer: they are not "inline in a sentence", so the exception in SC 2.5.8
+   does not cover them. */
+.crumbs a { display: inline-block; padding-block: 3px; }
+
+.skip {
+  position: absolute;
+  left: var(--s-4);
+  top: -100px;
+  z-index: 100;
+  background: var(--ink);
+  color: var(--sun);
+  padding: var(--s-3) var(--s-4);
+  border-radius: var(--r-sm);
+  text-decoration: none;
+  font-weight: 700;
+  transition: top var(--fast);
+}
+.skip:focus { top: var(--s-4); }
+
+.sr {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   Type helpers
+   -------------------------------------------------------------------------- */
+.t-1 { font-family: var(--font-display); font-size: var(--t-1); font-weight: 600; line-height: 1.05; letter-spacing: -0.015em; }
+.t-2 { font-family: var(--font-display); font-size: var(--t-2); font-weight: 600; line-height: 1.08; letter-spacing: -0.015em; }
+.t-3 { font-family: var(--font-display); font-size: var(--t-3); font-weight: 600; line-height: 1.15; }
+.t-4 { font-family: var(--font-display); font-size: var(--t-4); font-weight: 600; }
+
+.sm { font-size: var(--sm); line-height: 1.5; }
+.xs { font-size: var(--xs); line-height: 1.45; }
+.quiet { color: var(--ink-2); }
+.quieter { color: var(--ink-3); }
+.lede { font-size: clamp(1.1rem, 1.8vw, 1.35rem); line-height: 1.5; }
+
+.label {
+  font-family: var(--font-display);
+  font-size: var(--xs);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.money { font-variant-numeric: tabular-nums; font-weight: 700; }
+
+/* A hand-drawn emphasis: the word sits on a crayon underline rather than in
+   a different colour, so it survives a monochrome print and colour blindness. */
+.marked {
+  background: linear-gradient(transparent 62%, var(--berry) 62%, var(--berry) 86%, transparent 86%);
+  padding-inline: 0.08em;
+}
+
+/* --------------------------------------------------------------------------
+   Print — the confirmation page is the one people print.
+   -------------------------------------------------------------------------- */
+@media print {
+  body { background: #fff; font-size: 11pt; }
+  .noprint, .chrome, .footer { display: none !important; }
+  .panel { box-shadow: none; border-width: 1px; break-inside: avoid; }
+}

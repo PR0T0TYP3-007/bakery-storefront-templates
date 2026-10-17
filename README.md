@@ -35,6 +35,7 @@ the working storefront.
 | | | |
 |---|---|---|
 | Template 01 | The Editorial Atelier | Crumb Atelier, Brooklyn |
+| Template 02 | The Playful Celebration | Many Happy Returns, Margate |
 | Template 05 | The Modern Neighbourhood Bakery | Hazel & Rye, London |
 
 ### How it deploys
@@ -98,15 +99,20 @@ behaviour matches the host instead of serving stale modules from cache.
 ## Structure
 
 ```
-index.html                     Template chooser
+index.html                     Listed Templates — one entry per template
 
 shared/
-  js/store.js                  Dates, lead times, capacity, pricing, cart. No markup.
-  js/commerce-ui.js            Date picker, modal, toasts, cart badge, countdown, reveal.
+  core/                        Pure, DOM-free commerce rules. No markup, no globals.
+    dates · format · pricing · cart · rules · fulfilment · storage
+  session.js                   Merchant, catalogue, basket, chosen day, events.
+                               A factory taking the template's own api.js.
+  js/store.js                  Template 01's older global-script commerce layer.
+  js/commerce-ui.js            Template 01's date picker, modal, toasts, countdown.
   img/                         Photography, three widths each (-sm 240, -md 800, -lg 1600)
 
 templates/
   01-editorial-atelier/        Crumb Atelier — premium, art-directed, made-to-order
+  02-playful-celebration/      Many Happy Returns — "Make a Fuss", live cake builder
   05-neighbourhood/            Hazel & Rye — "The Counter", everyday shop
 
 _archive/05-neighbourhood-v1/  The first attempt at 05, kept for reference
@@ -115,17 +121,24 @@ devserver.py                   Static server with caching turned off
 ```
 
 **The split is the point.** The brief asks for *creative diversity at the presentation
-layer, consistency and reliability at the commerce layer.* In both templates the commerce
-logic holds no markup and the brand data holds no logic, so the same rules — dates,
-product-specific lead times, capacity, pricing, cart — run underneath two designs that
-share not one line of styling.
+layer, consistency and reliability at the commerce layer.* The commerce logic holds no
+markup and the brand data holds no logic, so the same rules — dates, product-specific
+lead times, capacity, pricing, cart — run underneath designs that share not one line of
+styling.
 
-**Two architectures, stated plainly.** Template 01 uses global scripts in `shared/js/`.
-Template 05 was rebuilt on native ES modules with a pure, DOM-free
-`templates/05-neighbourhood/js/core/` and a single swappable `api.js` seam. The second is
-the better version and Template 01 should migrate to it; until it does, the commerce rules
-are encoded twice. That is real duplication and it should not survive into template 02 —
-see [docs/decisions.md](docs/decisions.md) D3.
+**Three layers, and a rule about each.** `shared/core/` holds the pure, DOM-free
+commerce rules — dates, money, pricing, cart, option rules, fulfilment, storage.
+`shared/session.js` holds the stateful layer above it. Everything in a template's own
+`js/` is shared with nothing, including its UI components: Template 02's date picker and
+Template 05's do the same job and look nothing alike, which is the point.
+
+That arrangement was earned rather than designed. D3 warned that Template 05's duplicated
+commerce rules "should not survive into template 02"; when Template 02 started, they were
+promoted instead of copied a third time — see [docs/decisions.md](docs/decisions.md) D9.
+
+**Template 01 is still the odd one out.** It uses global scripts in `shared/js/` and has
+not been migrated to the module layer, so its commerce rules are encoded separately. That
+is real duplication and it is the oldest open item in the project.
 
 ---
 
@@ -149,6 +162,44 @@ Where the direction came from, and how to defend it:
 Made-to-order only. Multi-day lead times (1–7 days), full configuration on every cake,
 gifting with recipient details, delivery zones, NYC sales tax.
 
+## Template 02 — The Playful Celebration
+
+**Many Happy Returns**, Margate. Our concept for this direction is **Make a Fuss**: a
+shop where configuring the cake is the reason to use the site rather than a form to get
+through.
+
+| | |
+|---|---|
+| Display | Fredoka (variable, rounded geometric) |
+| Interface | Nunito — both self-hosted, 69KB, no third-party connection |
+| Surface | `#FFD84D` sun yellow ground, white panels, 3px ink outlines |
+| Accent | `#6B2FD4` grape · berry, mint and tangerine confined to the cake and status |
+
+Pages: `index` · `build` · `shop` · `cart` · `checkout` · `confirmation` · `404` ·
+`styleguide`
+
+**The cake is drawn live.** Six option groups — tiers, sponge, filling, colour, finish,
+topper — redraw an inline SVG on every choice, and the inscription appears on the cake as
+you type. 11,250 distinct drawings, pure SVG and CSS, no canvas and no dependencies.
+Research for this direction found no bakery storefront in the category with a live visual
+preview: the real "build your own cake" pages are dropdown forms that show the customer
+nothing until collection day.
+
+It also carries the project's answer to the note that Template 05 "seems similar to the
+spirit of the first one". Before any of it was designed, four axes were fixed and
+measured against both shipped templates — ground, display type class, accent chroma and
+separation method. Its ground sits 192 and 207 channels from the other two, its accent
+214 and 302. See [docs/decisions.md](docs/decisions.md) D8.
+
+19 unit tests on the renderer; gifting as a branch of the checkout rather than a
+checkbox; simulated payment with working decline and recovery.
+
+Its own [README](templates/02-playful-celebration/README.md) has the detail, and
+[docs/02-playful-celebration.md](docs/02-playful-celebration.md) has the research and the
+art direction.
+
+---
+
 ## Template 05 — The Modern Neighbourhood Bakery
 
 **Hazel & Rye**, London. Our concept for this direction is **The Counter**: a shop you
@@ -156,10 +207,10 @@ use weekly, built as a board you read and a ticket that builds.
 
 | | |
 |---|---|
-| Display | Fraunces (variable, `SOFT 40 / WONK 1`) |
-| Interface | Public Sans — both self-hosted, 148KB, no third-party connection |
-| Surface | `#FBF6EC` warm oat; rules and ground shifts, not shadows |
-| Accent | `#1B5E41` green available · honey low · clay sold out |
+| Display | Bricolage Grotesque (variable, `wdth 92 / opsz 48`) |
+| Interface | Public Sans — both self-hosted, 164KB, no third-party connection |
+| Surface | `#FAF9F6` near-white on white cards; rules, not shadows |
+| Accent | `#0E7A4E` green available · honey low · clay sold out |
 
 Pages: `index` · `shop` · `product` · `cart` · `checkout` · `confirmation` · `visit` ·
 `faq` · `404` · `styleguide`
@@ -175,24 +226,11 @@ Its own [README](templates/05-neighbourhood/README.md) has the detail, and
 [docs/02-concept.md](docs/02-concept.md) has the reasoning — including a frank account of
 what was wrong with v1.
 
----|---|
-| Display | Bricolage Grotesque |
-| Interface | Plus Jakarta Sans — no monospace, that is Template 01's signature |
-| Surface | `#FDF8F0` warm oat, white cards, 14–20px radii, soft shadows |
-| Accent | `#1F6B4A` green for fresh/available, honey for low, tomato for sold out |
-
-Pages: `index` · `shop` · `product` · `cart` · `checkout`
-
-Larger base type, 48px minimum hit targets, nothing hover-dependent. Mostly same-day
-stock with an 11am cutoff, one-tap adding, collection time slots with capacity,
-"your usual" re-ordering, **gifting switched off**, and **no sales tax** — both of
-which exercise paths Template 01 never touches.
-
 ---
 
 ## What the research changed
 
-Decisions common to both templates that came out of the research pass rather than taste:
+Decisions common to the templates that came out of the research pass rather than taste:
 
 **Date first, not at checkout.** Lead times are product-specific, and the date
 constrains what is purchasable at all. A persistent control sits in the header and the
@@ -266,14 +304,21 @@ validation and confirmation.
 
 ## Known gaps
 
-- **Neither template has been tested against bad merchant photography.** The brief is
+- **No template has been tested against bad merchant photography.** The brief is
   explicit that concepts which only work with perfect demonstration content are not
-  acceptable, and Template 01 is the most exposed. Both need a deliberately hostile
+  acceptable, and Template 01 is the most exposed. All three need a deliberately hostile
   fixture set: phone photos, wrong aspect ratios, a 3-item and a 200-item catalogue,
   60-character product names, and a merchant with no delivery and no customization.
+  Templates 02 and 05 cover part of this on their style-guide pages; Template 01 does
+  not have one.
 - **No accessibility audit has been run.** Focus states, reduced-motion, landmarks,
-  labelled calendar cells and skip links are in place; that is not the same as tested.
-  Template 05 was designed to AA contrast but has not been measured.
+  labelled calendar cells and skip links are in place; that is not the same as tested,
+  and nothing has been through a screen reader. Template 02's contrast, target sizes and
+  horizontal overflow were measured during the build and its style guide computes the
+  contrast table live from the tokens. Templates 01 and 05 have not been measured.
+- **Template 01 has not been migrated to the shared module layer.** Its commerce rules
+  live in `shared/js/store.js` rather than `shared/core/`, so two implementations of the
+  same rules exist in the repository.
 - **No performance budget has been measured.**
 - **Headers and footers are injected by JavaScript** rather than duplicated across five
   files per template. In production these become template partials; the markup is

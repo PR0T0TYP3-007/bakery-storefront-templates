@@ -1,0 +1,289 @@
+{
+  "categories": [
+    { "id": "custom", "label": "Build your own", "note": "Four days' notice" },
+    { "id": "ready", "label": "Our cakes", "note": "Made to our recipes, decorated to yours" },
+    { "id": "boxes", "label": "By the box", "note": "For a table rather than a candle" }
+  ],
+  "occasions": [
+    { "id": "birthday", "label": "Birthday", "icon": "🎂", "tile": "#ffe0ee" },
+    { "id": "kids", "label": "Kids' party", "icon": "🎈", "tile": "#e3f3ea" },
+    { "id": "baby", "label": "New baby", "icon": "🍼", "tile": "#efe6ff" },
+    { "id": "exams", "label": "Exams done", "icon": "🎓", "tile": "#fff0cf" },
+    { "id": "engagement", "label": "Engagement", "icon": "💍", "tile": "#ffe5db" },
+    { "id": "work", "label": "Work do", "icon": "🎉", "tile": "#ddf7ed" },
+    { "id": "sorry", "label": "Sorry / thank you", "icon": "💐", "tile": "#fff4d1" }
+  ],
+
+  "_note": "Option groups carry two extra keys the commerce core ignores and the cake renderer needs: `swatch`, a hex the swatch control and the drawing both use, and `draw`, a named rendering mode. Keeping them in data means a merchant can add a buttercream colour without touching JavaScript.",
+
+  "optionGroups": {
+    "tiers": {
+      "id": "tiers",
+      "label": "How big",
+      "required": true,
+      "options": [
+        { "id": "1", "label": "One tier", "note": "Serves 8–10", "price": 0, "serves": "8–10" },
+        { "id": "2", "label": "Two tiers", "note": "Serves 18–24", "price": 26, "leadDays": 1, "serves": "18–24" },
+        { "id": "3", "label": "Three tiers", "note": "Serves 35–45", "price": 58, "leadDays": 2, "serves": "35–45" }
+      ]
+    },
+    "sponge": {
+      "id": "sponge",
+      "label": "The sponge",
+      "required": true,
+      "options": [
+        { "id": "vanilla", "label": "Vanilla", "note": "Madagascan bean", "price": 0, "swatch": "#f7e2a8" },
+        { "id": "chocolate", "label": "Chocolate", "note": "70% Valrhona", "price": 4, "swatch": "#6b4328" },
+        { "id": "velvet", "label": "Red velvet", "note": "Buttermilk, cocoa", "price": 5, "swatch": "#a8252f" },
+        { "id": "lemon", "label": "Lemon", "note": "Amalfi zest", "price": 4, "swatch": "#f6d94a" },
+        { "id": "funfetti", "label": "Funfetti", "note": "Sprinkles baked in", "price": 5, "swatch": "#fbeed0", "speckled": true }
+      ]
+    },
+    "filling": {
+      "id": "filling",
+      "label": "In between",
+      "required": true,
+      "options": [
+        { "id": "vanillabc", "label": "Vanilla buttercream", "price": 0, "swatch": "#fff6e6" },
+        { "id": "jam", "label": "Raspberry jam & cream", "price": 3, "swatch": "#d6295c" },
+        { "id": "caramel", "label": "Salted caramel", "price": 4, "swatch": "#c98534" },
+        { "id": "ganache", "label": "Chocolate ganache", "price": 4, "swatch": "#4a2c1b" },
+        { "id": "curd", "label": "Lemon curd", "price": 3, "swatch": "#ffd84d" }
+      ]
+    },
+    "icing": {
+      "id": "icing",
+      "label": "The colour",
+      "required": true,
+      "options": [
+        { "id": "cream", "label": "Buttercream", "price": 0, "swatch": "#fff6e6" },
+        { "id": "strawberry", "label": "Strawberry pink", "price": 0, "swatch": "#ffb3cd" },
+        { "id": "lilac", "label": "Lilac", "price": 0, "swatch": "#ded0ff" },
+        { "id": "mint", "label": "Mint", "price": 0, "swatch": "#bdf0dc" },
+        { "id": "cocoa", "label": "Chocolate", "price": 2, "swatch": "#7a4a2b" },
+        { "id": "sunshine", "label": "Sunshine yellow", "price": 0, "swatch": "#ffd84d" }
+      ]
+    },
+    "finish": {
+      "id": "finish",
+      "label": "The finish",
+      "required": true,
+      "options": [
+        { "id": "smooth", "label": "Smooth", "note": "Sharp edges, palette knife", "price": 0, "draw": "smooth" },
+        { "id": "swirl", "label": "Swirled", "note": "Spoon-whipped all round", "price": 4, "draw": "swirl" },
+        { "id": "drip", "label": "Drip", "note": "Ganache poured over the top", "price": 7, "draw": "drip" },
+        { "id": "sprinkles", "label": "Sprinkle coat", "note": "Pressed on by hand", "price": 8, "draw": "sprinkles" },
+        { "id": "naked", "label": "Naked", "note": "Sides scraped back to the sponge", "price": 0, "draw": "naked" }
+      ]
+    },
+    "topper": {
+      "id": "topper",
+      "label": "On top",
+      "required": true,
+      "options": [
+        { "id": "none", "label": "Nothing", "note": "Just cake", "price": 0, "draw": "none" },
+        { "id": "candles", "label": "Candles", "note": "As many as you like", "price": 2, "draw": "candles" },
+        { "id": "sparklers", "label": "Sparklers", "note": "Two, lit at the table", "price": 5, "draw": "sparklers" },
+        { "id": "fruit", "label": "Berries & fruit", "note": "Whatever is good that week", "price": 9, "draw": "fruit" },
+        {
+          "id": "figure",
+          "label": "Fondant figure",
+          "note": "Modelled by hand — adds 4 days",
+          "price": 24,
+          "leadDays": 4,
+          "draw": "figure"
+        }
+      ]
+    },
+    "boxsize": {
+      "id": "boxsize",
+      "label": "How many",
+      "required": true,
+      "options": [
+        { "id": "6", "label": "Box of six", "price": 0 },
+        { "id": "12", "label": "Box of twelve", "price": 14 },
+        { "id": "24", "label": "Box of twenty-four", "price": 26 }
+      ]
+    }
+  },
+
+  "addons": [
+    { "id": "candlepack", "label": "Candles and matches", "note": "Pack of 24, in the box", "price": 2 },
+    { "id": "card", "label": "Handwritten card", "note": "We write your message in ink", "price": 3 },
+    { "id": "boxpretty", "label": "Ribboned gift box", "note": "Grosgrain, not stuck down", "price": 5 },
+    { "id": "slices", "label": "Cut and boxed slices", "note": "We slice it and bag each one", "price": 8 },
+    { "id": "stand", "label": "Cake stand on loan", "note": "£20 back when you return it", "price": 20 }
+  ],
+
+  "products": [
+    {
+      "id": "build-your-own",
+      "kind": "custom",
+      "category": "custom",
+      "name": "Build your own",
+      "subtitle": "Six choices, 11,250 cakes",
+      "price": 42,
+      "leadDays": 4,
+      "batchSize": null,
+      "image": null,
+      "occasions": ["birthday", "kids", "baby", "exams", "engagement", "work", "sorry"],
+      "popular": true,
+      "allergens": ["gluten", "dairy", "egg"],
+      "description": "The cake on the left is the cake you get. Change a choice and it is redrawn — tiers, sponge, what is in between, the colour, the finish and whatever goes on top. Nothing is a surprise on the day.",
+      "options": ["tiers", "sponge", "filling", "icing", "finish", "topper"],
+      "defaults": {
+        "tiers": "2",
+        "sponge": "vanilla",
+        "filling": "vanillabc",
+        "icing": "strawberry",
+        "finish": "drip",
+        "topper": "candles"
+      },
+      "inscribable": true
+    },
+    {
+      "id": "rainbow",
+      "kind": "cake",
+      "category": "ready",
+      "name": "The Rainbow",
+      "subtitle": "Six coloured layers, vanilla buttercream",
+      "price": 54,
+      "leadDays": 3,
+      "batchSize": 3,
+      "image": "photo-1464349095431-e9a21285b5f3",
+      "occasions": ["birthday", "kids"],
+      "popular": true,
+      "allergens": ["gluten", "dairy", "egg"],
+      "description": "Six sponges, each one a different colour, stacked and iced white so the surprise is in the cut. The one children ask for by name.",
+      "options": ["tiers", "topper"],
+      "defaults": { "tiers": "1", "topper": "candles" },
+      "inscribable": true
+    },
+    {
+      "id": "fudge",
+      "kind": "cake",
+      "category": "ready",
+      "name": "Proper Chocolate Fudge",
+      "subtitle": "Four layers, ganache, a lot of it",
+      "price": 48,
+      "leadDays": 2,
+      "batchSize": 4,
+      "image": "photo-1578985545062-69928b1d9587",
+      "occasions": ["birthday", "work", "exams", "sorry"],
+      "popular": true,
+      "allergens": ["gluten", "dairy", "egg", "soya"],
+      "description": "The cake people order when they have stopped pretending to want fruit. Four layers of dark sponge, ganache between each one and poured over the top.",
+      "options": ["tiers", "topper"],
+      "defaults": { "tiers": "1", "topper": "none" },
+      "inscribable": true
+    },
+    {
+      "id": "confetti-slab",
+      "kind": "cake",
+      "category": "ready",
+      "name": "Confetti Slab",
+      "subtitle": "A tray, not a tier — serves 30",
+      "price": 62,
+      "leadDays": 3,
+      "batchSize": 2,
+      "image": "photo-1562777717-dc6984f65a63",
+      "occasions": ["work", "kids", "exams"],
+      "popular": false,
+      "allergens": ["gluten", "dairy", "egg"],
+      "description": "For an office or a classroom, where thirty people need a piece and nobody needs a tier. Funfetti sponge, flat iced, your message across the top in piped letters.",
+      "options": ["topper"],
+      "defaults": { "topper": "none" },
+      "inscribable": true
+    },
+    {
+      "id": "victoria-vegan",
+      "kind": "cake",
+      "category": "ready",
+      "name": "Vegan Victoria",
+      "subtitle": "Raspberry, oat cream, no egg or dairy",
+      "price": 44,
+      "leadDays": 3,
+      "batchSize": 2,
+      "image": "photo-1565958011703-44f9829ba187",
+      "occasions": ["birthday", "sorry", "baby"],
+      "popular": false,
+      "allergens": ["gluten", "soya"],
+      "description": "Developed because we were asked for it weekly and were tired of apologising. Aquafaba sponge, whipped oat cream and raspberries crushed rather than jammed.",
+      "options": ["tiers", "topper"],
+      "defaults": { "tiers": "1", "topper": "fruit" },
+      "inscribable": true
+    },
+    {
+      "id": "number-cake",
+      "kind": "cake",
+      "category": "ready",
+      "name": "Number Cake",
+      "subtitle": "Any one or two digits, piped and loaded",
+      "price": 58,
+      "leadDays": 4,
+      "batchSize": 2,
+      "image": "photo-1557925923-cd4648e211a0",
+      "occasions": ["birthday", "engagement"],
+      "popular": true,
+      "allergens": ["gluten", "dairy", "egg", "nuts"],
+      "description": "Two shortbread numbers, piped with vanilla cream and loaded with berries, meringue and chocolate. Tell us the number in the box below and we cut the templates to match.",
+      "options": ["topper"],
+      "defaults": { "topper": "fruit" },
+      "inscribable": true
+    },
+    {
+      "id": "cupcakes",
+      "kind": "box",
+      "category": "boxes",
+      "name": "Party Cupcakes",
+      "subtitle": "Swirled, sprinkled, boxed flat",
+      "price": 21,
+      "leadDays": 2,
+      "batchSize": 12,
+      "image": "photo-1486427944299-d1955d23e34d",
+      "occasions": ["kids", "work", "birthday"],
+      "popular": true,
+      "allergens": ["gluten", "dairy", "egg"],
+      "description": "Vanilla or chocolate, swirled high and sprinkled, in a box that holds them upright in the car.",
+      "options": ["boxsize"],
+      "defaults": { "boxsize": "12" },
+      "inscribable": false
+    },
+    {
+      "id": "cookies",
+      "kind": "box",
+      "category": "boxes",
+      "name": "Iced Name Cookies",
+      "subtitle": "One name per cookie, royal icing",
+      "price": 18,
+      "leadDays": 4,
+      "batchSize": 8,
+      "image": "photo-1499636136210-6f4ee915583e",
+      "occasions": ["kids", "baby", "work"],
+      "popular": false,
+      "allergens": ["gluten", "dairy", "egg"],
+      "description": "Vanilla shortbread, flooded in royal icing and hand-lettered. Send us the list of names and we will get them all right.",
+      "options": ["boxsize"],
+      "defaults": { "boxsize": "12" },
+      "inscribable": false
+    },
+    {
+      "id": "brownies",
+      "kind": "box",
+      "category": "boxes",
+      "name": "Brownie Slab",
+      "subtitle": "Cut into sixteen, still fudgy",
+      "price": 24,
+      "leadDays": 1,
+      "batchSize": 6,
+      "image": "photo-1551024601-bec78aea704b",
+      "occasions": ["work", "sorry", "exams"],
+      "popular": false,
+      "allergens": ["gluten", "dairy", "egg", "nuts"],
+      "description": "The easiest thing we make and the hardest to stop eating. One slab, cut into sixteen, in greaseproof.",
+      "options": [],
+      "defaults": {},
+      "inscribable": false
+    }
+  ]
+}

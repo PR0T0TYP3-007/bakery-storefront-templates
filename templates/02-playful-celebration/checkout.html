@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout — Many Happy Returns</title>
+<meta name="robots" content="noindex">
+
+<link rel="preload" href="assets/fonts/fredoka.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/nunito.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/card.css">
+<link rel="stylesheet" href="css/components/overlay.css">
+<link rel="stylesheet" href="css/pages/checkout.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to the form</a>
+
+<header class="chrome" data-chrome></header>
+<div class="allergen" data-allergens></div>
+
+<main id="main">
+  <div class="shell section--tight">
+    <h1 class="t-2">Nearly there</h1>
+    <p class="lede quiet" style="margin-top:var(--s-2)">
+      No account needed. We only ask for what we need to get the cake to you.
+    </p>
+
+    <div class="with-aside" style="margin-top:var(--s-5)">
+
+      <form novalidate data-form>
+        <!-- A failed payment lands here, above everything, and nothing below
+             it is cleared. -->
+        <p class="note note--bad" style="margin-bottom:var(--s-5)" data-failure hidden
+           role="alert" tabindex="-1"></p>
+
+        <!-- 1 ------------------------------------------------------------ -->
+        <section class="group panel">
+          <div class="group__head">
+            <p class="group__n" aria-hidden="true">1</p>
+            <h2 class="group__title">Collect or deliver</h2>
+          </div>
+
+          <div class="methods" data-methods></div>
+
+          <div style="margin-top:var(--s-4)" data-pickup>
+            <p class="note note--flat" data-location></p>
+          </div>
+
+          <div style="margin-top:var(--s-4)" data-delivery hidden>
+            <label class="field">
+              <span class="field__label" for="postcode">Postcode</span>
+              <span class="field__hint">We check it against the areas we drive to.</span>
+              <input class="input" id="postcode" name="postcode" type="text"
+                     autocomplete="postal-code" inputmode="text" placeholder="CT9 2RN"
+                     style="max-width:220px; text-transform:uppercase">
+            </label>
+            <p class="err" data-err-postcode></p>
+            <p class="note" data-zone hidden></p>
+
+            <label class="field" style="margin-top:var(--s-4)">
+              <span class="field__label" for="address">Where to</span>
+              <textarea class="textarea" id="address" name="address" autocomplete="street-address"
+                placeholder="Flat, number and street&#10;Town"></textarea>
+            </label>
+            <p class="err" data-err-address></p>
+          </div>
+
+          <div style="margin-top:var(--s-4)">
+            <p class="label">When</p>
+            <div class="row" style="margin-top:var(--s-2)">
+              <button class="btn" type="button" data-pick-day>
+                <span data-day-label>Choose a day</span>
+              </button>
+              <p class="sm quiet" data-slot-label></p>
+            </div>
+            <p class="err" data-err-when></p>
+          </div>
+        </section>
+
+        <!-- 2 ------------------------------------------------------------ -->
+        <section class="group panel">
+          <div class="group__head">
+            <p class="group__n" aria-hidden="true">2</p>
+            <h2 class="group__title">You</h2>
+          </div>
+
+          <div class="pair">
+            <label class="field">
+              <span class="field__label" for="name">Your name</span>
+              <input class="input" id="name" name="name" type="text" autocomplete="name" required>
+              <span class="err" data-err-name></span>
+            </label>
+            <label class="field">
+              <span class="field__label" for="phone">Mobile</span>
+              <span class="field__hint">Only if something goes wrong on the day.</span>
+              <input class="input" id="phone" name="phone" type="tel" autocomplete="tel" required>
+              <span class="err" data-err-phone></span>
+            </label>
+          </div>
+
+          <label class="field">
+            <span class="field__label" for="email">Email</span>
+            <span class="field__hint">The receipt and the collection reminder go here.</span>
+            <input class="input" id="email" name="email" type="email" autocomplete="email"
+                   inputmode="email" required>
+            <span class="err" data-err-email></span>
+          </label>
+        </section>
+
+        <!-- 3 ------------------------------------------------------------ -->
+        <section class="group panel">
+          <div class="group__head">
+            <p class="group__n" aria-hidden="true">3</p>
+            <h2 class="group__title">Is it a present?</h2>
+          </div>
+
+          <label class="addon">
+            <input type="checkbox" data-is-gift>
+            <span>
+              Yes — it is going to someone else
+              <span class="sw__meta" style="display:block;font-weight:600">
+                We hide the prices, write your card and put the recipient on the box.
+              </span>
+            </span>
+          </label>
+
+          <div class="gift" data-gift hidden>
+            <div class="pair" style="margin-top:var(--s-4)">
+              <label class="field">
+                <span class="field__label" for="to">Who is it for?</span>
+                <input class="input" id="to" name="to" type="text" autocomplete="off">
+              </label>
+              <label class="field">
+                <span class="field__label" for="tophone">Their mobile</span>
+                <span class="field__hint">For the driver, if we are delivering.</span>
+                <input class="input" id="tophone" name="tophone" type="tel">
+              </label>
+            </div>
+
+            <label class="field">
+              <span class="field__label" for="message">What should the card say?</span>
+              <textarea class="textarea" id="message" name="message" maxlength="200"
+                placeholder="Written by hand, in ink."></textarea>
+              <span class="counter" data-msg-count>0 / 200</span>
+            </label>
+
+            <p class="label">How it will look</p>
+            <p class="giftcard" data-giftcard></p>
+
+            <label class="addon" style="margin-top:var(--s-4)">
+              <input type="checkbox" data-hide-prices checked>
+              <span>Leave the prices off everything in the box</span>
+            </label>
+          </div>
+        </section>
+
+        <!-- 4 ------------------------------------------------------------ -->
+        <section class="group panel">
+          <div class="group__head">
+            <p class="group__n" aria-hidden="true">4</p>
+            <h2 class="group__title">Pay</h2>
+          </div>
+
+          <div class="paybox">
+            <div class="paybox__head">
+              <p class="t-4">Card</p>
+              <span class="paybox__sim">Simulated</span>
+            </div>
+
+            <label class="field">
+              <span class="field__label" for="card">Card number</span>
+              <input class="input" id="card" name="card" type="text" inputmode="numeric"
+                     autocomplete="cc-number" placeholder="4242 4242 4242 4242" required>
+              <span class="err" data-err-card></span>
+            </label>
+
+            <div class="pair">
+              <label class="field">
+                <span class="field__label" for="exp">Expires</span>
+                <input class="input" id="exp" name="exp" type="text" inputmode="numeric"
+                       autocomplete="cc-exp" placeholder="MM/YY" required>
+                <span class="err" data-err-exp></span>
+              </label>
+              <label class="field">
+                <span class="field__label" for="cvc">Security code</span>
+                <input class="input" id="cvc" name="cvc" type="text" inputmode="numeric"
+                       autocomplete="cc-csc" placeholder="123" required>
+                <span class="err" data-err-cvc></span>
+              </label>
+            </div>
+
+            <p class="paybox__test">
+              Nothing here reaches a bank. <code>4242 4242 4242 4242</code> succeeds,
+              <code>4000 0000 0000 0002</code> is declined and
+              <code>4000 0000 0000 0119</code> fails to reach the processor.
+            </p>
+          </div>
+
+          <label class="addon" style="margin-top:var(--s-4)">
+            <input type="checkbox" data-terms>
+            <span>I have read the allergen notice at the top of the page</span>
+          </label>
+          <p class="err" data-err-terms></p>
+
+          <button class="btn btn--loud btn--block" style="margin-top:var(--s-4)" type="submit" data-pay>
+            <span data-pay-label>Place the order</span>
+          </button>
+          <p class="xs quiet" style="margin-top:var(--s-3);text-align:center">
+            A design template. No money moves and no data leaves this browser.
+          </p>
+        </section>
+      </form>
+
+      <!-- Summary ------------------------------------------------------- -->
+      <aside class="with-aside__aside">
+        <div class="panel">
+          <button class="summary__toggle" type="button" data-summary-toggle aria-expanded="false"
+                  aria-controls="summary-body">
+            <span class="t-3">Your order</span>
+            <span class="money spread" data-peek></span>
+            <span data-chev></span>
+          </button>
+          <h2 class="t-3 sr">Your order</h2>
+
+          <div id="summary-body" class="summary__body" data-summary-body hidden>
+            <div class="summary__lines" style="margin-top:var(--s-4)" data-summary-lines></div>
+            <div style="margin-top:var(--s-4)" data-summary-totals></div>
+          </div>
+
+          <p class="note" style="margin-top:var(--s-4)" data-summary-when></p>
+          <a class="btn btn--quiet btn--sm btn--block" style="margin-top:var(--s-3)"
+             href="cart.html" data-cart-link>Change the basket</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<footer class="footer" data-footer></footer>
+
+<script type="module" src="js/pages/checkout.js"></script>
+</body>
+</html>

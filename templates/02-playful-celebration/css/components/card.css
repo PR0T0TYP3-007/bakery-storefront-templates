@@ -1,0 +1,203 @@
+/* ==========================================================================
+   Cards — the ready-made cakes, the hero, the occasion tiles, the basket
+   lines.
+
+   Template 05's post-mortem warned that a uniform rounded card in an even
+   grid is the most recognisable machine-made storefront pattern. The answer
+   here is not to avoid cards — a celebration cake genuinely wants a picture
+   — but to make them unmistakably drawn objects: outlined, offset, tilted
+   by a degree, and in three sizes that mean three different things.
+   ========================================================================== */
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: var(--stroke);
+  border-radius: var(--r);
+  box-shadow: var(--pop);
+  overflow: hidden;
+  text-decoration: none;
+  transition: translate var(--mid) var(--ease-pop), box-shadow var(--mid) var(--ease-pop), rotate var(--mid) var(--ease-pop);
+}
+.card:hover {
+  translate: -2px -3px;
+  rotate: -0.6deg;
+  box-shadow: 8px 9px 0 var(--ink);
+}
+.card:has(a:focus-visible) { outline: 3px solid var(--grape); outline-offset: 4px; }
+
+/* The media box. Absolute positioning inside an aspect-ratio frame, because
+   an in-flow image with height:100% in a flex column has no definite parent
+   height to resolve against and stretches the frame past its ratio — the
+   bug that made Template 05's cake tiles uneven. */
+.card__media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: var(--sun-3);
+  border-bottom: var(--stroke);
+  overflow: hidden;
+}
+.card__media img,
+.card__media svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.card__media--tall { aspect-ratio: 4 / 5; }
+
+.card__body { padding: var(--s-4); display: flex; flex-direction: column; gap: var(--s-2); flex: 1; }
+.card__name { font-family: var(--font-display); font-weight: 600; font-size: var(--t-4); line-height: 1.15; }
+.card__name a { text-decoration: none; }
+/* The whole card is clickable via a stretched pseudo-element on the link,
+   which keeps one link per card for screen readers instead of three. */
+.card__name a::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+.card__sub { font-size: var(--sm); color: var(--ink-2); font-weight: 600; }
+.card__foot {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin-top: auto;
+  padding-top: var(--s-3);
+}
+.card__price { font-variant-numeric: tabular-nums; font-weight: 800; }
+.card__price span { font-weight: 600; font-size: var(--xs); color: var(--ink-2); display: block; }
+/* The add button must sit above the stretched link or it cannot be clicked. */
+.card__foot .btn { position: relative; z-index: 2; margin-inline-start: auto; }
+
+/* A corner flag, for "most ordered" and the like. Rotated, so it reads as
+   something stuck on rather than another rectangle. */
+.card__flag {
+  position: absolute;
+  top: var(--s-3);
+  left: calc(var(--s-3) * -1);
+  z-index: 2;
+  background: var(--berry);
+  color: #fff;
+  border: var(--stroke-2);
+  padding: 2px var(--s-3);
+  font-size: var(--xs);
+  font-weight: 800;
+  rotate: -4deg;
+  box-shadow: var(--pop-sm);
+}
+
+.card[data-state="out"] { opacity: 0.72; }
+.card[data-state="out"] .card__media { filter: saturate(0.3); }
+
+/* --------------------------------------------------------------------------
+   The hero. One wide drawn panel, the cake on the right, the claim on the
+   left, and nothing else.
+   -------------------------------------------------------------------------- */
+.hero { padding-block: var(--s-6) var(--s-5); }
+.hero__grid { display: grid; gap: var(--s-5); align-items: center; }
+@media (min-width: 58rem) {
+  .hero__grid { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: var(--s-6); }
+}
+.hero h1 { text-wrap: balance; }
+.hero__claim { margin-top: var(--s-4); max-width: 44ch; }
+.hero__cta { margin-top: var(--s-5); display: flex; flex-wrap: wrap; gap: var(--s-3); align-items: center; }
+
+/* The hero cake sits in a drawn frame with a thick outline and a tilt. */
+.hero__frame {
+  background: var(--surface);
+  border: var(--stroke);
+  border-radius: var(--r);
+  box-shadow: 10px 10px 0 var(--ink);
+  rotate: 1.2deg;
+  padding: var(--s-4);
+  position: relative;
+}
+.hero__frame svg { display: block; width: 100%; height: auto; }
+
+/* The three promises under the hero. Facts with numbers in them, not three
+   decorative pills — the thing Template 05 v1 was criticised for. */
+.promises {
+  display: grid;
+  gap: var(--s-4);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  margin-top: var(--s-6);
+}
+.promise {
+  display: flex;
+  gap: var(--s-3);
+  align-items: flex-start;
+  padding: var(--s-4);
+  background: var(--surface);
+  border: var(--stroke-2);
+  border-radius: var(--r-sm);
+}
+.promise svg { flex: none; }
+.promise strong { display: block; font-family: var(--font-display); font-weight: 600; }
+.promise span { font-size: var(--sm); color: var(--ink-2); font-weight: 600; }
+
+/* --------------------------------------------------------------------------
+   Occasion tiles. Illustration, not photography — this is the one place the
+   template leans on its full confetti palette.
+   -------------------------------------------------------------------------- */
+.occ {
+  display: grid;
+  gap: var(--s-2);
+  padding: var(--s-4);
+  background: var(--tile, var(--sun-3));
+  border: var(--stroke);
+  border-radius: var(--r);
+  box-shadow: var(--pop-sm);
+  text-decoration: none;
+  min-height: 132px;
+  align-content: end;
+  transition: translate var(--mid) var(--ease-pop), box-shadow var(--mid) var(--ease-pop);
+}
+.occ:hover { translate: -2px -2px; box-shadow: var(--pop); }
+.occ__icon { font-size: 1.7rem; line-height: 1; }
+.occ__name { font-family: var(--font-display); font-weight: 600; font-size: var(--t-4); }
+.occ__n { font-size: var(--xs); font-weight: 700; color: var(--ink-2); }
+
+/* --------------------------------------------------------------------------
+   Basket lines. Not cards — a basket is a list, and a list of rounded boxes
+   is harder to scan than a list of rows.
+   -------------------------------------------------------------------------- */
+.lines { display: grid; }
+.line {
+  display: grid;
+  gap: var(--s-3) var(--s-4);
+  grid-template-columns: 96px minmax(0, 1fr);
+  padding-block: var(--s-4);
+  border-bottom: var(--stroke-2);
+  align-items: start;
+}
+.line:first-child { border-top: var(--stroke-2); }
+.line__thumb {
+  position: relative;
+  aspect-ratio: 1;
+  background: var(--sun-3);
+  border: var(--stroke-2);
+  border-radius: var(--r-sm);
+  overflow: hidden;
+}
+.line__thumb img, .line__thumb svg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.line__name { font-family: var(--font-display); font-weight: 600; font-size: var(--t-4); }
+.line__spec { font-size: var(--sm); color: var(--ink-2); font-weight: 600; margin-top: var(--s-1); }
+.line__said { font-size: var(--sm); font-weight: 700; margin-top: var(--s-2); }
+.line__foot { display: flex; flex-wrap: wrap; gap: var(--s-3); align-items: center; margin-top: var(--s-3); }
+.line__price { margin-inline-start: auto; font-variant-numeric: tabular-nums; font-weight: 800; font-size: var(--t-4); }
+@media (max-width: 34rem) {
+  .line { grid-template-columns: 64px minmax(0, 1fr); }
+  .line__price { margin-inline-start: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   Empty states. They say what to do next, and link to it.
+   -------------------------------------------------------------------------- */
+.empty {
+  text-align: center;
+  padding: var(--s-7) var(--s-4);
+  background: var(--sun-3);
+  border: var(--line) dashed var(--ink);
+  border-radius: var(--r);
+}
+.empty svg { margin-inline: auto; margin-bottom: var(--s-4); }
+.empty p { max-width: 42ch; margin-inline: auto; }

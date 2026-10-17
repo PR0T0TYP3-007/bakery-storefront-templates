@@ -1,0 +1,9 @@
+{
+  "name": "template-02-playful-celebration",
+  "private": true,
+  "type": "module",
+  "description": "Template 02 — The Playful Celebration. Static storefront with a live SVG cake builder; this file exists only so Node can run the unit tests as ES modules. Nothing is installed or shipped to the browser.",
+  "scripts": {
+    "test": "node --test \"tests/*.test.js\""
+  }
+}

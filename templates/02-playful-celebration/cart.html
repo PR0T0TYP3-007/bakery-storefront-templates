@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your basket — Many Happy Returns</title>
+<meta name="robots" content="noindex">
+
+<link rel="preload" href="assets/fonts/fredoka.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/nunito.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/card.css">
+<link rel="stylesheet" href="css/components/cake.css">
+<link rel="stylesheet" href="css/components/overlay.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to the basket</a>
+
+<header class="chrome" data-chrome></header>
+<div class="allergen" data-allergens></div>
+
+<main id="main">
+  <div class="shell section--tight">
+    <h1 class="t-2">Your basket</h1>
+
+    <div class="with-aside" style="margin-top:var(--s-5)">
+      <div>
+        <p class="note" data-ready hidden></p>
+        <p class="note note--warn" style="margin-top:var(--s-3)" data-stale hidden></p>
+
+        <div class="lines" style="margin-top:var(--s-4)" data-lines></div>
+
+        <div class="row" style="margin-top:var(--s-5)">
+          <a class="btn btn--quiet" href="shop.html" data-shop-link>Keep looking</a>
+          <button class="linkish spread" type="button" data-clear>Empty the basket</button>
+        </div>
+      </div>
+
+      <aside class="with-aside__aside" data-aside hidden>
+        <div class="panel">
+          <h2 class="t-3">What it comes to</h2>
+          <div style="margin-top:var(--s-4)" data-totals></div>
+          <a class="btn btn--loud btn--block" style="margin-top:var(--s-4)" href="checkout.html" data-checkout>
+            Check out
+          </a>
+          <p class="xs quiet" style="margin-top:var(--s-3);text-align:center">
+            Guest checkout. No account, no password.
+          </p>
+        </div>
+
+        <p class="note note--flat" style="margin-top:var(--s-4)" data-free hidden></p>
+      </aside>
+    </div>
+
+    <div data-empty hidden>
+      <div class="empty">
+        <p class="t-3">Nothing in here yet</p>
+        <p class="sm" style="margin-top:var(--s-2)">
+          Build the cake you have in mind, or have a look at the nine we already make.
+        </p>
+        <div class="row" style="justify-content:center;margin-top:var(--s-4)">
+          <a class="btn btn--loud" href="build.html" data-build-link>Build a cake</a>
+          <a class="btn" href="shop.html" data-shop-link-2>See ours</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer" data-footer></footer>
+
+<script type="module" src="js/pages/cart.js"></script>
+</body>
+</html>

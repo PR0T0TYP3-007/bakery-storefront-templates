@@ -226,7 +226,7 @@
     <p class="meta">Cake &amp; bakery storefronts</p>
     <h1>Listed Templates</h1>
     <div class="count">
-      <p class="meta">Two templates available</p>
+      <p class="meta" data-count>Three templates available</p>
       <p class="meta">Select one to view it</p>
     </div>
   </div>
@@ -259,6 +259,28 @@
 
     <li class="entry">
       <div class="entry__preview">
+        <img src="assets/previews/template-02.jpg"
+             alt="Preview of The Playful Celebration: a sun-yellow page with a rounded headline reading “Draw the cake. We’ll bake that exact one.” beside a drawn three-tier pink cake with candles and a slice cut out."
+             width="1120" height="700" loading="eager" decoding="async">
+      </div>
+      <div class="entry__body">
+        <p class="meta">Template 02</p>
+        <h2 class="entry__name">
+          <a class="entry__link" href="templates/02-playful-celebration/index.html">The Playful Celebration</a>
+        </h2>
+        <dl class="entry__facts">
+          <div><dt>Company</dt><dd>Many Happy Returns</dd></div>
+          <div><dt>Concept</dt><dd>Make a Fuss</dd></div>
+        </dl>
+        <div class="entry__foot">
+          <span class="meta">Northdown Road, Margate</span>
+          <span class="view">View template <span aria-hidden="true">&rarr;</span></span>
+        </div>
+      </div>
+    </li>
+
+    <li class="entry">
+      <div class="entry__preview">
         <img src="assets/previews/template-05.jpg"
              alt="Preview of The Counter: a ruled board listing bread and pastry with prices and stock, beside an order ticket panel."
              width="1120" height="700" loading="eager" decoding="async">
@@ -280,6 +302,20 @@
     </li>
 
   </ul>
+<script>
+  // Written, not hardcoded: the heading counts the entries below it, so
+  // adding a template cannot leave this line stale. The markup already
+  // carries the right word, so nothing breaks if this never runs.
+  (function () {
+    var n = document.querySelectorAll('.listing .entry').length;
+    var words = ['No', 'One', 'Two', 'Three', 'Four', 'Five'];
+    var el = document.querySelector('[data-count]');
+    if (el && n) {
+      el.textContent = (words[n] || n) + ' template' + (n === 1 ? '' : 's') + ' available';
+    }
+  })();
+</script>
+
 </main>
 
 <footer>

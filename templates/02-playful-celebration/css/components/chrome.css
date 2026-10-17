@@ -1,0 +1,233 @@
+/* ==========================================================================
+   Chrome — header, nav, basket button, footer.
+   ========================================================================== */
+
+.chrome {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--sun);
+  border-bottom: var(--stroke);
+}
+
+.chrome__in {
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  min-height: 72px;
+  padding-block: var(--s-2);
+}
+
+/* The wordmark. Rotated a degree and a half and given a solid shadow, which
+   is the template's whole personality in one element: drawn, not floated. */
+.mark {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.22rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  background: var(--surface);
+  border: var(--stroke);
+  border-radius: var(--r-sm);
+  box-shadow: var(--pop-sm);
+  padding: var(--s-2) var(--s-3);
+  rotate: -1.5deg;
+  /* Allowed to shrink. `flex: none` plus a long shop name and a basket
+     button pushed the header 86px past a 375px screen. */
+  flex: 0 1 auto;
+  min-width: 0;
+  transition: rotate var(--mid) var(--ease-pop), box-shadow var(--mid) var(--ease-pop);
+}
+.mark:hover { rotate: 1.5deg; box-shadow: 5px 5px 0 var(--berry); }
+.mark__sub {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin-top: 2px;
+}
+
+.nav { display: flex; gap: var(--s-1); align-items: center; }
+.nav a {
+  display: block;
+  padding: var(--s-2) var(--s-3);
+  min-height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--r-pill);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: var(--sm);
+  border: 2px solid transparent;
+  transition: background var(--fast), border-color var(--fast);
+}
+.nav a:hover { background: color-mix(in oklab, var(--ink) 8%, transparent); }
+.nav a[aria-current='page'] { border-color: var(--ink); background: var(--surface); }
+
+@media (max-width: 54rem) {
+  .nav { display: none; }
+}
+
+/* On a phone the chrome carries a wordmark, a basket and a menu button, and
+   a shop with a long name does not fit all three. The address line and the
+   word "Basket" are the two things that can go without losing anything: the
+   address is in the footer on every page, and the basket keeps its icon,
+   its count and its accessible label. */
+@media (max-width: 30rem) {
+  .chrome__in { gap: var(--s-2); }
+  .mark { font-size: 1.02rem; }
+  .mark__sub { display: none; }
+  .basket { padding-inline: var(--s-3); }
+  .basket__word { display: none; }
+}
+
+/* Basket. The count is the only number in the chrome, so it gets the berry. */
+.basket {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: 44px;
+  padding: var(--s-2) var(--s-4);
+  background: var(--ink);
+  color: var(--sun);
+  border: var(--stroke);
+  border-radius: var(--r-pill);
+  box-shadow: var(--pop-sm);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: var(--sm);
+  flex: none;
+  transition: translate var(--fast), box-shadow var(--fast);
+}
+.basket:hover { translate: -1px -1px; box-shadow: 4px 4px 0 var(--berry); }
+.basket:active { translate: 2px 2px; box-shadow: 1px 1px 0 var(--ink); }
+.basket__n {
+  min-width: 1.5em;
+  padding-inline: 0.35em;
+  background: var(--berry);
+  color: #fff;
+  border-radius: var(--r-pill);
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.basket__n[data-zero='true'] { background: color-mix(in oklab, var(--sun) 22%, transparent); color: var(--sun); }
+
+/* The mobile nav lives in a details element so it needs no JavaScript to
+   open, and keyboard support comes free. */
+.menu { display: none; }
+@media (max-width: 54rem) {
+  .menu { display: block; position: relative; flex: none; }
+}
+.menu__btn {
+  display: grid;
+  place-items: center;
+  width: 44px; height: 44px;
+  background: var(--surface);
+  border: var(--stroke);
+  border-radius: var(--r-sm);
+  box-shadow: var(--pop-sm);
+  cursor: pointer;
+  list-style: none;
+}
+.menu__btn::-webkit-details-marker { display: none; }
+.menu[open] .menu__btn { box-shadow: none; translate: 2px 2px; }
+.menu__panel {
+  position: absolute;
+  right: 0;
+  top: calc(100% + var(--s-2));
+  min-width: 220px;
+  background: var(--surface);
+  border: var(--stroke);
+  border-radius: var(--r);
+  box-shadow: var(--pop);
+  padding: var(--s-2);
+  display: grid;
+  gap: 2px;
+}
+.menu__panel a {
+  display: block;
+  padding: var(--s-3);
+  min-height: 44px;
+  border-radius: var(--r-sm);
+  text-decoration: none;
+  font-weight: 700;
+}
+.menu__panel a:hover { background: var(--sun-3); }
+.menu__panel a[aria-current='page'] { background: var(--grape-wash); }
+
+/* --------------------------------------------------------------------------
+   The occasion strip. Sits under the chrome on the shop and home pages and
+   is the template's answer to "discovery" in the brief: people shopping for
+   a celebration cake arrive knowing the occasion, not the flavour.
+   -------------------------------------------------------------------------- */
+.occasions {
+  display: flex;
+  gap: var(--s-2);
+  overflow-x: auto;
+  scrollbar-width: thin;
+  padding-block: var(--s-3);
+  /* Scroll-snap so a thumb flick lands on a whole chip, not half of one. */
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+}
+.occasions > * { scroll-snap-align: start; flex: none; }
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+.footer {
+  background: var(--ink);
+  color: var(--sun-3);
+  border-top: var(--stroke);
+  padding-block: var(--s-6) var(--s-5);
+}
+.footer a { color: var(--sun); }
+.footer__grid {
+  display: grid;
+  gap: var(--s-5);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr));
+}
+.footer h2 {
+  font-size: var(--xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-family: var(--font-body);
+  font-weight: 800;
+  color: var(--sun);
+  margin-bottom: var(--s-3);
+}
+.footer ul { list-style: none; padding: 0; margin: 0; }
+.footer li { margin-bottom: var(--s-2); font-size: var(--sm); }
+
+/* WCAG 2.2 SC 2.5.8 wants 24x24. A footer link at the small size is 19px
+   tall, so it gets padding rather than relying on the spacing exception. */
+.footer a,
+.footer li a { display: inline-block; padding-block: 3px; }
+.footer__legal {
+  margin-top: var(--s-6);
+  padding-top: var(--s-4);
+  border-top: 2px solid color-mix(in oklab, var(--sun-3) 25%, transparent);
+  font-size: var(--xs);
+  color: color-mix(in oklab, var(--sun-3) 72%, transparent);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-4);
+  justify-content: space-between;
+}
+
+/* Allergen statement. Legally the most important sentence on the site, so it
+   is never a tooltip and never collapsed. */
+.allergen {
+  background: var(--sun-2);
+  color: var(--ink);
+  border-block: var(--stroke);
+  padding-block: var(--s-3);
+  font-size: var(--sm);
+  font-weight: 600;
+}
+.allergen__in { display: flex; gap: var(--s-3); align-items: flex-start; }
+.allergen svg { flex: none; margin-top: 2px; }

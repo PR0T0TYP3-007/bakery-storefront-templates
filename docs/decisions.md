@@ -118,3 +118,75 @@ point.
 **What this means.** Those documents are not written. The commercial hypotheses live in
 `02-concept.md` §5 rather than a separate analytics file, and no Lighthouse or axe run has
 been performed yet — so no performance or accessibility numbers should be quoted.
+
+---
+
+### D8 — An explicit distance check before any template is designed
+
+**Decision.** Before a new template gets a single line of CSS, four axes are fixed and
+compared against every template already shipped: the ground colour, the display type
+*class*, the accent chroma, and the method used to separate one thing from another. All
+four must differ. The numbers go in that template's concept document.
+
+**Why.** The higher-up's note on Template 05 — "looks good in style but it seems similar
+to the spirit of the first one" — was correct, and the evidence was measurable. Template
+01's ground was `#F5F1EA`, Template 05's `#FBF6EC`: about 2% apart. Both had a serif
+display face, 1px rules, no shadows and a muted earth accent.
+
+The cause was that I differentiated on **structure** — cards versus ruled rows, ticket
+versus no ticket — while keeping my own aesthetic defaults, and those defaults *are* the
+identity. The brief's §11 names "five designs that share essentially the same creative
+identity" as a rejection criterion, so this is a project risk, not a question of taste.
+
+**What this means in practice.** It forced Template 02 off an off-white ground entirely,
+because any pale colour is numerically close to any other pale colour. Template 02's
+ground is 192 and 207 channels from the other two; its accent is 214 and 302 away.
+
+---
+
+### D9 — Shared commerce layer, per-template everything else
+
+**Decision.** Three layers, with a hard rule about what may go in each:
+
+- `shared/core/` — pure, DOM-free commerce rules. Dates, money, pricing, cart, option
+  rules, fulfilment, storage. Imported by every template.
+- `shared/session.js` — the stateful layer: merchant, catalogue, basket, chosen day,
+  events. It touches the DOM (it sets `lang` and `data-brand`), so it is not in `core/`.
+  It is a factory that takes the template's own `api.js`.
+- Everything in `templates/<name>/js/` — components, pages and the `api.js` data seam.
+  Shared by nothing.
+
+**Why.** D3 said the duplicated commerce rules "should not survive into template 02". When
+Template 02 started, the choice was to copy them a third time or promote them. Promoting
+them took a `git mv`, thirteen import rewrites and a build-script change; copying would
+have been free today and a three-way merge every time a rule changed.
+
+`session.js` went the same way one step later, for the same reason: it was 180 lines and
+the only template-specific line in it was the relative import of `api.js`.
+
+**What this means.** UI components are deliberately *not* shared. Template 02's date picker
+and Template 05's do the same job and look nothing alike, which is the point — a shared
+component across five templates with five identities would pull them back together, which
+is exactly what D8 exists to prevent.
+
+---
+
+### D10 — The cake builder is drawn from data, and it is deterministic
+
+**Decision.** Template 02's live cake preview is inline SVG built by one pure function
+that returns a string. Option colours and drawing modes live in `products.json`; the
+renderer never mentions an option id. Sprinkle scatter and drip lobes are seeded from an
+FNV-1a hash of the configuration.
+
+**Why determinism matters.** The inscription repaints the cake on every keystroke. With
+random placement the sprinkles would re-scatter on each letter typed, which reads as a
+glitch rather than a feature. There is a test asserting that typing does not re-pour the
+drip.
+
+**Why from data.** A merchant adding a buttercream colour should not need a developer. The
+only join between the two vocabularies — option ids and drawing modes — is `specFrom()`.
+
+**Why a string and not DOM nodes.** It makes the thing testable under `node --test` with
+no DOM, no jsdom and no transpiler. One `innerHTML` of a three-tier sprinkle-coated cake
+measures around 1.1ms, well under a frame, so diffing would be more code for no gain the
+customer could feel.

@@ -1,0 +1,84 @@
+/* ==========================================================================
+   Layout. Page shell, sections, grids.
+
+   Template 05's post-mortem found that "every section the same width, the
+   same padding, the same grid" is what makes a page read as machine-made.
+   So the widths here are named by intent and the home page alternates them.
+   ========================================================================== */
+
+.shell { width: min(100% - 2.5rem, var(--page)); margin-inline: auto; }
+.shell--narrow { width: min(100% - 2.5rem, 820px); margin-inline: auto; }
+.shell--wide { width: min(100% - 1.5rem, 1420px); margin-inline: auto; }
+
+.prose { max-width: var(--prose); }
+
+.section { padding-block: var(--s-7); }
+.section--tight { padding-block: var(--s-5); }
+.section--loud { padding-block: var(--s-8); }
+
+/* A band is a full-bleed colour change. The home page is built from these
+   rather than from one long yellow scroll. */
+.band { position: relative; }
+.band--white { background: var(--surface); }
+.band--cream { background: var(--sun-3); }
+.band--grape { background: var(--grape); color: var(--surface); }
+.band--ink { background: var(--ink); color: var(--sun-3); }
+
+/* Bands meet on a drawn edge, never a gradient or a shadow. */
+.band + .band { border-top: var(--stroke); }
+
+/* The zigzag that separates the hero from the first band. Drawn as a CSS
+   mask so it needs no image and inherits the band colour. */
+.zig {
+  height: 18px;
+  background: var(--ink);
+  --tooth: 28px;
+  mask: conic-gradient(from -45deg at 50% 0, #000 0 90deg, #0000 0) 50% / var(--tooth) 100%;
+}
+
+.sec-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--s-4);
+  margin-bottom: var(--s-5);
+}
+.sec-head p { margin: var(--s-2) 0 0; max-width: 46ch; }
+
+/* --------------------------------------------------------------------------
+   Grids
+   -------------------------------------------------------------------------- */
+.grid {
+  display: grid;
+  gap: var(--s-4);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+}
+.grid--2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); }
+.grid--roomy { gap: var(--s-5); }
+
+/* The builder page: cake on the left, choices on the right, and the cake
+   stays put while the choices scroll. */
+.studio {
+  display: grid;
+  gap: var(--s-5);
+  align-items: start;
+}
+@media (min-width: 62rem) {
+  .studio { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: var(--s-6); }
+  .studio__stage { position: sticky; top: var(--s-4); }
+}
+
+/* Checkout and cart: form beside a summary that sticks. */
+.with-aside { display: grid; gap: var(--s-5); align-items: start; }
+@media (min-width: 60rem) {
+  .with-aside { grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.85fr); gap: var(--s-6); }
+  .with-aside__aside { position: sticky; top: var(--s-4); }
+}
+
+.stack > * + * { margin-top: var(--s-4); }
+.stack--tight > * + * { margin-top: var(--s-2); }
+.row { display: flex; flex-wrap: wrap; gap: var(--s-3); align-items: center; }
+.row--end { justify-content: flex-end; }
+.row--between { justify-content: space-between; }
+.spread { margin-inline-start: auto; }
