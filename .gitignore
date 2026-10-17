@@ -1,0 +1,23 @@
+# Dependencies — nothing here ships to the browser
+node_modules/
+
+# Generated demo artefacts.
+# walkthrough.mp4 is ~14MB and regenerable. Git stores binaries in full on
+# every change, so committing it would roughly double the clone size forever.
+# If it needs to be versioned, use Git LFS rather than removing this line.
+walkthrough.mp4
+*.mp4
+
+# Local scratch
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+
+# Editor
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc

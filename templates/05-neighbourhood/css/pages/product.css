@@ -1,0 +1,159 @@
+/* ==========================================================================
+   Product page
+   ========================================================================== */
+
+.pdp {
+  display: grid;
+  gap: var(--s-5);
+  align-items: start;
+  padding-bottom: var(--s-8);
+}
+
+@media (min-width: 60rem) {
+  .pdp {
+    grid-template-columns: minmax(0, 1fr) minmax(22rem, 0.9fr);
+    gap: var(--s-7);
+  }
+
+  .pdp__media {
+    position: sticky;
+    top: calc(var(--header-h) + var(--s-4));
+  }
+}
+
+.pdp__figure {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--paper-3);
+  border: 1px solid var(--rule);
+  border-radius: var(--r);
+}
+
+.pdp__figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pdp__figure .monogram {
+  font-size: 6rem;
+}
+
+.pdp__price {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-3);
+  margin-top: var(--s-3);
+}
+
+.pdp__price strong {
+  font-family: var(--font-display);
+  font-variation-settings: var(--display-settings);
+  font-size: clamp(2rem, 3.5vw, 2.5rem);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+
+/* The price is live. It flashes only when the number has actually changed,
+   so the movement always means something. */
+.pdp__price strong[data-bumped='true'] {
+  animation: bump 320ms var(--ease-out);
+}
+
+@keyframes bump {
+  40% {
+    color: var(--green);
+    transform: translateY(-2px);
+  }
+}
+
+.pdp__block {
+  padding-block: var(--s-5);
+  border-top: 1px solid var(--rule);
+}
+
+.pdp__block:first-of-type {
+  border-top: 2px solid var(--ink);
+}
+
+.pdp__blockhead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-2) var(--s-4);
+  margin-bottom: var(--s-3);
+}
+
+/* Inscription preview: what will actually be piped, in the lettering we use. */
+.inscription {
+  display: grid;
+  place-items: center;
+  min-height: 5.5rem;
+  margin-top: var(--s-3);
+  padding: var(--s-4);
+  background: var(--paper-2);
+  border: 1.5px dashed var(--rule-2);
+  border-radius: var(--r);
+  text-align: center;
+}
+
+.inscription p {
+  font-family: var(--font-display);
+  font-variation-settings: 'SOFT' 60, 'WONK' 1;
+  font-size: clamp(1.25rem, 2.6vw, 1.75rem);
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--green);
+  word-break: break-word;
+}
+
+.inscription[data-empty='true'] p {
+  font-family: var(--font-ui);
+  font-size: var(--t-sm);
+  font-weight: 400;
+  color: var(--ink-3);
+}
+
+/* Allergens — stated plainly, as a list, never as an icon row. */
+.allergens {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin-top: var(--s-3);
+}
+
+.allergen {
+  padding: 0.2rem 0.6rem;
+  background: var(--honey-wash);
+  border-radius: var(--r);
+  font-size: var(--t-sm);
+  font-weight: 600;
+  color: var(--honey);
+  text-transform: capitalize;
+}
+
+.buybar {
+  position: sticky;
+  bottom: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding-block: var(--s-3);
+  margin-top: var(--s-4);
+  background: var(--paper);
+  border-top: 2px solid var(--ink);
+}
+
+.buybar .btn {
+  flex: 1;
+}
+
+/* Keep clear of the mobile ticket bar. */
+@media (max-width: 63.99rem) {
+  .buybar {
+    bottom: 4.5rem;
+  }
+}

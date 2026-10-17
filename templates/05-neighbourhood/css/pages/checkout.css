@@ -1,0 +1,223 @@
+/* ==========================================================================
+   Checkout
+   ========================================================================== */
+
+.steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-5);
+  padding-block: var(--s-3);
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: var(--s-5);
+}
+
+.steps li {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-size: var(--t-sm);
+  font-weight: 600;
+  color: var(--ink-3);
+}
+
+.steps li[aria-current='step'] {
+  color: var(--ink);
+}
+
+.steps b {
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1.5px solid currentColor;
+  border-radius: var(--r-pill);
+  font-size: var(--t-label);
+}
+
+.steps li[aria-current='step'] b {
+  background: var(--green);
+  border-color: var(--green);
+  color: #fff;
+}
+
+.steps li[data-done='true'] b {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+.cblock {
+  padding-block: var(--s-5);
+  border-top: 1px solid var(--rule);
+}
+
+.cblock:first-of-type {
+  border-top: 2px solid var(--ink);
+}
+
+.cblock__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-2) var(--s-4);
+  margin-bottom: var(--s-4);
+}
+
+/* Payment: card fields plus the wallet buttons, which are visual only here. */
+.wallets {
+  display: grid;
+  gap: var(--s-2);
+  margin-bottom: var(--s-4);
+}
+
+@media (min-width: 30rem) {
+  .wallets {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.wallet {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  min-height: var(--tap);
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: var(--r);
+  font-weight: 600;
+  font-size: var(--t-sm);
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.paydivider {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  margin-block: var(--s-4);
+  color: var(--ink-3);
+  font-size: var(--t-sm);
+}
+
+.paydivider::before,
+.paydivider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+.testcards {
+  margin-top: var(--s-3);
+}
+
+.testcards summary {
+  cursor: pointer;
+  font-size: var(--t-sm);
+  font-weight: 600;
+}
+
+.testcards table {
+  margin-top: var(--s-3);
+  font-size: var(--t-sm);
+}
+
+.testcards td,
+.testcards th {
+  padding: var(--s-2) var(--s-3) var(--s-2) 0;
+  text-align: left;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+
+.testcards code {
+  font-family: ui-monospace, Menlo, monospace;
+  font-size: 0.8125rem;
+}
+
+/* Pending state — the button says what is happening and stays disabled. */
+.btn[data-pending='true'] {
+  cursor: progress;
+}
+
+.spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: var(--r-pill);
+  animation: spin 700ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation-duration: 2s;
+  }
+}
+
+/* Confirmation */
+.receipt {
+  max-width: 34rem;
+  margin-top: var(--s-5);
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--r);
+}
+
+.receipt__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding: var(--s-4);
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: 3px 3px 0 0;
+}
+
+.receipt__body {
+  padding: var(--s-4);
+}
+
+.receipt dl {
+  display: grid;
+  gap: var(--s-4);
+}
+
+@media (min-width: 30rem) {
+  .receipt dl {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.receipt dt {
+  font-size: var(--t-label);
+  font-weight: 700;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.receipt dd {
+  margin-top: 0.15rem;
+  font-weight: 600;
+}
+
+.tick {
+  display: inline-grid;
+  place-items: center;
+  width: 3.25rem;
+  height: 3.25rem;
+  background: var(--green-wash);
+  color: var(--green);
+  border-radius: var(--r-pill);
+  margin-bottom: var(--s-4);
+}

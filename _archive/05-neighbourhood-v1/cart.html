@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your basket — Bluebird Bakery</title>
+<meta name="description" content="What you're collecting, and when.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div data-header></div>
+
+<main id="main">
+  <div class="wrap">
+    <section class="section-tight">
+      <div class="sec-head">
+        <h1 class="d-1">Your basket</h1>
+        <p class="small" data-line-count></p>
+      </div>
+    </section>
+
+    <div class="order" data-order hidden>
+      <div>
+        <div data-lines></div>
+
+        <section style="padding-block:clamp(1.5rem,3vw,2.25rem)" data-suggest-block hidden>
+          <div class="sec-head" style="margin-bottom:.9rem">
+            <h2 class="d-3">Pop one of these in too?</h2>
+          </div>
+          <div data-suggest></div>
+        </section>
+      </div>
+
+      <aside class="order__aside">
+        <div class="panel">
+          <p class="label">Summary</p>
+          <div style="margin-top:1rem">
+            <div class="summary__row"><span>Subtotal</span><span data-subtotal>—</span></div>
+            <div class="summary__row summary__muted"><span>Collection or delivery</span><span>Chosen next</span></div>
+            <div class="summary__row summary__row--total"><span>So far</span><span data-total>—</span></div>
+          </div>
+
+          <div class="notice" style="margin-top:1rem" data-when-note></div>
+
+          <p style="margin-top:1rem"><a class="btn btn--lg btn--block" href="checkout.html">Checkout</a></p>
+          <p style="margin-top:.5rem"><a class="btn btn--ghost btn--block" href="shop.html">Keep shopping</a></p>
+          <p class="small" style="margin-top:1rem">No account needed. Nothing is charged in this demonstration.</p>
+        </div>
+      </aside>
+    </div>
+
+    <div class="empty" data-empty hidden>
+      <div class="empty__inner">
+        <h2 class="d-2">Nothing in the basket yet</h2>
+        <p class="lede" style="margin-top:.75rem">The shelf is over there. Bread goes quickly on a Saturday.</p>
+        <p style="margin-top:1.5rem"><a class="btn btn--lg" href="shop.html">Go to the shop</a></p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<div data-footer></div>
+
+<script src="assets/js/catalogue.js"></script>
+<script src="../../shared/js/store.js"></script>
+<script src="../../shared/js/commerce-ui.js"></script>
+<script src="assets/js/chrome.js"></script>
+<script src="assets/js/cart.js"></script>
+</body>
+</html>

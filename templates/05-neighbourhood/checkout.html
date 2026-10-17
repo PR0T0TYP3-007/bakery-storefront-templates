@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hazel &amp; Rye — checkout</title>
+<meta name="description" content="Pick a collection time, leave a number, done.">
+<meta name="robots" content="noindex">
+<link rel="preload" href="assets/fonts/publicsans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/board.css">
+<link rel="stylesheet" href="css/components/ticket.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/overlay.css">
+<link rel="stylesheet" href="css/pages/checkout.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div data-header></div>
+
+<main id="main" class="wrap">
+  <section class="section--tight">
+    <h1 class="t-1">Checkout</h1>
+  </section>
+
+  <ol class="steps" data-steps>
+    <li data-done="true"><b>1</b> Your ticket</li>
+    <li aria-current="step"><b>2</b> Details</li>
+    <li><b>3</b> Done</li>
+  </ol>
+
+  <div class="counter" data-checkout hidden style="padding-bottom:var(--s-8)">
+    <form id="order" novalidate>
+
+      <!-- Errors are summarised at the top AND marked on each field. -->
+      <div data-summary hidden tabindex="-1"></div>
+
+      <!-- 1. Collecting or delivering -->
+      <section class="cblock">
+        <div class="cblock__head"><h2 class="t-2">Collecting or delivering?</h2></div>
+        <fieldset class="opts" data-methods>
+          <legend class="vh">How would you like your order?</legend>
+        </fieldset>
+
+        <!-- Location, only where there is a choice to make -->
+        <div data-locations hidden style="margin-top:var(--s-4)">
+          <div class="field">
+            <label class="field__label" for="loc"><span>Which shop?</span></label>
+            <select class="select" id="loc" name="location" data-loc></select>
+          </div>
+        </div>
+
+        <!-- Delivery: postcode checked before anything else -->
+        <div data-delivery hidden style="margin-top:var(--s-4)">
+          <div class="field" data-postcode-field>
+            <label class="field__label" for="postcode"><span>Postcode</span></label>
+            <div class="cluster">
+              <input class="input" id="postcode" name="postcode" autocomplete="shipping postal-code"
+                     style="flex:1;min-width:10rem" aria-describedby="zone-result">
+              <button class="btn btn--quiet" type="button" data-check-zone>Check</button>
+            </div>
+            <p class="field__error" data-postcode-error></p>
+          </div>
+          <div id="zone-result" aria-live="polite" style="margin-top:var(--s-3)" data-zone-result></div>
+
+          <div class="field" data-address-field hidden style="margin-top:var(--s-4)">
+            <label class="field__label" for="address"><span>Address</span></label>
+            <textarea class="textarea" id="address" name="address" rows="3"
+                      autocomplete="shipping street-address"></textarea>
+            <p class="field__error" data-address-error></p>
+          </div>
+        </div>
+
+        <!-- Collection slots -->
+        <div data-slots-block hidden style="margin-top:var(--s-5)">
+          <div class="cblock__head" style="margin-bottom:var(--s-3)">
+            <h3 class="t-3">Pick a time</h3>
+            <span class="sm" data-slot-day>—</span>
+          </div>
+          <fieldset class="slots" data-slots>
+            <legend class="vh">Collection time</legend>
+          </fieldset>
+          <p class="field__error" data-slot-error></p>
+        </div>
+
+        <div class="note" style="margin-top:var(--s-5)" data-day-note></div>
+      </section>
+
+      <!-- 2. Who -->
+      <section class="cblock">
+        <div class="cblock__head">
+          <h2 class="t-2">Who's picking it up?</h2>
+          <span class="sm">No account needed</span>
+        </div>
+
+        <div class="row2">
+          <div class="field" data-field="name">
+            <label class="field__label" for="name"><span>Name</span></label>
+            <input class="input" id="name" name="name" autocomplete="name" required>
+            <p class="field__error" data-error></p>
+          </div>
+          <div class="field" data-field="phone">
+            <label class="field__label" for="phone"><span>Mobile</span></label>
+            <input class="input" id="phone" name="phone" type="tel" inputmode="tel"
+                   autocomplete="tel" required>
+            <p class="field__error" data-error></p>
+          </div>
+        </div>
+
+        <div class="field" data-field="email">
+          <label class="field__label" for="email"><span>Email</span></label>
+          <input class="input" id="email" name="email" type="email" inputmode="email"
+                 autocomplete="email" required aria-describedby="email-hint">
+          <p class="field__error" data-error></p>
+          <p class="field__hint" id="email-hint">We send the receipt here, and a reminder the day before.</p>
+        </div>
+      </section>
+
+      <!-- 3. Gift — rendered only where the merchant offers it -->
+      <section class="cblock" data-gift-block hidden>
+        <div class="cblock__head"><h2 class="t-2">Is it a gift?</h2></div>
+        <div class="opts">
+          <label class="opt opt--check">
+            <input type="checkbox" data-gift-toggle>
+            <span class="opt__mark" aria-hidden="true"></span>
+            <span class="opt__body">
+              <span class="opt__name">Yes, it's going to someone else</span>
+              <span class="opt__note">We leave the prices off and add a card</span>
+            </span>
+          </label>
+        </div>
+        <div data-gift-fields hidden style="margin-top:var(--s-4)">
+          <div class="field">
+            <label class="field__label" for="giftmsg">
+              <span>Message on the card</span><span class="field__opt"><span data-gift-count>0</span>/200</span>
+            </label>
+            <textarea class="textarea" id="giftmsg" name="giftMessage" maxlength="200"></textarea>
+          </div>
+          <div class="row2" style="margin-top:var(--s-4)">
+            <div class="field">
+              <label class="field__label" for="rname"><span>Their name</span></label>
+              <input class="input" id="rname" name="recipientName">
+            </div>
+            <div class="field">
+              <label class="field__label" for="rphone"><span>Their number</span><span class="field__opt">Optional</span></label>
+              <input class="input" id="rphone" name="recipientPhone" type="tel">
+            </div>
+          </div>
+          <div class="opts" style="margin-top:var(--s-4)">
+            <label class="opt opt--check">
+              <input type="checkbox" name="hidePrices" checked>
+              <span class="opt__mark" aria-hidden="true"></span>
+              <span class="opt__body"><span class="opt__name">Keep prices off the gift note</span></span>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Notes + allergens -->
+      <section class="cblock">
+        <div class="cblock__head">
+          <h2 class="t-2">Anything we should know?</h2>
+          <span class="sm">Optional</span>
+        </div>
+        <div class="field">
+          <label class="field__label" for="notes"><span>Allergies or notes</span></label>
+          <textarea class="textarea" id="notes" name="notes" rows="3"
+                    placeholder="Nut allergy — please bag separately."></textarea>
+        </div>
+        <p class="note note--flat" style="margin-top:var(--s-4)" data-allergen-statement></p>
+      </section>
+
+      <!-- 5. Payment -->
+      <section class="cblock">
+        <div class="cblock__head">
+          <h2 class="t-2">Payment</h2>
+          <span class="sm">Demonstration only</span>
+        </div>
+
+        <div class="wallets" aria-hidden="true">
+          <span class="wallet">Apple&nbsp;Pay</span>
+          <span class="wallet">Google&nbsp;Pay</span>
+        </div>
+        <p class="sm" style="margin-top:calc(var(--s-4) * -1 + var(--s-2))">
+          Wallet buttons are shown for layout only and are not wired up.
+        </p>
+
+        <p class="paydivider">or pay by card</p>
+
+        <div class="field" data-field="card">
+          <label class="field__label" for="card"><span>Card number</span></label>
+          <input class="input" id="card" name="card" inputmode="numeric" autocomplete="cc-number"
+                 placeholder="4242 4242 4242 4242" required>
+          <p class="field__error" data-error></p>
+        </div>
+
+        <div class="row2" style="margin-top:var(--s-4)">
+          <div class="field" data-field="expiry">
+            <label class="field__label" for="expiry"><span>Expiry</span></label>
+            <input class="input" id="expiry" name="expiry" inputmode="numeric"
+                   autocomplete="cc-exp" placeholder="MM / YY" required>
+            <p class="field__error" data-error></p>
+          </div>
+          <div class="field" data-field="cvc">
+            <label class="field__label" for="cvc"><span>Security code</span></label>
+            <input class="input" id="cvc" name="cvc" inputmode="numeric" autocomplete="cc-csc"
+                   placeholder="123" required>
+            <p class="field__error" data-error></p>
+          </div>
+        </div>
+
+        <details class="testcards">
+          <summary>Test card numbers</summary>
+          <table>
+            <tr><th>Any other number</th><td>Succeeds</td></tr>
+            <tr><th><code>4000 0000 0000 0002</code></th><td>Declined by the bank</td></tr>
+            <tr><th><code>4000 0000 0000 0119</code></th><td>Payment provider unreachable</td></tr>
+          </table>
+        </details>
+      </section>
+
+      <div style="padding-block:var(--s-5)">
+        <div data-payment-error></div>
+        <button class="btn btn--lg btn--block" type="submit" data-place>
+          Place order — <span data-submit-total>—</span>
+        </button>
+        <p class="sm" style="margin-top:var(--s-3);text-align:center">
+          No money is taken. This is a design template.
+        </p>
+      </div>
+    </form>
+
+    <aside class="counter__rail" aria-label="Your ticket">
+      <div data-ticket></div>
+      <div data-fulfilment-sum style="margin-top:var(--s-3)"></div>
+    </aside>
+  </div>
+
+  <div data-empty hidden style="padding-block:var(--s-8);text-align:center">
+    <h2 class="t-2">There's nothing to check out</h2>
+    <p style="margin-top:var(--s-5)"><a class="btn btn--lg" href="shop.html" data-shop-link>Go to the shop</a></p>
+  </div>
+</main>
+
+<div data-footer></div>
+<script type="module" src="js/pages/checkout.js"></script>
+</body>
+</html>

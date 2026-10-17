@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cake Themes — Storefront Templates</title>
+<meta name="description" content="Five storefront templates for independent cake and bakery brands. Two built so far.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f3efe8;
+    --ink: #17140f;
+    --ink-2: #574f44;
+    --ink-3: #857b6e;
+    --line: rgba(23,20,15,.14);
+    --accent: #8a3e2c;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: Inter, system-ui, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1180px; margin-inline: auto; padding-inline: clamp(1.25rem,4vw,3rem); }
+  .meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: .6875rem; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-3);
+  }
+  h1 {
+    font-family: 'Instrument Serif', serif; font-weight: 400;
+    font-size: clamp(2.5rem,7vw,5rem); line-height: .95; letter-spacing: -.03em;
+    margin-top: 1rem; text-wrap: balance;
+  }
+  .lede { max-width: 56ch; margin-top: 1.25rem; color: var(--ink-2); font-size: clamp(1rem,1.4vw,1.1875rem); }
+  header { padding-block: clamp(3rem,8vw,6rem) clamp(2rem,4vw,3rem); }
+  .grid { display: grid; gap: clamp(1.25rem,3vw,2rem); padding-bottom: clamp(3rem,7vw,6rem); }
+  @media (min-width: 820px) { .grid { grid-template-columns: 1fr 1fr; } }
+  .card {
+    display: flex; flex-direction: column;
+    border: 1px solid var(--line); background: #fbf8f3;
+    transition: transform .25s cubic-bezier(.2,.7,.2,1), box-shadow .25s cubic-bezier(.2,.7,.2,1);
+  }
+  .card--live:hover { transform: translateY(-3px); box-shadow: 0 10px 34px rgba(23,20,15,.12); }
+  .card__shot { aspect-ratio: 16/10; overflow: hidden; background: #e7dfd2; border-bottom: 1px solid var(--line); }
+  .card__shot img { width: 100%; height: 100%; object-fit: cover; }
+  .card__body { padding: clamp(1.25rem,2.5vw,1.75rem); flex: 1; display: flex; flex-direction: column; }
+  .card h2 { font-family: 'Instrument Serif', serif; font-weight: 400; font-size: 2rem; line-height: 1.02; letter-spacing: -.02em; margin-top: .5rem; }
+  .card p { color: var(--ink-2); margin-top: .6rem; font-size: .9375rem; }
+  .tags { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1.1rem; }
+  .tag { font-family: 'IBM Plex Mono', monospace; font-size: .625rem; letter-spacing: .1em; text-transform: uppercase;
+         padding: .3rem .6rem; border: 1px solid var(--line); border-radius: 999px; color: var(--ink-2); }
+  .card__foot { margin-top: auto; padding-top: 1.5rem; }
+  .btn {
+    display: inline-flex; align-items: center; gap: .5rem;
+    padding: .85rem 1.4rem; background: var(--ink); color: var(--paper);
+    border-radius: 999px; font-family: 'IBM Plex Mono', monospace;
+    font-size: .75rem; letter-spacing: .12em; text-transform: uppercase;
+  }
+  .btn:hover { background: var(--accent); }
+  .card--soon { opacity: .62; }
+  .card--soon .card__shot { display: grid; place-items: center; }
+  .soonmark { font-family: 'Instrument Serif', serif; font-size: 3.5rem; color: var(--ink-3); opacity: .45; }
+  footer { border-top: 1px solid var(--line); padding-block: 2rem 3rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <p class="meta">Cake Themes Templates · Phase 1</p>
+    <h1>Five storefronts.<br>Two of them built.</h1>
+    <p class="lede">Each template is a different answer to what ordering a cake online could feel like. They share the same commerce rules — dates, product-specific lead times, capacity, pricing and cart — and almost nothing else.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="grid">
+
+    <a class="card card--live" href="templates/01-editorial-atelier/index.html">
+      <div class="card__shot">
+        <img src="shared/img/photo-1588195538326-c5b1e9f80a1b-md.jpg" alt="" width="800" height="500">
+      </div>
+      <div class="card__body">
+        <p class="meta">Template 01 · Crumb Atelier</p>
+        <h2>The Editorial Atelier</h2>
+        <p>A cake studio presented as a catalogue raisonné. Plate numbers, makers, provenance. Art-directed, typography-led, premium perception.</p>
+        <div class="tags">
+          <span class="tag">Instrument Serif</span>
+          <span class="tag">Date-first</span>
+          <span class="tag">Full configuration</span>
+          <span class="tag">Gifting</span>
+        </div>
+        <div class="card__foot"><span class="btn">Open template →</span></div>
+      </div>
+    </a>
+
+    <a class="card card--live" href="templates/05-neighbourhood/index.html">
+      <div class="card__shot">
+        <img src="shared/img/photo-1549931319-a545dcf3bc73-md.jpg" alt="" width="800" height="500">
+      </div>
+      <div class="card__body">
+        <p class="meta">Template 05 · Hazel &amp; Rye</p>
+        <h2>The Counter</h2>
+        <p>A board you read and a ticket that builds. Ruled rows for everyday stock, photography only where it sells. Two merchant configs, pure testable core, simulated payment with real failure paths.</p>
+        <div class="tags">
+          <span class="tag">Fraunces</span>
+          <span class="tag">ES modules</span>
+          <span class="tag">Honest stock</span>
+          <span class="tag">37 unit tests</span>
+        </div>
+        <div class="card__foot"><span class="btn">Open template →</span></div>
+      </div>
+    </a>
+
+    <div class="card card--soon">
+      <div class="card__shot"><span class="soonmark">02</span></div>
+      <div class="card__body">
+        <p class="meta">Template 02</p>
+        <h2>The Playful Celebration</h2>
+        <p>Joyful, expressive, memorable interactions. Not started — its value lives in bespoke animation, which is not a one-night build.</p>
+      </div>
+    </div>
+
+    <div class="card card--soon">
+      <div class="card__shot"><span class="soonmark">03 · 04</span></div>
+      <div class="card__body">
+        <p class="meta">Templates 03 &amp; 04</p>
+        <h2>Romantic Boutique · Contemporary Studio</h2>
+        <p>Deep personalisation and gifting, and the most experimental of the five. Both still to come.</p>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="meta">Demonstration storefronts · No orders are processed · Photography is stock, for layout only</p>
+  </div>
+</footer>
+
+</body>
+</html>

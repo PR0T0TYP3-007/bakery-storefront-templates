@@ -1,0 +1,148 @@
+/* ==========================================================================
+   THE COUNTER — tokens.css
+   Every colour, type step, space, radius, border and duration in the template.
+
+   Rebranding this template for a different bakery should mean editing this
+   file and swapping the logo. Nothing else.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Fonts — self-hosted variable WOFF2, latin subset.
+   Fraunces carries the warmth; Public Sans carries the legibility.
+   -------------------------------------------------------------------------- */
+@font-face {
+  font-family: 'Fraunces';
+  src: url('../assets/fonts/fraunces.woff2') format('woff2-variations');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Public Sans';
+  src: url('../assets/fonts/publicsans.woff2') format('woff2-variations');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+:root {
+  /* ------------------------------------------------------------------------
+     Colour
+     Warm oat ground, near-black warm ink, three status hues. Status is never
+     carried by colour alone — every state has a word beside it.
+     ------------------------------------------------------------------------ */
+  --paper: #fbf6ec;
+  --paper-2: #f4ecdd;
+  --paper-3: #ebe0cc;
+  --surface: #fffdf8;
+
+  --ink: #1e1711;
+  --ink-2: #574c3f;
+  --ink-3: #857767;
+
+  --rule: rgba(30, 23, 17, 0.16);
+  --rule-2: rgba(30, 23, 17, 0.32);
+  --rule-strong: var(--ink);
+
+  --green: #1b5e41;
+  --green-dark: #144630;
+  --green-wash: #e4efe8;
+
+  --honey: #9a6410;
+  --honey-wash: #f8eed8;
+
+  --clay: #a33f28;
+  --clay-wash: #f8e8e3;
+
+  --focus: #1b5e41;
+
+  /* ------------------------------------------------------------------------
+     Type
+     ------------------------------------------------------------------------ */
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-ui: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui,
+    sans-serif;
+
+  /* Fraunces axes. SOFT rounds the terminals, WONK allows the irregular
+     letterforms — both are what stop it reading as a default serif. */
+  --display-settings: 'SOFT' 40, 'WONK' 1;
+
+  /* Real contrast between steps. v1 kept everything in a narrow band of
+     medium-large, which is part of why nothing felt authored. */
+  --t-hero: clamp(2.5rem, 6.5vw, 4.5rem);
+  --t-1: clamp(1.875rem, 3.6vw, 2.75rem);
+  --t-2: clamp(1.375rem, 2.2vw, 1.75rem);
+  --t-3: 1.1875rem;
+  --t-body: 1rem; /* 16px floor, never smaller for body copy */
+  --t-sm: 0.875rem;
+  --t-label: 0.75rem;
+
+  --lh-tight: 1.04;
+  --lh-snug: 1.2;
+  --lh-body: 1.55;
+
+  --track-label: 0.07em;
+
+  /* ------------------------------------------------------------------------
+     Space — dense by intent. A board shows more of the shop per screen.
+     ------------------------------------------------------------------------ */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4rem;
+
+  --gutter: clamp(1rem, 3.5vw, 2.5rem);
+  --max: 1360px;
+  --measure: 64ch;
+
+  --row-h: 3.5rem; /* the board's rhythm */
+  --thumb: 4rem;
+  --tap: 2.75rem; /* 44px minimum target */
+
+  /* ------------------------------------------------------------------------
+     Shape — exactly two radii. Uniform rounding is the absence of a decision.
+     ------------------------------------------------------------------------ */
+  --r: 4px;
+  --r-pill: 999px;
+
+  /* ------------------------------------------------------------------------
+     Elevation — reserved for things genuinely floating above the page:
+     the mobile ticket sheet, the modal, the toast. Three places, no more.
+     Everything else separates with a rule.
+     ------------------------------------------------------------------------ */
+  --lift: 0 1px 2px rgba(30, 23, 17, 0.08), 0 16px 40px rgba(30, 23, 17, 0.16);
+
+  /* ------------------------------------------------------------------------
+     Motion — functional only, under 250ms, never between a tap and a result.
+     ------------------------------------------------------------------------ */
+  --t-fast: 120ms;
+  --t-base: 180ms;
+  --t-slow: 240ms;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --header-h: 3.75rem;
+}
+
+/* --------------------------------------------------------------------------
+   Merchant accent override hook
+   Each merchant config may set a brand hue; the template reads it from here
+   so a rebrand never touches component CSS.
+   -------------------------------------------------------------------------- */
+[data-brand='corner-crumb'] {
+  --green: #1f5566;
+  --green-dark: #163f4c;
+  --green-wash: #e2eef2;
+  --focus: #1f5566;
+}

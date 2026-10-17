@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shop — Bluebird Bakery</title>
+<meta name="description" content="Bread, pastry, cookies and cakes. What's on the shelf updates with the day you're collecting.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div data-header></div>
+
+<main id="main">
+  <div class="wrap">
+    <section class="section-tight">
+      <h1 class="d-1">The shop</h1>
+      <p class="lede" style="margin-top:.75rem">Everything below is what we can have ready for
+        <strong data-when-label>—</strong>. Change the day at the top and the shelf changes with it.</p>
+    </section>
+
+    <section class="section-tight" style="padding-top:0">
+      <div style="display:flex;flex-wrap:wrap;gap:1rem;align-items:center;margin-bottom:1.25rem">
+        <label class="search">
+          <span class="visually-hidden">Search the shop</span>
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="5.3" stroke="currentColor" stroke-width="1.8"/><path d="m12 12 3.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <input type="search" placeholder="Sourdough, croissant, birthday…" data-search autocomplete="off">
+        </label>
+        <p class="small" style="margin-left:auto" data-count></p>
+      </div>
+
+      <nav class="tabs" data-tabs aria-label="Categories"></nav>
+    </section>
+
+    <section style="padding-bottom:clamp(2.5rem,5vw,4rem)">
+      <div data-note></div>
+      <div class="grid" data-grid></div>
+      <div class="empty" data-empty hidden>
+        <div class="empty__inner">
+          <h2 class="d-3">Nothing matches that</h2>
+          <p class="small" style="margin-top:.5rem">Try a different word, or have a look at everything.</p>
+          <p style="margin-top:1.5rem"><button class="btn btn--ghost" type="button" data-reset>Show everything</button></p>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<div data-footer></div>
+
+<script src="assets/js/catalogue.js"></script>
+<script src="../../shared/js/store.js"></script>
+<script src="../../shared/js/commerce-ui.js"></script>
+<script src="assets/js/chrome.js"></script>
+<script src="assets/js/shop.js"></script>
+</body>
+</html>

@@ -1,0 +1,349 @@
+/* ==========================================================================
+   Overlays — dialog, toast, date picker
+
+   Built on native <dialog>, so focus trapping, Esc, inertness and the
+   top-layer stacking are the browser's job rather than ours.
+   ========================================================================== */
+
+.dialog {
+  width: min(32rem, calc(100vw - 2rem));
+  padding: 0;
+  border: 1px solid var(--ink);
+  border-radius: var(--r);
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: var(--lift);
+}
+
+.dialog::backdrop {
+  background: rgba(30, 23, 17, 0.5);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .dialog[open] {
+    animation: dialog-in var(--t-base) var(--ease-out);
+  }
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.dialog__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding: var(--s-4);
+  border-bottom: 1px solid var(--rule);
+}
+
+.dialog__body {
+  padding: var(--s-4);
+}
+
+.dialog__close {
+  display: grid;
+  place-items: center;
+  width: var(--tap);
+  height: var(--tap);
+  flex: none;
+  border: 1.5px solid var(--rule-2);
+  border-radius: var(--r);
+  transition: border-color var(--t-fast) var(--ease);
+}
+
+.dialog__close:hover {
+  border-color: var(--ink);
+}
+
+/* --------------------------------------------------------------------------
+   Toast — announced politely, never the only confirmation of an action
+   -------------------------------------------------------------------------- */
+.toasts {
+  position: fixed;
+  left: 50%;
+  bottom: var(--s-4);
+  z-index: 80;
+  display: grid;
+  gap: var(--s-2);
+  width: min(28rem, calc(100vw - 2rem));
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+/* Keep clear of the mobile ticket bar. */
+@media (max-width: 63.99rem) {
+  .toasts {
+    bottom: 5.5rem;
+  }
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-3);
+  background: var(--ink);
+  color: var(--paper);
+  border-radius: var(--r);
+  box-shadow: var(--lift);
+  pointer-events: auto;
+  font-size: var(--t-sm);
+}
+
+.toast svg {
+  flex: none;
+  color: #8fd3ae;
+}
+
+.toast__body {
+  flex: 1;
+  min-width: 0;
+  font-weight: 600;
+}
+
+.toast__body small {
+  display: block;
+  font-weight: 400;
+  color: rgba(251, 246, 236, 0.65);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .toast {
+    animation: toast-in var(--t-base) var(--ease-out);
+  }
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.toast[data-out='true'] {
+  opacity: 0;
+  transition: opacity var(--t-base) var(--ease);
+}
+
+/* --------------------------------------------------------------------------
+   Date picker
+   Availability is stated inside the calendar. Every blocked day carries its
+   reason on the cell, so nobody has to leave the flow to find out why.
+   -------------------------------------------------------------------------- */
+.dp__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  margin-bottom: var(--s-3);
+}
+
+.dp__month {
+  font-family: var(--font-display);
+  font-variation-settings: var(--display-settings);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.dp__nav {
+  display: flex;
+  gap: var(--s-2);
+}
+
+.dp__nav button {
+  width: var(--tap);
+  height: var(--tap);
+  display: grid;
+  place-items: center;
+  border: 1.5px solid var(--rule-2);
+  border-radius: var(--r);
+  transition: border-color var(--t-fast) var(--ease), background var(--t-fast) var(--ease);
+}
+
+.dp__nav button:hover:not([disabled]) {
+  border-color: var(--ink);
+  background: var(--paper-2);
+}
+
+.dp__nav button[disabled] {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.dp__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+}
+
+.dp__dow {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+  margin-bottom: var(--s-2);
+}
+
+.dp__dow span {
+  text-align: center;
+  font-size: var(--t-label);
+  font-weight: 700;
+  color: var(--ink-3);
+}
+
+.dp__day {
+  aspect-ratio: 1;
+  min-height: 2.5rem;
+  display: grid;
+  place-items: center;
+  border: 1.5px solid transparent;
+  border-radius: var(--r);
+  font-weight: 600;
+  font-size: var(--t-sm);
+  position: relative;
+}
+
+.dp__day[data-state='available'] {
+  background: var(--surface);
+  border-color: var(--rule);
+  cursor: pointer;
+}
+
+.dp__day[data-state='available']:hover {
+  border-color: var(--green);
+  background: var(--green-wash);
+}
+
+.dp__day[data-state='selected'] {
+  background: var(--green);
+  border-color: var(--green);
+  color: #fff;
+}
+
+.dp__day[data-state='lead'],
+.dp__day[data-state='closed'],
+.dp__day[data-state='full'],
+.dp__day[data-state='past'] {
+  color: var(--ink-3);
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Booked out is struck through — "taken", not "broken". */
+.dp__day[data-state='full']::after {
+  content: '';
+  position: absolute;
+  left: 22%;
+  right: 22%;
+  top: 50%;
+  height: 2px;
+  background: var(--clay);
+  border-radius: 1px;
+}
+
+.dp__day[data-state='empty'] {
+  pointer-events: none;
+}
+
+.dp__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-4);
+  margin-top: var(--s-3);
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--rule);
+}
+
+.dp__legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-size: var(--t-label);
+  color: var(--ink-3);
+}
+
+.dp__key {
+  width: 0.85rem;
+  height: 0.85rem;
+  border: 1.5px solid var(--rule-2);
+  border-radius: 3px;
+  position: relative;
+}
+
+.dp__key--sel {
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.dp__key--off {
+  opacity: 0.4;
+}
+
+.dp__key--full::after {
+  content: '';
+  position: absolute;
+  inset: 50% -1px auto;
+  height: 2px;
+  background: var(--clay);
+}
+
+/* --------------------------------------------------------------------------
+   Collection slots
+   -------------------------------------------------------------------------- */
+.slots {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 9rem), 1fr));
+  gap: var(--s-2);
+}
+
+.slot {
+  position: relative;
+  display: block;
+  padding: var(--s-3);
+  background: var(--surface);
+  border: 1.5px solid var(--rule-2);
+  border-radius: var(--r);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color var(--t-fast) var(--ease), background var(--t-fast) var(--ease);
+}
+
+.slot:hover {
+  border-color: var(--ink);
+}
+
+.slot input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.slot:has(input:checked) {
+  border-color: var(--green);
+  background: var(--green-wash);
+}
+
+.slot:has(input:focus-visible) {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.slot:has(input:disabled) {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: var(--paper-2);
+}
+
+.slot__time {
+  font-weight: 700;
+}
+
+.slot__left {
+  font-size: var(--t-sm);
+  color: var(--ink-3);
+}

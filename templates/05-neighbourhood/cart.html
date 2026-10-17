@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hazel &amp; Rye — your ticket</title>
+<meta name="description" content="What you're collecting, and when.">
+<link rel="preload" href="assets/fonts/publicsans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/board.css">
+<link rel="stylesheet" href="css/components/ticket.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/overlay.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div data-header></div>
+
+<main id="main" class="wrap">
+  <section class="section--tight">
+    <nav class="sm" aria-label="Breadcrumb" style="margin-bottom:var(--s-3)">
+      <a class="link" href="index.html" data-home-link>Home</a> / <span>Your ticket</span>
+    </nav>
+    <h1 class="t-1">Your ticket</h1>
+  </section>
+
+  <div class="counter" data-full hidden style="padding-bottom:var(--s-8)">
+    <div>
+      <div data-stale></div>
+      <div class="board" data-lines></div>
+
+      <section class="section--tight" data-suggest-block hidden>
+        <h2 class="t-3" style="margin-bottom:var(--s-3)">Pop one of these in too?</h2>
+        <div class="opts" data-suggest></div>
+      </section>
+    </div>
+
+    <aside class="counter__rail" aria-label="Summary">
+      <div data-ticket></div>
+      <p style="margin-top:var(--s-3)">
+        <a class="btn btn--quiet btn--block" href="shop.html" data-shop-link>Keep shopping</a>
+      </p>
+      <p class="sm" style="margin-top:var(--s-3)">
+        No account needed. Nothing is charged in this demonstration.
+      </p>
+    </aside>
+  </div>
+
+  <div data-empty hidden style="padding-block:var(--s-8);text-align:center">
+    <h2 class="t-2">Nothing on the ticket yet</h2>
+    <p class="lede" style="margin:var(--s-3) auto 0">
+      The board is over there. Bread goes quickly on a Saturday.
+    </p>
+    <p style="margin-top:var(--s-5)">
+      <a class="btn btn--lg" href="shop.html" data-shop-link>Go to the shop</a>
+    </p>
+  </div>
+</main>
+
+<div data-footer></div>
+<script type="module" src="js/pages/cart.js"></script>
+</body>
+</html>

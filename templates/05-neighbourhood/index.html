@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hazel &amp; Rye — bread, cake and good coffee</title>
+<meta name="description" content="A small bakery on Bellevue Road. Order before 11am and collect the same day. The board shows what we're baking and, when it's today, how much is left.">
+<meta property="og:title" content="Hazel &amp; Rye">
+<meta property="og:description" content="Bread out by half seven. Cake with two days' notice.">
+<meta property="og:type" content="website">
+
+<link rel="preload" href="assets/fonts/publicsans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/board.css">
+<link rel="stylesheet" href="css/components/ticket.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/overlay.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Bakery",
+  "name": "Hazel & Rye",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "68 Bellevue Road",
+    "addressLocality": "London",
+    "postalCode": "SW17 7EQ",
+    "addressCountry": "GB"
+  },
+  "telephone": "+442079460712",
+  "servesCuisine": "Bakery",
+  "priceRange": "££"
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#board">Skip to the board</a>
+<div data-header></div>
+
+<main id="main">
+
+  <!-- ====================================================================
+       Masthead — deliberately short. The board is the hero, not a photograph.
+       ==================================================================== -->
+  <section class="wrap section--tight">
+    <p class="label" data-kicker>Bellevue Road, London · Since 2014</p>
+    <h1 class="t-hero" style="margin-top:var(--s-2);max-width:14ch" data-headline>
+      Bread out by half seven.
+    </h1>
+    <p class="lede" style="margin-top:var(--s-3)" data-lede>
+      Order before 11am and collect the same day. The board below shows what we're baking —
+      and, when it's today, how much of it is left.
+    </p>
+  </section>
+
+  <!-- ====================================================================
+       The Counter: board on the left, ticket on the right
+       ==================================================================== -->
+  <section class="wrap section" id="board">
+    <div class="counter">
+
+      <div>
+        <div class="sechead">
+          <div class="sechead__title">
+            <h2 class="t-1">The board</h2>
+            <p class="label" data-board-day>—</p>
+          </div>
+          <a class="link" href="shop.html">Everything in the shop</a>
+        </div>
+
+        <div class="board" data-board>
+          <noscript>
+            <p class="note" style="margin-block:var(--s-4)">
+              The live board needs JavaScript. You can still
+              <a class="link" href="visit.html">see our hours and address</a>,
+              or call the shop on 020 7946 0712.
+            </p>
+          </noscript>
+        </div>
+
+        <p class="sm" style="margin-top:var(--s-3)" data-board-foot></p>
+      </div>
+
+      <aside class="counter__rail" aria-label="Your ticket">
+        <div data-ticket></div>
+
+        <!-- Repeat purchase. Honest framing: it is your own history, kept on
+             your device, not a profile anyone else holds. -->
+        <section class="section--tight" data-usual hidden>
+          <h2 class="label">Your usual</h2>
+          <div class="ticket" style="margin-top:var(--s-2)">
+            <div class="ticket__body">
+              <p class="sm" data-usual-detail></p>
+              <p style="margin-top:var(--s-3)">
+                <button class="btn btn--quiet btn--block" type="button" data-usual-add>
+                  Order it again
+                </button>
+              </p>
+            </div>
+          </div>
+        </section>
+      </aside>
+
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       Cakes — the one place photography leads
+       ==================================================================== -->
+  <section class="section section--edge" data-cakes-section hidden>
+    <div class="wrap">
+      <div class="sechead">
+        <div class="sechead__title">
+          <h2 class="t-1">Cakes, with notice</h2>
+        </div>
+        <p class="label">Made to order</p>
+      </div>
+      <p class="lede" style="margin-bottom:var(--s-5)">
+        Two days for most, three if there's fruit on top. Choose the size by how many people
+        you're feeding, pick a sponge, and tell us what to write on it.
+      </p>
+      <div class="tiles" data-cakes></div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       How ordering works — narrower measure, so the page changes shape
+       ==================================================================== -->
+  <section class="section section--edge">
+    <div class="wrap-read">
+      <div class="sechead">
+        <div class="sechead__title"><h2 class="t-1">How ordering works</h2></div>
+      </div>
+
+      <ol class="split" style="counter-reset:step">
+        <li>
+          <h3 class="t-3">1 &mdash; Pick your day</h3>
+          <p class="prose sm" style="margin-top:var(--s-2)">
+            The bar at the top sets when you're collecting. Everything on the site updates to
+            match it, so you never see something you can't actually have.
+          </p>
+          <h3 class="t-3" style="margin-top:var(--s-5)">2 &mdash; Order by 11am</h3>
+          <p class="prose sm" style="margin-top:var(--s-2)">
+            Before 11 and you can collect the same day. After that the clock starts tomorrow,
+            because the morning's baking is already spoken for.
+          </p>
+        </li>
+        <li>
+          <h3 class="t-3">3 &mdash; Choose a time</h3>
+          <p class="prose sm" style="margin-top:var(--s-2)">
+            Two-hour collection windows from half seven. Each one holds a limited number of
+            bags, so there's never a queue out of the door.
+          </p>
+          <h3 class="t-3" style="margin-top:var(--s-5)">4 &mdash; Or we'll bike it</h3>
+          <p class="prose sm" style="margin-top:var(--s-2)" data-delivery-copy>
+            Local delivery within three miles, mornings only. We don't ship, and we're not
+            going to pretend otherwise.
+          </p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+</main>
+
+<div data-footer></div>
+
+<script type="module" src="js/pages/home.js"></script>
+</body>
+</html>

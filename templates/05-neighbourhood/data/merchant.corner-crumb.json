@@ -1,0 +1,108 @@
+{
+  "id": "corner-crumb",
+  "name": "Corner Crumb",
+  "shortName": "Corner Crumb",
+  "tagline": "Cupcakes, pastries and coffee. Two corners of Portland.",
+  "since": "2019",
+  "locale": "en-US",
+  "currency": "USD",
+  "timeZone": "America/Los_Angeles",
+  "taxRate": 0,
+  "taxNote": "No sales tax in Oregon.",
+  "capabilities": {
+    "pickup": true,
+    "delivery": false,
+    "customCakes": false,
+    "inscriptions": false,
+    "gifting": false,
+    "giftPackaging": false,
+    "guestCheckout": true
+  },
+  "locations": [
+    {
+      "id": "division",
+      "name": "SE Division",
+      "address": "1142 SE Division St, Portland OR 97202",
+      "phone": "(503) 555-0118",
+      "default": true,
+      "slots": [
+        "07:00–09:00",
+        "09:00–11:00",
+        "11:00–13:00",
+        "13:00–15:00"
+      ]
+    },
+    {
+      "id": "alberta",
+      "name": "NE Alberta",
+      "address": "2210 NE Alberta St, Portland OR 97211",
+      "phone": "(503) 555-0144",
+      "default": false,
+      "slots": [
+        "08:00–10:00",
+        "10:00–12:00",
+        "12:00–14:00"
+      ]
+    }
+  ],
+  "email": "hey@cornercrumb.com",
+  "hours": [
+    {
+      "day": "Monday",
+      "open": "07:00",
+      "close": "14:00"
+    },
+    {
+      "day": "Tuesday",
+      "open": "07:00",
+      "close": "14:00"
+    },
+    {
+      "day": "Wednesday",
+      "open": "07:00",
+      "close": "14:00"
+    },
+    {
+      "day": "Thursday",
+      "open": "07:00",
+      "close": "14:00"
+    },
+    {
+      "day": "Friday",
+      "open": "07:00",
+      "close": "15:00"
+    },
+    {
+      "day": "Saturday",
+      "open": "08:00",
+      "close": "15:00"
+    },
+    {
+      "day": "Sunday",
+      "open": null
+    }
+  ],
+  "closedWeekdays": [
+    0
+  ],
+  "closedDates": [
+    "2026-11-26",
+    "2026-12-25"
+  ],
+  "cutoffHour": 10,
+  "maxDaysAhead": 30,
+  "dailyCapacity": 25,
+  "delivery": null,
+  "allergens": [
+    "gluten",
+    "dairy",
+    "egg",
+    "nuts"
+  ],
+  "allergenStatement": "Baked in a kitchen that handles gluten, dairy, egg and nuts. We can't guarantee anything is free from them.",
+  "voice": {
+    "kicker": "Two corners of Portland · Since 2019",
+    "headline": "Cupcakes, by the box.",
+    "lede": "Order before 10am and pick it up the same day, from Division or Alberta. The board shows what's on the shelf."
+  }
+}

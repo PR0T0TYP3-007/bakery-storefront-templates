@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Catalogue — Crumb Atelier</title>
+<meta name="description" content="Eight made-to-order celebration cakes, filtered by the date you actually need them.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div data-header></div>
+
+<main id="main">
+  <section class="pagehead">
+    <div class="wrap">
+      <nav class="breadcrumb meta" aria-label="Breadcrumb">
+        <a href="index.html">Crumb</a> <span aria-hidden="true">/</span> <span class="meta-ink">The Catalogue</span>
+      </nav>
+      <div class="pagehead__row">
+        <div>
+          <h1 class="d-1">The&nbsp;Catalogue</h1>
+          <p class="lede" style="margin-top:1.25rem">Eight cakes, numbered in the order they entered the book. Every one is made to order — the date you choose above decides what you can actually have.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="occasions">
+    <div class="wrap">
+      <div class="filters">
+        <span class="meta" style="margin-right:.5rem">Occasion</span>
+        <div data-filters style="display:contents"></div>
+        <p class="meta filters__count" data-count></p>
+      </div>
+
+      <div data-unavailable-note></div>
+
+      <div class="grid-cards" data-grid style="padding-bottom:clamp(3rem,6vw,5rem)"></div>
+    </div>
+  </section>
+</main>
+
+<div data-footer></div>
+
+<script src="assets/js/catalogue.js"></script>
+<script src="../../shared/js/store.js"></script>
+<script src="../../shared/js/commerce-ui.js"></script>
+<script src="assets/js/chrome.js"></script>
+<script src="assets/js/collection.js"></script>
+</body>
+</html>

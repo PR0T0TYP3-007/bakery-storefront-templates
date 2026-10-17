@@ -1,0 +1,280 @@
+{
+  "categories": [
+    { "id": "bread", "label": "Bread", "note": "Out of the oven by half seven" },
+    { "id": "pastry", "label": "Pastry", "note": "Laminated the day before" },
+    { "id": "cookies", "label": "Cookies", "note": "By the box" },
+    { "id": "cakes", "label": "Cakes", "note": "Two days' notice" }
+  ],
+
+  "occasions": [
+    { "id": "everyday", "label": "Everyday" },
+    { "id": "birthday", "label": "Birthday" },
+    { "id": "celebration", "label": "Celebration" },
+    { "id": "thank-you", "label": "Thank you" }
+  ],
+
+  "optionGroups": {
+    "pack": {
+      "id": "pack",
+      "label": "How many",
+      "required": true,
+      "options": [
+        { "id": "4", "label": "Box of four", "price": 0 },
+        { "id": "8", "label": "Box of eight", "price": 7 },
+        { "id": "12", "label": "Box of twelve", "price": 12 }
+      ]
+    },
+    "servings": {
+      "id": "servings",
+      "label": "How many people?",
+      "help": "Slices are generous. If you're between sizes, go up.",
+      "required": true,
+      "options": [
+        { "id": "s", "label": "6 inch", "note": "Serves 8–10", "price": 0 },
+        { "id": "m", "label": "8 inch", "note": "Serves 14–16", "price": 16 },
+        { "id": "l", "label": "10 inch", "note": "Serves 22–26", "price": 34, "leadDays": 1 },
+        { "id": "xl", "label": "Two tier", "note": "Serves 40–50", "price": 95, "leadDays": 3 }
+      ]
+    },
+    "sponge": {
+      "id": "sponge",
+      "label": "Sponge",
+      "required": true,
+      "options": [
+        { "id": "vanilla", "label": "Vanilla", "price": 0 },
+        { "id": "chocolate", "label": "Chocolate", "price": 0 },
+        { "id": "lemon", "label": "Lemon", "price": 3 },
+        { "id": "carrot", "label": "Carrot & walnut", "price": 3, "allergens": ["nuts"] }
+      ]
+    },
+    "finish": {
+      "id": "finish",
+      "label": "Finish",
+      "required": true,
+      "options": [
+        { "id": "buttercream", "label": "Swiss buttercream", "note": "Our house finish", "price": 0 },
+        { "id": "naked", "label": "Naked & dusted", "note": "Layers left visible", "price": 0 },
+        { "id": "fruit", "label": "Fresh fruit top", "note": "Adds a day", "price": 9, "leadDays": 1 },
+        {
+          "id": "fondant",
+          "label": "Fondant figures",
+          "note": "Hand-modelled — four days' notice, 8 inch and up",
+          "price": 28,
+          "leadDays": 4,
+          "requiresServings": ["m", "l", "xl"]
+        }
+      ]
+    }
+  },
+
+  "addons": [
+    { "id": "candles", "label": "Birthday candles", "note": "Pack of 24", "price": 2 },
+    { "id": "card", "label": "Handwritten card", "note": "We'll write your message", "price": 3 },
+    { "id": "coffee", "label": "Bag of our house coffee", "note": "250g, ground or beans", "price": 9 }
+  ],
+
+  "products": [
+    {
+      "id": "sourdough",
+      "kind": "everyday",
+      "category": "bread",
+      "name": "Country Sourdough",
+      "subtitle": "Naturally leavened, 48-hour ferment",
+      "price": 4.8,
+      "leadDays": 0,
+      "batchSize": 40,
+      "image": "photo-1549931319-a545dcf3bc73",
+      "occasions": ["everyday"],
+      "popular": true,
+      "allergens": ["gluten"],
+      "description": "The loaf we built the shop on. Flour, water, salt and a starter that's been going since the week we opened. Out of the oven at five, on the shelf by half seven, usually gone by eleven on a Saturday.",
+      "options": [],
+      "defaults": {}
+    },
+    {
+      "id": "rye",
+      "kind": "everyday",
+      "category": "bread",
+      "name": "Dark Rye & Seed",
+      "subtitle": "Sunflower, pumpkin, caraway",
+      "price": 5.4,
+      "leadDays": 0,
+      "batchSize": 18,
+      "image": "photo-1509440159596-0249088772ff",
+      "occasions": ["everyday"],
+      "allergens": ["gluten", "sesame"],
+      "description": "Dense, dark and faintly sour. Keeps most of a week, which is just as well — very few people get through one in a day.",
+      "options": [],
+      "defaults": {}
+    },
+    {
+      "id": "baguette",
+      "kind": "everyday",
+      "category": "bread",
+      "name": "Baguette",
+      "subtitle": "Thin, blistered, slightly scorched",
+      "price": 2.6,
+      "leadDays": 0,
+      "batchSize": 55,
+      "image": "photo-1608198093002-ad4e005484ec",
+      "occasions": ["everyday"],
+      "popular": true,
+      "allergens": ["gluten"],
+      "description": "Baked twice a day, at six and again at two, because a baguette is only really a baguette for about four hours.",
+      "options": [],
+      "defaults": {}
+    },
+    {
+      "id": "focaccia",
+      "kind": "everyday",
+      "category": "bread",
+      "name": "Rosemary & Maldon Salt Focaccia, by the slab",
+      "subtitle": "Olive oil, a lot of it",
+      "price": 6.5,
+      "leadDays": 0,
+      "batchSize": 12,
+      "image": null,
+      "occasions": ["everyday"],
+      "allergens": ["gluten"],
+      "description": "Proved slowly in the tray, dimpled by hand, and far oilier than is strictly sensible. Sold by the slab.",
+      "options": [],
+      "defaults": {}
+    },
+    {
+      "id": "croissant",
+      "kind": "everyday",
+      "category": "pastry",
+      "name": "Butter Croissant",
+      "subtitle": "Laminated with Ampersand butter",
+      "price": 3.2,
+      "leadDays": 0,
+      "batchSize": 60,
+      "image": "photo-1555507036-ab1f4038808a",
+      "occasions": ["everyday"],
+      "popular": true,
+      "allergens": ["gluten", "dairy"],
+      "description": "Three days from first fold to the counter. We make about sixty a day and have never once had any left at closing.",
+      "options": [],
+      "defaults": {}
+    },
+    {
+      "id": "pastry-box",
+      "kind": "everyday",
+      "category": "pastry",
+      "name": "Morning Pastry Box",
+      "subtitle": "Six pastries, baker's choice",
+      "price": 16,
+      "leadDays": 0,
+      "batchSize": 10,
+      "image": "photo-1530610476181-d83430b64dcd",
+      "occasions": ["everyday", "thank-you"],
+      "popular": true,
+      "allergens": ["gluten", "dairy", "egg"],
+      "description": "Whatever came out best that morning — usually two croissants, two pains au chocolat and two things we were experimenting with. The office-meeting order.",
+      "options": [],
+      "defaults": {}
+    },
+    {
+      "id": "doughnuts",
+      "kind": "everyday",
+      "category": "pastry",
+      "name": "Sprinkle Doughnuts",
+      "subtitle": "Raised, glazed, extremely bright",
+      "price": 2.8,
+      "leadDays": 0,
+      "batchSize": 36,
+      "availableWeekdays": [5, 6, 0],
+      "image": "photo-1551024601-bec78aea704b",
+      "occasions": ["everyday", "birthday"],
+      "allergens": ["gluten", "dairy", "egg"],
+      "description": "Not sophisticated and not trying to be. Friday to Sunday only, because they're a treat and we'd like them to stay that way.",
+      "options": [],
+      "defaults": {}
+    },
+    {
+      "id": "choc-cookies",
+      "kind": "everyday",
+      "category": "cookies",
+      "name": "Chocolate Chunk Cookies",
+      "subtitle": "Brown butter, sea salt, 70% chocolate",
+      "price": 9,
+      "leadDays": 0,
+      "batchSize": 24,
+      "image": "photo-1499636136210-6f4ee915583e",
+      "occasions": ["everyday", "thank-you"],
+      "popular": true,
+      "allergens": ["gluten", "dairy", "egg", "soya"],
+      "description": "The dough rests for 36 hours before it goes anywhere near an oven. It makes more difference than it sounds like it should.",
+      "options": ["pack"],
+      "defaults": { "pack": "4" }
+    },
+    {
+      "id": "oat-cookies",
+      "kind": "everyday",
+      "category": "cookies",
+      "name": "Salted Oat Cookies",
+      "subtitle": "Oats, dark chocolate, flaky salt",
+      "price": 9,
+      "leadDays": 0,
+      "batchSize": 20,
+      "image": "photo-1558961363-fa8fdf82db35",
+      "occasions": ["everyday"],
+      "allergens": ["gluten", "dairy", "egg"],
+      "description": "Chewier than the chunk cookie and a little less sweet. The one the regulars quietly prefer.",
+      "options": ["pack"],
+      "defaults": { "pack": "4" }
+    },
+    {
+      "id": "birthday-cake",
+      "kind": "cake",
+      "category": "cakes",
+      "name": "Birthday Cake",
+      "subtitle": "Six layers, naturally coloured",
+      "price": 34,
+      "leadDays": 2,
+      "batchSize": null,
+      "image": "photo-1464349095431-e9a21285b5f3",
+      "occasions": ["birthday", "celebration"],
+      "popular": true,
+      "allergens": ["gluten", "dairy", "egg"],
+      "description": "The one we make most. Colour comes from beetroot, turmeric and butterfly pea rather than a bottle, so the shades are quieter than you might expect. Children never notice. Their parents always do.",
+      "options": ["servings", "sponge", "finish"],
+      "defaults": { "servings": "m", "sponge": "vanilla", "finish": "buttercream" },
+      "inscribable": true
+    },
+    {
+      "id": "chocolate-cake",
+      "kind": "cake",
+      "category": "cakes",
+      "name": "Chocolate Celebration",
+      "subtitle": "Piped, drizzled, unrestrained",
+      "price": 38,
+      "leadDays": 2,
+      "batchSize": null,
+      "image": "photo-1578985545062-69928b1d9587",
+      "occasions": ["birthday", "celebration"],
+      "allergens": ["gluten", "dairy", "egg", "nuts"],
+      "description": "For people who, asked what kind of cake they'd like, say \"chocolate\" and then stop talking.",
+      "options": ["servings", "sponge", "finish"],
+      "defaults": { "servings": "m", "sponge": "chocolate", "finish": "buttercream" },
+      "inscribable": true
+    },
+    {
+      "id": "berry-cake",
+      "kind": "cake",
+      "category": "cakes",
+      "name": "Seasonal Berry",
+      "subtitle": "Vanilla sponge under whatever's in season",
+      "price": 42,
+      "leadDays": 3,
+      "batchSize": null,
+      "image": "photo-1535141192574-5d4897c12636",
+      "occasions": ["celebration", "thank-you"],
+      "allergens": ["gluten", "dairy", "egg"],
+      "description": "Dressed with fruit from the market on Saturday morning, which is why it needs three days and why no two have ever matched.",
+      "options": ["servings", "sponge", "finish"],
+      "defaults": { "servings": "m", "sponge": "vanilla", "finish": "fruit" },
+      "inscribable": true
+    }
+  ]
+}

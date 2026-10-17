@@ -1,0 +1,364 @@
+/* ==========================================================================
+   The Board — ruled rows, the primary language of this template
+
+   Replaces v1's uniform card grid. A row is dense, scannable, and holds its
+   shape whatever the content does to it: no photo, a 60-character name, a
+   catalogue of three items or three hundred.
+   ========================================================================== */
+
+.board {
+  border-top: 2px solid var(--ink);
+}
+
+.board__head {
+  display: none;
+}
+
+/* Column headings appear once there is room for them — they are what makes
+   the board read as a board rather than a list. */
+@media (min-width: 48rem) {
+  .board__head {
+    display: grid;
+    grid-template-columns: var(--thumb) minmax(0, 1fr) 9rem 6rem var(--tap);
+    gap: var(--s-4);
+    align-items: center;
+    padding: var(--s-2) var(--s-2);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .board__head > :nth-child(3) {
+    text-align: left;
+  }
+
+  .board__head > :nth-child(4) {
+    text-align: right;
+  }
+}
+
+.row {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--thumb) minmax(0, 1fr) auto;
+  grid-template-areas:
+    'thumb title price'
+    'thumb meta  add';
+  column-gap: var(--s-3);
+  row-gap: var(--s-1);
+  align-items: center;
+  padding: var(--s-3) var(--s-2);
+  border-bottom: 1px solid var(--rule);
+  transition: background var(--t-fast) var(--ease);
+}
+
+.row:hover {
+  background: var(--paper-2);
+}
+
+@media (min-width: 48rem) {
+  .row {
+    grid-template-columns: var(--thumb) minmax(0, 1fr) 9rem 6rem var(--tap);
+    grid-template-areas: 'thumb title meta price add';
+    column-gap: var(--s-4);
+    min-height: var(--row-h);
+  }
+}
+
+.row__thumb {
+  grid-area: thumb;
+  width: var(--thumb);
+  height: var(--thumb);
+  border-radius: var(--r);
+  overflow: hidden;
+  background: var(--paper-3);
+}
+
+.row__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Designed fallback for a missing photo. A merchant without photography gets
+   something deliberate rather than a broken tile. */
+.monogram {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  background: var(--paper-3);
+  color: var(--ink-3);
+  font-family: var(--font-display);
+  font-variation-settings: var(--display-settings);
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1;
+  user-select: none;
+}
+
+/* Name and its one-line description share a cell, so the "Today" column
+   holds availability and nothing else — the column headings stay honest. */
+.row__title {
+  grid-area: title;
+  min-width: 0;
+}
+
+.row__name {
+  min-width: 0;
+  font-weight: 600;
+  font-size: var(--t-body);
+  line-height: 1.25;
+}
+
+.row__sub {
+  font-size: var(--t-sm);
+  color: var(--ink-3);
+  line-height: 1.35;
+  /* Two lines maximum: a long merchant description can never break the
+     board's rhythm. */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.row__name a {
+  text-decoration: none;
+}
+
+/* The whole row is the target; the add button sits above it. */
+.row__name a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.row__name a:focus-visible::after {
+  outline: 3px solid var(--focus);
+  outline-offset: -3px;
+  border-radius: 2px;
+}
+
+.row__meta {
+  grid-area: meta;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+.row__price {
+  grid-area: price;
+  font-weight: 700;
+  white-space: nowrap;
+  justify-self: end;
+}
+
+@media (min-width: 48rem) {
+  .row__price {
+    text-align: right;
+  }
+}
+
+.row__price small {
+  display: block;
+  font-size: var(--t-label);
+  font-weight: 400;
+  color: var(--ink-3);
+}
+
+.row__add {
+  grid-area: add;
+  position: relative;
+  z-index: 2;
+  justify-self: end;
+}
+
+.row[data-available='false'] .row__thumb img,
+.row[data-available='false'] .monogram {
+  filter: grayscale(1);
+  opacity: 0.55;
+}
+
+.row[data-available='false'] .row__title {
+  color: var(--ink-2);
+}
+
+/* --------------------------------------------------------------------------
+   Status
+   Colour is never the only signal — each state carries its own word, and the
+   shape of the dot changes too.
+   -------------------------------------------------------------------------- */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-size: var(--t-sm);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.status::before {
+  content: '';
+  width: 0.5rem;
+  height: 0.5rem;
+  flex: none;
+  border-radius: var(--r-pill);
+  background: currentColor;
+}
+
+.status[data-state='in'] {
+  color: var(--green);
+}
+
+.status[data-state='low'] {
+  color: var(--honey);
+}
+
+/* Sold out gets a square, not a circle — distinguishable without colour. */
+.status[data-state='out'] {
+  color: var(--clay);
+}
+
+.status[data-state='out']::before {
+  border-radius: 1px;
+}
+
+.status[data-state='made'] {
+  color: var(--ink-3);
+}
+
+.status[data-state='made']::before {
+  background: none;
+  border: 1.5px solid currentColor;
+}
+
+/* --------------------------------------------------------------------------
+   Cake tiles — the one place photography leads
+   Used only for made-to-order celebration cakes, where the picture is doing
+   the selling. Everyday stock stays in rows.
+   -------------------------------------------------------------------------- */
+.tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--r);
+  overflow: hidden;
+}
+
+.tile:hover {
+  border-color: var(--ink);
+}
+
+.tile__media {
+  aspect-ratio: 5 / 4;
+  background: var(--paper-3);
+}
+
+.tile__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.tile__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: var(--s-2);
+  padding: var(--s-3);
+}
+
+.tile__name {
+  font-family: var(--font-display);
+  font-variation-settings: var(--display-settings);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.tile__name a {
+  text-decoration: none;
+}
+
+.tile__name a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.tile__foot {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-3);
+  margin-top: auto;
+  padding-top: var(--s-2);
+  border-top: 1px solid var(--rule);
+}
+
+.tile__price {
+  font-weight: 700;
+}
+
+.tile__price small {
+  font-weight: 400;
+  font-size: var(--t-label);
+  color: var(--ink-3);
+}
+
+/* --------------------------------------------------------------------------
+   Empty board
+   -------------------------------------------------------------------------- */
+.board__empty {
+  padding: var(--s-7) var(--s-4);
+  text-align: center;
+  border-bottom: 1px solid var(--rule);
+}
+
+/* --------------------------------------------------------------------------
+   Loading skeleton — reserves the row's exact height so nothing shifts
+   -------------------------------------------------------------------------- */
+.row--skeleton {
+  pointer-events: none;
+}
+
+.skel {
+  background: var(--paper-3);
+  border-radius: 2px;
+  height: 0.85rem;
+  animation: skel 1.4s var(--ease) infinite;
+}
+
+.skel--thumb {
+  height: var(--thumb);
+  border-radius: var(--r);
+}
+
+.skel--name {
+  width: 60%;
+}
+
+.skel--meta {
+  width: 35%;
+  height: 0.7rem;
+}
+
+@keyframes skel {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skel {
+    animation: none;
+  }
+}

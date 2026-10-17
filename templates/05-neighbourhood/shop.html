@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hazel &amp; Rye — the shop</title>
+<meta name="description" content="Bread, pastry, cookies and cakes. What's on the board changes with the day you're collecting.">
+<link rel="preload" href="assets/fonts/publicsans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/board.css">
+<link rel="stylesheet" href="css/components/ticket.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/overlay.css">
+</head>
+<body>
+<a class="skip" href="#board">Skip to the board</a>
+<div data-header></div>
+
+<main id="main">
+  <section class="wrap section--tight">
+    <nav class="sm" aria-label="Breadcrumb" style="margin-bottom:var(--s-3)">
+      <a class="link" href="index.html" data-home-link>Home</a> /
+      <span data-crumb>The shop</span>
+    </nav>
+    <h1 class="t-1">The shop</h1>
+    <p class="lede" style="margin-top:var(--s-2)">
+      Everything here is what we can have ready for <strong data-when-label>—</strong>.
+      Change the day at the top and the board changes with it.
+    </p>
+  </section>
+
+  <section class="wrap section--tight" style="padding-top:0">
+    <form class="cluster--3 cluster" role="search" style="margin-bottom:var(--s-4)" data-searchform>
+      <label class="field" style="flex:1;min-width:14rem;margin:0">
+        <span class="vh">Search the shop</span>
+        <input class="input" type="search" name="q" placeholder="Sourdough, croissant, birthday…"
+               autocomplete="off" data-search>
+      </label>
+      <p class="sm push" aria-live="polite" data-count></p>
+    </form>
+
+    <nav class="cluster" aria-label="Categories" data-tabs></nav>
+  </section>
+
+  <section class="wrap" id="board" style="padding-bottom:var(--s-8)">
+    <div class="counter">
+      <div>
+        <div data-note></div>
+        <div class="board" data-board></div>
+      </div>
+
+      <aside class="counter__rail" aria-label="Your ticket">
+        <div data-ticket></div>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<div data-footer></div>
+<script type="module" src="js/pages/shop.js"></script>
+</body>
+</html>

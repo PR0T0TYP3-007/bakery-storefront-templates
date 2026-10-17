@@ -1,0 +1,141 @@
+/* ==========================================================================
+   THE COUNTER — layout.css
+   The asymmetric counter: a board you read, and a ticket that builds.
+   ========================================================================== */
+
+.wrap {
+  width: 100%;
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* The reading measure — used for prose sections, deliberately narrower than
+   the board so the page changes shape as you move down it. */
+.wrap-read {
+  width: 100%;
+  max-width: 68rem;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  padding-block: var(--s-7);
+}
+
+.section--tight {
+  padding-block: var(--s-5);
+}
+
+.section--edge {
+  border-top: 1px solid var(--rule);
+}
+
+/* Section heading: a label, a rule, and a title that sits on it. The rule is
+   the structural device the whole template leans on instead of shadow. */
+.sechead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-2) var(--s-5);
+  padding-bottom: var(--s-3);
+  border-bottom: 2px solid var(--ink);
+  margin-bottom: var(--s-5);
+}
+
+.sechead__title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s-3);
+}
+
+/* --------------------------------------------------------------------------
+   The counter grid
+   Board and ticket are deliberately unequal. On mobile the ticket becomes a
+   bottom sheet (see components/ticket.css) and leaves the flow entirely.
+   -------------------------------------------------------------------------- */
+.counter {
+  display: grid;
+  gap: var(--s-6);
+  align-items: start;
+}
+
+@media (min-width: 64rem) {
+  .counter {
+    grid-template-columns: minmax(0, 1.55fr) minmax(19rem, 0.75fr);
+    gap: var(--s-7);
+  }
+
+  .counter__rail {
+    position: sticky;
+    top: calc(var(--header-h) + var(--s-4));
+  }
+}
+
+/* Two-column prose/figure split used on visit + product pages. */
+.split {
+  display: grid;
+  gap: var(--s-5);
+  align-items: start;
+}
+
+@media (min-width: 52rem) {
+  .split {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--s-7);
+  }
+
+  .split--wide-left {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  }
+
+  .split--wide-right {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+  }
+}
+
+/* Tile grid — used only where photography genuinely sells the product, which
+   in this shop means celebration cakes and nothing else. */
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+  gap: var(--s-4);
+}
+
+.stack-2 > * + * {
+  margin-top: var(--s-2);
+}
+.stack-3 > * + * {
+  margin-top: var(--s-3);
+}
+.stack-4 > * + * {
+  margin-top: var(--s-4);
+}
+.stack-5 > * + * {
+  margin-top: var(--s-5);
+}
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2);
+}
+
+.cluster--3 {
+  gap: var(--s-3);
+}
+
+.spread {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+}
+
+.push {
+  margin-left: auto;
+}

@@ -1,0 +1,151 @@
+{
+  "_note": "Deliberately small (7 items) and with no made-to-order cakes, to exercise the template against a thin catalogue and a merchant with customCakes disabled.",
+
+  "categories": [
+    { "id": "pastry", "label": "Pastry", "note": "In by seven" },
+    { "id": "cupcakes", "label": "Cupcakes", "note": "By the box" },
+    { "id": "cookies", "label": "Cookies", "note": "Baked twice daily" }
+  ],
+
+  "occasions": [
+    { "id": "everyday", "label": "Everyday" },
+    { "id": "birthday", "label": "Birthday" }
+  ],
+
+  "optionGroups": {
+    "pack": {
+      "id": "pack",
+      "label": "How many",
+      "required": true,
+      "options": [
+        { "id": "4", "label": "Box of four", "price": 0 },
+        { "id": "6", "label": "Box of six", "price": 5 },
+        { "id": "12", "label": "Box of twelve", "price": 14 }
+      ]
+    }
+  },
+
+  "addons": [
+    { "id": "candles", "label": "Birthday candles", "note": "Pack of 24", "price": 3 },
+    { "id": "coffee", "label": "Bag of house coffee", "note": "12oz, ground or whole", "price": 16 }
+  ],
+
+  "products": [
+    {
+      "id": "croissant",
+      "kind": "everyday",
+      "category": "pastry",
+      "name": "Butter Croissant",
+      "subtitle": "Laminated over three days",
+      "price": 4.25,
+      "leadDays": 0,
+      "batchSize": 48,
+      "image": "photo-1555507036-ab1f4038808a",
+      "occasions": ["everyday"],
+      "popular": true,
+      "allergens": ["gluten", "dairy"],
+      "description": "Three days from first fold to the counter. Gone by ten most mornings.",
+      "options": [],
+      "defaults": {}
+    },
+    {
+      "id": "pastry-box",
+      "kind": "everyday",
+      "category": "pastry",
+      "name": "Pastry Box",
+      "subtitle": "Six, baker's choice",
+      "price": 22,
+      "leadDays": 0,
+      "batchSize": 8,
+      "image": "photo-1530610476181-d83430b64dcd",
+      "occasions": ["everyday"],
+      "popular": true,
+      "allergens": ["gluten", "dairy", "egg"],
+      "description": "Whatever came out best that morning. The standing order for half the offices on Division.",
+      "options": [],
+      "defaults": {}
+    },
+    {
+      "id": "doughnuts",
+      "kind": "everyday",
+      "category": "pastry",
+      "name": "Sprinkle Doughnuts",
+      "subtitle": "Raised, glazed, very bright",
+      "price": 3.5,
+      "leadDays": 0,
+      "batchSize": 30,
+      "image": "photo-1551024601-bec78aea704b",
+      "occasions": ["everyday", "birthday"],
+      "allergens": ["gluten", "dairy", "egg"],
+      "description": "Not sophisticated and not trying to be.",
+      "options": [],
+      "defaults": {}
+    },
+    {
+      "id": "cookies-cream-cupcakes",
+      "kind": "everyday",
+      "category": "cupcakes",
+      "name": "Cookies & Cream Cupcakes",
+      "subtitle": "Chocolate sponge, vanilla buttercream",
+      "price": 18,
+      "leadDays": 0,
+      "batchSize": 14,
+      "image": "photo-1612203985729-70726954388c",
+      "occasions": ["birthday", "everyday"],
+      "popular": true,
+      "allergens": ["gluten", "dairy", "egg"],
+      "description": "The thing to bring to a classroom, an office, or a Tuesday.",
+      "options": ["pack"],
+      "defaults": { "pack": "4" }
+    },
+    {
+      "id": "vanilla-cupcakes",
+      "kind": "everyday",
+      "category": "cupcakes",
+      "name": "Vanilla Sprinkle Cupcakes",
+      "subtitle": "Madagascan vanilla, a lot of sprinkles",
+      "price": 18,
+      "leadDays": 0,
+      "batchSize": 16,
+      "image": "photo-1519869325930-281384150729",
+      "occasions": ["birthday"],
+      "allergens": ["gluten", "dairy", "egg"],
+      "description": "Our most-ordered box, and the one most likely to have a candle stuck in it ten minutes later.",
+      "options": ["pack"],
+      "defaults": { "pack": "4" }
+    },
+    {
+      "id": "mint-cupcakes",
+      "kind": "everyday",
+      "category": "cupcakes",
+      "name": "Mint Chocolate Cupcakes",
+      "subtitle": "Dark sponge, mint buttercream",
+      "price": 19,
+      "leadDays": 0,
+      "batchSize": 10,
+      "image": "photo-1486427944299-d1955d23e34d",
+      "occasions": ["everyday"],
+      "allergens": ["gluten", "dairy", "egg"],
+      "description": "Divisive, and we're keeping them.",
+      "options": ["pack"],
+      "defaults": { "pack": "4" }
+    },
+    {
+      "id": "choc-cookies",
+      "kind": "everyday",
+      "category": "cookies",
+      "name": "Chocolate Chunk Cookies",
+      "subtitle": "Brown butter, sea salt",
+      "price": 14,
+      "leadDays": 0,
+      "batchSize": 22,
+      "image": "photo-1499636136210-6f4ee915583e",
+      "occasions": ["everyday"],
+      "popular": true,
+      "allergens": ["gluten", "dairy", "egg", "nuts"],
+      "description": "Thirty-six hour dough. Worth the wait, which you don't have to do.",
+      "options": ["pack"],
+      "defaults": { "pack": "4" }
+    }
+  ]
+}

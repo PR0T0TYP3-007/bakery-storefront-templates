@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Configure your cake — Crumb Atelier</title>
+<meta name="description" content="Choose size, sponge, filling, finish and inscription. The price and the earliest date update as you go.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/components.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div data-header></div>
+
+<main id="main">
+  <div class="wrap">
+    <section class="pagehead" style="padding-bottom:0">
+      <nav class="breadcrumb meta" aria-label="Breadcrumb">
+        <a href="index.html">Crumb</a> <span aria-hidden="true">/</span>
+        <a href="collection.html">The Catalogue</a> <span aria-hidden="true">/</span>
+        <span class="meta-ink" data-crumb>—</span>
+      </nav>
+    </section>
+
+    <div class="pdp" data-pdp hidden>
+      <!-- Media -------------------------------------------------------- -->
+      <div class="pdp__media">
+        <figure class="pdp__figure">
+          <span class="pdp__plate" data-plate></span>
+          <img data-image alt="" width="1100" height="1375" fetchpriority="high">
+        </figure>
+        <div class="pdp__caption">
+          <p class="meta" data-caption-maker></p>
+          <p class="meta" data-caption-year></p>
+        </div>
+      </div>
+
+      <!-- Configuration ------------------------------------------------ -->
+      <div>
+        <header class="pdp__head">
+          <p class="meta" data-occasions></p>
+          <h1 class="d-1" style="margin-top:.6rem" data-name></h1>
+          <p class="lede" style="margin-top:.75rem" data-subtitle></p>
+          <p class="pdp__price">
+            <strong data-price>—</strong>
+            <span class="small" data-price-note></span>
+          </p>
+        </header>
+
+        <section class="pdp__section">
+          <div class="prose" data-story></div>
+          <div class="spread__notes" data-notes></div>
+        </section>
+
+        <!-- Options: rendered from the product's own option groups, so a
+             merchant selling fixed cakes simply ships fewer of them. -->
+        <section class="pdp__section" data-options></section>
+
+        <!-- Inscription -->
+        <section class="pdp__section" data-inscription-section hidden>
+          <div class="optgroup__head">
+            <h2 class="meta meta-ink">Inscription</h2>
+            <span class="optgroup__chosen"><span data-insc-count>0</span>/40</span>
+          </div>
+          <label class="field">
+            <span class="visually-hidden">Message to pipe on the cake</span>
+            <input class="input" type="text" maxlength="40" data-insc
+                   placeholder="Happy Birthday, Mum" autocomplete="off">
+          </label>
+          <div class="inscription__preview" data-insc-preview data-empty="true">
+            <p>This is exactly how it will be piped.</p>
+          </div>
+          <p class="field__hint">Check the spelling — we pipe precisely what is written here.</p>
+        </section>
+
+        <!-- Add-ons -->
+        <section class="pdp__section">
+          <div class="optgroup__head">
+            <h2 class="meta meta-ink">Add to the box</h2>
+            <span class="optgroup__chosen">Optional</span>
+          </div>
+          <div data-addons></div>
+        </section>
+
+        <!-- Ready by -->
+        <section class="pdp__section">
+          <div class="optgroup__head">
+            <h2 class="meta meta-ink">Ready by</h2>
+            <button class="link" type="button" data-toggle-cal aria-expanded="false">Change date</button>
+          </div>
+
+          <div class="readycard">
+            <div>
+              <span class="meta">Earliest for this configuration</span>
+              <strong data-ready-date>—</strong>
+            </div>
+            <span class="pill" data-lead-pill></span>
+          </div>
+
+          <div data-cal-wrap hidden style="margin-top:1.25rem">
+            <div data-cal></div>
+          </div>
+        </section>
+
+        <!-- Buy -->
+        <div class="buybar">
+          <div class="qty">
+            <button type="button" data-qty-down aria-label="Decrease quantity">−</button>
+            <output data-qty aria-live="polite">1</output>
+            <button type="button" data-qty-up aria-label="Increase quantity">+</button>
+          </div>
+          <button class="btn btn--accent btn--lg" type="button" data-add>
+            Add to order — <span data-total>—</span>
+          </button>
+        </div>
+        <p class="small" style="margin-top:.75rem" data-buy-note></p>
+      </div>
+    </div>
+
+    <div data-missing hidden class="empty">
+      <div class="empty__inner">
+        <h1 class="d-2">That plate isn’t in the book</h1>
+        <p class="lede" style="margin-top:1rem">The cake you are looking for may have been retired, or the link may be wrong.</p>
+        <p style="margin-top:2rem"><a class="btn" href="collection.html">See the catalogue</a></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Related ---------------------------------------------------------- -->
+  <section class="section" data-related-section hidden style="background:var(--paper-2)">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="meta">Also in the book</p>
+        <div class="sec-head__row">
+          <h2 class="d-2">You may also like</h2>
+          <a class="link" href="collection.html">All eight <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <div class="grid-cards" data-related></div>
+    </div>
+  </section>
+</main>
+
+<div data-footer></div>
+
+<script src="assets/js/catalogue.js"></script>
+<script src="../../shared/js/store.js"></script>
+<script src="../../shared/js/commerce-ui.js"></script>
+<script src="assets/js/chrome.js"></script>
+<script src="assets/js/product.js"></script>
+</body>
+</html>

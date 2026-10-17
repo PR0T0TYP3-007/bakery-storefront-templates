@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bluebird Bakery</title>
+<meta name="description" content="Everyday things add in one tap. Cakes get the options they actually need.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div data-header></div>
+
+<main id="main">
+  <div class="wrap">
+    <nav class="small" style="padding-block:1rem" aria-label="Breadcrumb">
+      <a class="linkish" href="index.html">Bluebird</a> /
+      <a class="linkish" href="shop.html">Shop</a> /
+      <span data-crumb>—</span>
+    </nav>
+
+    <div class="pdp" data-pdp hidden>
+      <!-- Media -->
+      <div class="pdp__media">
+        <figure class="pdp__figure">
+          <img data-image alt="" width="1100" height="825" fetchpriority="high">
+        </figure>
+        <div class="prose" style="margin-top:1.25rem" data-story></div>
+        <div class="pdp__notes" data-notes></div>
+      </div>
+
+      <!-- Buy -->
+      <div>
+        <p class="label" data-category></p>
+        <h1 class="d-1" style="margin-top:.4rem" data-name></h1>
+        <p class="lede" style="margin-top:.5rem" data-subtitle></p>
+
+        <p class="pdp__price">
+          <strong data-price>—</strong>
+          <span class="small" data-price-note></span>
+        </p>
+
+        <p style="margin-top:.9rem"><span class="stock" data-stock>—</span></p>
+
+        <!-- Options: only rendered when this product actually has any. -->
+        <section class="pdp__block" data-options-block hidden>
+          <div data-options></div>
+        </section>
+
+        <!-- Inscription: cakes only -->
+        <section class="pdp__block" data-inscription-block hidden>
+          <div class="optgroup__head">
+            <h2>What shall we write?</h2>
+            <span class="small"><span data-insc-count>0</span>/40</span>
+          </div>
+          <label class="field">
+            <span class="visually-hidden">Message to pipe on the cake</span>
+            <input class="input" type="text" maxlength="40" data-insc placeholder="Happy Birthday Sam" autocomplete="off">
+          </label>
+          <div class="inscription__preview" data-insc-preview data-empty="true">
+            <p>We'll pipe exactly what you type here.</p>
+          </div>
+          <p class="field__hint">Leave it blank if you'd rather we didn't.</p>
+        </section>
+
+        <!-- Add-ons -->
+        <section class="pdp__block">
+          <div class="optgroup__head">
+            <h2>Anything else?</h2>
+            <span class="small">Optional</span>
+          </div>
+          <div data-addons></div>
+        </section>
+
+        <!-- Collection -->
+        <section class="pdp__block">
+          <div class="optgroup__head">
+            <h2>Collecting</h2>
+            <button class="linkish" type="button" data-toggle-cal aria-expanded="false">Change day</button>
+          </div>
+
+          <div class="notice" data-ready-note>—</div>
+
+          <div data-cal-wrap hidden style="margin-top:1rem">
+            <div data-cal></div>
+          </div>
+        </section>
+
+        <!-- Buy bar -->
+        <div class="buybar">
+          <div class="qty">
+            <button type="button" data-qty-down aria-label="Decrease quantity">−</button>
+            <output data-qty aria-live="polite">1</output>
+            <button type="button" data-qty-up aria-label="Increase quantity">+</button>
+          </div>
+          <button class="btn btn--lg" type="button" data-add>
+            Add to basket — <span data-total>—</span>
+          </button>
+        </div>
+        <p class="small" style="margin-top:.6rem" data-buy-note></p>
+      </div>
+    </div>
+
+    <div class="empty" data-missing hidden>
+      <div class="empty__inner">
+        <h1 class="d-2">We don't have that one</h1>
+        <p class="lede" style="margin-top:.75rem">It may have come off the menu, or the link may be wrong.</p>
+        <p style="margin-top:1.5rem"><a class="btn" href="shop.html">Back to the shop</a></p>
+      </div>
+    </div>
+  </div>
+
+  <section style="background:var(--surface-2);border-top:1px solid var(--line)" data-related-block hidden>
+    <div class="wrap section">
+      <div class="sec-head">
+        <h2 class="d-2">Usually bought with it</h2>
+        <a class="linkish" href="shop.html">Everything</a>
+      </div>
+      <div class="grid" data-related></div>
+    </div>
+  </section>
+</main>
+
+<div data-footer></div>
+
+<script src="assets/js/catalogue.js"></script>
+<script src="../../shared/js/store.js"></script>
+<script src="../../shared/js/commerce-ui.js"></script>
+<script src="assets/js/chrome.js"></script>
+<script src="assets/js/product.js"></script>
+</body>
+</html>

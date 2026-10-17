@@ -1,0 +1,426 @@
+/* ==========================================================================
+   Controls — buttons, chips, steppers, form fields
+
+   Shape discipline: --r (4px) for anything rectangular; --r-pill only for
+   filter chips and the cart badge, which are genuinely pill-shaped objects.
+   v1 put 999px on everything, which is why nothing had a voice.
+   ========================================================================== */
+
+.btn {
+  --bg: var(--green);
+  --fg: #fff;
+  --bd: var(--green);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  min-height: var(--tap);
+  padding: 0.6rem 1.1rem;
+  background: var(--bg);
+  color: var(--fg);
+  border: 1.5px solid var(--bd);
+  border-radius: var(--r);
+  font-weight: 600;
+  font-size: var(--t-body);
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  transition: background var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease);
+}
+
+.btn:hover {
+  --bg: var(--green-dark);
+  --bd: var(--green-dark);
+}
+
+/* Press feedback is the one motion between a tap and a result, so it is
+   instant and tiny — never a transition the customer has to wait out. */
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn--ink {
+  --bg: var(--ink);
+  --bd: var(--ink);
+}
+
+.btn--ink:hover {
+  --bg: #000;
+  --bd: #000;
+}
+
+.btn--quiet {
+  --bg: transparent;
+  --fg: var(--ink);
+  --bd: var(--rule-2);
+}
+
+.btn--quiet:hover {
+  --bg: var(--paper-2);
+  --bd: var(--ink);
+}
+
+.btn--bare {
+  --bg: transparent;
+  --fg: var(--ink);
+  --bd: transparent;
+  padding-inline: var(--s-2);
+}
+
+.btn--bare:hover {
+  --bg: var(--paper-2);
+  --bd: transparent;
+}
+
+.btn--lg {
+  min-height: 3.25rem;
+  padding: 0.85rem 1.5rem;
+  font-size: 1.0625rem;
+}
+
+.btn--sm {
+  min-height: var(--tap); /* still 44px — "small" is visual, not a smaller target */
+  padding: 0.4rem 0.8rem;
+  font-size: var(--t-sm);
+}
+
+.btn--block {
+  width: 100%;
+}
+
+.btn[disabled],
+.btn[aria-disabled='true'] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* A real text link, underlined. Not a button pretending to be a link. */
+.link {
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 0.22em;
+  text-decoration-color: var(--rule-2);
+  transition: text-decoration-color var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}
+
+.link:hover {
+  color: var(--green);
+  text-decoration-color: currentColor;
+}
+
+/* --------------------------------------------------------------------------
+   Chips — genuinely pill-shaped, used for filters only
+   -------------------------------------------------------------------------- */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: var(--tap);
+  padding: 0.35rem 0.9rem;
+  background: transparent;
+  border: 1.5px solid var(--rule-2);
+  border-radius: var(--r-pill);
+  font-size: var(--t-sm);
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background var(--t-fast) var(--ease), border-color var(--t-fast) var(--ease),
+    color var(--t-fast) var(--ease);
+}
+
+.chip:hover {
+  border-color: var(--ink);
+}
+
+.chip[aria-pressed='true'] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+.chip__count {
+  font-weight: 400;
+  opacity: 0.6;
+}
+
+/* --------------------------------------------------------------------------
+   Quantity stepper
+   -------------------------------------------------------------------------- */
+.qty {
+  display: inline-flex;
+  align-items: center;
+  border: 1.5px solid var(--rule-2);
+  border-radius: var(--r);
+  background: var(--surface);
+}
+
+.qty button {
+  width: var(--tap);
+  height: var(--tap);
+  display: grid;
+  place-items: center;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--ink);
+  transition: background var(--t-fast) var(--ease);
+}
+
+.qty button:first-child {
+  border-radius: 2px 0 0 2px;
+}
+.qty button:last-child {
+  border-radius: 0 2px 2px 0;
+}
+
+.qty button:hover:not([disabled]) {
+  background: var(--paper-2);
+}
+
+.qty button[disabled] {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.qty output {
+  min-width: 2.5ch;
+  text-align: center;
+  font-weight: 700;
+}
+
+.qty--sm button {
+  width: 2.25rem;
+  height: 2.25rem;
+  font-size: 1rem;
+}
+
+/* --------------------------------------------------------------------------
+   Form fields
+   Visible labels always. Placeholders are examples, never labels.
+   -------------------------------------------------------------------------- */
+.field + .field {
+  margin-top: var(--s-4);
+}
+
+.field__label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-4);
+  margin-bottom: var(--s-2);
+  font-weight: 600;
+  font-size: var(--t-sm);
+}
+
+.field__opt {
+  font-weight: 400;
+  color: var(--ink-3);
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.65rem 0.8rem;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1.5px solid var(--rule-2);
+  border-radius: var(--r);
+  font-size: var(--t-body);
+  transition: border-color var(--t-fast) var(--ease);
+}
+
+.input:hover,
+.select:hover,
+.textarea:hover {
+  border-color: var(--ink-3);
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  outline: 3px solid var(--focus);
+  outline-offset: 1px;
+  border-color: var(--ink);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 5.5rem;
+  line-height: 1.5;
+}
+
+.select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1.5 6 6.5l5-5' fill='none' stroke='%231e1711' stroke-width='1.8'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.85rem center;
+  padding-right: 2.4rem;
+}
+
+/* Errors say what to do, sit next to the field, and are never colour-only —
+   they carry an icon and a sentence. */
+.field[data-invalid='true'] .input,
+.field[data-invalid='true'] .select,
+.field[data-invalid='true'] .textarea {
+  border-color: var(--clay);
+  background: var(--clay-wash);
+}
+
+.field__error {
+  display: none;
+  align-items: flex-start;
+  gap: var(--s-2);
+  margin-top: var(--s-2);
+  font-size: var(--t-sm);
+  font-weight: 600;
+  color: var(--clay);
+}
+
+.field[data-invalid='true'] .field__error {
+  display: flex;
+}
+
+.field__error svg {
+  flex: none;
+  margin-top: 0.15em;
+}
+
+.field__hint {
+  margin-top: var(--s-2);
+  font-size: var(--t-sm);
+  color: var(--ink-3);
+}
+
+.row2 {
+  display: grid;
+  gap: var(--s-4);
+}
+
+@media (min-width: 36rem) {
+  .row2 {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .row2 .field + .field {
+    margin-top: 0;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Option list — radio rows, not cards
+   Same ruled language as the board, so configuring a cake looks like reading
+   the shop rather than filling in a form.
+   -------------------------------------------------------------------------- */
+.opts {
+  border-top: 1px solid var(--rule);
+}
+
+.opt {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  min-height: var(--row-h);
+  padding: var(--s-3) var(--s-2);
+  border-bottom: 1px solid var(--rule);
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.opt:hover {
+  background: var(--paper-2);
+}
+
+.opt input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* The tick box is drawn, so selection is shape + colour, never colour alone. */
+.opt__mark {
+  flex: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 1.5px solid var(--rule-2);
+  border-radius: var(--r-pill);
+  display: grid;
+  place-items: center;
+}
+
+.opt__mark::after {
+  content: '';
+  width: 0.625rem;
+  height: 0.625rem;
+  border-radius: var(--r-pill);
+  background: transparent;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.opt:has(input:checked) {
+  background: var(--green-wash);
+}
+
+.opt:has(input:checked) .opt__mark {
+  border-color: var(--green);
+}
+
+.opt:has(input:checked) .opt__mark::after {
+  background: var(--green);
+}
+
+.opt:has(input:focus-visible) {
+  outline: 3px solid var(--focus);
+  outline-offset: -3px;
+}
+
+.opt:has(input:disabled) {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: var(--paper-2);
+}
+
+.opt__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.opt__name {
+  font-weight: 600;
+}
+
+.opt__note {
+  font-size: var(--t-sm);
+  color: var(--ink-3);
+}
+
+.opt__price {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Checkbox variant for add-ons. Never pre-ticked. */
+.opt--check .opt__mark {
+  border-radius: 2px;
+}
+
+.opt--check .opt__mark::after {
+  border-radius: 0;
+  width: 0.7rem;
+  height: 0.7rem;
+  background: transparent;
+  clip-path: polygon(14% 44%, 0 58%, 43% 100%, 100% 16%, 86% 2%, 43% 72%);
+}
+
+.opt--check:has(input:checked) .opt__mark {
+  background: var(--green);
+  border-color: var(--green);
+}
+
+.opt--check:has(input:checked) .opt__mark::after {
+  background: #fff;
+}

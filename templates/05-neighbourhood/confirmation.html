@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hazel &amp; Rye — order in</title>
+<meta name="robots" content="noindex">
+<link rel="preload" href="assets/fonts/publicsans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/board.css">
+<link rel="stylesheet" href="css/components/ticket.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/overlay.css">
+<link rel="stylesheet" href="css/pages/checkout.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div data-header></div>
+
+<main id="main" class="wrap-read" style="padding-block:var(--s-6) var(--s-8)">
+  <ol class="steps">
+    <li data-done="true"><b>1</b> Your ticket</li>
+    <li data-done="true"><b>2</b> Details</li>
+    <li aria-current="step"><b>3</b> Done</li>
+  </ol>
+
+  <div data-receipt hidden>
+    <span class="tick" aria-hidden="true">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+
+    <p class="label">Order in</p>
+    <h1 class="t-1" style="margin-top:var(--s-2)">Lovely. See you soon.</h1>
+    <p class="lede" style="margin-top:var(--s-3)" data-lede></p>
+
+    <div class="receipt">
+      <div class="receipt__head">
+        <span>Order <strong data-ref></strong></span>
+        <span data-placed></span>
+      </div>
+      <div class="receipt__body">
+        <dl data-details></dl>
+        <div class="ticket__perf" aria-hidden="true" style="margin-block:var(--s-4)"></div>
+        <div data-lines></div>
+        <div class="ticket__total">
+          <span>Paid</span><strong class="money" data-total>—</strong>
+        </div>
+      </div>
+    </div>
+
+    <p class="cluster" style="margin-top:var(--s-6)">
+      <a class="btn" href="index.html" data-home-link>Back to the shop</a>
+      <button class="btn btn--quiet" type="button" data-print>Print this</button>
+    </p>
+  </div>
+
+  <div data-none hidden style="text-align:center;padding-block:var(--s-7)">
+    <h1 class="t-2">No recent order on this device</h1>
+    <p class="lede" style="margin:var(--s-3) auto 0">
+      Order confirmations are kept on the device you ordered from. If you've cleared your
+      browser data, check your email for the receipt.
+    </p>
+    <p style="margin-top:var(--s-5)">
+      <a class="btn btn--lg" href="shop.html" data-shop-link>Go to the shop</a>
+    </p>
+  </div>
+</main>
+
+<div data-footer></div>
+<script type="module" src="js/pages/confirmation.js"></script>
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bluebird Bakery — Your corner bakery in Portland</title>
+<meta name="description" content="Bread out at seven, pastries while they last, cakes with two days notice. Order by 11am for same-day collection.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div data-header></div>
+
+<main id="main">
+
+  <!-- ====================================================================
+       Hero — copy on the left, what is actually on the shelf on the right.
+       No full-bleed photograph: this template leads with information.
+       ==================================================================== -->
+  <section class="wrap">
+    <div class="hero">
+      <div class="hero__copy">
+        <p class="label" data-since>Open since 2009</p>
+        <h1 class="d-1">Bread out at seven.<br>Cake with two days&nbsp;notice.</h1>
+        <p class="lede" style="margin-top:1rem">A small bakery on SE Division. Order before 11am and collect the same day. The board tells you what we're baking — and, when it's today, how much of it is left.</p>
+        <div class="hero__actions">
+          <a class="btn btn--lg" href="shop.html">Shop everything</a>
+          <a class="btn btn--ghost btn--lg" href="shop.html?cat=cakes">Order a cake</a>
+        </div>
+        <div class="hero__facts">
+          <span class="pill">Collection &amp; local delivery</span>
+          <span class="pill">No sales tax in Oregon</span>
+          <span class="pill">Closed Mondays</span>
+        </div>
+      </div>
+
+      <div data-reveal>
+        <div class="board">
+          <div class="board__head">
+            <div>
+              <p class="label" data-board-kicker>On the shelf</p>
+              <p class="d-3" data-board-day>—</p>
+            </div>
+            <a class="linkish" href="shop.html">See everything</a>
+          </div>
+          <div class="board__list" data-board></div>
+          <p class="small" data-board-foot style="padding:.85rem 1.25rem;border-top:1px solid var(--line);background:var(--surface-2)"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       Your usual — the repeat-purchase mechanic
+       ==================================================================== -->
+  <section class="wrap section-tight">
+    <div class="usual" data-usual hidden>
+      <div class="usual__items" data-usual-items aria-hidden="true"></div>
+      <div class="usual__text">
+        <p class="d-4" data-usual-title>Your usual</p>
+        <p class="small" data-usual-detail></p>
+      </div>
+      <button class="btn" type="button" data-usual-add>Add it all again</button>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       Categories
+       ==================================================================== -->
+  <section class="wrap section-tight">
+    <div class="sec-head">
+      <h2 class="d-2">Have a look round</h2>
+    </div>
+    <nav class="cats" data-cats aria-label="Shop by category"></nav>
+  </section>
+
+  <!-- ====================================================================
+       Popular
+       ==================================================================== -->
+  <section class="wrap section">
+    <div class="sec-head">
+      <h2 class="d-2">What people actually buy</h2>
+      <a class="linkish" href="shop.html">Everything in the shop</a>
+    </div>
+    <div class="grid" data-popular></div>
+  </section>
+
+  <!-- ====================================================================
+       Cakes
+       ==================================================================== -->
+  <section style="background:var(--surface-2);border-block:1px solid var(--line)">
+    <div class="wrap section">
+      <div class="sec-head">
+        <div>
+          <h2 class="d-2">Cakes, with notice</h2>
+          <p class="lede" style="margin-top:.5rem">Two days for most, three if it has fruit on top. Pick the size, the sponge and what you'd like written on it.</p>
+        </div>
+      </div>
+      <div class="grid" data-cakes></div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       How it works — operational clarity, stated plainly
+       ==================================================================== -->
+  <section class="wrap section" id="how">
+    <div class="sec-head"><h2 class="d-2">How ordering works</h2></div>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))">
+      <div class="panel">
+        <p class="d-4">1 — Pick your day</p>
+        <p class="small" style="margin-top:.5rem">The bar at the top sets when you're collecting. Everything on the site updates to match it, so you never see something you can't actually have.</p>
+      </div>
+      <div class="panel">
+        <p class="d-4">2 — Order by 11am</p>
+        <p class="small" style="margin-top:.5rem">Before 11am and you can collect the same day. After that the clock starts tomorrow, because the morning's baking is already spoken for.</p>
+      </div>
+      <div class="panel">
+        <p class="d-4">3 — Choose a time</p>
+        <p class="small" style="margin-top:.5rem">Two-hour collection windows from 7am. Each one has a limited number of slots so there's never a queue out the door.</p>
+      </div>
+      <div class="panel">
+        <p class="d-4">4 — Or we'll bike it</p>
+        <p class="small" style="margin-top:.5rem">Local delivery within three miles, mornings only, $6 — free over $45. We do not ship, and we're not going to pretend otherwise.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       Visit
+       ==================================================================== -->
+  <section style="background:var(--surface-2);border-top:1px solid var(--line)" id="visit">
+    <div class="wrap section">
+      <div class="hero" style="padding-block:0">
+        <div>
+          <p class="label">Find us</p>
+          <h2 class="d-2" style="margin-top:.5rem">1142 SE Division St<br>Portland, Oregon</h2>
+          <div class="prose" style="margin-top:1.25rem">
+            <p>Six tables, a long bench by the window, and a dog bowl outside. The coffee is from Proud Mary up the road and we do not make any claims about it beyond that it is good.</p>
+            <p>Whatever is left after four goes half price, and on a Sunday that is usually not very much.</p>
+          </div>
+          <div class="hero__facts">
+            <span class="pill">(503) 555-0118</span>
+            <span class="pill">hello@bluebirdbakery.com</span>
+          </div>
+        </div>
+        <div class="panel" data-reveal>
+          <p class="label">Opening hours</p>
+          <ul style="margin-top:.85rem" data-hours></ul>
+          <hr style="border:0;border-top:1px solid var(--line);margin-block:1.1rem">
+          <p class="small">Collection windows run from 7:00 to 17:00 on the hour pairs. Local delivery is mornings only, 8:00 to 12:00.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div data-footer></div>
+
+<script src="assets/js/catalogue.js"></script>
+<script src="../../shared/js/store.js"></script>
+<script src="../../shared/js/commerce-ui.js"></script>
+<script src="assets/js/chrome.js"></script>
+<script src="assets/js/home.js"></script>
+</body>
+</html>

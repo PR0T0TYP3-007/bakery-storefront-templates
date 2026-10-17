@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout — Bluebird Bakery</title>
+<meta name="description" content="Pick a collection time, leave a number, done.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div data-header></div>
+
+<main id="main">
+  <div class="wrap">
+
+    <div data-checkout hidden>
+      <section class="section-tight">
+        <h1 class="d-1">Checkout</h1>
+      </section>
+
+      <nav class="steps" aria-label="Progress">
+        <span><b>1</b> Basket</span>
+        <span aria-current="step"><b>2</b> Details</span>
+        <span><b>3</b> Done</span>
+      </nav>
+
+      <div class="order">
+        <form id="checkout-form" novalidate>
+
+          <!-- Collect or deliver -->
+          <section class="block">
+            <div class="block__head">
+              <h2 class="d-3">Collecting or delivering?</h2>
+            </div>
+            <div class="methods" data-methods></div>
+
+            <!-- Collection slots -->
+            <div data-pickup hidden style="margin-top:1.5rem">
+              <div class="block__head" style="margin-bottom:.75rem">
+                <h3 class="d-4">Pick a time</h3>
+                <span class="small" data-slot-day>—</span>
+              </div>
+              <div class="slots" data-slots role="radiogroup" aria-label="Collection time"></div>
+              <p class="field__error" data-slot-error style="display:none">Please choose a collection time.</p>
+              <p class="field__hint" data-pickup-note></p>
+            </div>
+
+            <!-- Delivery -->
+            <div data-delivery hidden style="margin-top:1.5rem">
+              <label class="field">
+                <span class="field__label"><span>Where are we taking it?</span></span>
+                <select class="select" name="zone" data-zone></select>
+              </label>
+              <div class="row row--2" style="margin-top:1.1rem">
+                <label class="field">
+                  <span class="field__label"><span>Address</span></span>
+                  <input class="input" name="address" autocomplete="shipping street-address" required>
+                  <span class="field__error">We need somewhere to bring it.</span>
+                </label>
+                <label class="field">
+                  <span class="field__label"><span>Zip</span></span>
+                  <input class="input" name="postcode" autocomplete="shipping postal-code" required>
+                  <span class="field__error">Add a zip code.</span>
+                </label>
+              </div>
+              <p class="field__hint" data-delivery-note></p>
+            </div>
+
+            <div class="notice" style="margin-top:1.5rem" data-day-note></div>
+          </section>
+
+          <!-- Contact -->
+          <section class="block">
+            <div class="block__head">
+              <h2 class="d-3">Who's picking it up?</h2>
+              <span class="small">No account needed</span>
+            </div>
+
+            <div class="row row--2">
+              <label class="field">
+                <span class="field__label"><span>Name</span></span>
+                <input class="input" name="name" autocomplete="name" required>
+                <span class="field__error">We'll need a name for the bag.</span>
+              </label>
+              <label class="field">
+                <span class="field__label"><span>Mobile</span></span>
+                <input class="input" name="phone" type="tel" autocomplete="tel" required>
+                <span class="field__error">We text when it's ready.</span>
+              </label>
+            </div>
+
+            <label class="field">
+              <span class="field__label"><span>Email</span></span>
+              <input class="input" name="email" type="email" autocomplete="email" required>
+              <span class="field__error">We need a valid email for the receipt.</span>
+            </label>
+          </section>
+
+          <!-- Gifting — rendered only if this merchant offers it. Bluebird
+               does not, so this section stays out of the page entirely. -->
+          <section class="block" data-gifting hidden>
+            <div class="block__head">
+              <h2 class="d-3">Is it a gift?</h2>
+            </div>
+            <label class="addon" style="border-top:1px solid var(--line)">
+              <input type="checkbox" data-gift-toggle>
+              <span class="addon__main">
+                <span class="addon__label">Yes, it's going to someone else</span>
+              </span>
+            </label>
+            <div data-gift-fields hidden style="margin-top:1.25rem">
+              <label class="field">
+                <span class="field__label"><span>Message</span></span>
+                <textarea class="textarea" name="giftMessage" maxlength="200"></textarea>
+              </label>
+            </div>
+          </section>
+
+          <!-- Notes -->
+          <section class="block">
+            <div class="block__head">
+              <h2 class="d-3">Anything we should know?</h2>
+              <span class="small">Optional</span>
+            </div>
+            <label class="field">
+              <span class="field__label"><span>Allergies or notes</span></span>
+              <textarea class="textarea" name="notes" placeholder="Nut allergy — please bag separately."></textarea>
+            </label>
+            <p class="notice notice--flat" style="margin-top:1.1rem">Everything is made in one small kitchen that handles nuts, dairy, egg, wheat and soy. We can't promise anything is free of them, and we'll call you if we can't safely make what you've asked for.</p>
+          </section>
+
+          <!-- Payment -->
+          <section class="block">
+            <div class="block__head">
+              <h2 class="d-3">Payment</h2>
+              <span class="pill">Demonstration</span>
+            </div>
+            <p class="notice notice--warn" style="margin-bottom:1.25rem">This is a design template. The fields below are switched off, nothing is sent anywhere and no payment is taken.</p>
+            <div class="row row--2">
+              <label class="field">
+                <span class="field__label"><span>Card number</span></span>
+                <input class="input" inputmode="numeric" placeholder="•••• •••• •••• ••••" disabled>
+              </label>
+              <label class="field">
+                <span class="field__label"><span>Expiry &amp; CVC</span></span>
+                <input class="input" placeholder="MM / YY   •••" disabled>
+              </label>
+            </div>
+          </section>
+
+          <div style="padding-block:clamp(1.5rem,3vw,2.25rem)">
+            <button class="btn btn--lg btn--block" type="submit" data-place>
+              Place order — <span data-submit-total>—</span>
+            </button>
+          </div>
+        </form>
+
+        <aside class="order__aside">
+          <div class="panel">
+            <p class="label">Your order</p>
+            <div data-mini style="margin-top:1rem"></div>
+            <div style="margin-top:1rem;padding-top:.9rem;border-top:1px solid var(--line)">
+              <div class="summary__row"><span>Subtotal</span><span data-subtotal>—</span></div>
+              <div class="summary__row"><span data-ship-label>Delivery</span><span data-ship>—</span></div>
+              <div class="summary__row" data-tax-row hidden><span>Tax</span><span data-tax>—</span></div>
+              <div class="summary__row summary__row--total"><span>Total</span><span data-total>—</span></div>
+            </div>
+            <p class="small" data-tax-note style="margin-top:.6rem"></p>
+            <div class="notice" style="margin-top:1rem" data-free-note hidden></div>
+            <div class="notice" style="margin-top:1rem" data-ready-note></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- Confirmation -->
+    <section data-confirmation hidden style="padding-block:clamp(2rem,5vw,4rem)">
+      <div class="wrap-narrow" style="padding-inline:0">
+        <nav class="steps" aria-label="Progress">
+          <span><b>1</b> Basket</span>
+          <span><b>2</b> Details</span>
+          <span aria-current="step"><b>3</b> Done</span>
+        </nav>
+
+        <div class="confirm__badge" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+
+        <p class="label">Order in</p>
+        <h1 class="d-1" style="margin-top:.5rem">Lovely. See you soon.</h1>
+        <p class="lede" style="margin-top:1rem" data-confirm-lede></p>
+
+        <div class="ticket">
+          <div class="ticket__head">
+            <span>Order <span data-order-no></span></span>
+            <span data-order-date></span>
+          </div>
+          <div class="ticket__body">
+            <dl data-confirm-details></dl>
+            <div style="margin-top:1.5rem;padding-top:1.25rem;border-top:1px solid var(--line)" data-confirm-lines></div>
+            <div class="summary__row summary__row--total"><span>Paid</span><span data-confirm-total>—</span></div>
+          </div>
+        </div>
+
+        <p style="margin-top:2rem;display:flex;gap:.6rem;flex-wrap:wrap">
+          <a class="btn" href="index.html">Back to the shop</a>
+          <a class="btn btn--ghost" href="shop.html">Order something else</a>
+        </p>
+      </div>
+    </section>
+
+    <div class="empty" data-empty hidden>
+      <div class="empty__inner">
+        <h1 class="d-2">Your basket is empty</h1>
+        <p style="margin-top:1.5rem"><a class="btn btn--lg" href="shop.html">Go to the shop</a></p>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<div data-footer></div>
+
+<script src="assets/js/catalogue.js"></script>
+<script src="../../shared/js/store.js"></script>
+<script src="../../shared/js/commerce-ui.js"></script>
+<script src="assets/js/chrome.js"></script>
+<script src="assets/js/checkout.js"></script>
+</body>
+</html>

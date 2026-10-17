@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hazel &amp; Rye</title>
+<meta name="description" content="Choose the size, the sponge and what we write on it. The price and the earliest day update as you go.">
+<link rel="preload" href="assets/fonts/publicsans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/board.css">
+<link rel="stylesheet" href="css/components/ticket.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/overlay.css">
+<link rel="stylesheet" href="css/pages/product.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div data-header></div>
+
+<main id="main" class="wrap">
+  <nav class="sm" aria-label="Breadcrumb" style="padding-block:var(--s-4)">
+    <a class="link" href="index.html" data-home-link>Home</a> /
+    <a class="link" href="shop.html" data-shop-link>Shop</a> /
+    <span data-crumb>—</span>
+  </nav>
+
+  <div class="pdp" data-pdp hidden>
+    <!-- Media + story -->
+    <div class="pdp__media">
+      <figure class="pdp__figure" data-figure></figure>
+      <div class="prose" style="margin-top:var(--s-4)" data-description></div>
+    </div>
+
+    <!-- Choices -->
+    <div>
+      <p class="label" data-category></p>
+      <h1 class="t-1" style="margin-top:var(--s-1)" data-name></h1>
+      <p class="lede" style="margin-top:var(--s-2)" data-subtitle></p>
+
+      <p class="pdp__price">
+        <strong class="money" data-price>—</strong>
+        <span class="sm" data-price-note></span>
+      </p>
+
+      <p style="margin-top:var(--s-3)">
+        <span class="status" data-shelf>—</span>
+      </p>
+
+      <!-- Options: only rendered when the product declares any -->
+      <section class="pdp__block" data-options-block hidden>
+        <div data-options></div>
+      </section>
+
+      <!-- Inscription: cakes only, and only where the merchant offers it -->
+      <section class="pdp__block" data-inscription-block hidden>
+        <div class="pdp__blockhead">
+          <h2 class="t-3">What shall we write?</h2>
+          <span class="sm"><span data-insc-count>0</span>/40</span>
+        </div>
+        <div class="field" data-insc-field>
+          <label class="field__label" for="insc">
+            <span>Message</span><span class="field__opt">Optional</span>
+          </label>
+          <input class="input" id="insc" type="text" maxlength="40" autocomplete="off"
+                 placeholder="Happy Birthday Sam" data-insc
+                 aria-describedby="insc-preview insc-hint">
+          <p class="field__error" data-insc-error></p>
+        </div>
+        <div class="inscription" id="insc-preview" data-insc-preview data-empty="true" aria-live="polite">
+          <p>We pipe exactly what you type here.</p>
+        </div>
+        <p class="field__hint" id="insc-hint">Check the spelling — this is piped by hand.</p>
+      </section>
+
+      <!-- Add-ons. Never pre-ticked. -->
+      <section class="pdp__block" data-addons-block>
+        <div class="pdp__blockhead">
+          <h2 class="t-3">Anything else?</h2>
+          <span class="sm">Optional</span>
+        </div>
+        <div class="opts" data-addons></div>
+      </section>
+
+      <!-- Allergens, in plain language -->
+      <section class="pdp__block">
+        <div class="pdp__blockhead"><h2 class="t-3">Allergens</h2></div>
+        <p class="sm">This contains:</p>
+        <div class="allergens" data-allergens></div>
+        <p class="note note--flat" style="margin-top:var(--s-3)" data-allergen-statement></p>
+      </section>
+
+      <!-- Collection -->
+      <section class="pdp__block">
+        <div class="pdp__blockhead">
+          <h2 class="t-3">Collecting</h2>
+          <button class="link" type="button" data-change-day>Change day</button>
+        </div>
+        <p class="note" data-ready-note></p>
+      </section>
+
+      <!-- Buy -->
+      <div class="buybar">
+        <span class="qty">
+          <button type="button" data-qty="-" aria-label="One fewer">−</button>
+          <output data-qty-out aria-live="polite">1</output>
+          <button type="button" data-qty="+" aria-label="One more">+</button>
+        </span>
+        <button class="btn btn--lg" type="button" data-add-configured>Add to basket</button>
+      </div>
+      <p class="sm" style="margin-top:var(--s-2)" data-buy-note></p>
+    </div>
+  </div>
+
+  <div data-missing hidden style="padding-block:var(--s-8);text-align:center">
+    <h1 class="t-1">We don't have that one</h1>
+    <p class="lede" style="margin:var(--s-3) auto 0">It may have come off the menu, or the link may be wrong.</p>
+    <p style="margin-top:var(--s-5)"><a class="btn" href="shop.html" data-shop-link>Back to the shop</a></p>
+  </div>
+</main>
+
+<div data-footer></div>
+<script type="module" src="js/pages/product.js"></script>
+</body>
+</html>

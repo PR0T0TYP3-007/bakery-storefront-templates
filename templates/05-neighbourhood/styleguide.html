@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Counter — style guide</title>
+<meta name="robots" content="noindex">
+<link rel="preload" href="assets/fonts/publicsans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/fraunces.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/board.css">
+<link rel="stylesheet" href="css/components/ticket.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/overlay.css">
+<link rel="stylesheet" href="css/pages/product.css">
+<link rel="stylesheet" href="css/pages/checkout.css">
+<style>
+  .sg { padding-block: var(--s-6); border-top: 1px solid var(--rule); }
+  .sg:first-of-type { border-top: 0; }
+  .sg__demo { margin-top: var(--s-4); }
+  .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr)); gap: var(--s-3); }
+  .sw__chip { height: 3.5rem; border-radius: var(--r); border: 1px solid var(--rule); }
+  .sw code { font-family: ui-monospace, Menlo, monospace; font-size: .75rem; color: var(--ink-3); }
+  .scale > * { margin-top: var(--s-3); }
+  .spec { font-family: ui-monospace, Menlo, monospace; font-size: .75rem; color: var(--ink-3); }
+  .toc { position: sticky; top: calc(var(--header-h) + var(--s-3)); }
+  .toc a { display: block; padding: .3rem 0; font-size: var(--t-sm); font-weight: 600; }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div data-header></div>
+
+<main id="main" class="wrap">
+  <section class="section--tight">
+    <p class="label">Template 05 — The Counter</p>
+    <h1 class="t-1" style="margin-top:var(--s-2)">Style guide</h1>
+    <p class="lede" style="margin-top:var(--s-3)">
+      Every component and every state, including the ones you would otherwise only catch on
+      the right day — sold out, nearly gone, fully booked, a product with no photograph.
+    </p>
+  </section>
+
+  <div class="counter">
+    <div>
+
+      <!-- Colour -->
+      <section class="sg" id="colour">
+        <h2 class="t-2">Colour</h2>
+        <p class="sm">Status is never carried by colour alone — every state has a word beside it,
+        and the sold-out marker is a square where the others are circles.</p>
+        <div class="sg__demo swatches" data-swatches></div>
+      </section>
+
+      <!-- Type -->
+      <section class="sg" id="type">
+        <h2 class="t-2">Type</h2>
+        <p class="sm">Fraunces (variable, <code class="spec">SOFT 40 / WONK 1</code>) for display,
+        Public Sans for interface. Both self-hosted. Body never below 16px.</p>
+        <div class="sg__demo scale">
+          <p class="t-hero">Hero — bread out by half seven</p>
+          <p class="t-1">Heading 1 — the board</p>
+          <p class="t-2">Heading 2 — collecting or delivering</p>
+          <p class="t-3">Heading 3 — what shall we write?</p>
+          <p>Body — the dough rests for 36 hours before it goes anywhere near an oven.</p>
+          <p class="sm">Small — six pastries, baker's choice</p>
+          <p class="label">Label — on the shelf now</p>
+          <p class="money" style="font-weight:700">Tabular numerals — £4.80 · £16.00 · £112.50</p>
+        </div>
+      </section>
+
+      <!-- Buttons -->
+      <section class="sg" id="buttons">
+        <h2 class="t-2">Buttons</h2>
+        <p class="sm">Two radii in the whole template: <code class="spec">4px</code> for
+        rectangles, <code class="spec">999px</code> for chips and the basket badge only.
+        Every control is at least 44px tall, including the small ones.</p>
+        <div class="sg__demo cluster">
+          <button class="btn">Primary</button>
+          <button class="btn btn--ink">Ink</button>
+          <button class="btn btn--quiet">Quiet</button>
+          <button class="btn btn--bare">Bare</button>
+          <button class="btn btn--sm">Small</button>
+          <button class="btn btn--lg">Large</button>
+          <button class="btn" disabled>Disabled</button>
+        </div>
+        <div class="sg__demo cluster">
+          <button class="chip" aria-pressed="true">Selected chip <span class="chip__count">12</span></button>
+          <button class="chip" aria-pressed="false">Chip <span class="chip__count">4</span></button>
+          <a class="link" href="#buttons">A real link</a>
+          <span class="qty">
+            <button type="button" aria-label="One fewer">−</button>
+            <output>2</output>
+            <button type="button" aria-label="One more">+</button>
+          </span>
+        </div>
+      </section>
+
+      <!-- Status -->
+      <section class="sg" id="status">
+        <h2 class="t-2">Stock states</h2>
+        <p class="sm">A live count only for today; batch size for any day still to come.
+        Claiming "15 left next Tuesday" would be invented precision.</p>
+        <div class="sg__demo cluster--3 cluster">
+          <span class="status" data-state="in">28 left</span>
+          <span class="status" data-state="low">2 left</span>
+          <span class="status" data-state="out">Sold out</span>
+          <span class="status" data-state="made">2 days notice</span>
+        </div>
+      </section>
+
+      <!-- Board -->
+      <section class="sg" id="board">
+        <h2 class="t-2">The board</h2>
+        <p class="sm">The primary language. Rows hold their shape against a missing photograph,
+        a 60-character name, a 3-item catalogue or a 300-item one.</p>
+        <div class="sg__demo board" data-board></div>
+      </section>
+
+      <!-- Tiles -->
+      <section class="sg" id="tiles">
+        <h2 class="t-2">Cake tiles</h2>
+        <p class="sm">The only place photography leads, because a celebration cake is bought
+        with the eyes and a baguette is not.</p>
+        <div class="sg__demo tiles" data-tiles></div>
+      </section>
+
+      <!-- Skeleton -->
+      <section class="sg" id="loading">
+        <h2 class="t-2">Loading</h2>
+        <p class="sm">Skeleton rows reserve the exact final height, so nothing shifts when data
+        lands (CLS).</p>
+        <div class="sg__demo board" data-skeleton></div>
+      </section>
+
+      <!-- Forms -->
+      <section class="sg" id="forms">
+        <h2 class="t-2">Form fields</h2>
+        <p class="sm">Visible labels always; placeholders are examples, never labels. Errors sit
+        beside the field, carry an icon as well as colour, and say how to fix it.</p>
+        <div class="sg__demo">
+          <div class="row2">
+            <div class="field">
+              <label class="field__label" for="sg-ok"><span>Name</span></label>
+              <input class="input" id="sg-ok" value="Ada Mensah">
+              <p class="field__hint">As it should appear on the bag.</p>
+            </div>
+            <div class="field" data-invalid="true">
+              <label class="field__label" for="sg-bad"><span>Email</span></label>
+              <input class="input" id="sg-bad" value="ada@">
+              <p class="field__error" data-demo-error></p>
+            </div>
+          </div>
+          <div class="field" style="margin-top:var(--s-4)">
+            <label class="field__label" for="sg-sel"><span>Which shop?</span><span class="field__opt">Optional</span></label>
+            <select class="select" id="sg-sel"><option>Bellevue Road</option></select>
+          </div>
+          <div class="field" style="margin-top:var(--s-4)">
+            <label class="field__label" for="sg-ta"><span>Allergies or notes</span></label>
+            <textarea class="textarea" id="sg-ta" rows="2" placeholder="Nut allergy — please bag separately."></textarea>
+          </div>
+        </div>
+      </section>
+
+      <!-- Options -->
+      <section class="sg" id="options">
+        <h2 class="t-2">Options</h2>
+        <p class="sm">Ruled rows, like the board. A combination we cannot make is disabled
+        <em>and</em> says why — a dead control with no explanation is a dead end.</p>
+        <div class="sg__demo">
+          <fieldset class="opts">
+            <legend class="vh">Size</legend>
+            <label class="opt">
+              <input type="radio" name="sg-size" value="s">
+              <span class="opt__mark" aria-hidden="true"></span>
+              <span class="opt__body"><span class="opt__name">6 inch</span><span class="opt__note">Serves 8–10</span></span>
+              <span class="opt__price">Included</span>
+            </label>
+            <label class="opt">
+              <input type="radio" name="sg-size" value="m" checked>
+              <span class="opt__mark" aria-hidden="true"></span>
+              <span class="opt__body"><span class="opt__name">8 inch</span><span class="opt__note">Serves 14–16</span></span>
+              <span class="opt__price">+£16</span>
+            </label>
+            <label class="opt">
+              <input type="radio" name="sg-size" value="x" disabled>
+              <span class="opt__mark" aria-hidden="true"></span>
+              <span class="opt__body"><span class="opt__name">Fondant figures</span><span class="opt__note">Only on 8 inch or Two tier</span></span>
+              <span class="opt__price">+£28</span>
+            </label>
+            <label class="opt opt--check">
+              <input type="checkbox" checked>
+              <span class="opt__mark" aria-hidden="true"></span>
+              <span class="opt__body"><span class="opt__name">Birthday candles</span><span class="opt__note">Pack of 24 — never pre-ticked in the real flow</span></span>
+              <span class="opt__price">+£2</span>
+            </label>
+          </fieldset>
+        </div>
+      </section>
+
+      <!-- Slots -->
+      <section class="sg" id="slots">
+        <h2 class="t-2">Collection slots</h2>
+        <div class="sg__demo slots">
+          <label class="slot"><input type="radio" name="sg-slot" checked><span class="slot__time">09:30–11:30</span><span class="slot__left">4 left</span></label>
+          <label class="slot"><input type="radio" name="sg-slot"><span class="slot__time">11:30–13:30</span><span class="slot__left">1 left</span></label>
+          <label class="slot"><input type="radio" name="sg-slot" disabled><span class="slot__time">13:30–15:30</span><span class="slot__left">Full</span></label>
+        </div>
+      </section>
+
+      <!-- Notices -->
+      <section class="sg" id="notices">
+        <h2 class="t-2">Notices</h2>
+        <div class="sg__demo stack-3" data-notes></div>
+      </section>
+
+      <!-- Overlays -->
+      <section class="sg" id="overlays">
+        <h2 class="t-2">Overlays</h2>
+        <p class="sm">Built on native <code class="spec">&lt;dialog&gt;</code>, so focus
+        trapping, Esc and top-layer stacking are the browser's job.</p>
+        <div class="sg__demo cluster">
+          <button class="btn btn--quiet" type="button" data-demo-picker>Open the date picker</button>
+          <button class="btn btn--quiet" type="button" data-demo-toast>Fire a toast</button>
+          <button class="btn btn--quiet" type="button" data-demo-toast-bad>Fire an error toast</button>
+        </div>
+      </section>
+
+      <!-- Motion -->
+      <section class="sg" id="motion">
+        <h2 class="t-2">Motion</h2>
+        <table class="testcards" style="width:100%">
+          <tr><th>Press feedback</th><td><code class="spec">120ms</code> — instant, between tap and result</td></tr>
+          <tr><th>Hover / state</th><td><code class="spec">120–180ms</code> <code class="spec">cubic-bezier(.2,.7,.2,1)</code></td></tr>
+          <tr><th>Ticket row in</th><td><code class="spec">240ms</code> <code class="spec">cubic-bezier(.16,1,.3,1)</code> — only on a genuinely new line</td></tr>
+          <tr><th>Sheet / dialog</th><td><code class="spec">180–240ms</code></td></tr>
+          <tr><th>Forbidden</th><td>Entrance animation on product rows; anything delaying add-to-cart</td></tr>
+          <tr><th>Reduced motion</th><td>All of the above collapse to <code class="spec">0.01ms</code></td></tr>
+        </table>
+      </section>
+
+      <!-- Elevation -->
+      <section class="sg" id="elevation">
+        <h2 class="t-2">Elevation</h2>
+        <p class="sm">Separation comes from 1px rules and ground-tone shifts. Shadow is reserved
+        for three genuinely floating things: the mobile ticket sheet, the dialog, the toast.
+        That constraint is what stops the page reading as a pile of tiles.</p>
+      </section>
+
+    </div>
+
+    <aside class="counter__rail">
+      <nav class="toc" aria-label="On this page">
+        <p class="label">On this page</p>
+        <a class="link" href="#colour">Colour</a>
+        <a class="link" href="#type">Type</a>
+        <a class="link" href="#buttons">Buttons</a>
+        <a class="link" href="#status">Stock states</a>
+        <a class="link" href="#board">The board</a>
+        <a class="link" href="#tiles">Cake tiles</a>
+        <a class="link" href="#loading">Loading</a>
+        <a class="link" href="#forms">Form fields</a>
+        <a class="link" href="#options">Options</a>
+        <a class="link" href="#slots">Slots</a>
+        <a class="link" href="#notices">Notices</a>
+        <a class="link" href="#overlays">Overlays</a>
+        <a class="link" href="#motion">Motion</a>
+        <a class="link" href="#elevation">Elevation</a>
+      </nav>
+    </aside>
+  </div>
+</main>
+
+<div data-footer></div>
+<script type="module" src="js/pages/styleguide.js"></script>
+</body>
+</html>
