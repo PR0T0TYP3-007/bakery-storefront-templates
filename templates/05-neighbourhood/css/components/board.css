@@ -251,12 +251,26 @@
   border-color: var(--ink);
 }
 
+/* Portrait, because a celebration cake is a tall object. The previous 5/4
+   landscape crop cut the top and bottom off anything tiered. */
 .tile__media {
-  aspect-ratio: 5 / 4;
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
   background: var(--paper-3);
 }
 
-.tile__media img {
+/* Absolutely positioned on purpose.
+   .tile is a column flex container, so an in-flow image with height:100% has
+   no definite parent height to resolve against, falls back to its intrinsic
+   height, and then stretches the flex item past its own aspect-ratio. That is
+   what made these tiles uneven: a 800x1197 photograph forced 483px where the
+   ratio asked for 258. Out of flow, the image cannot size its parent at all,
+   so the ratio always wins. */
+.tile__media img,
+.tile__media .monogram {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;

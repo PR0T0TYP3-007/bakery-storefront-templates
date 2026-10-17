@@ -94,7 +94,7 @@ export function renderTile(product, { when }) {
       <div class="tile__media">
         ${
           src
-            ? `<img src="${src}" alt="${esc(product.name)} — ${esc(product.subtitle)}" loading="lazy" decoding="async" width="800" height="640">`
+            ? `<img src="${src}" alt="${esc(product.name)} — ${esc(product.subtitle)}" loading="lazy" decoding="async" width="800" height="1000">`
             : `<span class="monogram" style="font-size:3rem">${esc(product.name.trim()[0])}</span>`
         }
       </div>

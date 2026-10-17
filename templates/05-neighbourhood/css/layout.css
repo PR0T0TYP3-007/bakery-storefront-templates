@@ -98,9 +98,12 @@
 
 /* Tile grid — used only where photography genuinely sells the product, which
    in this shop means celebration cakes and nothing else. */
+/* auto-fit, not auto-fill: with three cakes and room for four tracks,
+   auto-fill leaves an empty column hanging off the end of the row. auto-fit
+   collapses the empty tracks so the cakes share the full width evenly. */
 .tiles {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
   gap: var(--s-4);
 }
 
