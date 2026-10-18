@@ -1,0 +1,131 @@
+/* ==========================================================================
+   Layout.
+
+   The separation method is masked apertures on an uninterrupted ground —
+   no rules, no boxes, no cards, no shadows. So this file is mostly about
+   measure and air: where content starts, where it stops, and how much
+   quiet is left around it.
+   ========================================================================== */
+
+.page {
+  width: min(100% - (var(--gutter) * 2), var(--page));
+  margin-inline: auto;
+}
+
+/* Bands are direct children of <main> and already full width. Template 04
+   learned the hard way that the 100vw break-out trick includes the vertical
+   scrollbar and gives every page an eight-pixel sideways scroll. */
+.band { padding-block: var(--s-7); }
+.band--tight { padding-block: var(--s-6); }
+.band--tall { padding-block: var(--s-8); }
+.band--deep { background: var(--deep); }
+.band--deepest { background: var(--deepest); }
+
+/* A letter's measure. Everything long-form in this template is set to this
+   and no wider, including on a 1600px screen. */
+.measure { max-width: var(--measure); }
+.measure--center { margin-inline: auto; }
+
+/* --------------------------------------------------------------------------
+   The apertures — the separation method
+
+   Content is cut out of the ground into a shape rather than fenced off by a
+   line. The arch is a window; the oval is a photo mount. Both survive a bad
+   merchant photograph, which a rectangular card does not: a phone snapshot
+   in an arch still looks intended.
+   -------------------------------------------------------------------------- */
+.aperture {
+  position: relative;
+  overflow: hidden;
+  background: var(--deep);
+  display: block;
+}
+.aperture > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.aperture--arch { border-radius: var(--arch); }
+.aperture--oval { border-radius: var(--oval); }
+
+/* Ratios, so an empty aperture holds its shape and the grid never jumps
+   while photographs load. */
+.aperture--tall { aspect-ratio: 3 / 4; }
+.aperture--portrait { aspect-ratio: 4 / 5; }
+.aperture--square { aspect-ratio: 1 / 1; }
+.aperture--wide { aspect-ratio: 3 / 2; }
+
+/* No photograph: a monogram, set in the display face. A designed absence
+   beats a broken tile. */
+.aperture--empty {
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  letter-spacing: var(--track-wide);
+  color: var(--ink-3);
+}
+
+/* --------------------------------------------------------------------------
+   Grids
+
+   auto-fit and minmax throughout rather than viewport media queries, so a
+   grid asks the container how much room it has. Template 04 shipped a spec
+   sheet that laid itself out in two columns inside a 388px box because a
+   media query matched the viewport instead.
+   -------------------------------------------------------------------------- */
+.cols {
+  display: grid;
+  gap: var(--s-6) var(--s-5);
+  grid-template-columns: repeat(auto-fit, minmax(min(16rem, 100%), 1fr));
+}
+.cols--wide { grid-template-columns: repeat(auto-fit, minmax(min(21rem, 100%), 1fr)); }
+.cols--two { grid-template-columns: repeat(auto-fit, minmax(min(24rem, 100%), 1fr)); }
+
+/* The reading layout: a column of words beside a column of picture. Falls to
+   one column by container width, not by screen width. */
+.spread {
+  display: grid;
+  gap: var(--s-6) var(--s-5);
+  grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr));
+  align-items: center;
+}
+.spread--top { align-items: start; }
+
+/* Asymmetry. A romantic boutique is not a grid of equal cells, and an
+   off-centre column is the cheapest way to say so without inventing a
+   layout the content cannot survive. */
+@media (min-width: 60rem) {
+  .spread--offset { grid-template-columns: 5fr 7fr; }
+  .spread--offset-r { grid-template-columns: 7fr 5fr; }
+}
+
+.stack > * + * { margin-top: var(--s-4); }
+.stack--loose > * + * { margin-top: var(--s-5); }
+.stack--tight > * + * { margin-top: var(--s-2); }
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+  align-items: center;
+}
+.row--between { justify-content: space-between; }
+.row--end { justify-content: flex-end; }
+
+/* A section mark. Not a rule across the page — a short blush stroke and a
+   spaced label, which is how a letterhead separates one thing from the next. */
+.mark {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-3);
+  margin-bottom: var(--s-5);
+}
+.mark::before {
+  content: '';
+  width: 2.5rem;
+  height: 2px;
+  background: var(--blush);
+  flex: none;
+  transform: translateY(-0.25em);
+}

@@ -1,0 +1,197 @@
+/* ==========================================================================
+   The diary dialog, and toasts.
+
+   A native <dialog>, so focus trapping, Escape, the backdrop and the inert
+   background are the platform's job rather than ours.
+   ========================================================================== */
+
+.diary {
+  width: min(100% - 2rem, 34rem);
+  max-height: min(90dvh, 48rem);
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: var(--deep);
+  color: var(--ink);
+  overflow: auto;
+}
+.diary::backdrop { background: rgb(28 6 17 / 0.72); }
+
+@media (prefers-reduced-motion: no-preference) {
+  .diary[open] { animation: rise var(--mid) var(--ease); }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(0.75rem); }
+    to { opacity: 1; transform: none; }
+  }
+}
+
+.dlg__head {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-4);
+  padding: var(--s-5) var(--s-5) var(--s-3);
+}
+.dlg__title {
+  font-family: var(--font-display);
+  font-size: var(--t-3);
+  letter-spacing: var(--track);
+  margin: 0;
+}
+.dlg__note { margin: var(--s-2) 0 0; font-size: var(--sm); color: var(--ink-2); }
+.dlg__x {
+  margin-left: auto;
+  width: 44px; height: 44px;
+  display: grid;
+  place-items: center;
+  background: none;
+  border: 0;
+  border-radius: var(--oval);
+  cursor: pointer;
+}
+.dlg__x:hover { background: var(--deepest); }
+
+.dlg__body { padding: 0 var(--s-5) var(--s-4); }
+.dlg__foot {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-4) var(--s-5) var(--s-5);
+  position: sticky;
+  bottom: 0;
+  background: var(--deep);
+}
+
+/* --------------------------------------------------------------------------
+   Calendar
+   -------------------------------------------------------------------------- */
+.cal__nav { display: flex; align-items: center; gap: var(--s-3); margin-bottom: var(--s-3); }
+.cal__month {
+  flex: 1;
+  text-align: center;
+  margin: 0;
+  font-family: var(--font-display);
+  letter-spacing: var(--track);
+}
+.cal__arrow {
+  width: 44px; height: 44px;
+  display: grid;
+  place-items: center;
+  background: none;
+  border: 0;
+  border-radius: var(--oval);
+  cursor: pointer;
+}
+.cal__arrow:hover:not(:disabled) { background: var(--deepest); }
+.cal__arrow:disabled { opacity: 0.3; cursor: not-allowed; }
+
+.cal__grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+.cal__dow {
+  margin: 0;
+  text-align: center;
+  font-size: var(--xs);
+  letter-spacing: var(--track);
+  color: var(--ink-3);
+  padding-bottom: var(--s-2);
+}
+
+.cal__day {
+  aspect-ratio: 1;
+  min-height: 44px;
+  display: grid;
+  place-content: center;
+  gap: 1px;
+  background: none;
+  border: 0;
+  border-radius: var(--oval);
+  color: var(--ink);
+  cursor: pointer;
+  font-variant-numeric: tabular-nums;
+}
+.cal__day--empty { visibility: hidden; }
+.cal__day:hover:not(:disabled) { background: var(--deepest); }
+.cal__day:disabled { color: var(--ink-3); cursor: not-allowed; }
+.cal__day[data-today] { box-shadow: inset 0 0 0 1px var(--rule-strong); }
+.cal__day[aria-pressed='true'] { background: var(--blush); color: var(--blush-ink); font-weight: 700; }
+
+/* A blocked day says why on the cell. A disabled square with no explanation
+   makes the customer click it to find out, which is the one thing a disabled
+   control cannot answer. */
+.cal__why { font-size: 0.58rem; line-height: 1; letter-spacing: 0.02em; }
+
+.cal__key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-4);
+  margin-top: var(--s-4);
+  font-size: var(--xs);
+  color: var(--ink-2);
+}
+.cal__key span { display: inline-flex; align-items: center; gap: var(--s-2); }
+.cal__key i {
+  width: 0.75rem; height: 0.75rem;
+  border-radius: var(--oval);
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+
+/* --------------------------------------------------------------------------
+   Collection windows
+   -------------------------------------------------------------------------- */
+.slots { display: grid; gap: var(--s-2); grid-template-columns: repeat(auto-fit, minmax(min(9rem, 100%), 1fr)); }
+.slot input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.slot__face {
+  display: grid;
+  gap: 2px;
+  min-height: 48px;
+  align-content: center;
+  padding: var(--s-2) var(--s-3);
+  border-radius: 999px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 1px var(--rule-strong);
+}
+.slot input:checked + .slot__face { background: var(--blush); color: var(--blush-ink); box-shadow: none; }
+.slot input:disabled + .slot__face { opacity: 0.4; cursor: not-allowed; }
+.slot input:focus-visible + .slot__face { outline: 2px solid var(--ink); outline-offset: 2px; }
+.slot__left { font-size: var(--xs); opacity: 0.8; }
+
+/* --------------------------------------------------------------------------
+   Toasts
+   -------------------------------------------------------------------------- */
+.toasts {
+  position: fixed;
+  left: 50%;
+  bottom: var(--s-4);
+  transform: translateX(-50%);
+  z-index: 60;
+  display: grid;
+  gap: var(--s-2);
+  width: min(100% - 2rem, 26rem);
+  pointer-events: none;
+}
+.toast {
+  display: flex;
+  gap: var(--s-3);
+  align-items: flex-start;
+  padding: var(--s-3) var(--s-4);
+  background: var(--deepest);
+  border-radius: 4px;
+  box-shadow: 0 1rem 2rem rgb(0 0 0 / 0.35);
+  pointer-events: auto;
+  font-size: var(--sm);
+}
+.toast svg { flex: none; margin-top: 0.15em; color: var(--blush); }
+.toast strong { display: block; }
+.toast--bad svg { color: var(--bad); }
+.toast__action {
+  display: inline-block;
+  margin-top: var(--s-2);
+  color: var(--blush);
+  text-underline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .toast { animation: toast-in var(--mid) var(--ease); }
+  .toast[data-leaving] { animation: toast-out var(--mid) var(--ease) forwards; }
+  @keyframes toast-in { from { opacity: 0; transform: translateY(0.6rem); } }
+  @keyframes toast-out { to { opacity: 0; transform: translateY(0.4rem); } }
+}

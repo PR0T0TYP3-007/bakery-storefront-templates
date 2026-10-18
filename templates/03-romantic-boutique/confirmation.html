@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thank you &mdash; Postscript</title>
+<meta name="description" content="Your order, and what happens next.">
+<meta name="robots" content="noindex">
+<link rel="preload" href="assets/fonts/julius-sans-one.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/karla.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/cake.css">
+<link rel="stylesheet" href="css/components/letter.css">
+<link rel="stylesheet" href="css/components/overlay.css">
+<link rel="stylesheet" href="css/pages/pages.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to the content</a>
+
+<header class="masthead" data-masthead></header>
+
+<main id="main">
+
+  <section class="band band--tight page" data-none hidden>
+    <h1 class="t-1">Nothing recent on this device.</h1>
+    <p class="lede" style="margin-top:var(--s-4)">Orders are kept in the browser they were placed in. If you ordered on a phone and opened this on a laptop, it is on the phone &mdash; and the receipt is in your email either way.</p>
+    <p style="margin-top:var(--s-5)"><a class="btn btn--blush" href="index.html" data-home-link>Back to the shop</a></p>
+  </section>
+
+  <div data-receipt hidden>
+  <section class="band page">
+    <p class="label">Booked</p>
+    <p class="ref num" style="margin-top:var(--s-3)" data-ref></p>
+    <p class="lede" style="margin-top:var(--s-4)" data-lede></p>
+  </section>
+
+  <section class="band band--tight page">
+    <div class="checkout">
+      <div class="stack stack--loose">
+        <div>
+          <div class="mark"><h2 class="label">The order</h2></div>
+          <dl class="cols" data-details></dl>
+        </div>
+        <div data-lines></div>
+      </div>
+
+      <aside class="stack stack--loose">
+        <div class="mark"><h2 class="label">What happens next</h2></div>
+        <ul class="next sm" data-next></ul>
+
+        <div data-keep hidden>
+          <div class="mark"><h2 class="label">Shall we keep the date?</h2></div>
+          <p class="sm dim" data-keep-note></p>
+          <div class="row" style="margin-top:var(--s-4)">
+            <button class="btn btn--sm btn--blush" type="button" data-keep-yes>Keep it</button>
+          </div>
+          <p class="note note--good sm" style="margin-top:var(--s-3)" data-kept-done hidden></p>
+        </div>
+
+        <div class="row">
+          <button class="btn btn--sm" type="button" data-print>Print this</button>
+          <a class="btn btn--sm btn--bare" href="index.html" data-home-link>Back to the shop</a>
+        </div>
+      </aside>
+    </div>
+  </section>
+  </div>
+</main>
+
+<div class="allergen" data-allergens></div>
+<footer class="band band--tight" data-footer></footer>
+
+<script type="module" src="js/pages/confirmation.js"></script>
+</body>
+</html>

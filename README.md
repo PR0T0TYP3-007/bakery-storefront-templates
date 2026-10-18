@@ -1,7 +1,7 @@
 # Cake Themes — Storefront Templates
 
 Static storefront templates for independent cake and bakery brands, built against the
-*Cake Themes Templates* brief. Two of the five are done.
+*Cake Themes Templates* brief. All five are built.
 
 Plain HTML, CSS and JavaScript. No build step, no framework, no dependencies.
 
@@ -199,6 +199,51 @@ checkbox; simulated payment with working decline and recovery.
 Its own [README](templates/02-playful-celebration/README.md) has the detail, and
 [docs/02-playful-celebration.md](docs/02-playful-celebration.md) has the research and the
 art direction.
+
+---
+
+## Template 03 — The Romantic Boutique
+
+**Postscript**, Bath. Our concept for this direction is **Written by hand**: a shop whose
+product is the words on the cake, and which shows you those words set before you pay
+rather than after.
+
+| | |
+|---|---|
+| Display | Julius Sans One (incised capitals) |
+| The hand | Petit Formal Script — only ever a depiction of handwriting, never interface text |
+| Interface | Karla — all three self-hosted, 76KB, no third-party connection |
+| Surface | `#8E2A58` mulberry ground; arch and oval apertures; no rules, boxes or shadows |
+| Accent | `#FFB8C6` blush — the cliché of this direction, and the one accent region nobody had used |
+
+Pages: `index` · `cakes` · `cake` · `card` · `cart` · `checkout` · `confirmation` · `404` ·
+`styleguide`
+
+**The card sets itself as you type.** A6 folded, in the hand that will write it, broken
+where the pen will break it. It counts lines rather than characters, writes smaller before
+it refuses, names the word too wide for the stock, and reports the characters a pen cannot
+make instead of dropping them.
+
+Research found the gap and it is not subtle. [Konditor](https://konditor.co.uk/collections/personalised-cakes)
+promises to pipe your message "with care and a flourish" and gives you a 120-character
+counter and no preview. [Cutter & Squidge](https://www.cutterandsquidge.com) takes the note
+on a separate page *after* you have paid, inside a one-hour window, and reminds you to
+remember to sign it. The words are the product and every storefront treats them as a text
+input.
+
+This is also the template the distance check nearly ruled out. Built the obvious way —
+blush, a high-contrast serif, generous whitespace — its ground would have sat 10 and 17
+channels from two shipped templates and its display face would have been the project's
+fifth serif. The answer was a mid-saturated chromatic ground, which is 228 from the
+nearest shipped ground and the first ground in the set that is a colour rather than a
+neutral.
+
+28 unit tests on the typesetting model; gifting behind the capability flag per D15;
+simulated payment with working decline and recovery.
+
+Its own [README](templates/03-romantic-boutique/README.md) has the detail, and
+[docs/03-romantic-boutique.md](docs/03-romantic-boutique.md) has the research and the art
+direction.
 
 ---
 

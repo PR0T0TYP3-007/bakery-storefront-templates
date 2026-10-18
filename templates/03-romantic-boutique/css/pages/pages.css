@@ -1,0 +1,140 @@
+/* ==========================================================================
+   Page-specific pieces that are not components.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Home — the hero
+
+   The card overlaps the arch. Overlap is not this template's separation
+   method (that is Template 04's), and it is used exactly once, here, for a
+   reason that is about the subject rather than the system: the card and the
+   cake arrive in the same box, so they are shown touching.
+   -------------------------------------------------------------------------- */
+.hero { position: relative; }
+.hero__card {
+  position: relative;
+  margin-top: -18%;
+  margin-left: auto;
+  /* The sheet is rotated, so its corner reaches further right than its box
+     does. Sitting flush against the column's right edge put that corner
+     eight pixels past the document and gave the whole page a sideways
+     scroll — the same class of bug as Template 04's 100vw bleed, and
+     invisible until it was measured. */
+  margin-right: 4%;
+  width: min(72%, 17rem);
+}
+.hero__card .letter__stack { width: 100%; }
+.hero__card .letter__sheet { transform: rotate(-2deg); }
+
+@media (max-width: 48rem) {
+  .hero__card { margin-top: -14%; width: min(80%, 15rem); }
+}
+
+/* --------------------------------------------------------------------------
+   Occasions
+   -------------------------------------------------------------------------- */
+.occasions {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s-2);
+  grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
+}
+.occasion {
+  display: grid;
+  gap: 2px;
+  padding: var(--s-3) var(--s-4);
+  min-height: 48px;
+  align-content: center;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background var(--fast) var(--ease);
+}
+.occasion:hover { background: var(--deep); }
+.occasion__label { font-family: var(--font-display); letter-spacing: var(--track); }
+
+/* The chosen one on the range page. */
+.occasion[aria-current='page'] { background: var(--blush); color: var(--blush-ink); }
+.occasion[aria-current='page'] .occasion__note { color: var(--blush-ink); opacity: 0.75; }
+
+/* --------------------------------------------------------------------------
+   One cake
+   -------------------------------------------------------------------------- */
+.cake-page { display: grid; gap: var(--s-6) var(--s-6); align-items: start; }
+@media (min-width: 62rem) {
+  .cake-page { grid-template-columns: 6fr 5fr; }
+  .cake-page__media { position: sticky; top: var(--s-4); }
+}
+
+.price {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.4vw, 2.2rem);
+  letter-spacing: var(--track);
+}
+
+.crumbs { font-size: var(--sm); color: var(--ink-3); }
+.crumbs a { text-decoration: none; }
+.crumbs a:hover { color: var(--blush); }
+
+.when {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-3);
+  padding-block: var(--s-3);
+}
+
+/* --------------------------------------------------------------------------
+   The card page
+   -------------------------------------------------------------------------- */
+.writing { display: grid; gap: var(--s-6); align-items: start; }
+@media (min-width: 62rem) {
+  .writing { grid-template-columns: 1fr 1fr; }
+  .writing__preview { position: sticky; top: var(--s-4); }
+}
+
+.steps { counter-reset: step; display: grid; gap: var(--s-6); }
+.step-head { display: flex; align-items: baseline; gap: var(--s-3); margin-bottom: var(--s-3); }
+.step-head::before {
+  counter-increment: step;
+  content: counter(step);
+  font-family: var(--font-display);
+  font-size: var(--sm);
+  color: var(--blush);
+  letter-spacing: var(--track);
+  flex: none;
+  width: 1.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   Checkout and confirmation
+   -------------------------------------------------------------------------- */
+.checkout { display: grid; gap: var(--s-6); align-items: start; }
+@media (min-width: 62rem) {
+  .checkout { grid-template-columns: 7fr 5fr; }
+  .checkout__aside { position: sticky; top: var(--s-4); }
+}
+
+.fields { display: grid; gap: var(--s-5); }
+.fields--two { grid-template-columns: repeat(auto-fit, minmax(min(13rem, 100%), 1fr)); }
+
+.ref {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 7vw, 4rem);
+  letter-spacing: var(--track-wide);
+}
+
+.next { padding-left: 1.1em; }
+.next li { color: var(--ink-2); }
+
+/* --------------------------------------------------------------------------
+   Style guide
+   -------------------------------------------------------------------------- */
+.sg-table { width: 100%; border-collapse: collapse; font-size: var(--sm); }
+.sg-table th, .sg-table td { text-align: left; padding: var(--s-2) var(--s-3) var(--s-2) 0; }
+.sg-table thead tr { border-bottom: 1px solid var(--rule-strong); }
+.sg-table tbody tr { border-bottom: 1px solid var(--hair); }
+.sg-scroll { overflow-x: auto; }
+
+.swatch { height: 4rem; box-shadow: inset 0 0 0 1px var(--hair); border-radius: 2px; }

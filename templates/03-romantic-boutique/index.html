@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Postscript — celebration cakes in Bath, written by hand</title>
+<meta name="description" content="Celebration cakes from a two-room shop on Bartlett Street, Bath. Choose the cake, write the card, and see it set in the hand it will be written in — before you pay, not after.">
+<meta property="og:title" content="Postscript — celebration cakes in Bath, written by hand">
+<meta property="og:description" content="Choose the cake, write the card, and see it set in the hand it will be written in — before you pay, not after.">
+
+<link rel="preload" href="assets/fonts/julius-sans-one.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/karla.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/cake.css">
+<link rel="stylesheet" href="css/components/letter.css">
+<link rel="stylesheet" href="css/components/overlay.css">
+<link rel="stylesheet" href="css/pages/pages.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to the cakes</a>
+
+<header class="masthead" data-masthead></header>
+
+<main id="main">
+
+  <!-- The claim, and the thing itself beside it. A card set in the hand is
+       the whole proposition, so it is on the page before any argument for
+       it. -->
+  <section class="band page">
+    <div class="spread spread--offset-r">
+      <div class="stack stack--loose">
+        <p class="label" data-kicker></p>
+        <h1 class="t-1" data-headline></h1>
+        <p class="lede" data-lede></p>
+        <div class="row">
+          <a class="btn btn--blush" href="cakes.html" data-cakes-link>See the cakes</a>
+          <a class="btn" href="card.html" data-card-link>Write a card first</a>
+        </div>
+        <p class="sm dimmer" data-kept hidden></p>
+      </div>
+
+      <div class="hero" data-hero></div>
+    </div>
+  </section>
+
+  <!-- What is actually sold, said plainly, before anything clever.
+       D17: a visitor has to learn what is sold before they can care what is
+       different about it. -->
+  <section class="band band--deep">
+    <div class="page">
+      <div class="mark"><h2 class="label">What we do</h2></div>
+      <div class="cols" data-what></div>
+    </div>
+  </section>
+
+  <!-- The reason to order here rather than anywhere else. -->
+  <section class="band page">
+    <div class="spread spread--offset">
+      <div class="aperture aperture--oval aperture--square">
+        <img src="../../shared/img/photo-1529251333259-d36cccaf22ea-md.jpg"
+             srcset="../../shared/img/photo-1529251333259-d36cccaf22ea-sm.jpg 480w, ../../shared/img/photo-1529251333259-d36cccaf22ea-md.jpg 800w"
+             sizes="(min-width: 60rem) 36vw, 86vw"
+             alt="A fountain pen and pressed violets on a written sheet of paper"
+             loading="lazy" decoding="async" width="800" height="800">
+      </div>
+      <div class="stack stack--loose measure">
+        <h2 class="t-2">The card is the part people keep.</h2>
+        <div class="prose" data-card-why></div>
+        <a class="btn" href="card.html" data-card-link>Try it without buying anything</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Browsing by occasion: a §7 requirement, and the way people actually
+       arrive. -->
+  <section class="band band--tight page">
+    <div class="mark"><h2 class="label">What is it for?</h2></div>
+    <ul class="occasions" data-occasions></ul>
+  </section>
+
+  <!-- The range. -->
+  <section class="band page">
+    <div class="mark row row--between">
+      <h2 class="label">The cakes</h2>
+      <a class="sm" href="cakes.html" data-cakes-link>All of them</a>
+    </div>
+    <div class="cols" data-cakes></div>
+  </section>
+
+  <!-- The shop. -->
+  <section class="band band--deepest">
+    <div class="page spread spread--offset-r">
+      <div class="stack measure">
+        <h2 class="t-2" data-shop-head></h2>
+        <div class="prose dim" data-shop-body></div>
+      </div>
+      <div class="aperture aperture--arch aperture--wide">
+        <img src="../../shared/img/photo-1543769657-fcf1236421bc-md.jpg"
+             srcset="../../shared/img/photo-1543769657-fcf1236421bc-sm.jpg 480w, ../../shared/img/photo-1543769657-fcf1236421bc-md.jpg 800w"
+             sizes="(min-width: 60rem) 44vw, 86vw"
+             alt="Close handwriting in ink across a page"
+             loading="lazy" decoding="async" width="800" height="533">
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<div class="allergen" data-allergens></div>
+<footer class="band band--tight" data-footer></footer>
+
+<script type="module" src="js/pages/home.js"></script>
+</body>
+</html>

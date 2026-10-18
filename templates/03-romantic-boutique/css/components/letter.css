@@ -1,0 +1,167 @@
+/* ==========================================================================
+   The card, and the piped plaque.
+
+   The template's signature component.
+
+   A note on the one apparent contradiction: this template says it has no
+   cards and no shadows, and here is a card with a shadow. The difference is
+   that this is not a UI card — it is a depiction of a piece of paper that
+   will physically exist, at its real proportions, in the hand that will
+   write it. The shadow is what tells you it is an object rather than a
+   panel. Everything that is interface in this template still has no box
+   around it.
+   ========================================================================== */
+
+.letter {
+  margin: 0;
+  display: grid;
+  /* An auto column takes its max-content width, which a caption full of
+     warnings happily makes 465px inside a 335px figure — and `max-width:
+     100%` on the caption then resolves against that oversized column rather
+     than against the figure. Capping the column is the fix; capping the
+     child was treating the symptom. */
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--s-4);
+  justify-items: start;
+}
+
+.letter__stack { display: grid; gap: var(--s-3); width: min(100%, 22rem); }
+
+.letter__sheet {
+  /* A6 folded, portrait. The proportion is the stock's, not a design
+     decision, which is the point: the preview is the object. */
+  aspect-ratio: 105 / 148;
+  width: 100%;
+  /* The type is sized from the card's own width and the hand's measure, so
+     a line the model calls 26 characters is a line that physically fits.
+     Hard-coding a size meant the script ran past the edge of the paper
+     whenever the hand was the wider one. 0.53 is the measured average
+     advance of Petit Formal Script, per em. */
+  container-type: inline-size;
+  overflow: hidden;
+  padding: var(--s-5) var(--s-5) var(--s-4);
+  background: #fdf8f3;
+  color: #46202f;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-shadow: 0 1.2rem 2.5rem rgb(0 0 0 / 0.28);
+  transition: transform var(--mid) var(--ease);
+}
+
+/* The letterpressed mark, blind-debossed into the stock. */
+.letter__mark {
+  margin-top: auto;
+  align-self: flex-end;
+  font-family: var(--font-display);
+  font-size: var(--xs);
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+  color: #c9a5ae;
+}
+
+.letter__line {
+  margin: 0;
+  font-family: var(--font-hand);
+  font-size: clamp(0.8rem, calc(100cqw / (var(--per, 26) * 0.53)), 1.35rem);
+  line-height: 1.55;
+  /* The pen does not wrap. The model has already broken these lines, so the
+     sheet must not break them again — a second wrap here would make the
+     preview disagree with the thing it is previewing. */
+  white-space: pre;
+  overflow: visible;
+}
+.letter__line--sign { align-self: flex-end; margin-top: var(--s-3); }
+
+/* Past what the stock holds. Shown, not hidden: the overflow is the whole
+   reason this component exists. */
+.letter__line--over {
+  color: #b4435f;
+  text-decoration: underline wavy #b4435f 1px;
+  text-underline-offset: 0.3em;
+}
+
+/* What will not fit, shown beneath the paper rather than spilling over its
+   edge. It is the overflow that makes the point, so it is drawn plainly and
+   labelled rather than hidden or left to look like a bug. */
+.letter__spill {
+  container-type: inline-size;
+  padding: var(--s-3) var(--s-5);
+  border-top: 2px dashed var(--bad);
+}
+.letter__spill-head {
+  margin: 0 0 var(--s-2);
+  font-size: var(--xs);
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+  color: var(--bad);
+}
+.letter__spill .letter__line { color: var(--bad); }
+
+.letter[data-fits='false'] .letter__sheet { outline: 2px solid var(--bad); outline-offset: 4px; }
+
+.letter--blank .letter__sheet { background: #f4ebe6; }
+.letter--blank .letter__sheet { width: min(100%, 22rem); }
+.letter__waiting {
+  margin: auto;
+  font-size: var(--sm);
+  color: #9b7580;
+  text-align: center;
+  max-width: 18ch;
+}
+
+/* `min()` and not a bare 32rem. The figure is `justify-items: start`, so the
+   caption took its stated maximum rather than the column it was in and gave
+   the style guide 111px of sideways scroll at 375px — found by measuring,
+   not by looking. */
+.letter__read { max-width: min(32rem, 100%); display: grid; gap: var(--s-2); }
+
+/* A settle when the message changes, so the card reads as being written
+   rather than as a field repainting. Collapsed under reduced motion by the
+   token, so this costs nothing there. */
+@media (prefers-reduced-motion: no-preference) {
+  .letter__sheet { animation: settle var(--mid) var(--ease); }
+  @keyframes settle {
+    from { transform: translateY(2px) rotate(-0.15deg); }
+    to { transform: none; }
+  }
+}
+
+/* --------------------------------------------------------------------------
+   The plaque — what is piped on the cake
+
+   A different object with different limits: fewer lines, a wider pen,
+   buttercream rather than ink. Rendering it with the card's component would
+   have meant pretending they share constraints.
+   -------------------------------------------------------------------------- */
+.plaque {
+  margin: 0;
+  display: grid;
+  gap: var(--s-2);
+  justify-items: center;
+  text-align: center;
+  padding: var(--s-4) var(--s-5);
+  background: var(--deep);
+  border-radius: 999px / 40%;
+}
+.plaque__line {
+  margin: 0;
+  font-family: var(--font-hand);
+  font-size: 1.15rem;
+  line-height: 1.4;
+  color: var(--blush);
+  white-space: pre;
+}
+.plaque[data-fits='false'] .plaque__line { color: var(--bad); }
+.plaque__read { max-width: 30ch; }
+.plaque--blank { background: none; padding: var(--s-3) 0; }
+
+/* --------------------------------------------------------------------------
+   The pair — card and cake together, which is what the recipient sees
+   -------------------------------------------------------------------------- */
+.pair {
+  display: grid;
+  gap: var(--s-5);
+  grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr));
+  align-items: start;
+}

@@ -1,0 +1,149 @@
+/* ==========================================================================
+   Base. Element defaults and the type scale.
+   ========================================================================== */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  line-height: 1.6;
+  /* Light type on a saturated dark ground blooms badly. Grading it back is
+     the difference between body copy that reads at its weight and body copy
+     that reads a weight heavier. */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-synthesis-weight: none;
+  /* Customer-written content reaches this template more than most — the
+     card, the inscription, and the error messages that quote them back. The
+     style guide's hostile fixture is a 58-character Welsh place name, which
+     cannot wrap and pushed 111px of sideways scroll onto the page from
+     inside an error message. Long words break rather than break the page. */
+  overflow-wrap: break-word;
+}
+
+/* A .note or a .field is display:flex, which beats [hidden]'s UA rule.
+   Template 04 shipped with a notice that could not be hidden because of
+   exactly this. */
+[hidden] { display: none !important; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: var(--track);
+  margin: 0;
+  text-wrap: balance;
+}
+
+p { margin: 0 0 var(--s-4); }
+p:last-child { margin-bottom: 0; }
+
+a { color: inherit; }
+
+/* The only decoration in the template that moves: a blush rule under a
+   prose link, which thickens rather than lighting up. */
+a:not([class]) {
+  text-decoration: none;
+  background-image: linear-gradient(var(--blush), var(--blush));
+  background-size: 100% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 2px;
+  transition: background-size var(--mid) var(--ease);
+}
+a:not([class]):hover { background-size: 100% 2px; }
+
+img, svg, video { max-width: 100%; display: block; }
+
+ul, ol { margin: 0 0 var(--s-4); padding-left: 1.1em; }
+li { margin-bottom: var(--s-2); }
+dl, dt, dd { margin: 0; }
+
+button, input, select, textarea { font: inherit; color: inherit; }
+
+/* Focus indication is not where this template experiments. Form fields are
+   underlined rather than boxed, which is a real discoverability cost, so the
+   focus ring is an ordinary high-contrast outline and nothing clever. */
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.skip {
+  position: absolute;
+  left: var(--gutter);
+  top: -100px;
+  z-index: 100;
+  background: var(--blush);
+  color: var(--blush-ink);
+  padding: var(--s-3) var(--s-4);
+  text-decoration: none;
+  font-weight: 700;
+  transition: top var(--fast);
+}
+.skip:focus { top: var(--s-3); }
+
+.sr {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   Type helpers
+   -------------------------------------------------------------------------- */
+.t-1 {
+  font-family: var(--font-display);
+  font-size: var(--t-1);
+  line-height: 1.08;
+  letter-spacing: var(--track);
+  text-wrap: balance;
+}
+.t-2 { font-family: var(--font-display); font-size: var(--t-2); line-height: 1.15; letter-spacing: var(--track); }
+.t-3 { font-family: var(--font-display); font-size: var(--t-3); line-height: 1.25; letter-spacing: var(--track); }
+
+.lede {
+  font-size: clamp(1.05rem, 1.5vw, 1.25rem);
+  line-height: 1.5;
+  max-width: 40ch;
+  color: var(--ink-2);
+}
+.sm { font-size: var(--sm); line-height: 1.5; }
+.xs { font-size: var(--xs); line-height: 1.45; }
+.dim { color: var(--ink-2); }
+.dimmer { color: var(--ink-3); }
+.prose { max-width: var(--measure); }
+.num { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum' 1; }
+
+/* The shop's labelling voice: small, spaced, upright, in the interface face.
+   Every field name, column head and section mark in the template. */
+.label {
+  font-family: var(--font-ui);
+  font-size: var(--xs);
+  font-weight: 600;
+  letter-spacing: var(--track-wide);
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.label--blush { color: var(--blush); }
+
+/* The hand. Allowed only inside a preview of something written — the card,
+   the piped inscription. Never interface text, and never below 1.25rem,
+   because a script at small sizes is a legibility failure dressed as charm. */
+.hand {
+  font-family: var(--font-hand);
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+  font-size: 1.25rem;
+}

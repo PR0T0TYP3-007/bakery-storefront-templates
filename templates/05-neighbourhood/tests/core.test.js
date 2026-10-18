@@ -18,7 +18,7 @@ import {
 
 import { priceLine, orderTotals } from '../../../shared/core/pricing.js';
 import { dayState, earliestFor, isClosed, capacityFor, findZone, shelf, slotsFor } from '../../../shared/core/fulfilment.js';
-import { emptyCart, addLine, setQty, removeLine, count, readyBy, staleLines, signature } from '../../../shared/core/cart.js';
+import { emptyCart, addLine, updateLine, setQty, removeLine, count, readyBy, staleLines, signature } from '../../../shared/core/cart.js';
 
 /* ---------------------------------------------------------------------------
    Fixtures
@@ -173,6 +173,23 @@ test('reconcileSelections falls an impossible option back and names it', () => {
     groups
   );
   assert.equal(selections.finish, 'butter', 'reverts to the product default');
+  assert.deepEqual(changed, ['Finish']);
+});
+
+test('reconcileSelections does not fall back onto an option that is also impossible', () => {
+  // Template 03's Ombre defaults to sugar roses, which need one of the two
+  // larger sizes. Shrinking the cake used to fall the finish back to the
+  // product default and leave it on the option the kitchen had just refused.
+  const fancy = { ...cake, defaults: { ...cake.defaults, finish: 'fondant' } };
+  const { selections, changed } = reconcileSelections(
+    fancy,
+    { servings: 's', sponge: 'vanilla', finish: 'fondant' },
+    groups
+  );
+
+  assert.notEqual(selections.finish, 'fondant', 'the default was impossible too');
+  const landed = groups.finish.options.find((o) => o.id === selections.finish);
+  assert.equal(optionAvailable(landed, selections, groups).ok, true, 'it lands somewhere possible');
   assert.deepEqual(changed, ['Finish']);
 });
 
@@ -519,6 +536,39 @@ test('cart operations never mutate the cart passed in', () => {
   const snapshot = JSON.stringify(original);
   setQty(original, original.lines[0].id, 5);
   removeLine(original, original.lines[0].id);
+  assert.equal(JSON.stringify(original), snapshot);
+});
+
+test('updateLine keeps the id and the position of the line it changes', () => {
+  let cart = addLine(emptyCart(), line());
+  cart = addLine(cart, line({ inscription: 'Happy Birthday' }));
+  const id = cart.lines[0].id;
+
+  // Template 03 writes the card onto a line that is already in the basket.
+  // Re-adding would mint a new id, which breaks the ?line= link the customer
+  // is on, and move the row to the bottom of a basket they are looking at.
+  cart = updateLine(cart, id, { meta: { card: { to: 'Mara' } } });
+  assert.equal(cart.lines[0].id, id);
+  assert.equal(cart.lines.length, 2);
+  assert.deepEqual(cart.lines[0].meta, { card: { to: 'Mara' } });
+});
+
+test('updateLine merges two lines a patch has made identical', () => {
+  let cart = addLine(emptyCart(), line());
+  cart = addLine(cart, line({ meta: { card: { to: 'Mara' } } }));
+  assert.equal(cart.lines.length, 2);
+
+  // Clearing the card off one of two otherwise-identical cakes should leave
+  // two of that cake, not a basket showing the same row twice.
+  cart = updateLine(cart, cart.lines[1].id, { meta: null });
+  assert.equal(cart.lines.length, 1);
+  assert.equal(cart.lines[0].qty, 2);
+});
+
+test('updateLine does not mutate the cart passed in', () => {
+  const original = addLine(emptyCart(), line());
+  const snapshot = JSON.stringify(original);
+  updateLine(original, original.lines[0].id, { inscription: 'Changed' });
   assert.equal(JSON.stringify(original), snapshot);
 });
 

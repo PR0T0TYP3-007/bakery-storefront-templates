@@ -72,7 +72,18 @@ export function reconcileSelections(product, selections, groups) {
     const chosen = group.options.find((o) => o.id === next[groupId]);
     if (!chosen) continue;
     if (!optionAvailable(chosen, next, groups).ok) {
-      next[groupId] = product.defaults?.[groupId] ?? group.options[0].id;
+      // The product's own default first — but only if it is itself possible.
+      // Template 03's Ombré defaults to sugar roses, which need one of the
+      // two larger sizes, so shrinking the cake fell the finish back to the
+      // default and left it on an option the kitchen had just refused.
+      // Falling back to something invalid is not a fallback.
+      const preferred = group.options.find((o) => o.id === product.defaults?.[groupId]);
+      const usable =
+        (preferred && optionAvailable(preferred, next, groups).ok && preferred) ||
+        group.options.find((o) => optionAvailable(o, next, groups).ok);
+
+      if (!usable) continue; // nothing in this group is possible; leave it and let the UI say so
+      next[groupId] = usable.id;
       changed.push(group.label);
     }
   }

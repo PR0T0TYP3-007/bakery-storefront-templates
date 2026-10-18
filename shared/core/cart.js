@@ -68,6 +68,37 @@ export function addLine(cart, line) {
   return { ...cart, lines };
 }
 
+/**
+ * Change one line in place, keeping its id and its position.
+ *
+ * Template 03 writes the card after the cake is already in the basket, so a
+ * line has to be editable without being removed and re-added — re-adding
+ * would mint a new id, which breaks the `?line=` link the customer is on,
+ * and move the row to the bottom of a basket they are looking at.
+ *
+ * A patch can change the signature, so two lines that were different can
+ * become the same line. They are merged here rather than left as two
+ * identical rows: clearing a card off one of two otherwise-identical cakes
+ * should give you two of that cake, not a basket that looks broken.
+ *
+ * @param {object} cart
+ * @param {string} lineId
+ * @param {Partial<CartLine>} patch
+ * @returns {object} a new cart
+ */
+export function updateLine(cart, lineId, patch) {
+  const patched = cart.lines.map((l) => (l.id === lineId ? { ...l, ...patch, id: l.id } : l));
+
+  const merged = [];
+  for (const line of patched) {
+    const twin = merged.find((m) => signature(m) === signature(line));
+    if (twin) twin.qty = Math.min(MAX_QTY, twin.qty + line.qty);
+    else merged.push({ ...line });
+  }
+
+  return { ...cart, lines: merged };
+}
+
 export function setQty(cart, lineId, qty) {
   if (qty <= 0) return removeLine(cart, lineId);
   return {

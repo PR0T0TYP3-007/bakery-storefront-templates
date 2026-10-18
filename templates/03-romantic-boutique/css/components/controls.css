@@ -1,0 +1,240 @@
+/* ==========================================================================
+   Buttons, fields, choices, notices.
+
+   The one structural decision here: **fields are underlined, not boxed.**
+   That is the stationery register — you write on a line — and it is the
+   separation method applied to a form rather than abandoned at the form.
+
+   It is also a real discoverability cost, so it is paid for:
+     · every field keeps a visible, permanent label above it
+     · the baseline is 2px of --rule-strong, which measures 3.56:1
+     · the target is 48px, above the 44 of SC 2.5.5
+     · focus is an ordinary outline. This template does not experiment with
+       focus indication.
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  min-height: 48px;
+  padding: 0 var(--s-5);
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  background: none;
+  color: var(--ink);
+  font-size: var(--sm);
+  font-weight: 600;
+  letter-spacing: var(--track);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--fast) var(--ease), color var(--fast) var(--ease);
+}
+.btn:hover { background: var(--ink); color: var(--ground); }
+
+.btn--blush { background: var(--blush); border-color: var(--blush); color: var(--blush-ink); }
+.btn--blush:hover { background: var(--ink); border-color: var(--ink); color: var(--ground); }
+
+.btn--bare { border-color: transparent; padding-inline: var(--s-3); font-weight: 500; }
+.btn--bare:hover { background: none; color: var(--blush); text-decoration: underline; }
+
+.btn--sm { min-height: 44px; padding-inline: var(--s-4); font-size: var(--xs); }
+.btn--wide { width: 100%; }
+
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn:disabled:hover { background: none; color: var(--ink); }
+.btn--blush:disabled:hover { background: var(--blush); color: var(--blush-ink); }
+
+.linkish {
+  background: none;
+  border: 0;
+  padding: 0.6rem 0;
+  color: var(--ink-2);
+  font-size: var(--sm);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+.linkish:hover { color: var(--blush); }
+
+.push { margin-left: auto; }
+
+/* --------------------------------------------------------------------------
+   Fields — a line to write on
+   -------------------------------------------------------------------------- */
+.field { display: block; }
+.field__label { display: block; margin-bottom: var(--s-2); }
+.field__hint { display: block; font-size: var(--xs); color: var(--ink-3); margin-bottom: var(--s-2); }
+
+.input,
+.textarea,
+.select {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.55rem 0 0.5rem;
+  background: none;
+  border: 0;
+  border-bottom: 2px solid var(--rule-strong);
+  border-radius: 0;
+  color: var(--ink);
+  transition: border-color var(--fast) var(--ease);
+}
+.input::placeholder,
+.textarea::placeholder { color: var(--ink-3); opacity: 1; }
+
+.input:hover,
+.textarea:hover,
+.select:hover { border-bottom-color: var(--ink-2); }
+
+.input:focus,
+.textarea:focus,
+.select:focus { border-bottom-color: var(--blush); }
+
+.textarea { min-height: 7.5rem; resize: vertical; line-height: 1.6; }
+
+.select {
+  appearance: none;
+  padding-right: 1.6rem;
+  /* The arrow is drawn in the border-bottom's colour so it cannot drift
+     away from the field it belongs to. */
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
+                    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: right 0.6rem center, right 0.25rem center;
+  background-size: 0.35rem 0.35rem;
+  background-repeat: no-repeat;
+}
+.select option { background: var(--deepest); color: var(--ink); }
+
+.counter { display: block; margin-top: var(--s-2); font-size: var(--xs); color: var(--ink-3); }
+.counter[data-over='true'] { color: var(--bad); font-weight: 700; }
+
+.err {
+  display: flex;
+  gap: var(--s-2);
+  align-items: flex-start;
+  margin-top: var(--s-2);
+  font-size: var(--sm);
+  color: var(--bad);
+}
+.err:empty { display: none; }
+.err svg { flex: none; margin-top: 0.15em; }
+.err > span { min-width: 0; overflow-wrap: anywhere; }
+
+/* --------------------------------------------------------------------------
+   Choices — radios and checkboxes with the control itself shown
+
+   No custom-drawn control that hides the real input. The native radio is
+   kept, tinted with accent-color, and the label around it is the target.
+   -------------------------------------------------------------------------- */
+.choices { border: 0; padding: 0; margin: 0; display: grid; gap: var(--s-2); }
+
+.choice { display: block; cursor: pointer; }
+.choice input {
+  position: absolute;
+  opacity: 0;
+  width: 1px; height: 1px;
+}
+
+.choice__face {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: baseline;
+  gap: var(--s-2) var(--s-3);
+  min-height: 48px;
+  padding: var(--s-3) var(--s-4);
+  border-radius: 999px;
+  transition: background var(--fast) var(--ease);
+}
+/* The mark: an empty ring that fills. The only circle in the template that
+   is not an aperture, and it is a control, so it is allowed to look like one. */
+.choice__face::before {
+  content: '';
+  width: 0.85rem; height: 0.85rem;
+  border: 1.5px solid var(--rule-strong);
+  border-radius: var(--oval);
+  transform: translateY(0.15em);
+  transition: background var(--fast), border-color var(--fast), box-shadow var(--fast);
+}
+.choice:hover .choice__face { background: var(--deep); }
+.choice input:checked + .choice__face { background: var(--deep); }
+.choice input:checked + .choice__face::before {
+  background: var(--blush);
+  border-color: var(--blush);
+  box-shadow: inset 0 0 0 2px var(--deep);
+}
+.choice input:focus-visible + .choice__face {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+.choice input:disabled + .choice__face { opacity: 0.5; cursor: not-allowed; }
+
+.choice__name { font-weight: 600; }
+.choice__meta { grid-column: 3; text-align: right; color: var(--ink-2); font-size: var(--sm); }
+.choice__note { grid-column: 2 / -1; font-size: var(--sm); color: var(--ink-3); }
+.choice__why { grid-column: 2 / -1; font-size: var(--xs); color: var(--warn); }
+
+/* --------------------------------------------------------------------------
+   Quantity
+   -------------------------------------------------------------------------- */
+.step {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+}
+.step button {
+  width: 44px; height: 44px;
+  display: grid;
+  place-items: center;
+  background: none;
+  border: 0;
+  border-radius: var(--oval);
+  cursor: pointer;
+}
+.step button:hover:not(:disabled) { color: var(--blush); }
+.step button:disabled { opacity: 0.35; cursor: not-allowed; }
+.step output { min-width: 2ch; text-align: center; font-weight: 600; }
+
+/* --------------------------------------------------------------------------
+   Notices
+
+   Every one pairs its colour with a word, so nothing is signalled by hue
+   alone.
+   -------------------------------------------------------------------------- */
+.note {
+  display: flex;
+  gap: var(--s-3);
+  align-items: flex-start;
+  font-size: var(--sm);
+  color: var(--ink-2);
+  margin: 0;
+}
+.note + .note { margin-top: var(--s-2); }
+.note svg { flex: none; margin-top: 0.15em; }
+/* A flex child will not shrink below its content's minimum size unless it is
+   told it may, and the content here is whatever the customer typed. */
+.note > span { min-width: 0; overflow-wrap: anywhere; }
+.note--good { color: var(--ok); }
+.note--warn { color: var(--warn); }
+.note--bad { color: var(--bad); }
+
+.state {
+  display: inline-block;
+  font-size: var(--xs);
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.state[data-state='out'] { color: var(--warn); }
+.state[data-state='in'] { color: var(--ok); }
+
+/* Loading placeholders. A shape that holds its space, not a spinner. */
+.skel {
+  display: block;
+  background: var(--deep);
+  border-radius: 2px;
+  animation: breathe 1.6s ease-in-out infinite;
+}
+@keyframes breathe { 0%, 100% { opacity: 0.55; } 50% { opacity: 0.85; } }
+@media (prefers-reduced-motion: reduce) { .skel { animation: none; } }

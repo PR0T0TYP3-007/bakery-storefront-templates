@@ -170,6 +170,18 @@ export function createSession(api) {
     return { movedTo: ok ? null : when };
   }
 
+  /**
+   * Change one line that is already in the basket — its card, its piped
+   * inscription, its selections. Keeps the line's id and position.
+   * @param {string} lineId
+   * @param {object} patch
+   */
+  function updateLine(lineId, patch) {
+    state.cart = cartOps.updateLine(state.cart, lineId, patch);
+    persist();
+    return state.cart.lines.find((l) => l.id === lineId) ?? null;
+  }
+
   function setQty(lineId, qty) {
     state.cart = cartOps.setQty(state.cart, lineId, qty);
     persist();
@@ -199,5 +211,5 @@ export function createSession(api) {
       return p ? priceOf(p, line.selections, line.addons, 1).unit : null;
     });
 
-  return { state, on, boot, product, location, groups, leadFor, priceOf, setWhen, setLocation, add, setQty, remove, clear, count, orderReadyBy, stale };
+  return { state, on, boot, product, location, groups, leadFor, priceOf, setWhen, setLocation, add, updateLine, setQty, remove, clear, count, orderReadyBy, stale };
 }

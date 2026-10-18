@@ -1,0 +1,8 @@
+{
+  "name": "template-03-romantic-boutique",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test \"tests/*.test.js\""
+  }
+}

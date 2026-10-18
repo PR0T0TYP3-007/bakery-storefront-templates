@@ -461,3 +461,88 @@ at the basket rather than by trusting the call.
 with questions, and sometimes with a better idea than the one you sent." A studio that
 takes a brief and interprets it should say so, rather than implying six dropdowns fully
 determine the outcome.
+
+---
+
+### D19 — The direction that failed the distance check is the one that had to be rethought, not dropped
+
+**Decision.** Template 03, The Romantic Boutique, is built on a `#8e2a58` mulberry
+ground with an incised-capital display face, a blush accent and masked apertures for
+separation. Its signature is a card that typesets itself as the customer writes it.
+
+**Why this needed a decision at all.** When Template 04 was chosen ahead of this one,
+[docs/04-creative-studio.md](04-creative-studio.md) §1 made a specific argument: a
+Romantic Boutique built the way the brief's own words push it — intimate, affection,
+presentation, therefore blush, a high-contrast serif and generous whitespace — fails D8.
+Its ground would sit 10 and 17 channels from two shipped templates and its display face
+would be the project's fifth serif.
+
+That analysis was right about the obvious build and wrong about the direction. "Blush,
+serif, whitespace" is the *cliché* of romance, not romance itself. The fix was not to
+soften the distance check; it was to stop designing from the adjective.
+
+**Where the identity came from instead.** Three real shops, checked directly, all selling
+cakes whose entire purpose is to carry a message to somebody:
+
+- **Konditor** — *"Add your message at checkout and we'll pipe it by hand, with care and
+  a flourish."* A 120-character counter. No preview, anywhere.
+- **Cutter & Squidge** — the note is not part of the order. You pay, then go to a separate
+  page, enter your order number and postcode, and type it — **within one hour**, or the
+  cake is delivered with nothing. With the instruction to *"remember to include in your
+  note who the gift is from"*.
+- **Patisserie Valerie** — an inscription and an optional gift card at checkout, both
+  plain inputs.
+
+**The words are the product, and every storefront treats them as a text input.** A
+counter tells you that you have room. It does not tell you that your message lands on four
+lines and the card holds three, or that the longest word in it is wider than the card.
+The customer finds out when the recipient does, which is the one moment that cannot be
+fixed. That is the gap, and it maps exactly onto the four words the brief uses for this
+direction: *storytelling, personalization, emotional connection, and **presentation***.
+
+**The colour finding, which is reusable.** Under D8's metric, "deep and romantic" is
+mostly unavailable: any near-black is within about 100 channels of Template 04's, because
+dark colours are numerically close to each other whatever their hue. What is wide open is
+a ground with one high channel and two low — a saturated wine — at 228 from near-black
+and 300–470 from everything pale. Three near-whites, one near-black, and now one that is
+a colour. **Blush is the accent for the same reason in reverse:** every shipped accent is
+dark or saturated, so a pale pink measures 299–423 from all four. The cliché this
+direction was in danger of turned out to be the one region nobody had used, and
+reclaiming it is a better answer than flinching from it.
+
+**The rule that keeps the script honest.** Three faces: incised capitals for display,
+Karla for interface, and Petit Formal Script for *the hand* — allowed only inside a
+depiction of handwriting, the card and the piped plaque, and never in the interface. The
+script is **diegetic**. That is the whole difference between this and the stock bakery
+theme that sets its navigation in a script, and it is why D1's objection to Playfair
+Display SC — a face borrowed for atmosphere — does not apply here.
+
+**What the measurement caught this time.** D13 earned its place again, four times:
+
+- `--ink-3` at `#e3aebd` measured **4.22:1** and `--rule-strong` at `#c98da4` measured
+  **2.99:1**. Both were written down as passing. Both were mine.
+- The target table counted seven failures that were all false — hidden radio proxies one
+  pixel square, and tile titles whose stretched overlay is the real target. It now derives
+  the *effective* target from the computed styles, so the number means something.
+- The tile hit test reported a failure that was entirely its own: `elementFromPoint` only
+  answers for the viewport, and the section is a long way down the page.
+- 111px of sideways scroll at 375px, traced to a 58-character Welsh place name inside an
+  error message. Long words now break rather than breaking the page — which matters more
+  here than anywhere else in the project, because this template quotes the customer's own
+  writing back at them.
+
+**And one honest limit, stated rather than designed around.** The occasion layer — "keep
+this date" — is `localStorage`. It is this browser, on this device, and it cannot email
+anybody. The research on reminder features found vendor marketing and no independent
+conversion data at all; one add-on claims a "179% higher unique click rate" with no source
+and no method. §11 rejects unsubstantiated claims that a creative feature will increase
+sales, so the concept doc records three hypotheses with the measurements that would settle
+them, and every surface that offers to keep a date says in the same sentence where it
+lives.
+
+**Two shared-layer changes came out of this.** `cart.js` gained `updateLine`, because the
+card is written after the cake is already in the basket and re-adding would mint a new id
+and move the row; and `rules.js` stopped falling an impossible option back onto a default
+that was itself impossible — Ombré defaults to sugar roses, which need one of the larger
+sizes, so shrinking the cake left the finish on the option the kitchen had just refused.
+Both have tests.

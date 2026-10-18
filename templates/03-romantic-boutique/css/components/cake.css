@@ -1,0 +1,97 @@
+/* ==========================================================================
+   Cake tiles, basket lines, summaries.
+   ========================================================================== */
+
+.cake { position: relative; display: grid; gap: var(--s-2); align-content: start; }
+.cake .aperture { margin-bottom: var(--s-3); }
+
+/* The whole tile is the target. The title's stretched pseudo-element covers
+   it — the style guide checks that with elementFromPoint rather than
+   claiming it, after an outside review of Template 04 claimed the opposite
+   and was wrong. */
+.cake__name a {
+  text-decoration: none;
+  background: none;
+}
+.cake__name a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.cake__link { position: absolute; inset: 0; }
+
+.cake__price { color: var(--ink-2); }
+.cake:hover .aperture > img { transform: scale(1.03); }
+.aperture > img { transition: transform var(--slow) var(--ease); }
+
+/* --------------------------------------------------------------------------
+   Basket lines
+   -------------------------------------------------------------------------- */
+.line {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: var(--s-4);
+  padding-block: var(--s-5);
+}
+.line + .line { border-top: 1px solid var(--hair); }
+
+.line__thumb { width: 5.5rem; aspect-ratio: 1; }
+
+.line__spec { margin: var(--s-1) 0 0; }
+.line__card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-2);
+  margin: var(--s-3) 0 0;
+  color: var(--blush);
+}
+.line__card svg { flex: none; margin-top: 0.15em; }
+.line__card.dimmer { color: var(--ink-3); }
+
+.line__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-3);
+  margin-top: var(--s-4);
+}
+.line__price { margin-left: auto; font-size: var(--t-4); font-weight: 600; }
+
+@media (max-width: 30rem) {
+  .line { grid-template-columns: 3.5rem 1fr; }
+  .line__thumb { width: 3.5rem; }
+}
+
+/* --------------------------------------------------------------------------
+   Totals
+   -------------------------------------------------------------------------- */
+.totals { display: grid; gap: var(--s-2); }
+.totals > div {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-4);
+  padding-block: 0.2rem;
+}
+.totals dt { color: var(--ink-2); }
+.totals .totals__big {
+  padding-top: var(--s-3);
+  margin-top: var(--s-2);
+  border-top: 1px solid var(--rule-strong);
+  font-size: var(--t-3);
+  font-weight: 600;
+}
+.totals .totals__big dt { color: var(--ink); }
+
+/* --------------------------------------------------------------------------
+   A kept date, mentioned
+   -------------------------------------------------------------------------- */
+.kept {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-3) var(--s-4);
+  padding: var(--s-4) 0;
+}
+.kept__who { font-family: var(--font-display); font-size: var(--t-3); letter-spacing: var(--track); }
+.kept__when { color: var(--blush); }

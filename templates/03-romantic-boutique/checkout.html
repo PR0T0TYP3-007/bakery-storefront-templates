@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout &mdash; Postscript</title>
+<meta name="description" content="Collect it or have it brought. Guest checkout, clear totals, and no surprises at the end.">
+<link rel="preload" href="assets/fonts/julius-sans-one.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/karla.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/cake.css">
+<link rel="stylesheet" href="css/components/letter.css">
+<link rel="stylesheet" href="css/components/overlay.css">
+<link rel="stylesheet" href="css/pages/pages.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to the content</a>
+
+<header class="masthead" data-masthead></header>
+
+<main id="main">
+
+  <section class="band band--tight page">
+    <p class="crumbs"><a href="cart.html" data-cart-link>Basket</a> &middot; <span>Checkout</span></p>
+    <h1 class="t-1" style="margin-top:var(--s-4)">Nearly done.</h1>
+  </section>
+
+  <section class="band band--tight page">
+    <div class="checkout">
+      <form class="stack stack--loose" data-form novalidate>
+
+        <div>
+          <div class="mark"><h2 class="label">Collect it, or we bring it</h2></div>
+          <fieldset class="choices" data-method></fieldset>
+          <div style="margin-top:var(--s-4)" data-method-detail></div>
+        </div>
+
+        <div>
+          <div class="mark"><h2 class="label">You</h2></div>
+          <div class="fields">
+            <div class="fields fields--two">
+              <label class="field">
+                <span class="field__label label" for="co-name">Your name</span>
+                <input class="input" id="co-name" type="text" autocomplete="name" data-name>
+                <span class="err" data-err-name></span>
+              </label>
+              <label class="field">
+                <span class="field__label label" for="co-phone">Telephone</span>
+                <span class="field__hint">In case something happens on the morning.</span>
+                <input class="input" id="co-phone" type="tel" autocomplete="tel" data-phone>
+                <span class="err" data-err-phone></span>
+              </label>
+            </div>
+            <label class="field">
+              <span class="field__label label" for="co-email">Email</span>
+              <span class="field__hint">The receipt goes here. We do not send anything else.</span>
+              <input class="input" id="co-email" type="email" autocomplete="email" data-email>
+              <span class="err" data-err-email></span>
+            </label>
+          </div>
+        </div>
+
+        <div data-gift-section>
+          <div class="mark"><h2 class="label">Is it a present?</h2></div>
+          <div class="choices">
+            <label class="choice">
+              <input type="checkbox" data-is-gift>
+              <span class="choice__face">
+                <span class="choice__name">It is going to someone else</span>
+                <span class="choice__note" data-gift-note></span>
+              </span>
+            </label>
+          </div>
+          <div class="fields" style="margin-top:var(--s-4)" data-gift hidden>
+            <div class="fields fields--two">
+              <label class="field">
+                <span class="field__label label" for="g-name">Who is receiving it</span>
+                <input class="input" id="g-name" type="text" data-g-name>
+              </label>
+              <label class="field">
+                <span class="field__label label" for="g-phone">Their telephone</span>
+                <span class="field__hint">Only used if the driver cannot find them.</span>
+                <input class="input" id="g-phone" type="tel" data-g-phone>
+              </label>
+            </div>
+            <p class="note" data-gift-cards></p>
+          </div>
+        </div>
+
+        <div>
+          <div class="mark"><h2 class="label">Paying</h2></div>
+          <fieldset class="choices" data-pay-methods></fieldset>
+          <div class="fields" style="margin-top:var(--s-4)" data-card-fields>
+            <label class="field">
+              <span class="field__label label" for="pay-num">Card number</span>
+              <span class="field__hint">Simulated. 4242 4242 4242 4242 works; 4000 0000 0000 0002 is declined.</span>
+              <input class="input num" id="pay-num" type="text" inputmode="numeric" autocomplete="cc-number" data-card>
+              <span class="err" data-err-card></span>
+            </label>
+            <div class="fields fields--two">
+              <label class="field">
+                <span class="field__label label" for="pay-exp">Expires</span>
+                <input class="input num" id="pay-exp" type="text" inputmode="numeric" placeholder="MM/YY" autocomplete="cc-exp" data-exp>
+                <span class="err" data-err-exp></span>
+              </label>
+              <label class="field">
+                <span class="field__label label" for="pay-cvc">Security code</span>
+                <input class="input num" id="pay-cvc" type="text" inputmode="numeric" autocomplete="cc-csc" data-cvc>
+                <span class="err" data-err-cvc></span>
+              </label>
+            </div>
+          </div>
+          <p class="note" data-pay-note></p>
+        </div>
+
+        <p class="note note--bad" data-failure hidden></p>
+
+        <div class="row">
+          <button class="btn btn--blush" type="submit" data-pay>Pay</button>
+          <a class="btn btn--bare" href="cart.html" data-cart-link>Back to the basket</a>
+        </div>
+      </form>
+
+      <aside class="checkout__aside stack stack--loose">
+        <div class="mark"><h2 class="label">What you are buying</h2></div>
+        <div data-lines></div>
+        <dl class="totals" data-totals></dl>
+        <p class="sm dimmer" data-tax></p>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<div class="allergen" data-allergens></div>
+<footer class="band band--tight" data-footer></footer>
+
+<script type="module" src="js/pages/checkout.js"></script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+/* ==========================================================================
+   Template 03 — The Romantic Boutique
+   Tokens. The only file that states a raw value.
+
+   The distance check that produced these is in docs/03-romantic-boutique.md.
+   Against the four shipped templates:
+
+     ground      mulberry       — 228 / 298 / 448 / 473 channels away, and the
+                                  first ground in the set that is a colour
+                                  rather than a neutral
+     display     Julius Sans One — incised sans capitals; not serif, not
+                                  grotesque, not rounded, not quirky
+     accent      blush          — 299 / 320 / 393 / 423 away. The cliché of
+                                  this direction, and measurably the one
+                                  accent region nobody had used
+     separation  masked apertures on an uninterrupted ground. Nothing here
+                 has a rule, a box, a card or a shadow.
+   ========================================================================== */
+
+/* Three faces, three jobs. The script is diegetic — it is only ever a
+   depiction of handwriting, never interface text. See the concept doc §3. */
+@font-face {
+  font-family: 'Julius Sans One';
+  src: url('../assets/fonts/julius-sans-one.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+20AC, U+2122, U+2212, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Petit Formal Script';
+  src: url('../assets/fonts/petit-formal-script.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+20AC, U+2122, U+2212, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Karla';
+  src: url('../assets/fonts/karla.woff2') format('woff2-variations');
+  font-weight: 300 800;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+2000-206F, U+20AC, U+2122, U+2212, U+FEFF, U+FFFD;
+}
+
+:root {
+  /* ---- Colour -----------------------------------------------------------
+     One ground, one deeper tone of it, one accent. The photographs are the
+     only other colour on the page, which is why they need no treatment:
+     against mulberry a full-colour cake is already the brightest thing in
+     the room. */
+  --ground: #8e2a58;
+  --deep: #6b1c41;
+  --deepest: #5e1434;
+
+  --ink: #fdf2ee;        /*  7.29:1 on the ground, 10.23:1 on the deep  */
+  --ink-2: #f0cdd6;      /*  5.49:1 / 7.72:1                           */
+  /* 4.65:1 on the ground. It was #e3aebd, which this template's own live
+     contrast table measured at 4.22 — under AA for body text. Two tokens
+     failed that first pass; both were mine, and both were written down as
+     passing. D13 is why they were caught before anything shipped. */
+  --ink-3: #e8b9c6;
+
+  --blush: #ffb8c6;      /*  4.93:1 on the ground, 6.92:1 on the deep   */
+  --blush-ink: #5e1434;  /*  7.95:1 as the ink on a blush button        */
+
+  /* Status. Pitched light, because everything here sits on a dark chromatic
+     ground and a saturated red would disappear into it. */
+  --ok: #9fe8bf;         /*  5.63:1  */
+  --warn: #ffd79a;       /*  5.89:1  */
+  --bad: #ffb3ab;        /*  4.69:1  */
+
+  /* Rules exist only inside form fields and tables — nothing structural in
+     this template is separated by a line. --rule-strong is anything a
+     customer must be able to see; it clears the 3:1 of SC 1.4.11. It was
+     #c98da4, which measured 2.99. One hundredth under is still under. */
+  --rule-strong: #d49eb3;
+  --hair: #a24568;
+
+  /* ---- Type -------------------------------------------------------------
+     Display is a hairline incised capital. It is a signature, not a
+     paragraph: short strings, always tracked out, never below 1rem. */
+  --font-display: 'Julius Sans One', 'Optima', 'Candara', sans-serif;
+  --font-hand: 'Petit Formal Script', 'Segoe Script', cursive;
+  --font-ui: 'Karla', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* A narrow scale. This template's drama is the colour and the apertures,
+     so the type stays quiet and well-mannered — the opposite decision from
+     Template 04, deliberately. */
+  --t-1: clamp(2rem, 5.2vw, 3.6rem);
+  --t-2: clamp(1.5rem, 3vw, 2.1rem);
+  --t-3: clamp(1.15rem, 1.8vw, 1.4rem);
+  --t-4: 1.0625rem;
+  --sm: 0.9rem;
+  --xs: 0.78rem;
+
+  /* Tracking. The display face needs air to read as engraving rather than
+     as thin type; the label voice needs more still. */
+  --track: 0.08em;
+  --track-wide: 0.18em;
+
+  /* ---- Space ------------------------------------------------------------ */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.875rem;
+  --s-4: 1.25rem;
+  --s-5: 2rem;
+  --s-6: 3rem;
+  --s-7: 4.5rem;
+  --s-8: 7rem;
+
+  --gutter: clamp(1.25rem, 5vw, 4rem);
+  /* A letter's measure, not a web page's. Everything long-form in this
+     template is set to this and no wider. */
+  --measure: 34rem;
+  --page: 76rem;
+
+  /* ---- Shape ------------------------------------------------------------
+     The two apertures. These are the separation method, so they are tokens
+     rather than one-off radii scattered through the components. */
+  --arch: 50% 50% 0 0 / 60% 60% 0 0;
+  --oval: 50%;
+
+  /* ---- Motion ----------------------------------------------------------- */
+  --fast: 120ms;
+  --mid: 260ms;
+  --slow: 520ms;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --fast: 1ms; --mid: 1ms; --slow: 1ms; }
+}

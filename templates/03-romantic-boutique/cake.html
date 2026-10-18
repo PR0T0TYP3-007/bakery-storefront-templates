@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A cake &mdash; Postscript</title>
+<meta name="description" content="Choose the size, what is inside and how the outside is finished. The price moves as you go.">
+<link rel="preload" href="assets/fonts/julius-sans-one.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/karla.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/cake.css">
+<link rel="stylesheet" href="css/components/letter.css">
+<link rel="stylesheet" href="css/components/overlay.css">
+<link rel="stylesheet" href="css/pages/pages.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to the content</a>
+
+<header class="masthead" data-masthead></header>
+
+<main id="main">
+
+  <section class="band band--tight page" data-missing hidden>
+    <h1 class="t-1">We do not make that one.</h1>
+    <p class="lede" style="margin-top:var(--s-4)">It may be something we have stopped doing, or the link may have lost a letter on the way here.</p>
+    <p style="margin-top:var(--s-5)"><a class="btn btn--blush" href="cakes.html" data-cakes-link>See what we do make</a></p>
+  </section>
+
+  <div data-cake hidden>
+  <section class="band band--tight page">
+    <p class="crumbs">
+      <a href="index.html" data-home-link>Postscript</a> &middot;
+      <a href="cakes.html" data-cakes-link>The cakes</a> &middot;
+      <span data-crumb></span>
+    </p>
+  </section>
+
+  <section class="band band--tight page">
+    <div class="cake-page">
+      <div class="cake-page__media">
+        <div class="aperture aperture--arch aperture--portrait" data-media></div>
+        <div style="margin-top:var(--s-5)" data-plaque></div>
+      </div>
+
+      <div class="stack stack--loose">
+        <h1 class="t-1" data-name></h1>
+        <p class="lede" data-sub></p>
+        <p class="price num" data-price></p>
+        <p class="prose dim" data-desc></p>
+
+        <div data-options></div>
+
+        <div class="stack stack--tight">
+          <p class="label">When do you want it?</p>
+          <div class="when">
+            <button class="btn btn--sm" type="button" data-pick-day>Choose the day</button>
+            <p class="num" data-ready></p>
+          </div>
+          <p class="note" data-state-note></p>
+        </div>
+
+        <div class="row">
+          <div class="step" role="group" aria-label="How many">
+            <button type="button" data-less aria-label="One fewer" disabled>&minus;</button>
+            <output class="num" data-qty>1</output>
+            <button type="button" data-more aria-label="One more">+</button>
+          </div>
+        </div>
+
+        <!-- Two buttons, and the plain one is first. The Express Buyer is
+             half of the brief's section 5, and a storefront built around
+             writing a card is a trap for them. -->
+        <div class="row">
+          <button class="btn btn--blush" type="button" data-add>Add to basket</button>
+          <button class="btn" type="button" data-add-card>Add, and write the card</button>
+        </div>
+
+        <p class="sm dimmer" data-allergens-line></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band page">
+    <div class="mark"><h2 class="label">The others</h2></div>
+    <div class="cols" data-others></div>
+  </section>
+  </div>
+</main>
+
+<div class="allergen" data-allergens></div>
+<footer class="band band--tight" data-footer></footer>
+
+<script type="module" src="js/pages/cake.js"></script>
+</body>
+</html>

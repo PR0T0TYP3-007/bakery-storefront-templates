@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Write the card &mdash; Postscript</title>
+<meta name="description" content="Write the card and watch it set, in the hand it will be written in, broken where the pen will break it. Before you pay, not after.">
+<link rel="preload" href="assets/fonts/julius-sans-one.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/karla.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/cake.css">
+<link rel="stylesheet" href="css/components/letter.css">
+<link rel="stylesheet" href="css/components/overlay.css">
+<link rel="stylesheet" href="css/pages/pages.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to the content</a>
+
+<header class="masthead" data-masthead></header>
+
+<main id="main">
+
+  <section class="band band--tight page">
+    <p class="crumbs"><a href="index.html" data-home-link>Postscript</a> &middot; <span>The card</span></p>
+    <h1 class="t-1" style="margin-top:var(--s-4)">Write the card.</h1>
+    <p class="lede" style="margin-top:var(--s-4)" data-lede></p>
+  </section>
+
+  <section class="band band--tight page">
+    <div class="writing">
+      <form class="steps" data-form novalidate>
+
+        <div>
+          <div class="step-head"><h2 class="t-3">Who is it for?</h2></div>
+          <label class="field">
+            <span class="field__label label">Their name</span>
+            <input class="input" type="text" data-to maxlength="40" placeholder="Mara" autocomplete="off">
+          </label>
+        </div>
+
+        <div>
+          <div class="step-head"><h2 class="t-3">What should it say?</h2></div>
+          <p class="sm dim" style="margin-bottom:var(--s-3)" data-stock></p>
+          <label class="field">
+            <span class="field__label label">The message</span>
+            <span class="field__hint" data-hint></span>
+            <textarea class="textarea" data-message rows="5" placeholder="Thirty years, and you still laugh at the same joke."></textarea>
+            <span class="counter" data-count></span>
+          </label>
+        </div>
+
+        <div>
+          <div class="step-head"><h2 class="t-3">Who is it from?</h2></div>
+          <label class="field">
+            <span class="field__label label">Your name, as they call you</span>
+            <input class="input" type="text" data-from maxlength="40" placeholder="Dad" autocomplete="off">
+          </label>
+        </div>
+
+        <div data-cake-step hidden>
+          <div class="step-head"><h2 class="t-3">And on the cake itself?</h2></div>
+          <p class="sm dim" style="margin-bottom:var(--s-3)" data-plaque-note></p>
+          <label class="field">
+            <span class="field__label label">Piped in buttercream</span>
+            <input class="input" type="text" data-insc maxlength="60" placeholder="Happy birthday">
+            <span class="err" data-insc-err></span>
+          </label>
+        </div>
+
+        <div class="row" data-actions></div>
+      </form>
+
+      <div class="writing__preview stack stack--loose">
+        <div class="mark"><h2 class="label">What they will see</h2></div>
+        <div class="pair">
+          <div data-card-preview></div>
+          <div data-cake-preview></div>
+        </div>
+        <p class="sm dimmer" data-honest></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="allergen" data-allergens></div>
+<footer class="band band--tight" data-footer></footer>
+
+<script type="module" src="js/pages/card.js"></script>
+</body>
+</html>

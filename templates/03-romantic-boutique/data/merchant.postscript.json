@@ -1,0 +1,119 @@
+{
+  "id": "postscript",
+  "name": "Postscript",
+  "shortName": "Postscript",
+  "tagline": "Celebration cakes in Bath, written by hand.",
+  "since": "2016",
+  "locale": "en-GB",
+  "currency": "GBP",
+  "timeZone": "Europe/London",
+  "taxRate": 0,
+  "taxMode": "inclusive",
+  "taxNote": "No VAT is shown because none is charged: cakes are zero-rated in the UK, and everything we sell is a cake.",
+  "capabilities": {
+    "pickup": true,
+    "delivery": true,
+    "customCakes": false,
+    "inscriptions": true,
+    "gifting": true,
+    "giftPackaging": true,
+    "guestCheckout": true,
+    "cards": true,
+    "keptDates": true
+  },
+  "locations": [
+    {
+      "id": "shop",
+      "name": "The shop",
+      "address": "14 Bartlett Street, Bath BA1 2QZ",
+      "phone": "01225 447 019",
+      "default": true,
+      "slots": [
+        "09:30–11:00",
+        "11:00–13:00",
+        "13:00–15:00",
+        "15:00–17:00"
+      ]
+    }
+  ],
+  "email": "hello@postscript.cake",
+  "hours": [
+    { "day": "Monday", "open": null },
+    { "day": "Tuesday", "open": "09:30", "close": "17:00" },
+    { "day": "Wednesday", "open": "09:30", "close": "17:00" },
+    { "day": "Thursday", "open": "09:30", "close": "17:00" },
+    { "day": "Friday", "open": "09:30", "close": "17:30" },
+    { "day": "Saturday", "open": "09:00", "close": "17:30" },
+    { "day": "Sunday", "open": "10:00", "close": "15:00" }
+  ],
+  "closedWeekdays": [1],
+  "closedDates": ["2026-12-25", "2026-12-26", "2027-01-01"],
+  "cutoffHour": 15,
+  "maxDaysAhead": 365,
+  "dailyCapacity": 9,
+
+  "_card": "The physical stock, and the two hands. perLine is how many characters fit across the card; lines is how many the card holds. Writing smaller buys both. A merchant with different stock changes these two numbers and the whole preview follows.",
+  "card": {
+    "stock": "A6, folded, letterpressed with our mark",
+    "normal": { "perLine": 26, "lines": 6, "label": "our usual hand" },
+    "small": { "perLine": 34, "lines": 8, "label": "a smaller hand" },
+    "note": "Written in ink, by whoever is on the bench that morning. No charge — it is a card."
+  },
+
+  "_keptDates": "The occasion layer. This browser only; see docs/03-romantic-boutique.md §5. The template never claims it can send anything.",
+  "keptDates": {
+    "remindDaysBefore": 21,
+    "note": "Kept on this device, in this browser. We cannot email you about it, and we will not pretend otherwise."
+  },
+
+  "delivery": {
+    "note": "Driven by us, boxed flat, inside the city and the villages around it.",
+    "freeOver": 60,
+    "zones": [
+      {
+        "id": "city",
+        "label": "Bath, inside the city",
+        "prefixes": ["BA1", "BA2"],
+        "fee": 5
+      },
+      {
+        "id": "near",
+        "label": "Bathford, Batheaston, Saltford, Corsham",
+        "prefixes": ["BA3", "BA15", "SN13"],
+        "fee": 9
+      },
+      {
+        "id": "far",
+        "label": "Bristol and the villages east",
+        "prefixes": ["BS1", "BS3", "BS6", "BS8", "SN12", "BA14"],
+        "fee": 15
+      }
+    ],
+    "nudgeWithin": 15
+  },
+  "allergens": ["gluten", "dairy", "egg", "nuts", "soya"],
+  "allergenStatement": "Two rooms and one oven. Gluten, dairy, egg, nuts and soya are all in the building every day, so nothing leaves here certified free of them. Tell us the allergy when you order and we will tell you honestly whether we can work around it.",
+  "voice": {
+    "kicker": "Bartlett Street, Bath · Since 2016",
+    "headline": "Someone is about to open this.",
+    "lede": "We make celebration cakes, and we write what you want on them. Choose the cake, write the card, and see it set in the hand it will be written in — before you pay, not after."
+  },
+  "gifting": {
+    "messageMax": 240,
+    "packagingAddon": "ribbon",
+    "note": "Prices come off everything in the box as a matter of course. You do not have to ask."
+  },
+  "payment": {
+    "methods": [
+      { "id": "card", "label": "Card", "note": "Visa, Mastercard, Amex" },
+      { "id": "paypal", "label": "PayPal", "note": "You will be taken to PayPal" },
+      { "id": "klarna", "label": "Klarna", "note": "Pay in 30 days, or in three" },
+      {
+        "id": "wallet",
+        "label": "Apple Pay / Google Pay",
+        "note": "Shown where the device supports it",
+        "deviceOnly": true
+      }
+    ]
+  }
+}

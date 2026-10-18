@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Style guide &mdash; Postscript</title>
+<meta name="description" content="Every component against awkward content, with the contrast and target tables computed from the live page.">
+<meta name="robots" content="noindex">
+<link rel="preload" href="assets/fonts/julius-sans-one.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/karla.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/cake.css">
+<link rel="stylesheet" href="css/components/letter.css">
+<link rel="stylesheet" href="css/components/overlay.css">
+<link rel="stylesheet" href="css/pages/pages.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to the content</a>
+
+<header class="masthead" data-masthead></header>
+
+<main id="main">
+
+  <section class="band band--tight page">
+    <h1 class="t-1">Style guide</h1>
+    <p class="lede" style="margin-top:var(--s-4)">Every component against the content most likely to break it, and the contrast table computed from the live tokens rather than written down. A guide that states yesterday&rsquo;s ratio is worse than no guide, because it is believed.</p>
+  </section>
+
+  <section class="band band--tight page">
+    <div class="mark"><h2 class="label">Colour</h2></div>
+    <div class="cols" data-swatches></div>
+  </section>
+
+  <section class="band band--tight page">
+    <div class="mark"><h2 class="label">Contrast, measured now</h2></div>
+    <div class="sg-scroll" data-contrast></div>
+  </section>
+
+  <section class="band band--tight page">
+    <div class="mark"><h2 class="label">Targets and tiles, measured now</h2></div>
+    <div class="sg-scroll" data-targets></div>
+  </section>
+
+  <section class="band band--tight page">
+    <div class="mark"><h2 class="label">The card, at both ends of what it takes</h2></div>
+    <div class="cols cols--two" data-letters></div>
+  </section>
+
+  <section class="band band--tight page">
+    <div class="mark"><h2 class="label">Type</h2></div>
+    <div class="cols cols--two" data-type></div>
+  </section>
+
+  <section class="band band--tight page">
+    <div class="mark"><h2 class="label">Cakes, against hostile content</h2></div>
+    <div class="cols" data-cakes></div>
+  </section>
+
+  <section class="band band--tight page">
+    <div class="mark"><h2 class="label">Choices</h2></div>
+    <div class="measure" data-choices></div>
+  </section>
+
+  <section class="band band--tight page">
+    <div class="mark"><h2 class="label">Notices</h2></div>
+    <div class="measure stack stack--tight" data-notes></div>
+  </section>
+
+  <section class="band page">
+    <div class="mark"><h2 class="label">Overlays</h2></div>
+    <div class="row">
+      <button class="btn btn--sm" type="button" data-demo-diary>The diary</button>
+      <button class="btn btn--sm" type="button" data-demo-slots>The diary, with windows</button>
+      <button class="btn btn--sm" type="button" data-demo-toast>A toast</button>
+      <button class="btn btn--sm" type="button" data-demo-toast-bad>A toast that went wrong</button>
+    </div>
+  </section>
+</main>
+
+<div class="allergen" data-allergens></div>
+<footer class="band band--tight" data-footer></footer>
+
+<script type="module" src="js/pages/styleguide.js"></script>
+</body>
+</html>
