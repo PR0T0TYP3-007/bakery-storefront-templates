@@ -36,6 +36,7 @@ the working storefront.
 |---|---|---|
 | Template 01 | The Editorial Atelier | Crumb Atelier, Brooklyn |
 | Template 02 | The Playful Celebration | Many Happy Returns, Margate |
+| Template 04 | The Contemporary Creative Studio | FOLD, Berlin |
 | Template 05 | The Modern Neighbourhood Bakery | Hazel & Rye, London |
 
 ### How it deploys
@@ -113,6 +114,7 @@ shared/
 templates/
   01-editorial-atelier/        Crumb Atelier — premium, art-directed, made-to-order
   02-playful-celebration/      Many Happy Returns — "Make a Fuss", live cake builder
+  04-creative-studio/          FOLD — "Priced on the page", commissions quoted live
   05-neighbourhood/            Hazel & Rye — "The Counter", everyday shop
 
 _archive/05-neighbourhood-v1/  The first attempt at 05, kept for reference
@@ -197,6 +199,46 @@ checkbox; simulated payment with working decline and recovery.
 Its own [README](templates/02-playful-celebration/README.md) has the detail, and
 [docs/02-playful-celebration.md](docs/02-playful-celebration.md) has the research and the
 art direction.
+
+---
+
+## Template 04 — The Contemporary Creative Studio
+
+**FOLD**, Berlin. Our concept for this direction is **Priced on the page**: a studio that
+quotes a commission while you write the brief, instead of taking an enquiry and emailing a
+number next week.
+
+| | |
+|---|---|
+| Display | Syne (variable) |
+| Interface | Archivo — both self-hosted, 70KB, no third-party connection |
+| Surface | `#0E0E10` near-black on a visible twelve-column grid |
+| Accent | `#CCFF00` acid, and nothing else — the work supplies the colour |
+
+Pages: `index` · `commission` · `work` · `piece` · `cart` · `checkout` · `confirmation` ·
+`styleguide` · `404`
+
+**Nothing in it has a border radius, a shadow or a gradient.** Separation is positional:
+the grid is visible, sections bleed past the measure, elements overlap. It is also the
+first dark ground in the set — 504, 676 and 701 channels from the other three.
+
+**The commission prices itself.** Scale sets a base, ambition *multiplies* it, and the
+studio's nine techniques add on top with their own days. The same brief runs €720 at Clean
+and €2,262 at Editorial. The output is a typeset spec sheet with the arithmetic shown, and
+it prints. Research found no transactional storefront at this end of the market at all:
+[ECBG Studio](https://www.ecbgstudio.com/custom-inquiry) takes an enquiry and quotes
+later, [Yevnig](https://yevnig.com/contact-yevnig/) asks you to pick a budget *band*.
+
+A commission order takes a 30% deposit, so the checkout button says *"Pay the deposit —
+€689.51"* rather than the €2,298 total.
+
+20 unit tests on the pricing model. One rule held throughout: experiment with composition
+and typography, never with interaction — the commission page is unusual and the checkout
+is completely ordinary.
+
+Its own [README](templates/04-creative-studio/README.md) has the detail, and
+[docs/04-creative-studio.md](docs/04-creative-studio.md) has the research, the distance
+check and the case against building Template 03 instead.
 
 ---
 
@@ -312,10 +354,11 @@ validation and confirmation.
   Templates 02 and 05 cover part of this on their style-guide pages; Template 01 does
   not have one.
 - **No accessibility audit has been run.** Focus states, reduced-motion, landmarks,
-  labelled calendar cells and skip links are in place; that is not the same as tested,
-  and nothing has been through a screen reader. Template 02's contrast, target sizes and
-  horizontal overflow were measured during the build and its style guide computes the
-  contrast table live from the tokens. Templates 01 and 05 have not been measured.
+  labelled calendar cells and skip links are in place; that is not the same as tested, and
+  nothing has been through a screen reader. Templates 02 and 04 had contrast, target sizes
+  and horizontal overflow measured during the build, and both style guides compute the
+  contrast table live from the tokens — which caught three claims that were wrong, see
+  decision D13. Templates 01 and 05 have not been measured.
 - **Template 01 has not been migrated to the shared module layer.** Its commerce rules
   live in `shared/js/store.js` rather than `shared/core/`, so two implementations of the
   same rules exist in the repository.

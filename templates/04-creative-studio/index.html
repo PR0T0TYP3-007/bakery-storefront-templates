@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FOLD — a cake studio in Berlin</title>
+<meta name="description" content="Commissions priced on the page, firm for fourteen days. No enquiry form, no budget band, no quote in a week. Oranienstraße, Berlin.">
+
+<link rel="preload" href="assets/fonts/syne.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/piece.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to the work</a>
+
+<header class="masthead" data-masthead></header>
+<div class="allergen" data-allergens></div>
+
+<main id="main">
+
+  <!-- The claim. Type at display scale, a piece pushed up beside it, and
+       nothing else competing. -->
+  <section class="page sec">
+    <div class="g">
+      <div class="c-8">
+        <p class="label" data-kicker></p>
+        <h1 class="t-mega" style="margin-top:var(--s-4)" data-headline></h1>
+      </div>
+      <div class="c-4">
+        <p class="lede" data-lede></p>
+        <div class="row" style="margin-top:var(--s-5)">
+          <a class="btn btn--acid btn--lg" href="commission.html" data-commission-link>Start a brief</a>
+          <a class="btn btn--lg" href="work.html" data-work-link>See the work</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- The gap, stated plainly. This is the template's whole argument and it
+       gets a full band to itself. -->
+  <section class="bleed bleed--acid sec">
+    <div class="page">
+      <div class="g">
+        <div class="c-7">
+          <p class="t-1">Everyone else sends a number in a week.</p>
+        </div>
+        <div class="c-4 start-9">
+          <p class="prose" data-gap></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Work. An asymmetric grid: the pieces are not the same size, because
+       they are not the same thing. -->
+  <section class="page sec">
+    <div class="marker">
+      <span class="marker__n">01</span>
+      <span class="marker__name label">Recent work</span>
+      <a class="sm" href="work.html" data-work-link-2>All of it</a>
+    </div>
+    <div class="g" data-work></div>
+  </section>
+
+  <!-- The techniques, as a vocabulary. -->
+  <section class="bleed bleed--raised sec">
+    <div class="page">
+      <div class="marker">
+        <span class="marker__n">02</span>
+        <span class="marker__name label">What we can actually do</span>
+        <span class="sm dim">Each one carries its own price and its own days</span>
+      </div>
+      <ul class="g" style="list-style:none;padding:0" data-techniques></ul>
+    </div>
+  </section>
+
+  <!-- Editions. -->
+  <section class="page sec">
+    <div class="marker">
+      <span class="marker__n">03</span>
+      <span class="marker__name label">Editions</span>
+      <span class="sm dim">Pieces we repeat, at a fixed price</span>
+    </div>
+    <div class="g" data-editions></div>
+  </section>
+
+  <!-- The studio note. -->
+  <section class="page sec--tight" style="padding-bottom:var(--s-7)">
+    <hr class="rule">
+    <div class="g" style="margin-top:var(--s-5)">
+      <div class="c-5 start-2">
+        <p class="t-2" data-studio-head></p>
+      </div>
+      <div class="c-4 start-8">
+        <p class="prose dim" data-studio-body></p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer" data-footer></footer>
+
+<script type="module" src="js/pages/home.js"></script>
+</body>
+</html>

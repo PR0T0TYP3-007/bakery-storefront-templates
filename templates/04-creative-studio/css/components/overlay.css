@@ -1,0 +1,156 @@
+/* ==========================================================================
+   Overlays — the diary and the toast.
+
+   The diary is a native <dialog>: focus trapping, Escape, the backdrop and
+   making the background inert are the platform's job, and every hand-rolled
+   modal gets at least one of those four wrong.
+   ========================================================================== */
+
+dialog {
+  border: 1px solid var(--rule-strong);
+  border-radius: 0;
+  padding: 0;
+  background: var(--raised);
+  color: var(--ink);
+  max-width: min(560px, calc(100vw - 2rem));
+  width: 100%;
+}
+dialog::backdrop { background: color-mix(in oklab, #000 78%, transparent); }
+
+@keyframes dlg-in { from { opacity: 0; translate: 0 10px; } }
+dialog[open] { animation: dlg-in var(--mid) var(--ease); }
+@media (prefers-reduced-motion: reduce) { dialog[open] { animation: none; } }
+
+.dlg__head {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-4);
+  align-items: flex-start;
+  padding: var(--s-4);
+  border-bottom: 1px solid var(--rule-strong);
+}
+.dlg__title { font-family: var(--font-display); font-weight: 700; font-size: var(--t-3); }
+.dlg__note { font-size: var(--sm); color: var(--ink-2); margin-top: var(--s-1); }
+.dlg__x {
+  flex: none;
+  width: 44px; height: 44px;
+  display: grid;
+  place-items: center;
+  background: none;
+  border: 1px solid var(--rule-strong);
+  color: inherit;
+  cursor: pointer;
+}
+.dlg__x:hover { background: var(--ink); color: var(--ground); }
+.dlg__body { padding: var(--s-4); }
+.dlg__foot { padding: var(--s-3) var(--s-4) var(--s-4); display: flex; gap: var(--s-3); align-items: center; }
+
+/* --------------------------------------------------------------------------
+   The diary
+   -------------------------------------------------------------------------- */
+.cal__nav { display: flex; align-items: center; gap: var(--s-3); margin-bottom: var(--s-4); }
+.cal__month { flex: 1; text-align: center; font-family: var(--font-display); font-weight: 700; font-size: var(--t-4); }
+.cal__arrow {
+  width: 44px; height: 44px;
+  display: grid;
+  place-items: center;
+  background: none;
+  border: 1px solid var(--rule-strong);
+  color: inherit;
+  cursor: pointer;
+}
+.cal__arrow:hover:not(:disabled) { background: var(--ink); color: var(--ground); }
+.cal__arrow:disabled { opacity: 0.3; cursor: not-allowed; }
+
+.cal__grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 1px; background: var(--hair); }
+.cal__dow { text-align: center; font-size: var(--xs); color: var(--ink-2); padding-block: var(--s-2); background: var(--raised); }
+
+.cal__day {
+  aspect-ratio: 1;
+  min-height: 44px;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 1px;
+  background: var(--raised);
+  border: 0;
+  color: inherit;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  cursor: pointer;
+}
+.cal__day:hover:not(:disabled) { background: var(--raised-2); color: var(--acid); }
+.cal__day[aria-pressed='true'] { background: var(--acid); color: var(--ground); }
+.cal__day:disabled { color: var(--ink-3); cursor: not-allowed; background: var(--ground); }
+.cal__day--empty { visibility: hidden; }
+/* Today gets a mark, not a fill, so it cannot be read as the selection. */
+.cal__day[data-today]::after { content: ''; width: 4px; height: 4px; background: var(--acid); }
+.cal__day[aria-pressed='true'][data-today]::after { background: var(--ground); }
+
+/* A blocked day states its reason on the cell — a dead square with no
+   explanation makes you click it to find out why it is dead. */
+.cal__why { font-size: 0.56rem; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-3); line-height: 1; }
+
+.cal__key { display: flex; flex-wrap: wrap; gap: var(--s-4); margin-top: var(--s-4); font-size: var(--xs); color: var(--ink-2); }
+.cal__key span { display: inline-flex; align-items: center; gap: var(--s-2); }
+.cal__key i { width: 10px; height: 10px; display: inline-block; }
+
+/* --------------------------------------------------------------------------
+   Slots
+   -------------------------------------------------------------------------- */
+.slots { display: grid; gap: 1px; background: var(--hair); grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); }
+.slot { position: relative; }
+.slot input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; margin: 0; cursor: pointer; }
+.slot__face {
+  display: grid;
+  gap: 2px;
+  padding: var(--s-3);
+  min-height: 52px;
+  background: var(--raised);
+  cursor: pointer;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  font-size: var(--sm);
+}
+.slot input:hover:not(:disabled) + .slot__face { background: var(--raised-2); }
+.slot input:focus-visible + .slot__face { outline: 2px solid var(--acid); outline-offset: -2px; }
+.slot input:checked + .slot__face { background: var(--acid); color: var(--ground); }
+.slot input:disabled + .slot__face { color: var(--ink-3); cursor: not-allowed; background: var(--ground); }
+.slot__left { font-size: var(--xs); font-weight: 400; opacity: 0.75; }
+
+/* --------------------------------------------------------------------------
+   Toast
+   -------------------------------------------------------------------------- */
+.toasts {
+  position: fixed;
+  z-index: 60;
+  bottom: var(--s-4);
+  left: var(--s-4);
+  right: var(--s-4);
+  display: grid;
+  gap: var(--s-2);
+  justify-items: stretch;
+  pointer-events: none;
+}
+@media (min-width: 44rem) { .toasts { left: auto; max-width: 380px; } }
+
+.toast {
+  display: flex;
+  gap: var(--s-3);
+  align-items: flex-start;
+  background: var(--ink);
+  color: var(--ground);
+  padding: var(--s-3) var(--s-4);
+  font-size: var(--sm);
+  pointer-events: auto;
+  border-left: 3px solid var(--acid);
+}
+.toast--bad { border-left-color: var(--bad); }
+.toast strong { display: block; font-family: var(--font-display); font-weight: 700; }
+.toast svg { flex: none; margin-top: 2px; }
+
+@keyframes toast-in { from { opacity: 0; translate: 0 10px; } }
+@keyframes toast-out { to { opacity: 0; } }
+.toast { animation: toast-in var(--mid) var(--ease); }
+.toast[data-leaving] { animation: toast-out var(--fast) linear both; }
+@media (prefers-reduced-motion: reduce) { .toast { animation: none; } }

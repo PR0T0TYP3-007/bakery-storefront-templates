@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Not here — FOLD</title>
+<meta name="robots" content="noindex">
+
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<style>
+  /* A 404 has no session to boot, so it carries its own few lines rather
+     than rendering the chrome. */
+  body { display: grid; place-items: center; min-height: 100svh; padding: var(--gutter); }
+  .lost { max-width: 46ch; }
+</style>
+</head>
+<body>
+
+<main class="lost">
+  <p class="label label--acid">404</p>
+  <h1 class="t-mega" style="margin-top:var(--s-3)">Not&nbsp;here.</h1>
+  <p class="lede dim" style="margin-top:var(--s-5)">
+    That page has been taken down, moved, or never existed. The work is still where
+    you left it.
+  </p>
+  <div class="row" style="margin-top:var(--s-6)">
+    <a class="btn btn--acid btn--lg" href="commission.html">Start a brief</a>
+    <a class="btn btn--lg" href="index.html">Back to the studio</a>
+  </div>
+</main>
+
+</body>
+</html>

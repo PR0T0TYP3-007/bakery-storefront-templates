@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout — FOLD</title>
+<meta name="robots" content="noindex">
+
+<link rel="preload" href="assets/fonts/syne.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/piece.css">
+<link rel="stylesheet" href="css/components/sheet.css">
+<link rel="stylesheet" href="css/components/overlay.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to the form</a>
+
+<header class="masthead" data-masthead></header>
+<div class="allergen" data-allergens></div>
+
+<main id="main">
+  <div class="page sec--tight">
+    <h1 class="t-1">Checkout</h1>
+    <p class="lede dim" style="margin-top:var(--s-4)">
+      No account. We ask for what we need to get it to you and nothing else.
+    </p>
+
+    <div class="g" style="margin-top:var(--s-6)">
+      <form class="c-7" novalidate data-form>
+        <p class="note note--bad" style="margin-bottom:var(--s-5)" data-failure hidden role="alert" tabindex="-1"></p>
+
+        <!-- 01 -->
+        <section class="sec--tight">
+          <div class="marker">
+            <span class="marker__n">01</span>
+            <span class="marker__name label">Collect or deliver</span>
+          </div>
+          <fieldset class="choices" data-methods>
+            <legend class="sr">How you want it</legend>
+          </fieldset>
+
+          <div style="margin-top:var(--s-4)" data-pickup>
+            <p class="note" data-location></p>
+          </div>
+
+          <div style="margin-top:var(--s-4)" data-delivery hidden>
+            <label class="field">
+              <span class="field__label label" for="postcode">Postcode</span>
+              <span class="field__hint">We check it against where we drive.</span>
+              <input class="input" id="postcode" name="postcode" type="text"
+                     autocomplete="postal-code" inputmode="numeric" placeholder="10999" style="max-width:220px">
+            </label>
+            <p class="err" data-err-postcode></p>
+            <p class="note" data-zone hidden></p>
+
+            <label class="field">
+              <span class="field__label label" for="address">Where to</span>
+              <textarea class="textarea" id="address" name="address" autocomplete="street-address"
+                placeholder="Street and number&#10;Floor, and whether there is a lift"></textarea>
+            </label>
+            <p class="err" data-err-address></p>
+          </div>
+
+          <div style="margin-top:var(--s-4)">
+            <p class="label">When</p>
+            <div class="row" style="margin-top:var(--s-2)">
+              <button class="btn" type="button" data-pick-day><span data-day-label>Choose a day</span></button>
+              <p class="sm dim" data-slot-label></p>
+            </div>
+            <p class="err" data-err-when></p>
+          </div>
+        </section>
+
+        <!-- 02 -->
+        <section class="sec--tight">
+          <div class="marker">
+            <span class="marker__n">02</span>
+            <span class="marker__name label">You</span>
+          </div>
+
+          <label class="field">
+            <span class="field__label label" for="name">Name</span>
+            <input class="input" id="name" name="name" type="text" autocomplete="name" required>
+            <span class="err" data-err-name></span>
+          </label>
+
+          <label class="field">
+            <span class="field__label label" for="email">Email</span>
+            <span class="field__hint">The spec sheet and the receipt go here.</span>
+            <input class="input" id="email" name="email" type="email" autocomplete="email" inputmode="email" required>
+            <span class="err" data-err-email></span>
+          </label>
+
+          <label class="field">
+            <span class="field__label label" for="phone">Phone</span>
+            <span class="field__hint">We ring within two working days to talk the brief through.</span>
+            <input class="input" id="phone" name="phone" type="tel" autocomplete="tel" required>
+            <span class="err" data-err-phone></span>
+          </label>
+        </section>
+
+        <!-- 03 -->
+        <section class="sec--tight">
+          <div class="marker">
+            <span class="marker__n">03</span>
+            <span class="marker__name label">Pay</span>
+            <span class="label label--acid">Simulated</span>
+          </div>
+
+          <label class="field">
+            <span class="field__label label" for="card">Card number</span>
+            <input class="input" id="card" name="card" type="text" inputmode="numeric"
+                   autocomplete="cc-number" placeholder="4242 4242 4242 4242" required>
+            <span class="err" data-err-card></span>
+          </label>
+
+          <div class="g" style="--cols:2;gap:var(--s-5)">
+            <label class="field" style="grid-column:span 1">
+              <span class="field__label label" for="exp">Expires</span>
+              <input class="input" id="exp" name="exp" type="text" inputmode="numeric"
+                     autocomplete="cc-exp" placeholder="04/29" required>
+              <span class="err" data-err-exp></span>
+            </label>
+            <label class="field" style="grid-column:span 1">
+              <span class="field__label label" for="cvc">Security code</span>
+              <input class="input" id="cvc" name="cvc" type="text" inputmode="numeric"
+                     autocomplete="cc-csc" placeholder="123" required>
+              <span class="err" data-err-cvc></span>
+            </label>
+          </div>
+
+          <p class="sm dim">
+            Nothing here reaches a bank. <code>4242 4242 4242 4242</code> succeeds,
+            <code>4000 0000 0000 0002</code> is declined and
+            <code>4000 0000 0000 0119</code> cannot reach the processor.
+          </p>
+
+          <fieldset class="choices" style="margin-top:var(--s-5)">
+            <legend class="sr">Terms</legend>
+            <label class="choice">
+              <input type="checkbox" data-terms>
+              <span class="choice__face">
+                <span class="choice__name">I have read the allergen notice</span>
+                <span class="choice__meta"></span>
+                <span class="choice__note" data-terms-note></span>
+              </span>
+            </label>
+          </fieldset>
+          <p class="err" data-err-terms></p>
+
+          <button class="btn btn--acid btn--block btn--lg" style="margin-top:var(--s-5)" type="submit" data-pay>
+            <span data-pay-label>Place the order</span>
+          </button>
+          <p class="xs dim" style="margin-top:var(--s-3);text-align:center">
+            A design template. No money moves and nothing leaves this browser.
+          </p>
+        </section>
+      </form>
+
+      <aside class="c-4 start-9">
+        <div class="sheet-hold">
+          <div class="sheet">
+            <p class="label">Your order</p>
+            <div class="summary__lines" style="margin-top:var(--s-4)" data-summary-lines></div>
+            <div style="margin-top:var(--s-4)" data-summary-totals></div>
+          </div>
+          <p class="note" style="margin-top:var(--s-4)" data-summary-when></p>
+          <a class="btn btn--block btn--sm" style="margin-top:var(--s-3)" href="cart.html" data-cart-link>Change the basket</a>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<footer class="footer" data-footer></footer>
+
+<script type="module" src="js/pages/checkout.js"></script>
+</body>
+</html>

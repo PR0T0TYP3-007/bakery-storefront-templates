@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FOLD</title>
+<meta name="description" content="An edition. Fixed recipe, fixed price, a few days' notice.">
+
+<link rel="preload" href="assets/fonts/syne.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/piece.css">
+<link rel="stylesheet" href="css/components/sheet.css">
+<link rel="stylesheet" href="css/components/overlay.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to the piece</a>
+
+<header class="masthead" data-masthead></header>
+<div class="allergen" data-allergens></div>
+
+<main id="main">
+  <!-- Found -->
+  <div data-piece hidden>
+    <section class="page sec--tight">
+      <nav aria-label="Where you are" class="sm dim crumbs" style="margin-bottom:var(--s-4)">
+        <a href="work.html" data-work-link>Work</a> / <span data-crumb></span>
+      </nav>
+
+      <div class="g">
+        <div class="c-7">
+          <figure style="margin:0" class="piece__media piece__media--wide" data-media></figure>
+        </div>
+
+        <div class="c-4 start-9">
+          <p class="label" data-n></p>
+          <h1 class="t-1" style="margin-top:var(--s-3)" data-name></h1>
+          <p class="lede dim" style="margin-top:var(--s-3)" data-sub></p>
+          <p class="prose" style="margin-top:var(--s-4)" data-desc></p>
+
+          <hr class="rule" style="margin-block:var(--s-5)">
+
+          <div data-options></div>
+
+          <dl class="sheet__terms" style="border:0;padding:0;margin-top:var(--s-4)">
+            <div>
+              <dt class="label">Price</dt>
+              <dd class="num" data-price>—</dd>
+            </div>
+            <div>
+              <dt class="label">Ready</dt>
+              <dd class="num" data-ready>—</dd>
+            </div>
+            <div>
+              <dt class="label">Contains</dt>
+              <dd data-allergens-list>—</dd>
+            </div>
+          </dl>
+
+          <p class="note" style="margin-top:var(--s-4)" data-state-note></p>
+
+          <div class="row" style="margin-top:var(--s-5)">
+            <div class="step" role="group" aria-label="How many">
+              <button type="button" data-less aria-label="One fewer" disabled>&minus;</button>
+              <output data-qty>1</output>
+              <button type="button" data-more aria-label="One more">+</button>
+            </div>
+            <button class="btn btn--acid btn--lg" type="button" data-add>Add to basket</button>
+          </div>
+
+          <p class="sm dim" style="margin-top:var(--s-4)">
+            Want something that is not this? <a href="commission.html" data-commission-link>Commission it</a>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="page sec">
+      <div class="marker">
+        <span class="marker__n">02</span>
+        <span class="marker__name label">The other editions</span>
+      </div>
+      <div class="g" data-others></div>
+    </section>
+  </div>
+
+  <!-- Not found -->
+  <div class="page" data-missing hidden>
+    <div class="empty sec">
+      <h1 class="t-1">We do not have that one</h1>
+      <p class="lede dim" style="margin-top:var(--s-4)">
+        It may have come off the list, or the link may be wrong.
+      </p>
+      <p style="margin-top:var(--s-5)">
+        <a class="btn btn--acid btn--lg" href="work.html" data-work-link-2>See the work</a>
+      </p>
+    </div>
+  </div>
+</main>
+
+<footer class="footer" data-footer></footer>
+
+<script type="module" src="js/pages/piece.js"></script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Commission — FOLD</title>
+<meta name="description" content="Write the brief and watch it price itself. Firm for fourteen days, deposit at the end. No enquiry form, no quote in a week.">
+
+<link rel="preload" href="assets/fonts/syne.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/piece.css">
+<link rel="stylesheet" href="css/components/sheet.css">
+<link rel="stylesheet" href="css/components/overlay.css">
+</head>
+<body>
+
+<a class="skip" href="#brief">Skip to the brief</a>
+
+<header class="masthead" data-masthead></header>
+<div class="allergen" data-allergens></div>
+
+<main>
+  <div class="page sec--tight">
+    <div class="g">
+      <div class="c-7">
+        <h1 class="t-1">Write the brief.<br>Watch it price itself.</h1>
+        <p class="lede dim" style="margin-top:var(--s-4)">
+          Everyone else in this city takes your brief and sends a number in a week.
+          Every choice below moves the figure on the right, and that figure is the
+          figure — firm for fourteen days.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page">
+    <div class="g sec--tight">
+
+      <!-- The brief. -->
+      <div class="c-7" id="brief">
+        <div data-choices>
+          <div class="skel" style="height:14rem" aria-hidden="true"></div>
+          <div class="skel" style="height:20rem;margin-top:var(--s-5)" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <!-- The sheet. -->
+      <div class="c-5">
+        <div class="sheet-hold" data-sheet-hold>
+          <div class="skel" style="height:30rem" aria-hidden="true"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="commit" data-commit hidden>
+    <div class="page commit__in">
+      <div>
+        <p class="commit__price num" data-commit-price>—</p>
+        <p class="commit__when" data-commit-when></p>
+      </div>
+      <button class="btn btn--acid btn--lg" type="button" data-book>
+        <span data-book-label>Book it</span>
+      </button>
+    </div>
+  </div>
+
+  <section class="bleed bleed--raised sec" style="margin-top:var(--s-6)">
+    <div class="page">
+      <div class="marker">
+        <span class="marker__n">04</span>
+        <span class="marker__name label">What happens after you book</span>
+      </div>
+      <ol class="g" style="list-style:none;padding:0" data-after></ol>
+    </div>
+  </section>
+</main>
+
+<footer class="footer" data-footer></footer>
+
+<script type="module" src="js/pages/commission.js"></script>
+</body>
+</html>

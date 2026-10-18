@@ -252,3 +252,72 @@ precisely the precision D5 exists to avoid.
 
 It has since been done properly — bands for today, a capability statement for future days,
 thresholds in merchant config — and D5 is revised to match.
+
+---
+
+### D12 — Template 04 prices commissions; the model is template-local on purpose
+
+**Decision.** Template 04's commission pricing lives in
+`templates/04-creative-studio/js/commission.js`, not in `shared/core/`. It is pure and
+DOM-free and has its own tests, but it is not promoted.
+
+**Why not shared.** D3 and D9 set the rule the hard way: a module moves to `shared/` when
+a *second* template needs it, not in anticipation. One template prices commissions. If
+Template 03 ever does bespoke work, it moves and both import it.
+
+**Why not shared/core/pricing.js.** `priceLine()` is additive — a base plus the price of
+each chosen option — which is right for a cake with a size and a sponge. It cannot express
+how a studio quotes: a base for the *scale* of the piece, multiplied by how far it is
+taken, and only then the techniques added on top. Going from Clean to Editorial does not
+add a fixed sum, it changes what the whole job costs. Forcing that into an additive model
+would have meant inventing option prices that do not correspond to anything.
+
+The two models coexist through `priceAnyWith()`, which dispatches on `product.kind` and
+returns the same shape as `priceLine`, so a basket row is written once whichever applies.
+The shared `priceLine` is passed in rather than imported, which keeps the module free of a
+dependency on the layer above it.
+
+**What the research found.** Two real studios, checked directly. ECBG Studio (Chicago)
+publishes "custom cakes start at $300" and takes an enquiry; a named manager quotes later.
+Yevnig (London) asks for a budget *band* — below £1,500, £1,500–3,000, above £3,000 — and
+books a consultation. Neither lets anyone buy. The budget band is a frank admission that
+they cannot price it on the page, and it is the gap this template is built around.
+
+**Three consequences that are not negotiable.**
+
+*The lines sum to the quote.* A test asserts it. A figure a customer cannot check by
+adding up is just a different kind of guess, which is what the category already offers.
+
+*Lead time is additive, not the longest.* One person builds the whole piece, so drying
+sugar flowers and building an armature happen in sequence. An ambitious brief really does
+take six weeks and the diary says so before anyone has typed a name.
+
+*The deposit is a share of the order.* A basket holding a commission is a commission
+order: the button says "Pay the deposit — €689.51", not the €2,298 total. Showing the
+total as the amount to pay would be a lie the customer finds on their statement.
+
+---
+
+### D13 — Measure the design claims, or do not make them
+
+**Decision.** Every template's style guide computes its contrast table from the live
+tokens rather than listing figures written down at design time, and target sizes and
+horizontal overflow are measured per page at 375px before a template is called done.
+
+**Why.** Three times now the measurement has disagreed with the claim, and each time the
+claim was mine:
+
+- Template 02's docs said "every tap target is at least 44 × 44". Measuring found fifteen
+  under it, including every footer link.
+- Template 04's `tokens.css` said `--rule-strong` "clears 3:1". Its own style guide
+  measured **2.64:1** — under what SC 1.4.11 requires of a rule that separates content.
+- Template 04's `.bleed` used the standard `100vw` break-out, which includes the vertical
+  scrollbar and gave every page a sideways scroll. Nothing looked wrong; the number was
+  eight pixels.
+
+A guide that states yesterday's contrast ratio is worse than no guide, because it is
+believed. The cost of computing it live is about fifteen lines per template.
+
+**What this does not cover.** No axe or Lighthouse run has been performed on any template,
+and nothing has been tested with a screen reader. Measured is not audited, and no
+accessibility or performance numbers should be quoted to the client yet.

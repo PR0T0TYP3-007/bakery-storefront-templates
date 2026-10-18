@@ -1,0 +1,9 @@
+{
+  "name": "template-04-creative-studio",
+  "private": true,
+  "type": "module",
+  "description": "Template 04 — The Contemporary Creative Studio. Static storefront with a commission brief that prices itself; this file exists only so Node can run the unit tests as ES modules.",
+  "scripts": {
+    "test": "node --test \"tests/*.test.js\""
+  }
+}

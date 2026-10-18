@@ -1,0 +1,108 @@
+/* ==========================================================================
+   Pieces — the editions, the work index, basket lines.
+
+   No cards. A piece is a photograph with its number and name set under it,
+   and the whole thing is a link. What separates one from the next is the
+   grid and the space, not an outline.
+   ========================================================================== */
+
+.piece { display: grid; gap: var(--s-3); position: relative; text-decoration: none; }
+
+.piece__media {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--raised-2);
+}
+/* Absolute inside an aspect-ratio frame: an in-flow image with height:100%
+   in a grid or flex item has no definite parent height to resolve against
+   and stretches the frame past its ratio. That bug made Template 05's cake
+   tiles uneven and is worth never repeating. */
+.piece__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: scale var(--mid) var(--ease), filter var(--mid) var(--ease);
+  /* Dark ground: photographs are dropped a touch so they sit in the page
+     rather than glowing off it, and come back up on hover. */
+  filter: saturate(0.82) brightness(0.88);
+}
+.piece:hover .piece__media img { scale: 1.03; filter: none; }
+
+.piece__media--wide { aspect-ratio: 16 / 10; }
+.piece__media--tall { aspect-ratio: 3 / 4; }
+
+.piece__n {
+  position: absolute;
+  top: var(--s-3);
+  left: var(--s-3);
+  z-index: 2;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--sm);
+  color: var(--acid);
+  mix-blend-mode: difference;
+}
+
+.piece__head { display: flex; justify-content: space-between; gap: var(--s-4); align-items: baseline; }
+.piece__name { font-family: var(--font-display); font-weight: 600; font-size: var(--t-3); }
+.piece__name a { text-decoration: none; }
+/* One link per piece for a screen reader; the whole tile is the hit area. */
+.piece__name a::after { content: ''; position: absolute; inset: 0; z-index: 1; }
+.piece__price { font-variant-numeric: tabular-nums; font-weight: 600; white-space: nowrap; }
+.piece__sub { font-size: var(--sm); color: var(--ink-2); }
+
+.piece__foot { display: flex; gap: var(--s-3); align-items: center; margin-top: var(--s-2); }
+.piece__foot .btn { position: relative; z-index: 2; }
+
+.piece[data-state='out'] .piece__media img { filter: grayscale(1) brightness(0.5); }
+.piece[data-state='out'] .piece__name { color: var(--ink-2); }
+
+/* --------------------------------------------------------------------------
+   The status word. No pill, no dot — the word, in its colour.
+   -------------------------------------------------------------------------- */
+.state { font-size: var(--xs); letter-spacing: var(--wide); text-transform: uppercase; font-weight: 600; }
+.state[data-state='in'] { color: var(--ok); }
+.state[data-state='low'] { color: var(--warn); }
+.state[data-state='out'] { color: var(--bad); }
+.state[data-state='baked'], .state[data-state='made'] { color: var(--ink-2); }
+
+/* --------------------------------------------------------------------------
+   Basket lines — a list, because a basket is a list.
+   -------------------------------------------------------------------------- */
+.lines { display: grid; }
+.line {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: var(--s-4);
+  padding-block: var(--s-5);
+  border-bottom: 1px solid var(--hair);
+  align-items: start;
+}
+.line:first-child { border-top: 1px solid var(--rule-strong); }
+.line__thumb { position: relative; aspect-ratio: 1; overflow: hidden; background: var(--raised-2); }
+.line__thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.line__thumb--none {
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--acid);
+  font-size: var(--sm);
+}
+.line__name { font-family: var(--font-display); font-weight: 600; font-size: var(--t-3); }
+.line__spec { font-size: var(--sm); color: var(--ink-2); margin-top: var(--s-1); }
+.line__foot { display: flex; flex-wrap: wrap; gap: var(--s-4); align-items: center; margin-top: var(--s-3); }
+.line__price { margin-inline-start: auto; font-variant-numeric: tabular-nums; font-weight: 600; font-size: var(--t-3); font-family: var(--font-display); }
+@media (max-width: 34rem) {
+  .line { grid-template-columns: 64px minmax(0, 1fr); }
+  .line__price { margin-inline-start: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   Empty states — a sentence and a way out, set large.
+   -------------------------------------------------------------------------- */
+.empty { padding-block: var(--s-7); border-top: 1px solid var(--rule-strong); }
+.empty p { max-width: 42ch; }

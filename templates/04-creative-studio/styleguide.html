@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Style guide — FOLD</title>
+<meta name="robots" content="noindex">
+
+<link rel="preload" href="assets/fonts/syne.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/piece.css">
+<link rel="stylesheet" href="css/components/sheet.css">
+<link rel="stylesheet" href="css/components/overlay.css">
+</head>
+<body>
+
+<header class="masthead" data-masthead></header>
+
+<main>
+  <section class="page sec--tight">
+    <h1 class="t-1">Style guide</h1>
+    <p class="lede dim" style="margin-top:var(--s-4)">
+      Every component against deliberately awkward content, so the states that
+      only turn up on the wrong day are visible together rather than found by a
+      customer.
+    </p>
+  </section>
+
+  <section class="page sec--tight">
+    <div class="marker"><span class="marker__n">01</span><span class="marker__name label">Colour</span></div>
+    <p class="sm dim">Two greys and one accent. The work supplies the colour; the interface gets out of its way.</p>
+    <div class="g" style="margin-top:var(--s-4)" data-swatches></div>
+  </section>
+
+  <section class="page sec--tight">
+    <div class="marker"><span class="marker__n">02</span><span class="marker__name label">Contrast</span></div>
+    <p class="sm dim">Measured live from the tokens, not copied from a spreadsheet. Anything under 4.5:1 for body text is a bug.</p>
+    <div style="margin-top:var(--s-4);overflow-x:auto" data-contrast></div>
+  </section>
+
+  <section class="page sec--tight">
+    <div class="marker"><span class="marker__n">03</span><span class="marker__name label">Type</span></div>
+    <div class="g" style="margin-top:var(--s-4)">
+      <div class="c-7">
+        <p class="t-mega">Priced</p>
+        <p class="t-1">Display one</p>
+        <p class="t-2">Display two</p>
+        <p class="t-3">Display three</p>
+      </div>
+      <div class="c-4 start-9">
+        <p class="lede">Lede. Archivo, set a little larger than body.</p>
+        <p style="margin-top:var(--s-3)">Body. Archivo at 400, graded back because light type on a dark ground blooms.</p>
+        <p class="sm">Small — notes, captions, the line under a price.</p>
+        <p class="xs">Extra small — legal, counts, the colophon.</p>
+        <p class="label" style="margin-top:var(--s-3)">Label, uppercase, spaced</p>
+        <p class="label label--acid">Label, accent</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="page sec--tight">
+    <div class="marker"><span class="marker__n">04</span><span class="marker__name label">Buttons</span></div>
+    <div class="row" style="margin-top:var(--s-4)">
+      <button class="btn btn--acid btn--lg" type="button">Primary, large</button>
+      <button class="btn btn--acid" type="button">Primary</button>
+      <button class="btn" type="button">Default</button>
+      <button class="btn btn--sm" type="button">Small</button>
+      <button class="btn btn--bare" type="button">Bare</button>
+      <button class="btn" type="button" disabled>Disabled</button>
+      <button class="btn btn--acid" type="button" aria-busy="true"><span>Working…</span></button>
+    </div>
+    <p class="sm dim" style="margin-top:var(--s-4)">
+      No radius, no shadow, no gradient anywhere in this template. What marks a control
+      as pressable is the accent and the cursor.
+    </p>
+  </section>
+
+  <section class="page sec--tight">
+    <div class="marker"><span class="marker__n">05</span><span class="marker__name label">Choice rows</span></div>
+    <div class="g" style="margin-top:var(--s-4)">
+      <div class="c-6" data-choices-demo></div>
+      <div class="c-5 start-8">
+        <p class="label">Fields</p>
+        <label class="field" style="margin-top:var(--s-3)">
+          <span class="field__label label" for="sg-ok">Normal</span>
+          <input class="input" id="sg-ok" value="Mara Vogel">
+        </label>
+        <label class="field">
+          <span class="field__label label" for="sg-bad">With an error</span>
+          <input class="input" id="sg-bad" value="mara@" aria-invalid="true">
+          <span class="err" data-demo-err></span>
+        </label>
+        <p class="label" style="margin-top:var(--s-4)">Quantity</p>
+        <div class="step" style="margin-top:var(--s-2)" role="group" aria-label="Demo quantity">
+          <button type="button" disabled>&minus;</button><output>1</output><button type="button">+</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page sec--tight">
+    <div class="marker"><span class="marker__n">06</span><span class="marker__name label">The spec sheet</span></div>
+    <p class="sm dim">Rendered by the same code the commission page uses, against the most and least ambitious briefs the studio accepts.</p>
+    <div class="g" style="margin-top:var(--s-4)" data-sheets></div>
+  </section>
+
+  <section class="page sec--tight">
+    <div class="marker"><span class="marker__n">07</span><span class="marker__name label">Pieces, against hostile content</span></div>
+    <div class="g" style="margin-top:var(--s-4)" data-pieces></div>
+  </section>
+
+  <section class="page sec--tight">
+    <div class="marker"><span class="marker__n">08</span><span class="marker__name label">Notices</span></div>
+    <div class="stack" style="margin-top:var(--s-4)" data-notes></div>
+  </section>
+
+  <section class="page sec--tight" style="padding-bottom:var(--s-7)">
+    <div class="marker"><span class="marker__n">09</span><span class="marker__name label">Overlays</span></div>
+    <div class="row" style="margin-top:var(--s-4)">
+      <button class="btn" type="button" data-demo-diary>Open the diary</button>
+      <button class="btn" type="button" data-demo-slots>Diary with windows</button>
+      <button class="btn" type="button" data-demo-toast>Toast</button>
+      <button class="btn" type="button" data-demo-toast-bad>Toast, bad news</button>
+    </div>
+  </section>
+</main>
+
+<footer class="footer" data-footer></footer>
+
+<script type="module" src="js/pages/styleguide.js"></script>
+</body>
+</html>

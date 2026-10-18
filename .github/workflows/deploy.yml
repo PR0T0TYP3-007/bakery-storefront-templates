@@ -44,13 +44,14 @@ jobs:
           test -f dist/.nojekyll   || { echo "::error::.nojekyll missing"; exit 1; }
           test -d dist/shared/img  || { echo "::error::photography missing"; exit 1; }
 
-          for t in 01-editorial-atelier 02-playful-celebration 05-neighbourhood; do
+          for t in 01-editorial-atelier 02-playful-celebration 04-creative-studio 05-neighbourhood; do
             test -f "dist/templates/$t/index.html"               || { echo "::error::template $t missing"; exit 1; }
           done
 
           # The listing page shows a screenshot of each template.
           test -f dist/assets/previews/template-01.jpg || { echo "::error::preview 01 missing"; exit 1; }
           test -f dist/assets/previews/template-02.jpg || { echo "::error::preview 02 missing"; exit 1; }
+          test -f dist/assets/previews/template-04.jpg || { echo "::error::preview 04 missing"; exit 1; }
           test -f dist/assets/previews/template-05.jpg || { echo "::error::preview 05 missing"; exit 1; }
 
           # Underscore paths are what Jekyll would drop; .nojekyll prevents it,
@@ -58,6 +59,8 @@ jobs:
           test -f dist/templates/05-neighbourhood/js/pages/_page.js             || { echo "::error::_page.js missing — Template 05 will not boot"; exit 1; }
           test -f dist/templates/02-playful-celebration/js/pages/_page.js       || { echo "::error::_page.js missing — Template 02 will not boot"; exit 1; }
           test -f dist/templates/02-playful-celebration/js/components/cake.js   || { echo "::error::cake.js missing — Template 02 has no builder"; exit 1; }
+          test -f dist/templates/04-creative-studio/js/pages/_page.js         || { echo "::error::_page.js missing — Template 04 will not boot"; exit 1; }
+          test -f dist/templates/04-creative-studio/js/commission.js         || { echo "::error::commission.js missing — Template 04 cannot price"; exit 1; }
           test -f dist/shared/session.js                                        || { echo "::error::shared/session.js missing — no template will boot"; exit 1; }
 
           # Development files must not reach the public site.

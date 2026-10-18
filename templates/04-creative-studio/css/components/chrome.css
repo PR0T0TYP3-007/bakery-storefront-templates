@@ -1,0 +1,147 @@
+/* ==========================================================================
+   Chrome — masthead, allergen line, colophon.
+
+   No bar, no panel, no shadow. The masthead sits on the same grid as the
+   page and is separated from it by one rule.
+   ========================================================================== */
+
+.masthead {
+  border-bottom: 1px solid var(--rule-strong);
+  background: var(--ground);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+.masthead__in {
+  display: flex;
+  align-items: center;
+  gap: var(--s-5);
+  min-height: 68px;
+  padding-block: var(--s-3);
+}
+
+.mark {
+  text-decoration: none;
+  flex: none;
+  display: grid;
+  line-height: 1;
+}
+.mark__name {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.35rem;
+  letter-spacing: -0.03em;
+}
+.mark:hover .mark__name { color: var(--acid); }
+.mark__where {
+  font-size: var(--xs);
+  letter-spacing: var(--wide);
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin-top: 3px;
+}
+
+.nav { display: flex; gap: var(--s-5); }
+.nav__link {
+  text-decoration: none;
+  font-size: var(--sm);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  /* The current page is marked with the accent, not a box. */
+  border-bottom: 2px solid transparent;
+}
+.nav__link:hover { color: var(--acid); }
+.nav__link[aria-current='page'] { border-bottom-color: var(--acid); }
+
+@media (max-width: 54rem) { .nav { display: none; } }
+
+.basket {
+  margin-inline-start: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: 44px;
+  text-decoration: none;
+  flex: none;
+}
+.basket:hover .label { color: var(--acid); }
+.basket__n {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--acid);
+}
+.basket__n[data-empty='true'] { color: var(--ink-3); }
+
+/* The phone menu is a <details>, so Escape and keyboard support come free. */
+.menu { display: none; flex: none; position: relative; }
+@media (max-width: 54rem) { .menu { display: block; } }
+.menu__btn {
+  display: grid;
+  place-items: center;
+  width: 44px; height: 44px;
+  cursor: pointer;
+  list-style: none;
+  color: var(--ink);
+}
+.menu__btn::-webkit-details-marker { display: none; }
+.menu[open] .menu__btn { color: var(--acid); }
+.menu__panel {
+  position: absolute;
+  right: 0;
+  top: calc(100% + var(--s-3));
+  min-width: 220px;
+  background: var(--raised);
+  border: 1px solid var(--rule-strong);
+  padding: var(--s-3);
+  display: grid;
+}
+.menu__panel .nav__link {
+  display: block;
+  padding-block: var(--s-3);
+  border-bottom: 1px solid var(--hair);
+}
+.menu__panel .nav__link:last-child { border-bottom: 0; }
+
+/* --------------------------------------------------------------------------
+   Allergen line
+   -------------------------------------------------------------------------- */
+.allergen { border-bottom: 1px solid var(--rule-strong); }
+.allergen__in {
+  display: flex;
+  gap: var(--s-3);
+  align-items: flex-start;
+  padding-block: var(--s-3);
+  color: var(--ink-2);
+}
+.allergen__in svg { flex: none; margin-top: 2px; color: var(--warn); }
+.allergen__in p { margin: 0; max-width: 92ch; }
+
+/* --------------------------------------------------------------------------
+   Colophon
+   -------------------------------------------------------------------------- */
+.footer { padding-block: var(--s-6) var(--s-5); }
+
+/* WCAG 2.2 SC 2.5.8 wants 24x24. A footer link at the small size is 17px
+   tall, so it gets padding rather than leaning on the spacing exception. */
+.footer a { display: inline-block; padding-block: 4px; }
+
+.deflist { display: grid; gap: 2px; }
+.deflist > div { display: flex; justify-content: space-between; gap: var(--s-3); }
+.deflist dt { color: var(--ink-2); }
+
+ul.plain { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s-2); }
+ul.plain li { margin: 0; color: var(--ink-2); }
+
+.colophon {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2) var(--s-5);
+  justify-content: space-between;
+  padding-top: var(--s-4);
+  margin: 0;
+}

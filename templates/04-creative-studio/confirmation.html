@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Booked — FOLD</title>
+<meta name="robots" content="noindex">
+
+<link rel="preload" href="assets/fonts/syne.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/piece.css">
+<link rel="stylesheet" href="css/components/sheet.css">
+</head>
+<body>
+
+<header class="masthead noprint" data-masthead></header>
+<div class="allergen noprint" data-allergens></div>
+
+<main id="main">
+  <div class="page--narrow">
+
+    <div data-none hidden>
+      <div class="empty sec">
+        <h1 class="t-1">No recent order on this device</h1>
+        <p class="lede dim" style="margin-top:var(--s-4)">
+          We keep confirmations in the browser they were placed in. If you booked on your
+          phone it will be there, and the spec sheet is in your email either way. Quote the
+          reference and we will find it.
+        </p>
+        <p style="margin-top:var(--s-5)">
+          <a class="btn btn--acid btn--lg" href="index.html" data-home-link>Back to the studio</a>
+        </p>
+      </div>
+    </div>
+
+    <div data-receipt hidden>
+      <section class="sec--tight">
+        <p class="label label--acid">In the diary</p>
+        <h1 class="t-mega" style="margin-top:var(--s-3)" data-ref></h1>
+        <p class="lede" style="margin-top:var(--s-4)" data-lede></p>
+      </section>
+
+      <div class="sheet" style="margin-top:var(--s-5)">
+        <div class="sheet__head">
+          <p class="label">The booking</p>
+          <button class="btn btn--sm noprint" type="button" data-print>Print it</button>
+        </div>
+
+        <dl class="sheet__brief" data-details></dl>
+
+        <hr class="rule">
+        <div class="lines" data-lines></div>
+
+        <div class="sum sum--total"><span>Total</span><span data-total></span></div>
+        <div class="sum sum--due" data-due hidden><span>Paid now</span><span data-due-now></span></div>
+        <div class="sum" data-later hidden><span>On collection</span><span data-due-later></span></div>
+      </div>
+
+      <section class="sec--tight">
+        <div class="marker">
+          <span class="marker__n">02</span>
+          <span class="marker__name label">What happens next</span>
+        </div>
+        <ol class="stack" style="padding-left:1.1em" data-next></ol>
+      </section>
+
+      <p class="row noprint" style="justify-content:center;padding-bottom:var(--s-7)">
+        <a class="btn" href="index.html" data-home-link-2>Back to the studio</a>
+      </p>
+    </div>
+  </div>
+</main>
+
+<footer class="footer noprint" data-footer></footer>
+
+<script type="module" src="js/pages/confirmation.js"></script>
+</body>
+</html>

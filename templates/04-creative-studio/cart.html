@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Basket — FOLD</title>
+<meta name="robots" content="noindex">
+
+<link rel="preload" href="assets/fonts/syne.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/piece.css">
+<link rel="stylesheet" href="css/components/sheet.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to the basket</a>
+
+<header class="masthead" data-masthead></header>
+<div class="allergen" data-allergens></div>
+
+<main id="main">
+  <div class="page sec--tight">
+    <h1 class="t-1">Basket</h1>
+
+    <div class="g" style="margin-top:var(--s-5)">
+      <div class="c-7">
+        <p class="note" data-ready hidden></p>
+        <p class="note note--warn" style="margin-top:var(--s-3)" data-stale hidden></p>
+
+        <div class="lines" style="margin-top:var(--s-4)" data-lines></div>
+
+        <div class="row" style="margin-top:var(--s-5)">
+          <a class="btn" href="work.html" data-work-link>Keep looking</a>
+          <button class="linkish push" type="button" data-clear>Empty it</button>
+        </div>
+      </div>
+
+      <aside class="c-4 start-9" data-aside hidden>
+        <div class="sheet-hold">
+          <div class="sheet">
+            <p class="label">What it comes to</p>
+            <div data-totals></div>
+            <a class="btn btn--acid btn--block btn--lg" style="margin-top:var(--s-4)" href="checkout.html" data-checkout>
+              Check out
+            </a>
+            <p class="xs dim" style="margin-top:var(--s-3)">Guest checkout. No account, no password.</p>
+          </div>
+          <p class="note" style="margin-top:var(--s-4)" data-free hidden></p>
+        </div>
+      </aside>
+    </div>
+
+    <div data-empty hidden>
+      <div class="empty">
+        <h2 class="t-2">Nothing in it yet</h2>
+        <p class="lede dim" style="margin-top:var(--s-4)">
+          Start a brief and the price follows you down the page, or take one of the editions as it is.
+        </p>
+        <div class="row" style="margin-top:var(--s-5)">
+          <a class="btn btn--acid btn--lg" href="commission.html" data-commission-link>Start a brief</a>
+          <a class="btn btn--lg" href="work.html" data-work-link-2>See the editions</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer" data-footer></footer>
+
+<script type="module" src="js/pages/cart.js"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+/* ==========================================================================
+   Template 04 — The Contemporary Creative Studio
+   Tokens. The only file that states a raw value.
+
+   The distance check that produced these is in docs/04-creative-studio.md.
+   Against the three shipped templates:
+
+     ground      near-black     — 504 / 676 / 701 channels away, and the
+                                  first dark ground in the set
+     display     Syne           — not serif, not grotesque, not rounded
+     accent      acid           — 303 / 517 / 401 away
+     separation  overlap and full bleed on a visible column grid.
+                 Nothing in this template has a border or a shadow.
+   ========================================================================== */
+
+@font-face {
+  font-family: 'Syne';
+  src: url('../assets/fonts/syne.woff2') format('woff2-variations');
+  font-weight: 400 800;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Archivo';
+  src: url('../assets/fonts/archivo.woff2') format('woff2-variations');
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+:root {
+  /* ---- Colour -----------------------------------------------------------
+     Two greys, one accent. A studio does not need a palette; the work
+     supplies the colour and the interface gets out of its way. */
+  --ground: #0e0e10;
+  --raised: #191a1d;
+  --raised-2: #232428;
+
+  --ink: #f2f2ef;
+  --ink-2: #9a9a93;
+  --ink-3: #6a6a66;
+
+  --acid: #ccff00;
+  --acid-dim: #a8d400;
+
+  /* Status. Kept deliberately unsaturated against the acid, so the one
+     bright thing on the page is always the thing you act on. */
+  --ok: #7ee3a8;
+  --warn: #ffc864;
+  --bad: #ff7a6b;
+
+  /* Rules. The hairline is atmosphere and is aria-hidden wherever it
+     appears; --rule-strong is for anything that actually separates content
+     and clears 3:1 against the ground, per WCAG 2.2 SC 1.4.11. */
+  --hair: #26272c;
+  /* 3.64:1 against the ground. The first value tried was #55565e, which the
+     style guide's live contrast table measured at 2.64:1 — under the 3:1 that
+     SC 1.4.11 requires of a rule that actually separates content. Measuring
+     it is the only reason that was caught. */
+  --rule-strong: #6a6b73;
+
+  /* ---- Type -------------------------------------------------------------
+     Syne is the point. It is set tight, large, and allowed to run to the
+     edge of the measure — "expressive typography" in the brief means the
+     type is the composition, not a label on one. */
+  --font-display: 'Syne', 'Trebuchet MS', sans-serif;
+  --font-ui: 'Archivo', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* A wide scale, because the contrast between the largest and smallest
+     type is what carries the hierarchy once the borders are gone. Big, but
+     not so big that one line needs two screens — display type that cannot
+     hold a sentence is decoration, and the brief rejects beautiful
+     interfaces that are hard to use. */
+  --t-mega: clamp(2.8rem, 9.5vw, 8rem);
+  --t-1: clamp(2.4rem, 6.5vw, 5rem);
+  --t-2: clamp(1.7rem, 3.6vw, 2.6rem);
+  --t-3: clamp(1.15rem, 1.9vw, 1.45rem);
+  --t-4: 1.0625rem;
+  --sm: 0.875rem;
+  --xs: 0.75rem;
+
+  --tight: -0.04em;
+  --wide: 0.14em;
+
+  /* ---- Space ------------------------------------------------------------ */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.875rem;
+  --s-4: 1.25rem;
+  --s-5: 2rem;
+  --s-6: 3.25rem;
+  --s-7: 5rem;
+  --s-8: 8rem;
+
+  /* ---- The grid ---------------------------------------------------------
+     A 12-column grid that is actually visible. It is the template's
+     separation method: nothing is boxed, so the grid is what tells you
+     where one thing ends and the next begins. */
+  --cols: 12;
+  --gutter: clamp(1rem, 2.2vw, 2rem);
+  --page: 1560px;
+  --prose: 58ch;
+
+  /* ---- Motion -----------------------------------------------------------
+     The brief rejects "excessive animations that slow down purchasing", so
+     nothing here delays an action. Motion is for arrival and hover only,
+     never between a press and its result. */
+  --fast: 110ms;
+  --mid: 260ms;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --fast: 1ms; --mid: 1ms; --ease: linear; }
+}

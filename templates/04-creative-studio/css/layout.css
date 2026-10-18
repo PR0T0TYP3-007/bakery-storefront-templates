@@ -1,0 +1,121 @@
+/* ==========================================================================
+   Layout — the grid, and the compositions built on it.
+
+   This is the template's separation method. Nothing here has a border or a
+   shadow: where one thing ends and the next begins is told by the grid, by
+   a full-bleed edge, or by two elements overlapping. Template 01 separates
+   with hairline rules, Template 02 with drawn outlines, Template 05 with
+   ruled rows. This one separates with position.
+   ========================================================================== */
+
+.page { width: min(100% - (var(--gutter) * 2), var(--page)); margin-inline: auto; }
+.page--narrow { width: min(100% - (var(--gutter) * 2), 980px); margin-inline: auto; }
+
+/* The 12-column grid every composition sits on. */
+.g {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  gap: var(--gutter);
+}
+
+/* Column spans. Below 60rem everything collapses to full width — an
+   "unusual composition" that cannot be read on a phone is just a defect,
+   and the brief rejects desktop-first designs with poor mobile. */
+@media (min-width: 60rem) {
+  .c-2 { grid-column: span 2; }
+  .c-3 { grid-column: span 3; }
+  .c-4 { grid-column: span 4; }
+  .c-5 { grid-column: span 5; }
+  .c-6 { grid-column: span 6; }
+  .c-7 { grid-column: span 7; }
+  .c-8 { grid-column: span 8; }
+  .c-9 { grid-column: span 9; }
+  .c-10 { grid-column: span 10; }
+  .c-12 { grid-column: span 12; }
+  .start-2 { grid-column-start: 2; }
+  .start-4 { grid-column-start: 4; }
+  .start-6 { grid-column-start: 6; }
+  .start-7 { grid-column-start: 7; }
+  .start-8 { grid-column-start: 8; }
+}
+@media (max-width: 59.99rem) {
+  .g > * { grid-column: 1 / -1; }
+}
+
+/* The visible column grid. Decorative and aria-hidden: it is atmosphere,
+   and its contrast is deliberately below the text threshold because
+   nothing depends on reading it. */
+.grid-lines {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  width: min(100% - (var(--gutter) * 2), var(--page));
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  gap: var(--gutter);
+}
+.grid-lines span { border-left: 1px solid var(--hair); }
+.grid-lines span:last-child { border-right: 1px solid var(--hair); }
+@media (max-width: 59.99rem) {
+  /* Twelve hairlines behind a single-column phone layout is noise. */
+  .grid-lines { display: none; }
+}
+
+/* Everything else sits above the grid. */
+.masthead, main, .footer { position: relative; z-index: 1; }
+
+/* --------------------------------------------------------------------------
+   Sections
+   -------------------------------------------------------------------------- */
+.sec { padding-block: var(--s-7); }
+.sec--tight { padding-block: var(--s-5); }
+.sec--huge { padding-block: var(--s-8); }
+
+/* A full-bleed band. These are direct children of <main>, so they are
+   already the full width of the document and need no escape hatch.
+   The usual `width: 100vw; margin-inline: calc(50% - 50vw)` trick is
+   deliberately not used: 100vw includes the vertical scrollbar, so it
+   overflows the document by the scrollbar's width and gives the whole page
+   a sideways scroll. */
+.bleed { padding-inline: var(--gutter); }
+.bleed--raised { background: var(--raised); }
+.bleed--acid { background: var(--acid); color: var(--ground); }
+.bleed--acid .label, .bleed--acid .dim { color: color-mix(in oklab, var(--ground) 68%, transparent); }
+
+/* A rule that genuinely separates content, so it meets 3:1. */
+.rule { border: 0; border-top: 1px solid var(--rule-strong); margin: 0; }
+
+/* The section marker: a number and a name, set across the top of a block. */
+.marker {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-4);
+  padding-bottom: var(--s-3);
+  border-bottom: 1px solid var(--rule-strong);
+  margin-bottom: var(--s-5);
+}
+.marker__n { font-family: var(--font-display); font-weight: 700; color: var(--acid); }
+.marker__name { flex: 1; }
+/* A link in a section marker is a real target, not prose, so it clears the
+   24px of SC 2.5.8 rather than relying on the spacing exception. */
+.marker a { display: inline-block; padding-block: 4px; }
+
+/* --------------------------------------------------------------------------
+   Overlap — the composition device that replaces the card.
+   -------------------------------------------------------------------------- */
+@media (min-width: 60rem) {
+  /* Pulls an element up into the one above it. Used sparingly: twice on the
+     home page, once on a piece. */
+  .lift { margin-top: -6vw; }
+  .lift-lg { margin-top: -11vw; }
+  /* Pushes type over the top of an image. */
+  .over { position: relative; z-index: 2; mix-blend-mode: difference; }
+}
+
+.stack > * + * { margin-top: var(--s-4); }
+.stack-2 > * + * { margin-top: var(--s-2); }
+.row { display: flex; flex-wrap: wrap; gap: var(--s-3); align-items: center; }
+.row--between { justify-content: space-between; }
+.push { margin-inline-start: auto; }

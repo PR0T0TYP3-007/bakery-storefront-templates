@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Work — FOLD</title>
+<meta name="description" content="Editions we repeat at a fixed price, and the commissions we build one at a time.">
+
+<link rel="preload" href="assets/fonts/syne.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/archivo.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/piece.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to the work</a>
+
+<header class="masthead" data-masthead></header>
+<div class="allergen" data-allergens></div>
+
+<main id="main">
+  <section class="page sec--tight">
+    <div class="g">
+      <div class="c-7">
+        <h1 class="t-1">Work</h1>
+        <p class="lede dim" style="margin-top:var(--s-4)">
+          Four editions we repeat, and the commissions, which are different every time.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="page sec--tight">
+    <div class="marker">
+      <span class="marker__n">01</span>
+      <span class="marker__name label">Commissions</span>
+    </div>
+    <div class="g">
+      <div class="c-6">
+        <p class="t-2" data-commission-pitch></p>
+        <p class="prose dim" style="margin-top:var(--s-4)" data-commission-body></p>
+        <p style="margin-top:var(--s-5)">
+          <a class="btn btn--acid btn--lg" href="commission.html" data-commission-link>Start a brief</a>
+        </p>
+      </div>
+      <ul class="c-5 start-8" style="list-style:none;padding:0;display:grid;gap:var(--s-3)" data-levels></ul>
+    </div>
+  </section>
+
+  <section class="page sec">
+    <div class="marker">
+      <span class="marker__n">02</span>
+      <span class="marker__name label">Editions</span>
+      <p class="sm dim num" aria-live="polite" data-found></p>
+    </div>
+    <div class="g" data-shelf></div>
+  </section>
+</main>
+
+<footer class="footer" data-footer></footer>
+
+<script type="module" src="js/pages/work.js"></script>
+</body>
+</html>

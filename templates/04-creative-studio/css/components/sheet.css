@@ -1,0 +1,143 @@
+/* ==========================================================================
+   The spec sheet.
+
+   The commission page's output, and the template's one piece of real
+   expressive typography — the price set at display scale with its working
+   set small underneath it, the way a studio's job sheet actually reads.
+
+   It is also designed to be printed. base.css flips the whole template to
+   paper under @media print, and this is the document that flip exists for.
+   ========================================================================== */
+
+.sheet {
+  background: var(--raised);
+  padding: var(--s-5);
+  display: grid;
+  gap: var(--s-5);
+}
+
+@media (min-width: 60rem) {
+  /* Sticky, so the number stays in view while the brief is written. */
+  .sheet-hold { position: sticky; top: calc(68px + var(--s-4)); }
+  .sheet { padding: var(--s-6) var(--s-5); }
+}
+
+.sheet__head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--s-3) var(--s-4);
+  align-items: flex-start;
+}
+/* Both halves must be allowed to shrink, or a long date pushes the header
+   out of a narrow sheet. */
+.sheet__head > * { min-width: 0; }
+.sheet__ref {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--t-3);
+  color: var(--acid);
+  margin-top: var(--s-1);
+}
+
+/* --------------------------------------------------------------------------
+   The brief
+   -------------------------------------------------------------------------- */
+.sheet__brief { display: grid; gap: var(--s-4); }
+.sheet__brief > div { display: grid; gap: var(--s-1); }
+.sheet__brief dd { font-weight: 600; text-wrap: pretty; }
+
+.sheet__note { display: block; font-size: var(--sm); font-weight: 400; color: var(--ink-2); margin-top: 2px; }
+.sheet__note--inline { display: inline; margin: 0; font-size: var(--xs); }
+
+/* --------------------------------------------------------------------------
+   The working
+   -------------------------------------------------------------------------- */
+.sheet__lines { width: 100%; border-collapse: collapse; font-size: var(--sm); }
+.sheet__lines th {
+  text-align: left;
+  font-weight: 400;
+  color: var(--ink-2);
+  padding-block: var(--s-2);
+  vertical-align: baseline;
+}
+.sheet__lines td {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  padding-block: var(--s-2);
+  padding-left: var(--s-4);
+  white-space: nowrap;
+  vertical-align: baseline;
+}
+
+/* --------------------------------------------------------------------------
+   The number
+   -------------------------------------------------------------------------- */
+.sheet__total { display: grid; gap: var(--s-1); }
+.sheet__amount {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(3rem, 7.5vw, 5.5rem);
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  color: var(--acid);
+  margin: 0;
+}
+/* The number flashes on change, so a rise is never silent. */
+@keyframes bumped { 0% { opacity: 1; } 35% { opacity: 0.35; } 100% { opacity: 1; } }
+.sheet__amount[data-bumped] { animation: bumped var(--mid) var(--ease); }
+
+/* --------------------------------------------------------------------------
+   The terms
+   -------------------------------------------------------------------------- */
+.sheet__terms {
+  display: grid;
+  gap: var(--s-4);
+  border-top: 1px solid var(--rule-strong);
+  padding-top: var(--s-4);
+}
+.sheet__terms > div { display: grid; gap: 2px; }
+.sheet__terms dd { font-weight: 600; }
+.sheet__terms dd.num { font-family: var(--font-display); font-size: var(--t-4); }
+
+/* Intrinsic, not a media query. The sheet is a 388px column inside a
+   1000px viewport, so a viewport media query put two columns inside a
+   narrow box and overflowed it. `auto-fit` asks the container how much room
+   it actually has, which is the question that matters here. */
+.sheet__brief { grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); }
+.sheet__terms { grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr)); }
+/* The techniques line is prose and always gets the full width. */
+.sheet__brief > div:has(dt:not(:only-child)) { min-width: 0; }
+.sheet__brief dd { overflow-wrap: anywhere; }
+
+/* --------------------------------------------------------------------------
+   The commit bar. On a phone the sheet scrolls away, so the number has to
+   travel with the button.
+   -------------------------------------------------------------------------- */
+.commit {
+  position: sticky;
+  bottom: 0;
+  z-index: 30;
+  background: var(--ground);
+  border-top: 1px solid var(--rule-strong);
+  padding-block: var(--s-3);
+}
+.commit__in { display: flex; align-items: center; gap: var(--s-4); flex-wrap: wrap; }
+.commit__price {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--t-2);
+  font-variant-numeric: tabular-nums;
+  color: var(--acid);
+}
+.commit__when { font-size: var(--xs); color: var(--ink-2); }
+.commit .btn { margin-inline-start: auto; }
+@media (max-width: 34rem) {
+  .commit .btn { margin-inline-start: 0; width: 100%; }
+}
+
+@media print {
+  .sheet { background: #fff; border: 1px solid #000; }
+  .sheet__amount { color: #000; }
+  .commit { display: none; }
+}
