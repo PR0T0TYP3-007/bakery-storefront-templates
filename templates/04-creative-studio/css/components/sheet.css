@@ -141,3 +141,73 @@
   .sheet__amount { color: #000; }
   .commit { display: none; }
 }
+
+/* ==========================================================================
+   The ambition control.
+
+   Four photographs, because this is the decision that multiplies the price
+   and it used to be four abstract words. A studio asked "what does
+   sculptural mean" in person would point at something it had made; this is
+   that, on a page.
+   ========================================================================== */
+
+.looks {
+  display: grid;
+  gap: var(--gutter);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr));
+}
+
+.look { position: relative; display: block; }
+.look input {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  opacity: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.look__face {
+  display: grid;
+  gap: var(--s-3);
+  cursor: pointer;
+  /* The selected state is a band of accent down the leading edge, the same
+     language as every other choice in the template. */
+  border-left: 2px solid transparent;
+  padding-left: var(--s-3);
+  transition: border-color var(--fast), background var(--fast);
+}
+.look input:hover + .look__face { background: var(--raised); }
+.look input:focus-visible + .look__face { outline: 2px solid var(--acid); outline-offset: 3px; }
+.look input:checked + .look__face { border-left-color: var(--acid); background: var(--raised); }
+
+.look__media {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--raised-2);
+}
+.look__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(1) contrast(1.15) brightness(0.9);
+  transition: filter var(--mid) var(--ease);
+}
+/* The chosen one comes into colour — the clearest possible signal of which
+   is selected, and it does not rely on the accent band alone. */
+.look input:checked + .look__face .look__media img,
+.look input:hover + .look__face .look__media img { filter: contrast(1.04); }
+
+.look__body { display: grid; gap: var(--s-1); padding-bottom: var(--s-3); }
+.look__name { font-family: var(--font-display); font-weight: 700; font-size: var(--t-3); }
+.look input:checked + .look__face .look__name { color: var(--acid); }
+.look__meta { font-size: var(--xs); color: var(--ink-2); }
+.look__note { font-size: var(--sm); color: var(--ink-2); text-wrap: pretty; }
+
+@media (prefers-reduced-motion: reduce) {
+  .look__media img { transition: none; }
+}

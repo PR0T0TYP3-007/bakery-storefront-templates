@@ -391,3 +391,38 @@ editions is more believable than one repeating three it cannot photograph.
 
 Sharing a photograph between two templates is its own portfolio problem, and worth a
 sweep: eight images are currently used by more than one template.
+
+---
+
+### D17 — Explain the product before explaining what is clever about it
+
+**Decision.** The commission page opens by saying what a commission *is*, in one
+sentence, before asking anything. The home page names the two things the studio sells
+before it makes its argument. The four ambition levels are shown as photographs.
+
+**Why.** The owner of this project read the commission page and asked: *what am I
+commissioning? what is the company even about? can I request custom orders? what do the
+options mean?* If the person who commissioned the work cannot tell what is being sold,
+the page has failed the brief's "beautiful interfaces that are difficult to navigate"
+regardless of how good the mechanic underneath it is.
+
+Everything on the page was true and nothing on it was an introduction. "Priced on the
+page" is the *differentiator*, not the *product*. A visitor has to learn what is sold
+before they can care what is clever about it.
+
+**The levels were the worst of it.** Clean, Composed, Sculptural and Editorial are the
+decision that multiplies the price, and they were four abstract words with abstract
+notes under them — nobody can choose between "composed" and "sculptural" from prose. A
+studio asked that question in person would point at something it had made. Each level
+now carries a reference photograph, a real figure for the scale currently chosen
+("from €972") rather than a multiplier, and a note in plain language. The chosen one
+comes into colour; the rest stay monochrome.
+
+Palette options moved from designer vocabulary to what they mean — "Monochrome" became
+"One colour", "High contrast" became "Colours that fight" — and each technique says what
+it looks like rather than what it is called in a kitchen.
+
+**What this is not.** It is not a retreat from the direction. The brief asks for a bold,
+experimental design language; it also rejects interfaces that are hard to use, and the
+two are not in tension. The composition, the typography and the dark ground are
+untouched. What changed is that the page now introduces itself.

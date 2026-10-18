@@ -60,7 +60,8 @@
           "factor": 1.0,
           "leadDays": 10,
           "allows": 2,
-          "note": "Simple forms, one finish, nothing applied. Harder than it sounds."
+          "note": "One tier, one finish, nothing stuck on. The shape has to carry it, which is harder than it sounds.",
+          "image": "photo-1640506054499-2b040ca19023"
         },
         {
           "id": "composed",
@@ -69,7 +70,8 @@
           "factor": 1.35,
           "leadDays": 14,
           "allows": 4,
-          "note": "Several elements and a palette we agree on first."
+          "note": "Two or three tiers with things arranged on them — flowers, fruit, piping — in colours we agree before we start.",
+          "image": "photo-1622174236096-69bca1b95b49"
         },
         {
           "id": "sculptural",
@@ -78,7 +80,8 @@
           "factor": 1.9,
           "leadDays": 21,
           "allows": 6,
-          "note": "Structure that has to hold its own weight. Built, not stacked."
+          "note": "A shape that has to be built rather than stacked: curves, overhangs, things that lean. There is steel inside some of these.",
+          "image": "photo-1572436237214-cf7568e025ea"
         },
         {
           "id": "editorial",
@@ -87,7 +90,8 @@
           "factor": 2.6,
           "leadDays": 28,
           "allows": 9,
-          "note": "A one-off, for a photograph or a room. We will argue with you about it."
+          "note": "A one-off for a photograph, a launch or a room. Hand-painted, hand-sculpted, no two the same. We will have opinions.",
+          "image": "photo-1554922735-c09cab077e35"
         }
       ]
     },
@@ -98,27 +102,27 @@
       "options": [
         {
           "id": "mono",
-          "label": "Monochrome",
+          "label": "One colour",
           "price": 0,
-          "note": "One colour, every value of it"
+          "note": "One colour, every shade of it, nothing else"
         },
         {
           "id": "tonal",
-          "label": "Tonal",
+          "label": "Colours that agree",
           "price": 0,
-          "note": "A narrow range, nothing fighting"
+          "note": "A narrow range — creams, or greens, or rusts"
         },
         {
           "id": "contrast",
-          "label": "High contrast",
+          "label": "Colours that fight",
           "price": 0,
-          "note": "Two colours that should not work"
+          "note": "Two that should not go together, which is the point"
         },
         {
           "id": "natural",
-          "label": "Left alone",
+          "label": "No colour added",
           "price": 0,
-          "note": "The colour the ingredients already are"
+          "note": "Whatever colour the ingredients already are"
         }
       ]
     },
@@ -153,7 +157,7 @@
     {
       "id": "piped",
       "label": "Hand-piped detail",
-      "note": "Royal icing, off the bench, no stencil",
+      "note": "Fine lines and dots in royal icing, done freehand",
       "price": 90,
       "leadDays": 2,
       "kind": "technique"
@@ -161,7 +165,7 @@
     {
       "id": "airbrush",
       "label": "Airbrushed gradient",
-      "note": "Across the whole form, not a panel",
+      "note": "Colour sprayed so it fades across the whole cake",
       "price": 80,
       "leadDays": 1,
       "kind": "technique"
@@ -169,7 +173,7 @@
     {
       "id": "print",
       "label": "Printed edible image",
-      "note": "Your artwork, on the piece",
+      "note": "Your artwork printed onto edible sheet and laid on",
       "price": 60,
       "leadDays": 1,
       "kind": "technique"
@@ -177,7 +181,7 @@
     {
       "id": "mirror",
       "label": "Mirror glaze",
-      "note": "Poured once, in one go",
+      "note": "A glossy coat poured in one go — you can see yourself in it",
       "price": 120,
       "leadDays": 1,
       "kind": "technique"
@@ -185,7 +189,7 @@
     {
       "id": "gold",
       "label": "Gold leaf",
-      "note": "23 carat, laid by hand",
+      "note": "Real gold leaf, laid on in flakes by hand",
       "price": 150,
       "leadDays": 1,
       "kind": "technique"
@@ -193,7 +197,7 @@
     {
       "id": "painted",
       "label": "Hand-painted panel",
-      "note": "Cocoa butter on fondant, painted wet",
+      "note": "Painted directly onto the cake with cocoa butter, like a canvas",
       "price": 280,
       "leadDays": 4,
       "kind": "technique"
@@ -201,15 +205,16 @@
     {
       "id": "flowers",
       "label": "Sugar flowers",
-      "note": "Wired and dusted, five days to dry",
+      "note": "Flowers made from sugar paste, wired and dusted — five days to dry",
       "price": 240,
       "leadDays": 5,
-      "kind": "technique"
+      "kind": "technique",
+      "image": "photo-1609522862879-6ec6f3f6ca2f"
     },
     {
       "id": "sculpted",
       "label": "Sculpted sugar",
-      "note": "Pulled and blown on the bench",
+      "note": "Sugar heated and pulled into shapes by hand",
       "price": 320,
       "leadDays": 6,
       "kind": "technique"
@@ -217,7 +222,7 @@
     {
       "id": "armature",
       "label": "Structural armature",
-      "note": "Steel inside it, so it can lean",
+      "note": "A steel frame inside the cake so it can lean or overhang",
       "price": 390,
       "leadDays": 7,
       "kind": "technique"
@@ -347,6 +352,67 @@
         "card",
         "giftbox"
       ]
+    },
+    {
+      "id": "ed-cocoa",
+      "kind": "edition",
+      "category": "edition",
+      "name": "Edition No.3",
+      "subtitle": "Dark cocoa, rye, smoked salt",
+      "price": 88,
+      "leadDays": 4,
+      "batchSize": 5,
+      "image": "photo-1569580990590-478357ea38ab",
+      "popular": false,
+      "allergens": [
+        "gluten",
+        "dairy",
+        "egg"
+      ],
+      "description": "Almost black, and barely sweet. Rye in the sponge gives it a sourness that stops the cocoa being a dessert, and the salt lands at the end.",
+      "options": [
+        "size"
+      ],
+      "defaults": {
+        "size": "s"
+      },
+      "addons": [
+        "candles",
+        "card",
+        "giftbox"
+      ],
+      "inscribable": true
+    },
+    {
+      "id": "ed-honey",
+      "kind": "edition",
+      "category": "edition",
+      "name": "Edition No.4",
+      "subtitle": "Burnt honey, walnut, sour cream",
+      "price": 92,
+      "leadDays": 4,
+      "batchSize": 4,
+      "image": "photo-1615200961517-d347f6f919ef",
+      "popular": true,
+      "allergens": [
+        "gluten",
+        "dairy",
+        "egg",
+        "nuts"
+      ],
+      "description": "Eight thin layers, built the day before so they soften into each other. The honey is taken past golden, which is where most people stop.",
+      "options": [
+        "size"
+      ],
+      "defaults": {
+        "size": "s"
+      },
+      "addons": [
+        "candles",
+        "card",
+        "giftbox"
+      ],
+      "inscribable": true
     },
     {
       "id": "offcuts",

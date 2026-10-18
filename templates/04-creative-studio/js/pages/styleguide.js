@@ -139,7 +139,7 @@ const FIXTURES = [
   [
     'The most we can do',
     { scale: 'xl', ambition: 'editorial', palette: 'contrast', setup: true },
-    catalogue.addons.map((a) => a.id),
+    catalogue.addons.filter((a) => a.kind === 'technique').map((a) => a.id),
     'For a launch in a white gallery. Nothing pink, and it has to survive two hours under lights.',
   ],
 ];

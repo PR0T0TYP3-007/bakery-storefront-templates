@@ -12,7 +12,7 @@
  * anyone could feel.
  */
 
-import { startPage, $, $$, esc, link } from './_page.js';
+import { startPage, $, $$, esc, link, photo } from './_page.js';
 import * as session from '../services/session.js';
 import {
   priceCommission,
@@ -32,6 +32,9 @@ await startPage({ nav: 'Commission' });
 const { merchant, catalogue } = session.state;
 const groups = catalogue.optionGroups;
 const product = catalogue.products.find((p) => p.kind === 'commission');
+
+$('[data-valid-days]').textContent = merchant.commission.quoteValidDays;
+$('[data-editions-link]').href = link('work.html');
 
 /* -------------------------------------------------------------------------
    The brief
@@ -78,13 +81,50 @@ function checkRow({ id, checked, disabled, title, meta, note, why }) {
     </label>`;
 }
 
+/**
+ * The ambition control, shown as photographs.
+ *
+ * This is the decision that moves the price most — it multiplies the base —
+ * and it was four abstract words with abstract notes under them. Nobody can
+ * choose between "Composed" and "Sculptural" from prose. Each level now shows
+ * what it looks like, which is how a studio would answer the question in
+ * person: by pointing at something it has made.
+ */
+function ambitionRow(o) {
+  const { ok } = { ok: true };
+  return `
+    <label class="look">
+      <input type="radio" name="ambition" value="${esc(o.id)}" ${selections.ambition === o.id ? 'checked' : ''}>
+      <span class="look__face">
+        <span class="look__media">
+          <img src="${photo(o.image, 'md')}"
+               srcset="${photo(o.image, 'sm')} 480w, ${photo(o.image, 'md')} 800w"
+               sizes="(min-width: 60rem) 22vw, 45vw"
+               alt="A ${o.label.toLowerCase()} commission" loading="lazy" decoding="async"
+               width="800" height="1000">
+        </span>
+        <span class="look__body">
+          <span class="look__name">${esc(o.label)}</span>
+          <span class="look__meta num">from ${money(Math.round(baseFor() * o.factor))} &middot; ${o.leadDays} days</span>
+          <span class="look__note">${esc(o.note)}</span>
+          <span class="look__meta">Up to ${o.allows} ${o.allows === 1 ? 'technique' : 'techniques'}</span>
+        </span>
+      </span>
+    </label>`;
+}
+
+/** The base this brief currently sits on, so each level can show a real figure. */
+function baseFor() {
+  return groups.scale.options.find((o) => o.id === selections.scale)?.price ?? 0;
+}
+
 function step(n, title, why, body) {
   return `
     <section class="sec--tight">
       <div class="marker">
         <span class="marker__n">${String(n).padStart(2, '0')}</span>
         <span class="marker__name label">${esc(title)}</span>
-        ${why ? `<span class="sm dim">${esc(why)}</span>` : ''}
+        ${why ? `<span class="sm dim marker__why">${esc(why)}</span>` : ''}
       </div>
       ${body}
     </section>`;
@@ -123,18 +163,7 @@ function renderChoices() {
     )
     .join('');
 
-  const ambition = groups.ambition.options
-    .map((o) =>
-      choiceRow({
-        name: 'ambition',
-        value: o.id,
-        checked: selections.ambition === o.id,
-        title: o.label,
-        meta: `&times; ${o.factor.toFixed(2)} &middot; ${o.leadDays} days`,
-        note: `${o.note} Up to ${o.allows} techniques.`,
-      })
-    )
-    .join('');
+  const ambition = `<div class="looks">${groups.ambition.options.map(ambitionRow).join('')}</div>`;
 
   const palette = groups.palette.options
     .map((o) =>
@@ -171,7 +200,7 @@ function renderChoices() {
   $('[data-choices]').innerHTML =
     startingNote() +
     step(1, 'How many it has to feed', 'People. Scale sets the base.', `<fieldset class="choices"><legend class="sr">Scale</legend>${scale}</fieldset>`) +
-    step(2, 'How far we take it', 'This multiplies the base, it does not add to it.', `<fieldset class="choices"><legend class="sr">Ambition</legend>${ambition}</fieldset>`) +
+    step(2, 'How far we take it', `Each step is more work on the bench, so it multiplies the ${money(baseFor())} above rather than adding to it.`, `<fieldset style="border:0;padding:0;margin:0"><legend class="sr">How far we take it</legend>${ambition}</fieldset>`) +
     step(
       3,
       'Our techniques',

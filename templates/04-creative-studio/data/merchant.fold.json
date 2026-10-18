@@ -2,7 +2,7 @@
   "id": "fold",
   "name": "FOLD",
   "shortName": "FOLD",
-  "tagline": "A cake studio. Commissions, priced on the page.",
+  "tagline": "We design and build one-off cakes, and price them on the page.",
   "since": "2019",
   "locale": "en-GB",
   "currency": "EUR",
@@ -148,8 +148,8 @@
   "allergenStatement": "One bench. Gluten, dairy, egg, nuts and soya cross it every day, so nothing leaves here certified free of them. Put the allergy in the brief — it is a design constraint like any other, and we will design around it or say it cannot be done.",
   "voice": {
     "kicker": "Oranienstraße, Berlin · Since 2019",
-    "headline": "Priced on the page.",
-    "lede": "Scale it, decide how far we take it, pick the techniques. The figure moves as you work, holds for fourteen days, and a deposit books the bench."
+    "headline": "One-off cakes, priced on the page.",
+    "lede": "A commission is a cake designed with you and built on our bench — for a wedding, a launch, a birthday. Answer six questions and the price appears as you go, instead of arriving by email next week."
   },
   "gifting": {
     "messageMax": 240,

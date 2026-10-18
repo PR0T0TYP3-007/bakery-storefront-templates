@@ -90,14 +90,22 @@
 /* The section marker: a number and a name, set across the top of a block. */
 .marker {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
-  gap: var(--s-4);
+  gap: var(--s-2) var(--s-4);
   padding-bottom: var(--s-3);
   border-bottom: 1px solid var(--rule-strong);
   margin-bottom: var(--s-5);
 }
-.marker__n { font-family: var(--font-display); font-weight: 700; color: var(--acid); }
-.marker__name { flex: 1; }
+.marker__n { font-family: var(--font-display); font-weight: 700; color: var(--acid); flex: none; }
+/* The label holds its line; the explanation beside it is what gives way.
+   With `flex: 1` on the label, a long explanation squeezed "HOW FAR WE TAKE
+   IT" into a four-line column one word wide. */
+.marker__name { flex: none; white-space: nowrap; }
+.marker__why { flex: 1 1 14rem; min-width: 0; text-align: right; }
+@media (max-width: 44rem) {
+  .marker__why { text-align: left; flex-basis: 100%; }
+}
 /* A link in a section marker is a real target, not prose, so it clears the
    24px of SC 2.5.8 rather than relying on the spacing exception. */
 .marker a { display: inline-block; padding-block: 4px; }
