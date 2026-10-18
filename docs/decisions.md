@@ -321,3 +321,73 @@ believed. The cost of computing it live is about fifteen lines per template.
 **What this does not cover.** No axe or Lighthouse run has been performed on any template,
 and nothing has been tested with a screen reader. Measured is not audited, and no
 accessibility or performance numbers should be quoted to the client yet.
+
+---
+
+### D14 — Tax is a property of the jurisdiction, not of the layout
+
+**Decision.** `shared/core/pricing.js` grows a `taxMode` of `inclusive` or `exclusive`,
+defaulting to `exclusive`. An inclusive merchant's shelf price already contains the tax,
+so the checkout *extracts* and states it rather than adding it.
+
+**Why.** Template 04's config said "Includes 7% VAT" while `orderTotals()` added 7% on
+top: €85 became €90.95. A customer saw one price and would have paid another. In the EU
+and the UK that is not a presentation preference, it is the law for consumer prices — so
+the bug was not merely confusing, it made the template non-compliant for the market it
+is set in.
+
+US sales tax genuinely is quoted separately and appears at checkout, which is why the
+exclusive path stays and stays the default: Template 01 is in Brooklyn.
+
+**Caught by an outside review, not by us.** Every test asserted the arithmetic was
+*consistent*; none asserted it matched what the page promised. There are now four tests
+covering both directions, a zero-rated merchant, and that a deposit is a share of the
+gross rather than of a pre-tax figure.
+
+---
+
+### D15 — A capability may be switched off; it may not be absent
+
+**Decision.** Where the brief's §7 lists a capability — inscriptions, add-ons, gifting,
+local payment methods — the template implements it behind a config flag. A merchant
+config may then turn it off.
+
+**Why.** Template 04 shipped with `gifting: false`, `inscriptions: false` and no code for
+either, justified on the grounds that Template 02 "owns" gifting. That confused two
+different things. §7 says *"Each template must support the core realities"* and then
+*"The underlying system must allow merchants to configure which capabilities apply... The
+experience must accurately reflect what each merchant can fulfil."* Supporting a
+capability and emphasising it are not the same decision. Differentiation between
+templates is about treatment and prominence, not about dropping requirements.
+
+Template 02's gifting is a first-class branch with a card preview; Template 04's is a
+compact section in the studio's voice. Both exist, both are config-driven, and they do
+not look alike — which is the whole point.
+
+**Also corrected under this.** Editions had a "How many: One / Two / Four" control where
+every option was priced zero and labelled "included", sitting directly above a quantity
+stepper. A control that changes nothing is worse than no control: it is the brief's
+"clear price changes as selections are made" failing in the most visible way available.
+It is a real size now, and the price moves.
+
+---
+
+### D16 — Photography is art-directed in CSS, and never lies about the product
+
+**Decision.** Template 04's images carry no baked-in treatment. A CSS filter puts every
+photograph into the studio's look, and full colour returns on hover and on focus.
+
+**Why in CSS.** The brief rejects "design concepts that only work with perfect
+demonstration content". A treatment applied in the stylesheet reaches a merchant's own
+phone snapshots too, so a bad photograph and a studio photograph end up looking like they
+belong to the same shop. A treatment baked into the files would only ever flatter ours.
+
+**Why the range shrank.** All four of Template 04's editions were showing photographs of
+something else — "Buckwheat, pear, crème fraîche" was a croissant — and two of them were
+the same shots Template 02 uses for different products. Only two cake photographs in the
+library were unused. So the range is two editions and the offcuts box, each with a
+photograph that is actually of it. A studio taking four commissions a week repeating two
+editions is more believable than one repeating three it cannot photograph.
+
+Sharing a photograph between two templates is its own portfolio problem, and worth a
+sweep: eight images are currently used by more than one template.

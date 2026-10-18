@@ -122,8 +122,8 @@ A failure keeps every field and the whole basket.
 
 ## Known gaps
 
-- No gifting branch. Template 02 owns that; this merchant's config has `gifting: false`.
 - One merchant config. The seam supports more.
+- Two editions rather than three — see decision D16.
 - No analytics instrumentation — unmet across the whole project.
 - No axe or Lighthouse run, and no screen-reader testing. Contrast, target sizes and
   horizontal overflow were measured during the build; everything else is built to WCAG

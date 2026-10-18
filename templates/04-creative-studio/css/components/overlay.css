@@ -147,6 +147,14 @@ dialog[open] { animation: dlg-in var(--mid) var(--ease); }
 }
 .toast--bad { border-left-color: var(--bad); }
 .toast strong { display: block; font-family: var(--font-display); font-weight: 700; }
+.toast__action {
+  display: inline-block;
+  margin-top: var(--s-2);
+  min-height: 24px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
 .toast svg { flex: none; margin-top: 2px; }
 
 @keyframes toast-in { from { opacity: 0; translate: 0 10px; } }

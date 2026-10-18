@@ -34,6 +34,8 @@
  */
 
 /** Money in minor units internally, as in shared/core/pricing.js. */
+import { applyTax } from '../../../shared/core/pricing.js';
+
 const toMinor = (n) => Math.round(n * 100);
 const toMajor = (n) => n / 100;
 
@@ -220,7 +222,10 @@ export function orderTotalsWith(priceLine, lines, merchant, catalogue, fulfilmen
     if (delivery.freeOver != null && subtotal >= toMinor(delivery.freeOver)) fee = 0;
   }
 
-  const tax = Math.round((subtotal + fee) * (merchant.taxRate ?? 0));
+  // Same rule as the shared model, imported rather than reimplemented — two
+  // copies of a tax calculation is how a basket and a checkout end up
+  // disagreeing by a few cents.
+  const { tax, total: gross } = applyTax(subtotal + fee, merchant);
   const gap = delivery?.freeOver != null ? Math.max(0, toMinor(delivery.freeOver) - subtotal) : 0;
 
   // The deposit is taken across the whole order, not per line: a basket with
@@ -228,7 +233,7 @@ export function orderTotalsWith(priceLine, lines, merchant, catalogue, fulfilmen
   const hasCommission = lines.some(
     (l) => catalogue.products.find((p) => p.id === l.productId)?.kind === COMMISSION_KIND
   );
-  const total = subtotal + fee + tax;
+  const total = gross;
   const depositPct = merchant.commission?.depositPct ?? 0;
   const dueNow = hasCommission ? Math.round(total * depositPct) : total;
 
@@ -237,6 +242,7 @@ export function orderTotalsWith(priceLine, lines, merchant, catalogue, fulfilmen
     fulfilment: toMajor(fee),
     tax: toMajor(tax),
     total: toMajor(total),
+    taxIncluded: (merchant.taxMode ?? 'exclusive') === 'inclusive',
     freeDeliveryGap: toMajor(gap),
     hasCommission,
     dueNow: toMajor(dueNow),

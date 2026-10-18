@@ -8,14 +8,15 @@
   "currency": "EUR",
   "timeZone": "Europe/Berlin",
   "taxRate": 0.07,
-  "taxNote": "Includes 7% VAT, the reduced German rate for prepared food.",
+  "taxMode": "inclusive",
+  "taxNote": "Every price here includes 7% VAT, the reduced German rate for prepared food.",
   "capabilities": {
     "pickup": true,
     "delivery": true,
     "customCakes": true,
-    "inscriptions": false,
-    "gifting": false,
-    "giftPackaging": false,
+    "inscriptions": true,
+    "gifting": true,
+    "giftPackaging": true,
     "guestCheckout": true
   },
   "locations": [
@@ -25,25 +26,63 @@
       "address": "Oranienstraße 182, 10999 Berlin",
       "phone": "+49 30 5557 2210",
       "default": true,
-      "slots": ["10:00–12:00", "12:00–14:00", "14:00–16:00", "16:00–18:00"]
+      "slots": [
+        "10:00–12:00",
+        "12:00–14:00",
+        "14:00–16:00",
+        "16:00–18:00"
+      ]
     }
   ],
   "email": "studio@fold.berlin",
   "hours": [
-    { "day": "Monday", "open": null },
-    { "day": "Tuesday", "open": "10:00", "close": "18:00" },
-    { "day": "Wednesday", "open": "10:00", "close": "18:00" },
-    { "day": "Thursday", "open": "10:00", "close": "18:00" },
-    { "day": "Friday", "open": "10:00", "close": "18:00" },
-    { "day": "Saturday", "open": "11:00", "close": "16:00" },
-    { "day": "Sunday", "open": null }
+    {
+      "day": "Monday",
+      "open": null
+    },
+    {
+      "day": "Tuesday",
+      "open": "10:00",
+      "close": "18:00"
+    },
+    {
+      "day": "Wednesday",
+      "open": "10:00",
+      "close": "18:00"
+    },
+    {
+      "day": "Thursday",
+      "open": "10:00",
+      "close": "18:00"
+    },
+    {
+      "day": "Friday",
+      "open": "10:00",
+      "close": "18:00"
+    },
+    {
+      "day": "Saturday",
+      "open": "11:00",
+      "close": "16:00"
+    },
+    {
+      "day": "Sunday",
+      "open": null
+    }
   ],
-  "closedWeekdays": [1, 0],
-  "closedDates": ["2026-12-24", "2026-12-25", "2026-12-26", "2027-01-01"],
+  "closedWeekdays": [
+    1,
+    0
+  ],
+  "closedDates": [
+    "2026-12-24",
+    "2026-12-25",
+    "2026-12-26",
+    "2027-01-01"
+  ],
   "cutoffHour": 16,
   "maxDaysAhead": 180,
   "dailyCapacity": 3,
-
   "_commission": "The numbers a real studio keeps in its head and never puts on the site. Every one of them is quoted back to the customer on the spec sheet.",
   "commission": {
     "minimum": 280,
@@ -53,23 +92,98 @@
     "setupFee": 180,
     "note": "One of us builds it, start to finish. That is why the diary is short and the notice is long."
   },
-
   "delivery": {
     "note": "Driven flat and level across Berlin, and set up on site if the piece needs it.",
     "freeOver": 900,
     "zones": [
-      { "id": "mitte", "label": "Kreuzberg, Mitte, Neukölln", "prefixes": ["109", "101", "104", "120"], "fee": 25 },
-      { "id": "ring", "label": "Inside the Ring", "prefixes": ["103", "105", "106", "107", "108", "121", "122"], "fee": 45 },
-      { "id": "outer", "label": "Outside the Ring", "prefixes": ["123", "124", "125", "126", "131", "133", "140"], "fee": 85 }
-    ]
+      {
+        "id": "mitte",
+        "label": "Kreuzberg, Mitte, Neukölln",
+        "prefixes": [
+          "109",
+          "101",
+          "104",
+          "120"
+        ],
+        "fee": 25
+      },
+      {
+        "id": "ring",
+        "label": "Inside the Ring",
+        "prefixes": [
+          "103",
+          "105",
+          "106",
+          "107",
+          "108",
+          "121",
+          "122"
+        ],
+        "fee": 45
+      },
+      {
+        "id": "outer",
+        "label": "Outside the Ring",
+        "prefixes": [
+          "123",
+          "124",
+          "125",
+          "126",
+          "131",
+          "133",
+          "140"
+        ],
+        "fee": 85
+      }
+    ],
+    "nudgeWithin": 150
   },
-
-  "allergens": ["gluten", "dairy", "egg", "nuts", "soya"],
-  "allergenStatement": "One kitchen, one bench. It handles gluten, dairy, egg, nuts and soya, and we cannot promise any piece is free of them. Tell us about an allergy in the brief and we will tell you honestly whether we can work around it.",
-
+  "allergens": [
+    "gluten",
+    "dairy",
+    "egg",
+    "nuts",
+    "soya"
+  ],
+  "allergenStatement": "One bench. Gluten, dairy, egg, nuts and soya cross it every day, so nothing leaves here certified free of them. Put the allergy in the brief — it is a design constraint like any other, and we will design around it or say it cannot be done.",
   "voice": {
     "kicker": "Oranienstraße, Berlin · Since 2019",
     "headline": "Priced on the page.",
-    "lede": "Every other studio takes your brief and sends a number in a week. Write it here and the figure moves as you go — firm for fourteen days, deposit at the end."
+    "lede": "Scale it, decide how far we take it, pick the techniques. The figure moves as you work, holds for fourteen days, and a deposit books the bench."
+  },
+  "gifting": {
+    "messageMax": 240,
+    "packagingAddon": "giftbox",
+    "note": "We leave the prices off everything in the box and write the card by hand."
+  },
+  "payment": {
+    "methods": [
+      {
+        "id": "card",
+        "label": "Card",
+        "note": "Visa, Mastercard, Amex"
+      },
+      {
+        "id": "paypal",
+        "label": "PayPal",
+        "note": "You will be taken to PayPal"
+      },
+      {
+        "id": "klarna",
+        "label": "Klarna",
+        "note": "Pay in 30 days, or in three"
+      },
+      {
+        "id": "sepa",
+        "label": "SEPA direct debit",
+        "note": "Lastschrift, from a German account"
+      },
+      {
+        "id": "wallet",
+        "label": "Apple Pay / Google Pay",
+        "note": "Shown where the device supports it",
+        "deviceOnly": true
+      }
+    ]
   }
 }

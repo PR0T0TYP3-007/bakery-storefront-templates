@@ -21,6 +21,10 @@ await startPage({ nav: null });
 
 for (const el of document.querySelectorAll('[data-home-link], [data-home-link-2]')) el.href = link('index.html');
 
+/** The method's own label from config, so the receipt names what was used. */
+const payLabel = (id) =>
+  (session.state.merchant.payment?.methods ?? []).find((m) => m.id === id)?.label ?? 'Card';
+
 const r = session.state.store.read('lastReceipt', null);
 const { merchant } = session.state;
 
@@ -53,7 +57,20 @@ if (!r) {
       }</dd>
     </div>
     <div><dt class="label">Booked by</dt><dd>${esc(r.customer.name)}<span class="sheet__note">${esc(r.customer.phone)}</span></dd></div>
-    <div><dt class="label">Placed</dt><dd>${esc(dateLong(new Date(r.placedAt)))}</dd></div>`;
+    <div><dt class="label">Placed</dt><dd>${esc(dateLong(new Date(r.placedAt)))}</dd></div>
+    <div><dt class="label">Paid with</dt><dd>${esc(payLabel(r.payment?.method))}</dd></div>
+    ${
+      r.gift?.isGift
+        ? `<div style="grid-column:1/-1">
+             <dt class="label">A present for</dt>
+             <dd>${esc(r.gift.recipient?.name || 'someone')}${
+               r.gift.recipient?.phone ? `<span class="sheet__note">${esc(r.gift.recipient.phone)}</span>` : ''
+             }${r.gift.message ? `<span class="sheet__note">&ldquo;${esc(r.gift.message)}&rdquo;</span>` : ''}${
+               r.gift.hidePrices ? '<span class="sheet__note">Prices left off everything in the box.</span>' : ''
+             }</dd>
+           </div>`
+        : ''
+    }`;
 
   // The same component the basket uses, read-only. One renderer for a line
   // means the receipt shows what was ordered, not a second idea of it.

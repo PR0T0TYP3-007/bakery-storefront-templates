@@ -39,6 +39,7 @@ const product = catalogue.products.find((p) => p.kind === 'commission');
 let selections = { ...product.defaults, setup: false };
 let techniques = [];
 let notes = '';
+let touched = false;
 let lastTotal = null;
 let shownWhen = null;
 
@@ -89,6 +90,23 @@ function step(n, title, why, body) {
     </section>`;
 }
 
+/**
+ * The brief opens on a sensible default rather than an empty form, the way
+ * Template 02's builder does: an empty configurator gives the customer
+ * nothing to react to, and a studio that cannot show a starting point looks
+ * like it has no opinion. What it must not do is let that default pass for
+ * the customer's own choice, so it says so, once, above the first step.
+ */
+function startingNote() {
+  if (touched) return '';
+  const scale = groups.scale.options.find((o) => o.id === selections.scale);
+  const amb = groups.ambition.options.find((o) => o.id === selections.ambition);
+  return `<p class="note" style="margin-bottom:var(--s-5)">${icons.info}<span>
+      Starting from <strong>${esc(amb.label.toLowerCase())}, ${esc(scale.label.toLowerCase())}</strong>
+      &mdash; the brief we are asked for most. Change any of it; the figure follows.
+    </span></p>`;
+}
+
 function renderChoices() {
   const allowance = techniqueAllowance(catalogue, selections);
 
@@ -131,7 +149,11 @@ function renderChoices() {
     )
     .join('');
 
-  const tech = catalogue.addons
+  // The product's own list, not the whole catalogue: editions' extras
+  // (candles, a card, a gift box) are add-ons too and are not techniques.
+  const tech = (product.addons ?? [])
+    .map((id) => catalogue.addons.find((a) => a.id === id))
+    .filter(Boolean)
     .map((a) => {
       const { ok, reason } = techniqueAvailable(catalogue, selections, techniques, a.id);
       return checkRow({
@@ -147,6 +169,7 @@ function renderChoices() {
     .join('');
 
   $('[data-choices]').innerHTML =
+    startingNote() +
     step(1, 'How many it has to feed', 'People. Scale sets the base.', `<fieldset class="choices"><legend class="sr">Scale</legend>${scale}</fieldset>`) +
     step(2, 'How far we take it', 'This multiplies the base, it does not add to it.', `<fieldset class="choices"><legend class="sr">Ambition</legend>${ambition}</fieldset>`) +
     step(
@@ -254,6 +277,7 @@ host.addEventListener('change', (e) => {
   const el = e.target;
 
   if (el.type === 'radio') {
+    touched = true;
     selections[el.name] = el.value;
     // Dropping to a lower ambition can make chosen techniques illegal. Say
     // so and drop them rather than quietly charging for something the level
@@ -284,6 +308,7 @@ host.addEventListener('change', (e) => {
   }
 
   if (el.type === 'checkbox') {
+    touched = true;
     techniques = $$('.choice input[type="checkbox"]:not([data-setup]):checked', host).map((i) => i.value);
     // Re-rendering switches the remaining techniques on or off as the
     // allowance fills up, which is the whole point of the cap being visible.

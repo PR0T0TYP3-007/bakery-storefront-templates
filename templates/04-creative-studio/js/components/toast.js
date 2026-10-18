@@ -25,12 +25,17 @@ function layer() {
 /**
  * @param {{title:string, detail?:string, tone?:'good'|'bad', icon?:string}} opts
  */
-export function toast({ title, detail = '', tone = 'good', icon = '' }) {
+export function toast({ title, detail = '', tone = 'good', icon = '', action = null }) {
   const host = layer();
 
   const el = document.createElement('div');
   el.className = `toast${tone === 'bad' ? ' toast--bad' : ''}`;
-  el.innerHTML = `${icon}<span><strong>${esc(title)}</strong>${detail ? esc(detail) : ''}</span>`;
+  // An optional way to act on it. A confirmation that tells you something
+  // was added and gives you no route to it is a dead end.
+  el.innerHTML =
+    `${icon}<span><strong>${esc(title)}</strong>${detail ? esc(detail) : ''}` +
+    (action ? `<a class="toast__action" href="${esc(action.href)}">${esc(action.label)}</a>` : '') +
+    `</span>`;
 
   host.append(el);
 

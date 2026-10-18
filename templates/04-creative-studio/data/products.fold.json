@@ -1,21 +1,51 @@
 {
   "_note": "Two kinds of thing. `commission` is the studio's real work and is priced by js/commission.js, because the model is multiplicative and the shared additive priceLine() cannot express it. `edition` pieces are ordinary products priced by shared/core/pricing.js. Everything else in the stack — dates, capacity, cart, checkout — is the same for both.",
-
   "categories": [
-    { "id": "commission", "label": "Commissions", "note": "Priced on the page" },
-    { "id": "edition", "label": "Editions", "note": "Pieces we repeat" }
+    {
+      "id": "commission",
+      "label": "Commissions",
+      "note": "Priced on the page"
+    },
+    {
+      "id": "edition",
+      "label": "Editions",
+      "note": "Pieces we repeat"
+    }
   ],
-
   "optionGroups": {
     "scale": {
       "id": "scale",
       "label": "How many it has to feed",
       "required": true,
       "options": [
-        { "id": "s", "label": "10 to 15", "note": "One tier, or a single sculptural form", "price": 280, "serves": "10–15" },
-        { "id": "m", "label": "25 to 35", "note": "Two tiers, or one large piece", "price": 420, "serves": "25–35" },
-        { "id": "l", "label": "60 to 80", "note": "Three tiers, or a table of pieces", "price": 720, "serves": "60–80" },
-        { "id": "xl", "label": "120 and up", "note": "A centrepiece and a cutting cake behind it", "price": 1150, "serves": "120+" }
+        {
+          "id": "s",
+          "label": "10 to 15",
+          "note": "One tier, or a single sculptural form",
+          "price": 280,
+          "serves": "10–15"
+        },
+        {
+          "id": "m",
+          "label": "25 to 35",
+          "note": "Two tiers, or one large piece",
+          "price": 420,
+          "serves": "25–35"
+        },
+        {
+          "id": "l",
+          "label": "60 to 80",
+          "note": "Three tiers, or a table of pieces",
+          "price": 720,
+          "serves": "60–80"
+        },
+        {
+          "id": "xl",
+          "label": "120 and up",
+          "note": "A centrepiece and a cutting cake behind it",
+          "price": 1150,
+          "serves": "120+"
+        }
       ]
     },
     "ambition": {
@@ -24,19 +54,39 @@
       "required": true,
       "options": [
         {
-          "id": "clean", "label": "Clean", "price": 0, "factor": 1.0, "leadDays": 10, "allows": 2,
+          "id": "clean",
+          "label": "Clean",
+          "price": 0,
+          "factor": 1.0,
+          "leadDays": 10,
+          "allows": 2,
           "note": "Simple forms, one finish, nothing applied. Harder than it sounds."
         },
         {
-          "id": "composed", "label": "Composed", "price": 0, "factor": 1.35, "leadDays": 14, "allows": 4,
+          "id": "composed",
+          "label": "Composed",
+          "price": 0,
+          "factor": 1.35,
+          "leadDays": 14,
+          "allows": 4,
           "note": "Several elements and a palette we agree on first."
         },
         {
-          "id": "sculptural", "label": "Sculptural", "price": 0, "factor": 1.9, "leadDays": 21, "allows": 6,
+          "id": "sculptural",
+          "label": "Sculptural",
+          "price": 0,
+          "factor": 1.9,
+          "leadDays": 21,
+          "allows": 6,
           "note": "Structure that has to hold its own weight. Built, not stacked."
         },
         {
-          "id": "editorial", "label": "Editorial", "price": 0, "factor": 2.6, "leadDays": 28, "allows": 9,
+          "id": "editorial",
+          "label": "Editorial",
+          "price": 0,
+          "factor": 2.6,
+          "leadDays": 28,
+          "allows": 9,
           "note": "A one-off, for a photograph or a room. We will argue with you about it."
         }
       ]
@@ -46,38 +96,157 @@
       "label": "Where the colour goes",
       "required": true,
       "options": [
-        { "id": "mono", "label": "Monochrome", "price": 0, "note": "One colour, every value of it" },
-        { "id": "tonal", "label": "Tonal", "price": 0, "note": "A narrow range, nothing fighting" },
-        { "id": "contrast", "label": "High contrast", "price": 0, "note": "Two colours that should not work" },
-        { "id": "natural", "label": "Left alone", "price": 0, "note": "The colour the ingredients already are" }
+        {
+          "id": "mono",
+          "label": "Monochrome",
+          "price": 0,
+          "note": "One colour, every value of it"
+        },
+        {
+          "id": "tonal",
+          "label": "Tonal",
+          "price": 0,
+          "note": "A narrow range, nothing fighting"
+        },
+        {
+          "id": "contrast",
+          "label": "High contrast",
+          "price": 0,
+          "note": "Two colours that should not work"
+        },
+        {
+          "id": "natural",
+          "label": "Left alone",
+          "price": 0,
+          "note": "The colour the ingredients already are"
+        }
       ]
     },
-    "boxsize": {
-      "id": "boxsize",
-      "label": "How many",
+    "size": {
+      "id": "size",
+      "label": "Size",
       "required": true,
       "options": [
-        { "id": "1", "label": "One", "price": 0 },
-        { "id": "2", "label": "Two", "price": 0 },
-        { "id": "4", "label": "Four", "price": 0 }
+        {
+          "id": "s",
+          "label": "Serves 10",
+          "note": "20cm, one tier",
+          "price": 0
+        },
+        {
+          "id": "m",
+          "label": "Serves 16",
+          "note": "24cm, one tier",
+          "price": 42
+        },
+        {
+          "id": "l",
+          "label": "Serves 24",
+          "note": "28cm, two tiers",
+          "price": 96
+        }
       ]
     }
   },
-
   "_techniques": "Add-ons in the catalogue sense, but they are the studio's actual vocabulary. Each carries its own price and its own days, and the ambition level caps how many of them a brief can hold — a Clean brief with six techniques on it is not a clean brief.",
-
   "addons": [
-    { "id": "piped", "label": "Hand-piped detail", "note": "Royal icing, off the bench, no stencil", "price": 90, "leadDays": 2 },
-    { "id": "airbrush", "label": "Airbrushed gradient", "note": "Across the whole form, not a panel", "price": 80, "leadDays": 1 },
-    { "id": "print", "label": "Printed edible image", "note": "Your artwork, on the piece", "price": 60, "leadDays": 1 },
-    { "id": "mirror", "label": "Mirror glaze", "note": "Poured once, in one go", "price": 120, "leadDays": 1 },
-    { "id": "gold", "label": "Gold leaf", "note": "23 carat, laid by hand", "price": 150, "leadDays": 1 },
-    { "id": "painted", "label": "Hand-painted panel", "note": "Cocoa butter on fondant, painted wet", "price": 280, "leadDays": 4 },
-    { "id": "flowers", "label": "Sugar flowers", "note": "Wired and dusted, five days to dry", "price": 240, "leadDays": 5 },
-    { "id": "sculpted", "label": "Sculpted sugar", "note": "Pulled and blown on the bench", "price": 320, "leadDays": 6 },
-    { "id": "armature", "label": "Structural armature", "note": "Steel inside it, so it can lean", "price": 390, "leadDays": 7 }
+    {
+      "id": "piped",
+      "label": "Hand-piped detail",
+      "note": "Royal icing, off the bench, no stencil",
+      "price": 90,
+      "leadDays": 2,
+      "kind": "technique"
+    },
+    {
+      "id": "airbrush",
+      "label": "Airbrushed gradient",
+      "note": "Across the whole form, not a panel",
+      "price": 80,
+      "leadDays": 1,
+      "kind": "technique"
+    },
+    {
+      "id": "print",
+      "label": "Printed edible image",
+      "note": "Your artwork, on the piece",
+      "price": 60,
+      "leadDays": 1,
+      "kind": "technique"
+    },
+    {
+      "id": "mirror",
+      "label": "Mirror glaze",
+      "note": "Poured once, in one go",
+      "price": 120,
+      "leadDays": 1,
+      "kind": "technique"
+    },
+    {
+      "id": "gold",
+      "label": "Gold leaf",
+      "note": "23 carat, laid by hand",
+      "price": 150,
+      "leadDays": 1,
+      "kind": "technique"
+    },
+    {
+      "id": "painted",
+      "label": "Hand-painted panel",
+      "note": "Cocoa butter on fondant, painted wet",
+      "price": 280,
+      "leadDays": 4,
+      "kind": "technique"
+    },
+    {
+      "id": "flowers",
+      "label": "Sugar flowers",
+      "note": "Wired and dusted, five days to dry",
+      "price": 240,
+      "leadDays": 5,
+      "kind": "technique"
+    },
+    {
+      "id": "sculpted",
+      "label": "Sculpted sugar",
+      "note": "Pulled and blown on the bench",
+      "price": 320,
+      "leadDays": 6,
+      "kind": "technique"
+    },
+    {
+      "id": "armature",
+      "label": "Structural armature",
+      "note": "Steel inside it, so it can lean",
+      "price": 390,
+      "leadDays": 7,
+      "kind": "technique"
+    },
+    {
+      "id": "candles",
+      "label": "Candles",
+      "note": "Twelve, matte black, in the box",
+      "price": 4,
+      "leadDays": 0,
+      "kind": "extra"
+    },
+    {
+      "id": "card",
+      "label": "Handwritten card",
+      "note": "Your message, in ink, by whoever boxed it",
+      "price": 5,
+      "leadDays": 0,
+      "kind": "extra"
+    },
+    {
+      "id": "giftbox",
+      "label": "Gift box",
+      "note": "Black board, lime grosgrain, not stuck down",
+      "price": 9,
+      "leadDays": 0,
+      "kind": "extra"
+    }
   ],
-
   "products": [
     {
       "id": "commission",
@@ -90,11 +259,34 @@
       "batchSize": null,
       "image": null,
       "popular": true,
-      "allergens": ["gluten", "dairy", "egg"],
+      "allergens": [
+        "gluten",
+        "dairy",
+        "egg"
+      ],
       "description": "Tell us the size, how far you want it taken, and which of our techniques belong on it. The number moves as you go, and it is the number — not a band, not a range, not an email in a week.",
-      "options": ["scale", "ambition", "palette"],
-      "defaults": { "scale": "m", "ambition": "composed", "palette": "tonal" },
-      "inscribable": false
+      "options": [
+        "scale",
+        "ambition",
+        "palette"
+      ],
+      "defaults": {
+        "scale": "m",
+        "ambition": "composed",
+        "palette": "tonal"
+      },
+      "inscribable": false,
+      "addons": [
+        "piped",
+        "airbrush",
+        "print",
+        "mirror",
+        "gold",
+        "painted",
+        "flowers",
+        "sculpted",
+        "armature"
+      ]
     },
     {
       "id": "ed-sesame",
@@ -105,47 +297,56 @@
       "price": 85,
       "leadDays": 4,
       "batchSize": 6,
-      "image": "photo-1578985545062-69928b1d9587",
+      "image": "photo-1571115177098-24ec42ed204d",
       "popular": true,
-      "allergens": ["gluten", "dairy", "egg", "soya"],
+      "allergens": [
+        "gluten",
+        "dairy",
+        "egg",
+        "soya"
+      ],
       "description": "The first thing we repeated. Sesame ground on the day, brown butter in the sponge, honey taken further than is comfortable.",
-      "options": ["boxsize"],
-      "defaults": { "boxsize": "1" },
-      "inscribable": false
+      "options": [
+        "size"
+      ],
+      "defaults": {
+        "size": "s"
+      },
+      "inscribable": true,
+      "addons": [
+        "candles",
+        "card",
+        "giftbox"
+      ]
     },
     {
       "id": "ed-olive",
       "kind": "edition",
       "category": "edition",
       "name": "Edition No.2",
-      "subtitle": "Olive oil, lemon, bay",
+      "subtitle": "Olive oil, dark chocolate, sea salt",
       "price": 85,
       "leadDays": 4,
       "batchSize": 6,
-      "image": "photo-1565958011703-44f9829ba187",
+      "image": "photo-1588195538326-c5b1e9f80a1b",
       "popular": true,
-      "allergens": ["gluten", "egg"],
-      "description": "No butter in it at all. Bay steeped in the oil overnight, which is the whole trick and took us a year to get right.",
-      "options": ["boxsize"],
-      "defaults": { "boxsize": "1" },
-      "inscribable": false
-    },
-    {
-      "id": "ed-buckwheat",
-      "kind": "edition",
-      "category": "edition",
-      "name": "Edition No.3",
-      "subtitle": "Buckwheat, pear, crème fraîche",
-      "price": 95,
-      "leadDays": 5,
-      "batchSize": 4,
-      "image": "photo-1555507036-ab1f4038808a",
-      "popular": false,
-      "allergens": ["gluten", "dairy", "egg"],
-      "description": "Autumn only, because the pears have to be the right ones. Buckwheat makes it darker and a little savoury.",
-      "options": ["boxsize"],
-      "defaults": { "boxsize": "1" },
-      "inscribable": false
+      "allergens": [
+        "gluten",
+        "egg"
+      ],
+      "description": "No butter in it at all. The oil keeps the crumb open for days, the chocolate is poured at the last moment, and the salt is there to stop it being a dessert.",
+      "options": [
+        "size"
+      ],
+      "defaults": {
+        "size": "s"
+      },
+      "inscribable": true,
+      "addons": [
+        "candles",
+        "card",
+        "giftbox"
+      ]
     },
     {
       "id": "offcuts",
@@ -156,13 +357,22 @@
       "price": 28,
       "leadDays": 1,
       "batchSize": 10,
-      "image": "photo-1549931319-a545dcf3bc73",
+      "image": "photo-1568254183919-78a4f43a2877",
       "popular": true,
-      "allergens": ["gluten", "dairy", "egg", "nuts", "soya"],
+      "allergens": [
+        "gluten",
+        "dairy",
+        "egg",
+        "nuts",
+        "soya"
+      ],
       "description": "Levelling a tier produces a lot of cake. It is the same cake, in the wrong shape, for a third of the price. We never know what is in the box until Friday.",
       "options": [],
       "defaults": {},
-      "inscribable": false
+      "inscribable": false,
+      "addons": [
+        "card"
+      ]
     }
   ]
 }

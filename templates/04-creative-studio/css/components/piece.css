@@ -25,13 +25,28 @@
   height: 100%;
   object-fit: cover;
   transition: scale var(--mid) var(--ease), filter var(--mid) var(--ease);
-  /* Dark ground: photographs are dropped a touch so they sit in the page
-     rather than glowing off it, and come back up on hover. */
-  filter: saturate(0.82) brightness(0.88);
+  /* The studio's treatment, applied in CSS rather than baked into the files.
+     Monochrome with the blacks crushed by default, full colour on hover.
+     Doing it here rather than in Photoshop means a merchant's own photographs
+     get it automatically, which is what the brief means by not depending on
+     perfect demonstration content — a phone snapshot and a studio shot end up
+     looking like they belong to the same shop. */
+  filter: grayscale(1) contrast(1.18) brightness(0.92);
 }
-.piece:hover .piece__media img { scale: 1.03; filter: none; }
+.piece:hover .piece__media img,
+.piece:focus-within .piece__media img { scale: 1.03; filter: contrast(1.04); }
+
+@media (prefers-reduced-motion: reduce) {
+  .piece:hover .piece__media img,
+  .piece:focus-within .piece__media img { scale: 1; }
+}
 
 .piece__media--wide { aspect-ratio: 16 / 10; }
+
+/* The product page hero is not inside a .piece, so it never receives the
+   hover that restores colour. The one thing you are about to buy should not
+   be the only thing on the site in black and white. */
+.piece__media--hero img { filter: contrast(1.04); }
 .piece__media--tall { aspect-ratio: 3 / 4; }
 
 .piece__n {

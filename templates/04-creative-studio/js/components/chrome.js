@@ -87,7 +87,9 @@ function paintBasket() {
   const el = document.querySelector('[data-basket-n]');
   if (!el) return;
   const n = session.count();
-  el.textContent = String(n).padStart(2, '0');
+  // Syne's zero is close enough to an O that "00" read as letters. The
+  // count is plain now, and the word carries the meaning either way.
+  el.textContent = String(n);
   el.dataset.empty = String(n === 0);
   document
     .querySelector('[data-basket]')

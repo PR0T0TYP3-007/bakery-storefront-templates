@@ -58,11 +58,42 @@ export function priceLine(product, selections = {}, addonIds = [], qty = 1, cata
 }
 
 /**
+ * Tax, in whichever direction the merchant's jurisdiction works.
+ *
+ * `exclusive` (the default) adds it on top: US sales tax is quoted separately
+ * and appears at checkout. `inclusive` means the shelf price already contains
+ * it — which is not a presentation choice in the EU and the UK, it is the law
+ * for consumer prices. A German shop showing EUR 85 and charging EUR 90.95 is
+ * not merely confusing, it is non-compliant.
+ *
+ * Returns the tax *contained in* the gross amount for an inclusive merchant,
+ * so the checkout can show "includes EUR 5.56 VAT" without the number ever
+ * being added to anything.
+ *
+ * @param {number} grossOrNet  minor units: gross when inclusive, net when not
+ * @param {object} merchant
+ * @returns {{tax:number, total:number}} both in minor units
+ */
+export function applyTax(grossOrNet, merchant) {
+  const rate = merchant.taxRate ?? 0;
+  if (!rate) return { tax: 0, total: grossOrNet };
+
+  if ((merchant.taxMode ?? 'exclusive') === 'inclusive') {
+    // The price already contains it; extract rather than add.
+    return { tax: Math.round(grossOrNet - grossOrNet / (1 + rate)), total: grossOrNet };
+  }
+
+  const tax = Math.round(grossOrNet * rate);
+  return { tax, total: grossOrNet + tax };
+}
+
+/**
  * @typedef {object} Totals
  * @property {number} subtotal
  * @property {number} fulfilment   delivery fee, or 0
  * @property {number} tax
  * @property {number} total
+ * @property {boolean} taxIncluded      whether tax is contained in the total
  * @property {number} freeDeliveryGap  how much more for free delivery, 0 if none
  */
 
@@ -91,7 +122,7 @@ export function orderTotals(lines, merchant, catalogue, fulfilment = { method: '
     if (delivery.freeOver != null && subtotal >= toMinor(delivery.freeOver)) fee = 0;
   }
 
-  const tax = Math.round((subtotal + fee) * (merchant.taxRate ?? 0));
+  const { tax, total } = applyTax(subtotal + fee, merchant);
 
   const gap =
     delivery?.freeOver != null ? Math.max(0, toMinor(delivery.freeOver) - subtotal) : 0;
@@ -100,7 +131,8 @@ export function orderTotals(lines, merchant, catalogue, fulfilment = { method: '
     subtotal: toMajor(subtotal),
     fulfilment: toMajor(fee),
     tax: toMajor(tax),
-    total: toMajor(subtotal + fee + tax),
+    total: toMajor(total),
+    taxIncluded: (merchant.taxMode ?? 'exclusive') === 'inclusive',
     freeDeliveryGap: toMajor(gap),
   };
 }

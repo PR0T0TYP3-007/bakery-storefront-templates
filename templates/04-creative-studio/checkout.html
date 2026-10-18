@@ -43,6 +43,7 @@
           </div>
           <fieldset class="choices" data-methods>
             <legend class="sr">How you want it</legend>
+            <div class="skel" style="height:7em" aria-hidden="true"></div>
           </fieldset>
 
           <div style="margin-top:var(--s-4)" data-pickup>
@@ -105,14 +106,72 @@
           </label>
         </section>
 
-        <!-- 03 -->
-        <section class="sec--tight">
+        <!-- 03 — gifting, rendered only where the studio offers it -->
+        <section class="sec--tight" data-gift-block hidden>
           <div class="marker">
             <span class="marker__n">03</span>
+            <span class="marker__name label">Is it a present?</span>
+          </div>
+
+          <fieldset class="choices">
+            <legend class="sr">Gifting</legend>
+            <label class="choice">
+              <input type="checkbox" data-is-gift>
+              <span class="choice__face">
+                <span class="choice__name">Yes, it is going to someone else</span>
+                <span class="choice__meta"></span>
+                <span class="choice__note" data-gift-note></span>
+              </span>
+            </label>
+          </fieldset>
+
+          <div data-gift hidden style="margin-top:var(--s-5)">
+            <label class="field">
+              <span class="field__label label" for="to">Who is it for?</span>
+              <input class="input" id="to" name="to" type="text" autocomplete="off">
+              <span class="err" data-err-to></span>
+            </label>
+
+            <label class="field">
+              <span class="field__label label" for="tophone">Their phone</span>
+              <span class="field__hint">For the driver, if we are delivering it.</span>
+              <input class="input" id="tophone" name="tophone" type="tel">
+              <span class="err" data-err-tophone></span>
+            </label>
+
+            <label class="field">
+              <span class="field__label label" for="message">What should the card say?</span>
+              <textarea class="textarea" id="message" name="message"></textarea>
+              <span class="counter num" data-msg-count></span>
+            </label>
+
+            <fieldset class="choices">
+              <legend class="sr">Gift options</legend>
+              <label class="choice">
+                <input type="checkbox" data-hide-prices checked>
+                <span class="choice__face">
+                  <span class="choice__name">Leave the prices off everything in the box</span>
+                  <span class="choice__meta"></span>
+                </span>
+              </label>
+            </fieldset>
+          </div>
+        </section>
+
+        <!-- 04 -->
+        <section class="sec--tight">
+          <div class="marker">
+            <span class="marker__n" data-pay-n>04</span>
             <span class="marker__name label">Pay</span>
             <span class="label label--acid">Simulated</span>
           </div>
 
+          <fieldset class="choices" data-methods-pay style="margin-bottom:var(--s-5)">
+            <legend class="sr">How you want to pay</legend>
+            <div class="skel" style="height:4.5em" aria-hidden="true"></div>
+          </fieldset>
+
+          <div data-card-fields>
           <label class="field">
             <span class="field__label label" for="card">Card number</span>
             <input class="input" id="card" name="card" type="text" inputmode="numeric"
@@ -140,6 +199,9 @@
             <code>4000 0000 0000 0002</code> is declined and
             <code>4000 0000 0000 0119</code> cannot reach the processor.
           </p>
+          </div>
+
+          <p class="note" data-alt-pay hidden></p>
 
           <fieldset class="choices" style="margin-top:var(--s-5)">
             <legend class="sr">Terms</legend>
@@ -167,10 +229,18 @@
         <div class="sheet-hold">
           <div class="sheet">
             <p class="label">Your order</p>
-            <div class="summary__lines" style="margin-top:var(--s-4)" data-summary-lines></div>
-            <div style="margin-top:var(--s-4)" data-summary-totals></div>
+            <div class="summary__lines" style="margin-top:var(--s-4)" data-summary-lines>
+              <div class="skel" style="height:1.1em;width:72%" aria-hidden="true"></div>
+              <div class="skel" style="height:0.8em;width:46%;margin-top:var(--s-2)" aria-hidden="true"></div>
+            </div>
+            <div style="margin-top:var(--s-4)" data-summary-totals>
+              <div class="skel" style="height:0.9em;width:100%" aria-hidden="true"></div>
+              <div class="skel" style="height:0.9em;width:100%;margin-top:var(--s-2)" aria-hidden="true"></div>
+              <div class="skel" style="height:1.6em;width:60%;margin-top:var(--s-4)" aria-hidden="true"></div>
+            </div>
           </div>
-          <p class="note" style="margin-top:var(--s-4)" data-summary-when></p>
+          <p class="note" style="margin-top:var(--s-4)" data-summary-gift hidden></p>
+          <p class="note" style="margin-top:var(--s-3)" data-summary-when></p>
           <a class="btn btn--block btn--sm" style="margin-top:var(--s-3)" href="cart.html" data-cart-link>Change the basket</a>
         </div>
       </aside>

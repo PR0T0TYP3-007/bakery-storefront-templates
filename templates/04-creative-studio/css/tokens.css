@@ -36,7 +36,10 @@
 
   --ink: #f2f2ef;
   --ink-2: #9a9a93;
-  --ink-3: #6a6a66;
+  /* 5.00:1 on the ground, 4.51:1 on a raised panel. It was #6a6a66, which
+     measured 3.55 and 3.20 and failed AA for body text — and was not in the
+     style guide's table, which is why it survived. It is now. */
+  --ink-3: #82827e;
 
   --acid: #ccff00;
   --acid-dim: #a8d400;

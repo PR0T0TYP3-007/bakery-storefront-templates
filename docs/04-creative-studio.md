@@ -177,15 +177,57 @@ for a multi-word name, the first four letters for a one-word one.
 
 ---
 
-## 6. What is not in this template
+## 6. What an outside review found
 
-- **No gifting branch.** `gifting: false` in the merchant config. Template 02 owns that,
-  and bolting it on would duplicate another template's best idea for a longer form.
+A reviewer walked the template as a customer. Five findings were real and are fixed; two
+were based on a misreading and are not.
+
+**Fixed, and serious:**
+
+- **VAT contradicted itself.** The config said "Includes 7% VAT" and the checkout added
+  7% on top: €85 became €90.95. In the EU that is not a presentation choice, it is the
+  law. See D14 — `taxMode` is now a property of the merchant and there are tests for
+  both directions.
+- **Gifting and inscriptions were absent, not switched off.** §7 requires the template to
+  *support* them behind a config flag. See D15.
+- **The size control did nothing.** Every option priced zero and labelled "included",
+  above a separate quantity stepper. It is a real size now and the price moves.
+- **Commission copy reached edition buyers.** An €85 cake off a shelf was told we would
+  ring to talk their brief through and that the spec sheet was on its way. The copy now
+  depends on what is in the basket.
+- **Card was the only payment method.** §7 asks for relevant local ones; Berlin gets
+  PayPal, Klarna and SEPA, with a wallet offered only where the device would have one.
+
+**Also fixed:** `--ink-3` measured 3.55:1 and failed AA — it was not in the style guide's
+table, which is why it survived, and it is now; the free-delivery nudge told an €85 order
+it was €815 away; the basket count rendered "00", which in Syne reads as two letters; the
+collection window was grey text that did not look required; the add-to-basket toast had
+no route to the basket; and the editions could not have their date chosen before
+checkout.
+
+**Not changed, and why:**
+
+- **"Only the title is clickable."** It is not — the title's stretched pseudo-element
+  covers the whole tile, confirmed with `elementFromPoint` over the photograph.
+- **"Start the commission builder empty."** An empty configurator gives the customer
+  nothing to react to. Template 02's builder opens on a default for the same reason. The
+  real concern — that a default could pass for the customer's own choice — is handled by
+  saying so above the first step, and the line disappears on first interaction.
+
+**Declined outright:** a proposal to add a live visual cake drawing to the commission
+builder. That is Template 02's signature mechanic, and copying it into Template 04 is
+precisely the failure D8 exists to prevent. This template's output is a document, not a
+picture, and the difference is the point.
+
+## 7. What is still not in this template
+
 - **One merchant config.** The seam is the same shape as everywhere else — a second studio
   is a pair of JSON files and one entry in an array.
 - **No analytics instrumentation.** A brief deliverable, unmet across the whole project.
+- **Two editions, not three.** See D16: there were only two unused cake photographs, and
+  a product showing a picture of something else is worse than a shorter range.
 
-## 7. Pages
+## 8. Pages
 
 | Page | What it is for |
 |---|---|
@@ -199,7 +241,7 @@ for a multi-word name, the first four letters for a one-word one.
 | `styleguide.html` | Every component against awkward content, contrast measured live |
 | `404.html` | |
 
-## 8. Running it
+## 9. Running it
 
 ```bash
 python devserver.py 4330 .

@@ -34,10 +34,27 @@ const { merchant, catalogue } = session.state;
 // than a form that cannot be submitted.
 if (!session.state.cart.lines.length) location.replace(link('cart.html'));
 
+/** Does this order contain a commission? It changes the copy and the payment. */
+const hasCommission = session.state.cart.lines.some(
+  (l) => session.product(l.productId)?.kind === 'commission'
+);
+
 $('[data-cart-link]').href = link('cart.html');
 $('[data-terms-note]').textContent = merchant.allergenStatement;
 
+// An edition is an EUR 85 cake off a shelf. Telling its buyer we will ring to
+// talk their brief through, and that the spec sheet goes to their inbox, is
+// copy from a different transaction.
+$('#phone').previousElementSibling.textContent = hasCommission
+  ? 'We ring within two working days to talk the brief through.'
+  : 'Only if we need to reach you about the order.';
+$('#email').previousElementSibling.textContent = hasCommission
+  ? 'The spec sheet and the receipt go here.'
+  : 'Your receipt goes here.';
+
 let method = 'pickup';
+let payMethod = 'card';
+let isGift = false;
 let zone = null;
 let when = session.orderReadyBy() ?? session.state.when;
 let slot = null;
@@ -119,8 +136,18 @@ $('#postcode').addEventListener('blur', async () => {
    ------------------------------------------------------------------------- */
 function paintWhen() {
   $('[data-day-label]').textContent = dateLong(when);
-  $('[data-slot-label]').textContent =
-    method === 'pickup' ? (slot ? `between ${slot}` : 'Pick a collection window') : 'We bring it in the morning';
+  const slotEl = $('[data-slot-label]');
+  if (method !== 'pickup') {
+    slotEl.className = 'sm dim';
+    slotEl.textContent = 'We bring it in the morning';
+  } else if (slot) {
+    slotEl.className = 'sm';
+    slotEl.innerHTML = `${icons.check}<span>Collecting between <strong>${esc(slot)}</strong></span>`;
+  } else {
+    // Required, and it did not look like it was.
+    slotEl.className = 'note note--warn';
+    slotEl.innerHTML = `${icons.alert}<span>Pick a collection window as well as a day.</span>`;
+  }
   paintSummary();
 }
 
@@ -180,14 +207,29 @@ function paintSummary() {
     <div class="sum"><span>Subtotal</span><span>${money(t.subtotal)}</span></div>
     <div class="sum"><span>${method === 'delivery' ? 'Delivery' : 'Collection'}</span>
       <span>${t.fulfilment === 0 ? 'Free' : money(t.fulfilment)}</span></div>
-    <div class="sum"><span>VAT at ${Math.round((merchant.taxRate ?? 0) * 100)}%</span><span>${money(t.tax)}</span></div>
     <div class="sum sum--total"><span>Total</span><span>${money(t.total)}</span></div>
+    ${
+      t.tax
+        ? `<p class="xs dim" style="margin-top:var(--s-2)">Includes ${money(t.tax)} VAT at
+             ${Math.round((merchant.taxRate ?? 0) * 100)}%.</p>`
+        : ''
+    }
     ${
       t.hasCommission
         ? `<div class="sum sum--due" style="margin-top:var(--s-3)"><span>Taken now</span><span>${money(t.dueNow)}</span></div>
            <div class="sum"><span>On collection</span><span>${money(t.dueLater)}</span></div>`
         : ''
     }`;
+
+  const giftLine = $('[data-summary-gift]');
+  if (giftLine) {
+    giftLine.hidden = !isGift;
+    if (isGift) {
+      const to = $('#to').value.trim();
+      giftLine.innerHTML = `${icons.info}<span><strong>A present${to ? ` for ${esc(to)}` : ''}.</strong>
+        ${$('[data-hide-prices]').checked ? 'Prices left off everything in the box.' : ''}</span>`;
+    }
+  }
 
   $('[data-summary-when]').innerHTML = `${icons.calendar}<span>
     ${method === 'pickup' ? 'Collect' : 'Delivered'} <strong>${esc(dateLong(when))}</strong>${
@@ -198,6 +240,79 @@ function paintSummary() {
     ? `Pay the deposit — ${money(t.dueNow)}`
     : `Pay ${money(t.total)}`;
 }
+
+/* -------------------------------------------------------------------------
+   Gifting — brief section 7. Rendered only where the merchant offers it, and
+   the numbering of the Pay section follows, so a studio with gifting off does
+   not get a gap where section 03 should be.
+   ------------------------------------------------------------------------- */
+const giftCfg = merchant.gifting ?? {};
+const MSG_MAX = giftCfg.messageMax ?? 200;
+
+if (merchant.capabilities?.gifting) {
+  $('[data-gift-block]').hidden = false;
+  $('[data-gift-note]').textContent = giftCfg.note ?? '';
+  $('#message').maxLength = MSG_MAX;
+  $('[data-msg-count]').textContent = `0 / ${MSG_MAX}`;
+
+  $('[data-is-gift]').addEventListener('change', (e) => {
+    isGift = e.target.checked;
+    // `hidden` rather than a class, so the fields genuinely leave the tab
+    // order when the branch is closed.
+    $('[data-gift]').hidden = !isGift;
+    paintSummary();
+  });
+
+  $('#message').addEventListener('input', () => {
+    $('[data-msg-count]').textContent = `${$('#message').value.length} / ${MSG_MAX}`;
+  });
+} else {
+  $('[data-pay-n]').textContent = '03';
+}
+
+/* -------------------------------------------------------------------------
+   Payment methods — "relevant local payment methods", Berlin.
+   All simulated, like the card. A wallet is offered only where the device
+   would actually have one, rather than showing a button that cannot work.
+   ------------------------------------------------------------------------- */
+const methods = (merchant.payment?.methods ?? [{ id: 'card', label: 'Card' }]).filter(
+  (m) => !m.deviceOnly || supportsWallet()
+);
+
+function supportsWallet() {
+  return Boolean(window.ApplePaySession) || /Android/i.test(navigator.userAgent);
+}
+
+$('[data-methods-pay]').innerHTML =
+  `<legend class="sr">How you want to pay</legend>` +
+  methods
+    .map(
+      (m, i) => `
+    <label class="choice">
+      <input type="radio" name="paymethod" value="${esc(m.id)}" ${i === 0 ? 'checked' : ''}>
+      <span class="choice__face">
+        <span class="choice__name">${esc(m.label)}</span>
+        <span class="choice__meta">${m.id === 'card' ? '' : 'Simulated'}</span>
+        <span class="choice__note">${esc(m.note ?? '')}</span>
+      </span>
+    </label>`
+    )
+    .join('');
+
+form.addEventListener('change', (e) => {
+  if (e.target.name !== 'paymethod') return;
+  payMethod = e.target.value;
+  const card = payMethod === 'card';
+  $('[data-card-fields]').hidden = !card;
+  const alt = $('[data-alt-pay]');
+  alt.hidden = card;
+  if (!card) {
+    const m = methods.find((x) => x.id === payMethod);
+    alt.innerHTML = `${icons.info}<span><strong>${esc(m.label)} is simulated here.</strong>
+      In production this hands off to ${esc(m.label)} and comes back with a token. Placing the
+      order below completes the simulated payment.</span>`;
+  }
+});
 
 /* -------------------------------------------------------------------------
    Validation
@@ -235,10 +350,28 @@ for (const field of Object.keys(RULES)) {
 function validate() {
   const problems = [];
 
+  const CARD_FIELDS = ['card', 'exp', 'cvc'];
   for (const [field, rule] of Object.entries(RULES)) {
+    if (CARD_FIELDS.includes(field) && payMethod !== 'card') {
+      setError(field, '');
+      continue;
+    }
     const msg = rule($(`#${field}`).value);
     setError(field, msg);
     if (msg) problems.push(field);
+  }
+
+  // A gift going to someone else needs their name, and a driver needs a
+  // number to ring when nobody answers the door.
+  if (isGift) {
+    if ($('#to').value.trim().length < 2) {
+      setError('to', 'Who is it going to?');
+      problems.push('to');
+    }
+    if (method === 'delivery' && $('#tophone').value.replace(/\D/g, '').length < 9) {
+      setError('tophone', 'A number for the driver.');
+      problems.push('tophone');
+    }
   }
 
   if (method === 'delivery') {
@@ -300,11 +433,20 @@ form.addEventListener('submit', async (e) => {
     merchantId: merchant.id,
     fulfilment: { method, locationId: loc.id, date: dateKey(when), slot, zoneId: zone?.id ?? null },
     customer: { name: $('#name').value.trim(), email: $('#email').value.trim(), phone: $('#phone').value.trim() },
+    gift: isGift
+      ? {
+          isGift: true,
+          recipient: { name: $('#to').value.trim(), phone: $('#tophone').value.trim() },
+          message: $('#message').value.trim(),
+          hidePrices: $('[data-hide-prices]').checked,
+          packaging: Boolean(giftCfg.packagingAddon),
+        }
+      : { isGift: false },
     address: method === 'delivery' ? $('#address').value.trim() : null,
     lines: session.state.cart.lines,
     totals: t,
     total: t.total,
-    payment: { card: $('#card').value },
+    payment: { method: payMethod, card: payMethod === 'card' ? $('#card').value : null },
   };
 
   try {

@@ -70,6 +70,8 @@ const PAIRS = [
   ['Secondary on the ground', '--ink-2', '--ground', 4.5],
   ['Body on a raised panel', '--ink', '--raised', 4.5],
   ['Secondary on a raised panel', '--ink-2', '--raised', 4.5],
+  ['Tertiary on the ground', '--ink-3', '--ground', 4.5],
+  ['Tertiary on a raised panel', '--ink-3', '--raised', 4.5],
   ['Accent on the ground', '--acid', '--ground', 4.5],
   ['Ground on the accent (buttons)', '--ground', '--acid', 4.5],
   ['Structural rule on the ground', '--rule-strong', '--ground', 3],

@@ -27,6 +27,7 @@ import { priceLine } from '../../../shared/core/pricing.js';
 const merchant = {
   id: 'fold',
   taxRate: 0.07,
+  taxMode: 'inclusive',
   commission: { minimum: 280, depositPct: 0.3, quoteValidDays: 14, perWeek: 4, setupFee: 180 },
   delivery: { freeOver: 900, zones: [{ id: 'a', fee: 25 }] },
 };
@@ -227,12 +228,49 @@ test('a basket of editions alone is paid in full', () => {
   assert.equal(t.dueLater, 0);
 });
 
-test('tax and delivery behave as they do in the shared model', () => {
+test('tax is contained in the total, not added to it', () => {
+  // Berlin. The shelf price includes VAT, which is the law for consumer
+  // prices in the EU — showing EUR 85 and charging EUR 90.95 is not merely
+  // confusing, it is non-compliant. Earlier this template did exactly that.
   const lines = [{ productId: 'ed-sesame', selections: { boxsize: '1' }, addons: [], qty: 1 }];
   const t = orderTotalsWith(priceLine, lines, merchant, catalogue, { method: 'delivery', zone: { fee: 25 } });
+
   assert.equal(t.fulfilment, 25);
-  assert.equal(t.tax, Math.round((85 + 25) * 0.07 * 100) / 100);
+  assert.equal(t.total, 110, 'the total is exactly what the customer saw, plus delivery');
+  assert.equal(t.taxIncluded, true);
+  assert.equal(t.tax, Math.round((110 - 110 / 1.07) * 100) / 100, 'the VAT inside the 110');
+  assert.ok(t.tax < t.total);
   assert.equal(t.freeDeliveryGap, 900 - 85);
+});
+
+test('an exclusive-tax merchant still has it added on top', () => {
+  // US sales tax is quoted separately and appears at checkout, so the other
+  // direction has to keep working. `exclusive` is the default.
+  const us = { ...merchant, taxMode: 'exclusive' };
+  const lines = [{ productId: 'ed-sesame', selections: { boxsize: '1' }, addons: [], qty: 1 }];
+  const t = orderTotalsWith(priceLine, lines, us, catalogue, { method: 'pickup' });
+
+  assert.equal(t.taxIncluded, false);
+  assert.equal(t.tax, Math.round(85 * 0.07 * 100) / 100);
+  assert.equal(t.total, Math.round((85 + 85 * 0.07) * 100) / 100);
+});
+
+test('a zero-rated merchant gets no tax either way', () => {
+  for (const mode of ['inclusive', 'exclusive']) {
+    const zero = { ...merchant, taxRate: 0, taxMode: mode };
+    const lines = [{ productId: 'ed-sesame', selections: { boxsize: '1' }, addons: [], qty: 1 }];
+    const t = orderTotalsWith(priceLine, lines, zero, catalogue, { method: 'pickup' });
+    assert.equal(t.tax, 0);
+    assert.equal(t.total, 85, `${mode} with a zero rate must not move the price`);
+  }
+});
+
+test('the deposit is a share of the gross, not of a pre-tax figure', () => {
+  const lines = [{ productId: 'commission', selections: brief(), addons: ['gold'], qty: 1 }];
+  const t = orderTotalsWith(priceLine, lines, merchant, catalogue, { method: 'pickup' });
+  assert.equal(t.total, 717, '567 + 150, VAT already inside it');
+  assert.equal(t.dueNow, Math.round(717 * 0.3 * 100) / 100);
+  assert.equal(Math.round((t.dueNow + t.dueLater) * 100), Math.round(t.total * 100));
 });
 
 test('delivery is free once the order passes the threshold', () => {

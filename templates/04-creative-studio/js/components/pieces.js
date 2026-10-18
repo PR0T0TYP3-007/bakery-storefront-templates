@@ -90,9 +90,15 @@ export function basketLine(line, { editable = true } = {}) {
   const price = priceOf(product, line.selections, line.addons, line.qty);
   const isCommission = product.kind === 'commission';
 
+  const extras = (line.addons ?? [])
+    .map((id) => session.state.catalogue.addons.find((a) => a.id === id)?.label)
+    .filter(Boolean);
+
   const spec = isCommission
     ? commissionSpec(line)
-    : describeSelections(product, line.selections, session.groups());
+    : [describeSelections(product, line.selections, session.groups()), ...extras]
+        .filter(Boolean)
+        .join(' · ');
 
   const thumb = product.image
     ? `<img src="${photo(product.image, 'sm')}" alt="" loading="lazy" decoding="async" width="200" height="200">`

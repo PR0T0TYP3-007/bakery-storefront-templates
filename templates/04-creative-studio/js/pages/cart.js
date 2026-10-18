@@ -89,8 +89,13 @@ function paint() {
     <div class="sum"><span>${cart.lines.length} ${cart.lines.length === 1 ? 'thing' : 'things'}</span>
       <span>${money(t.subtotal)}</span></div>
     <div class="sum"><span>Collection</span><span>Free</span></div>
-    <div class="sum"><span>VAT at ${Math.round((merchant.taxRate ?? 0) * 100)}%</span><span>${money(t.tax)}</span></div>
     <div class="sum sum--total"><span>Total</span><span>${money(t.total)}</span></div>
+    ${
+      t.tax
+        ? `<p class="xs dim" style="margin-top:var(--s-2)">Includes ${money(t.tax)} VAT at
+             ${Math.round((merchant.taxRate ?? 0) * 100)}%. ${t.taxIncluded ? 'Already in every price shown.' : ''}</p>`
+        : ''
+    }
     ${
       t.hasCommission
         ? `<div class="sum sum--due" style="margin-top:var(--s-3)">
@@ -102,8 +107,14 @@ function paint() {
         : ''
     }`;
 
+  // The threshold is EUR 900, so an EUR 85 order was being told it was
+  // EUR 815 away from free delivery. A nudge nobody can act on reads as a
+  // joke at the customer, so it only appears within reach.
   const free = $('[data-free]');
-  free.hidden = false;
+  const within = merchant.delivery?.nudgeWithin ?? Infinity;
+  free.hidden = t.freeDeliveryGap > 0 && t.freeDeliveryGap > within;
+  if (free.hidden) return;
+
   if (t.freeDeliveryGap > 0) {
     free.className = 'note';
     free.innerHTML = `${icons.info}<span>Another <strong>${money(t.freeDeliveryGap)}</strong> and we drive it over for nothing.</span>`;

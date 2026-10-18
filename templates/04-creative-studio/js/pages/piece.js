@@ -10,10 +10,16 @@ import { startPage, $, $$, esc, photo, link } from './_page.js';
 import * as session from '../services/session.js';
 import { pieceTile, priceOf } from '../components/pieces.js';
 import { toast } from '../components/toast.js';
+import { openDatePicker } from '../components/datepicker.js';
 import { icons } from '../components/icons.js';
 import { money, dateLong, whenPhraseMid } from '../../../../shared/core/format.js';
 import { shelf, earliestFor, dayState } from '../../../../shared/core/fulfilment.js';
-import { allergensFor, describeSelections } from '../../../../shared/core/rules.js';
+import {
+  allergensFor,
+  describeSelections,
+  validateInscription,
+  INSCRIPTION_MAX,
+} from '../../../../shared/core/rules.js';
 import { dateKey } from '../../../../shared/core/dates.js';
 
 await startPage({ nav: 'Work' });
@@ -36,6 +42,8 @@ if (!product) {
 
 function render() {
   let selections = { ...product.defaults };
+  let extras = [];
+  let inscription = '';
   let qty = 1;
   let shownWhen = null;
 
@@ -79,10 +87,87 @@ function render() {
     )
     .join('');
 
+  const available = (product.addons ?? [])
+    .map((id) => catalogue.addons.find((a) => a.id === id))
+    .filter(Boolean);
+
+  if (available.length) {
+    $('[data-options]').insertAdjacentHTML(
+      'beforeend',
+      `<fieldset class="choices" style="margin-bottom:var(--s-4)">
+         <legend class="label" style="padding-bottom:var(--s-2)">Anything with it</legend>
+         ${available
+           .map(
+             (a) => `
+           <label class="choice">
+             <input type="checkbox" data-extra value="${esc(a.id)}">
+             <span class="choice__face">
+               <span class="choice__name">${esc(a.label)}</span>
+               <span class="choice__meta">+${money(a.price)}</span>
+               <span class="choice__note">${esc(a.note)}</span>
+             </span>
+           </label>`
+           )
+           .join('')}
+       </fieldset>`
+    );
+  }
+
+  if (product.inscribable) {
+    $('[data-options]').insertAdjacentHTML(
+      'beforeend',
+      `<label class="field">
+         <span class="field__label label" for="insc">What should it say?</span>
+         <span class="field__hint">Piped by hand, so keep it short.</span>
+         <input class="input" id="insc" type="text" data-insc maxlength="${INSCRIPTION_MAX + 10}"
+           placeholder="For Mara">
+         <span class="counter num" data-insc-count>0 / ${INSCRIPTION_MAX}</span>
+         <span class="err" data-insc-err></span>
+       </label>`
+    );
+  }
+
   $('[data-options]').addEventListener('change', (e) => {
-    if (!e.target.name?.startsWith('opt-')) return;
-    selections[e.target.name.slice(4)] = e.target.value;
-    paint();
+    if (e.target.name?.startsWith('opt-')) {
+      selections[e.target.name.slice(4)] = e.target.value;
+      paint();
+      return;
+    }
+    if (e.target.hasAttribute('data-extra')) {
+      extras = $$('[data-extra]:checked').map((i) => i.value);
+      paint();
+    }
+  });
+
+  $('[data-options]').addEventListener('input', (e) => {
+    if (!e.target.hasAttribute('data-insc')) return;
+    inscription = e.target.value;
+    const count = $('[data-insc-count]');
+    count.textContent = `${inscription.length} / ${INSCRIPTION_MAX}`;
+    count.dataset.over = String(inscription.length > INSCRIPTION_MAX);
+    const check = validateInscription(inscription);
+    $('[data-insc-err]').innerHTML =
+      check.ok || !inscription ? '' : `${icons.alert}<span>${esc(check.reason)}</span>`;
+  });
+
+  /* ---- The day ------------------------------------------------------------
+     Somebody ordering for a birthday on the 6th should not have to reach
+     checkout to find out whether that is possible. The picker respects this
+     edition's own lead time, the studio's closures and its capacity. */
+  $('[data-pick-day]').addEventListener('click', () => {
+    const lead = session.leadFor(product, selections);
+    openDatePicker({
+      leadDays: lead,
+      selected: dayState(merchant, session.state.when, lead) === 'available'
+        ? session.state.when
+        : earliestFor(merchant, lead),
+      title: `When do you want ${product.name}?`,
+      note: `${lead} ${lead === 1 ? 'day' : 'days'} of notice on this one.`,
+      onSelect: (when) => {
+        session.setWhen(when);
+        paint();
+      },
+    });
   });
 
   /* ---- Quantity ---------------------------------------------------------- */
@@ -97,7 +182,7 @@ function render() {
 
   /* ---- Paint ------------------------------------------------------------- */
   function paint() {
-    const price = priceOf(product, selections, [], qty);
+    const price = priceOf(product, selections, extras, qty);
     const lead = session.leadFor(product, selections);
     const earliest = earliestFor(merchant, lead);
     const possible = dayState(merchant, session.state.when, lead) === 'available';
@@ -106,7 +191,11 @@ function render() {
 
     const state = shelf(merchant, product, when);
 
-    $('[data-price]').textContent = qty > 1 ? `${money(price.total)} for ${qty}` : money(price.unit);
+    // `unit` is the item before extras; showing it meant ticking candles left
+    // the price unchanged, which is the brief's "clear price changes as
+    // selections are made" failing in the most visible way possible.
+    $('[data-price]').textContent =
+      qty > 1 ? `${money(price.total)} for ${qty}` : money(price.unit + price.addons);
     $('[data-ready]').textContent = dateLong(when);
     $('[data-qty]').textContent = String(qty);
     $('[data-less]').disabled = qty <= 1;
@@ -129,10 +218,18 @@ function render() {
 
   /* ---- Adding ------------------------------------------------------------ */
   $('[data-add]').addEventListener('click', () => {
+    const check = validateInscription(inscription);
+    if (!check.ok) {
+      $('#insc')?.focus();
+      toast({ title: 'Have a look at the message', detail: check.reason, tone: 'bad', icon: icons.alert });
+      return;
+    }
+
     const { movedTo } = session.add({
       productId: product.id,
       selections: { ...selections },
-      addons: [],
+      addons: [...extras],
+      inscription: inscription.trim(),
       qty,
     });
 
@@ -145,6 +242,7 @@ function render() {
         ? `Needs more notice — set for ${whenPhraseMid(movedTo)}.`
         : [spec, `ready ${whenPhraseMid(movedTo ?? session.state.when)}`].filter(Boolean).join(' · '),
       icon: icons.check,
+      action: { label: 'View basket', href: link('cart.html') },
     });
 
     if (movedTo) paint();
