@@ -109,6 +109,15 @@
 }
 .line__name { font-family: var(--font-display); font-weight: 600; font-size: var(--t-3); }
 .line__spec { font-size: var(--sm); color: var(--ink-2); margin-top: var(--s-1); }
+/* The customer's own words, set as a quotation so they are not mistaken for
+   the studio's description of the piece. */
+.line__said {
+  font-size: var(--sm);
+  margin-top: var(--s-2);
+  padding-left: var(--s-3);
+  border-left: 1px solid var(--rule-strong);
+  text-wrap: pretty;
+}
 .line__foot { display: flex; flex-wrap: wrap; gap: var(--s-4); align-items: center; margin-top: var(--s-3); }
 .line__price { margin-inline-start: auto; font-variant-numeric: tabular-nums; font-weight: 600; font-size: var(--t-3); font-family: var(--font-display); }
 @media (max-width: 34rem) {

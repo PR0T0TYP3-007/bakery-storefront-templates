@@ -13,6 +13,7 @@
  * @property {string} readyBy      YYYY-MM-DD
  * @property {number} qty
  * @property {number} [addedPrice] unit price when it went in, for stale detection
+ * @property {object|null} [meta] per-line data the commerce core does not interpret
  */
 
 const MAX_QTY = 24;
@@ -24,6 +25,10 @@ export function signature(line) {
     JSON.stringify(line.selections ?? {}),
     [...(line.addons ?? [])].sort().join(','),
     line.inscription ?? '',
+    // Two commissions with different briefs are two different lines. Without
+    // this they would share a signature and silently merge into one line at
+    // quantity two, which is a different cake ordered twice.
+    JSON.stringify(line.meta ?? null),
     line.readyBy ?? '',
   ].join('|');
 }
@@ -50,6 +55,11 @@ export function addLine(cart, line) {
       selections: line.selections ?? {},
       addons: line.addons ?? [],
       inscription: line.inscription ?? '',
+      // Free-form, per line, for whatever a template needs to carry that the
+      // commerce core has no opinion about — Template 04 puts the written
+      // commission brief here. Anything not named in this object is dropped,
+      // which is deliberate: a cart line is a contract, not a scratchpad.
+      meta: line.meta ?? null,
       readyBy: line.readyBy,
       qty: Math.min(MAX_QTY, line.qty ?? 1),
       addedPrice: line.addedPrice,

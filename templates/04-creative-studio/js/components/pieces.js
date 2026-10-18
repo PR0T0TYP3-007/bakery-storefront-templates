@@ -111,6 +111,7 @@ export function basketLine(line, { editable = true } = {}) {
         <h3 class="line__name">${esc(product.name)}</h3>
         ${spec ? `<p class="line__spec">${esc(spec)}</p>` : ''}
         ${line.inscription ? `<p class="line__spec">&ldquo;${esc(line.inscription)}&rdquo;</p>` : ''}
+        ${briefLines(line)}
         ${
           isCommission && price.commission
             ? `<p class="line__spec">${price.commission.leadDays} days on the bench &middot;
@@ -133,6 +134,21 @@ export function basketLine(line, { editable = true } = {}) {
         </div>
       </div>
     </article>`;
+}
+
+/**
+ * The written brief on a basket row. It is the part of a commission that is
+ * neither a number nor a checkbox, so it has to survive all the way to the
+ * receipt — somebody checking their order is checking this.
+ */
+function briefLines(line) {
+  const b = line.meta?.brief;
+  if (!b) return '';
+  return [
+    b.occasion && `<p class="line__spec">For: ${esc(b.occasion)}</p>`,
+    b.idea && `<p class="line__said">&ldquo;${esc(b.idea)}&rdquo;</p>`,
+    b.avoid && `<p class="line__spec">Avoiding: ${esc(b.avoid)}</p>`,
+  ].filter(Boolean).join('');
 }
 
 /** The brief, in one line, for a basket row. */

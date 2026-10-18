@@ -415,6 +415,127 @@
       "inscribable": true
     },
     {
+      "id": "ed-stout",
+      "kind": "edition",
+      "category": "edition",
+      "name": "Edition No.5",
+      "subtitle": "Stout, treacle, burnt orange",
+      "price": 78,
+      "leadDays": 3,
+      "batchSize": 6,
+      "image": "photo-1611497406092-4bc22c54b322",
+      "popular": true,
+      "allergens": [
+        "gluten",
+        "dairy",
+        "egg"
+      ],
+      "description": "Baked in a ring so the middle cooks at the same rate as the edge, which matters when the batter is this dark. The stout does not taste of beer by the time it is out; it tastes of treacle.",
+      "options": [
+        "size"
+      ],
+      "defaults": {
+        "size": "s"
+      },
+      "addons": [
+        "candles",
+        "card",
+        "giftbox"
+      ],
+      "inscribable": true
+    },
+    {
+      "id": "ed-cheesecake",
+      "kind": "edition",
+      "category": "edition",
+      "name": "Edition No.6",
+      "subtitle": "Baked cheesecake, juniper",
+      "price": 95,
+      "leadDays": 4,
+      "batchSize": 4,
+      "image": "photo-1567171466295-4afa63d45416",
+      "popular": false,
+      "allergens": [
+        "gluten",
+        "dairy",
+        "egg"
+      ],
+      "description": "Baked low and slow until it only just sets, then left overnight. Juniper in the base, which people notice on the second mouthful and not the first.",
+      "options": [
+        "size"
+      ],
+      "defaults": {
+        "size": "s"
+      },
+      "addons": [
+        "candles",
+        "card",
+        "giftbox"
+      ],
+      "inscribable": true
+    },
+    {
+      "id": "ed-meringue",
+      "kind": "edition",
+      "category": "edition",
+      "name": "Edition No.7",
+      "subtitle": "Lemon, meringue, scorched",
+      "price": 84,
+      "leadDays": 3,
+      "batchSize": 5,
+      "image": "photo-1519915028121-7d3463d20b13",
+      "popular": false,
+      "allergens": [
+        "gluten",
+        "dairy",
+        "egg"
+      ],
+      "description": "The curd is sharper than most people expect and the meringue is taken to the edge of burnt with a torch. Both of those are deliberate and we will not soften either.",
+      "options": [
+        "size"
+      ],
+      "defaults": {
+        "size": "s"
+      },
+      "addons": [
+        "candles",
+        "card",
+        "giftbox"
+      ],
+      "inscribable": true
+    },
+    {
+      "id": "ed-almond",
+      "kind": "edition",
+      "category": "edition",
+      "name": "Edition No.8",
+      "subtitle": "Almond, brown sugar, bay",
+      "price": 72,
+      "leadDays": 2,
+      "batchSize": 8,
+      "image": "photo-1569775683473-c534979f35a9",
+      "popular": false,
+      "allergens": [
+        "gluten",
+        "dairy",
+        "egg",
+        "nuts"
+      ],
+      "description": "The plainest thing we make, and the one we eat. A loaf rather than a tier, cut thick, better on the second day than the first.",
+      "options": [
+        "size"
+      ],
+      "defaults": {
+        "size": "s"
+      },
+      "addons": [
+        "candles",
+        "card",
+        "giftbox"
+      ],
+      "inscribable": true
+    },
+    {
       "id": "offcuts",
       "kind": "edition",
       "category": "edition",

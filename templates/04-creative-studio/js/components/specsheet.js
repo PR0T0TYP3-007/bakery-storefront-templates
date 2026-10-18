@@ -45,10 +45,10 @@ export function reference(selections, techniqueIds) {
  * @param {string[]} opts.techniqueIds
  * @param {object} opts.groups        catalogue.optionGroups
  * @param {Date} opts.earliest        soonest day the studio can take it
- * @param {string} [opts.notes]
+ * @param {{occasion:string, idea:string, avoid:string}} [opts.brief]
  * @returns {string} markup
  */
-export function specSheet({ merchant, priced, selections, techniqueIds, groups, earliest, notes = '' }) {
+export function specSheet({ merchant, priced, selections, techniqueIds, groups, earliest, brief = {} }) {
   const cfg = merchant.commission ?? {};
   const opt = (g, id) => groups?.[g]?.options.find((o) => o.id === id);
 
@@ -59,7 +59,7 @@ export function specSheet({ merchant, priced, selections, techniqueIds, groups, 
   const valid = new Date();
   valid.setDate(valid.getDate() + (cfg.quoteValidDays ?? 14));
 
-  const brief = [
+  const rows = [
     ['Scale', scale ? `${scale.label} people` : '—', scale?.note],
     ['Taken to', ambition?.label ?? '—', ambition?.note],
     ['Colour', palette?.label ?? '—', palette?.note],
@@ -69,7 +69,11 @@ export function specSheet({ merchant, priced, selections, techniqueIds, groups, 
       priced.techniques.length ? `${priced.techniques.length} of ${ambition?.allows ?? 0} allowed at this level` : undefined,
     ],
     ...(selections.setup ? [['On the day', 'We deliver it and set it up', merchant.delivery.note]] : []),
-    ...(notes.trim() ? [['Your note', notes.trim(), undefined]] : []),
+    // The written brief sits with the rest of the specification, because on
+    // a job sheet it is the specification — everything above it is quantity.
+    ...(brief.occasion?.trim() ? [['For', brief.occasion.trim(), undefined]] : []),
+    ...(brief.idea?.trim() ? [['The idea', brief.idea.trim(), 'In your words. We design from this.']] : []),
+    ...(brief.avoid?.trim() ? [['Avoiding', brief.avoid.trim(), undefined]] : []),
   ];
 
   return `
@@ -85,7 +89,7 @@ export function specSheet({ merchant, priced, selections, techniqueIds, groups, 
       </header>
 
       <dl class="sheet__brief">
-        ${brief
+        ${rows
           .map(
             ([k, v, note]) => `
           <div>

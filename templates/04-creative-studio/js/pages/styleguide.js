@@ -135,16 +135,20 @@ $('[data-demo-err]').innerHTML = `${icons.alert}<span>Check the email — the sp
    The sheet, at both ends of what the studio accepts
    ------------------------------------------------------------------------- */
 const FIXTURES = [
-  ['The smallest brief we take', { scale: 's', ambition: 'clean', palette: 'natural' }, [], ''],
+  ['The smallest brief we take', { scale: 's', ambition: 'clean', palette: 'natural' }, [], {}],
   [
     'The most we can do',
     { scale: 'xl', ambition: 'editorial', palette: 'contrast', setup: true },
     catalogue.addons.filter((a) => a.kind === 'technique').map((a) => a.id),
-    'For a launch in a white gallery. Nothing pink, and it has to survive two hours under lights.',
+    {
+      occasion: 'A gallery opening, 120 people, evening',
+      idea: 'Something that looks carved rather than iced. The room is white and very bright, and it has to survive two hours under lights without sagging.',
+      avoid: 'Nothing pink, no fresh flowers',
+    },
   ],
 ];
 
-$('[data-sheets]').innerHTML = FIXTURES.map(([label, sel, tech, note]) => {
+$('[data-sheets]').innerHTML = FIXTURES.map(([label, sel, tech, brief]) => {
   const p = priceCommission(merchant, catalogue, sel, tech, { setup: Boolean(sel.setup) });
   return `
     <figure class="c-6" style="margin:0">
@@ -156,7 +160,7 @@ $('[data-sheets]').innerHTML = FIXTURES.map(([label, sel, tech, note]) => {
         techniqueIds: tech,
         groups: catalogue.optionGroups,
         earliest: earliestFor(merchant, p.leadDays),
-        notes: note,
+        brief,
       })}
     </figure>`;
 }).join('');

@@ -141,7 +141,7 @@ export function createSession(api) {
    * the chosen collection day cannot accommodate it, rather than failing later.
    * @returns {{line:object, movedTo:Date|null}}
    */
-  function add({ productId, selections, addons = [], inscription = '', qty = 1 }) {
+  function add({ productId, selections, addons = [], inscription = '', qty = 1, meta = null }) {
     const p = product(productId);
     if (!p) throw new Error(`Unknown product: ${productId}`);
 
@@ -157,6 +157,10 @@ export function createSession(api) {
       selections: sel,
       addons,
       inscription,
+      // Passed through untouched. The session layer has no opinion about what
+      // a template keeps here — Template 04 carries the written commission
+      // brief — but it must not be the place the data quietly disappears.
+      meta,
       readyBy: dateKey(when),
       qty,
       addedPrice: unit,

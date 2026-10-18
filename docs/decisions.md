@@ -426,3 +426,38 @@ it looks like rather than what it is called in a kitchen.
 experimental design language; it also rejects interfaces that are hard to use, and the
 two are not in tension. The composition, the typography and the dark ground are
 untouched. What changed is that the page now introduces itself.
+
+---
+
+### D18 — The written brief is the design, so it gets its own step
+
+**Decision.** Template 04's commission gains a numbered step, third of six, holding three
+short questions: what it is for, the idea in the customer's words, and anything to avoid.
+It travels on a new `meta` field on the cart line, which `shared/core/cart.js` carries and
+does not interpret.
+
+**Why.** The owner put it precisely: *after selecting the options, the overall design
+depends on the maker.* That is exactly right, and it is the hole in the mechanic. Scale,
+ambition, techniques and palette fix how much work is involved and roughly what register
+it is in. They do not describe the idea. Everything that makes the cake *this* cake rather
+than any other cake at that price was, until now, a 400-character box at the bottom of the
+delivery step labelled "Anything we should know" — which is why nobody found it, including
+the person who commissioned the project.
+
+Three short questions beat one open box. "Anything we should know" gets you nothing;
+"what is it for" gets you an answer.
+
+**Why `meta` and not `inscription`.** It was being stored as the line's inscription, which
+is the field for what is piped onto a cake. A design brief is not an inscription. The
+commerce core now carries an opaque per-line object instead, and `signature()` includes it
+— without that, two commissions with different briefs would share a signature and silently
+merge into one line at quantity two, which is a different cake ordered twice.
+
+`session.add()` had to forward it too. It builds its own line object and dropped every
+field it did not name, so the brief reached the cart layer and vanished. Found by looking
+at the basket rather than by trusting the call.
+
+**The honest bit the page now says.** "We design it from this... expect us to come back
+with questions, and sometimes with a better idea than the one you sent." A studio that
+takes a brief and interprets it should say so, rather than implying six dropdowns fully
+determine the outcome.

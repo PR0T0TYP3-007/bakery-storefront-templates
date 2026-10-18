@@ -41,7 +41,16 @@ $('[data-editions-link]').href = link('work.html');
    ------------------------------------------------------------------------- */
 let selections = { ...product.defaults, setup: false };
 let techniques = [];
-let notes = '';
+/**
+ * The written brief.
+ *
+ * The six options fix the scale, the ambition, the techniques and the colour
+ * direction. They do not describe the *idea* — and once they are answered,
+ * what the cake actually looks like is down to whoever builds it. This is
+ * where the customer says what they are picturing. It used to be one
+ * textarea at the bottom of the delivery step, which is why nobody found it.
+ */
+let brief = { occasion: '', idea: '', avoid: '' };
 let touched = false;
 let lastTotal = null;
 let shownWhen = null;
@@ -147,6 +156,51 @@ function startingNote() {
     </span></p>`;
 }
 
+/** How long the idea box accepts. Enough for a paragraph, not an essay. */
+const IDEA_MAX = 600;
+
+/**
+ * Three short questions rather than one open box. "Anything we should know"
+ * gets you nothing; "what is it for" gets you an answer.
+ */
+function ideaFields() {
+  return `
+    <div class="stack">
+      <label class="field" style="margin:0">
+        <span class="field__label label" for="occasion">What is it for?</span>
+        <span class="field__hint">A wedding, a launch, a fortieth. It changes how we read everything else.</span>
+        <input class="input" id="occasion" type="text" data-brief="occasion" maxlength="80"
+          placeholder="A gallery opening, 60 people, evening">
+      </label>
+
+      <label class="field" style="margin:0">
+        <span class="field__label label" for="idea">The idea, in your words</span>
+        <span class="field__hint">
+          What are you picturing? A shape, a feeling, something you have seen. As much or as
+          little as you like &mdash; this is what we design from.
+        </span>
+        <textarea class="textarea" id="idea" data-brief="idea" maxlength="${IDEA_MAX}"
+          style="min-height:9rem"
+          placeholder="Something that looks carved rather than iced. The room is white and very bright. I keep coming back to Brutalist stairwells."></textarea>
+        <span class="counter num" data-idea-count>0 / ${IDEA_MAX}</span>
+      </label>
+
+      <label class="field" style="margin:0">
+        <span class="field__label label" for="avoid">Anything to avoid</span>
+        <span class="field__hint">A colour, a flavour, a style you hate. Allergies go at checkout, not here.</span>
+        <input class="input" id="avoid" type="text" data-brief="avoid" maxlength="120"
+          placeholder="Nothing pink, no fresh flowers">
+      </label>
+
+      <p class="note">${icons.info}<span>
+        <strong>We design it from this.</strong> The choices above set the size, the amount of
+        work and the palette. This is where the idea comes from. Expect us to come back with
+        questions within two working days &mdash; and sometimes with a better idea than the one
+        you sent.
+      </span></p>
+    </div>`;
+}
+
 function renderChoices() {
   const allowance = techniqueAllowance(catalogue, selections);
 
@@ -201,15 +255,16 @@ function renderChoices() {
     startingNote() +
     step(1, 'How many it has to feed', 'People. Scale sets the base.', `<fieldset class="choices"><legend class="sr">Scale</legend>${scale}</fieldset>`) +
     step(2, 'How far we take it', `Each step is more work on the bench, so it multiplies the ${money(baseFor())} above rather than adding to it.`, `<fieldset style="border:0;padding:0;margin:0"><legend class="sr">How far we take it</legend>${ambition}</fieldset>`) +
+    step(3, 'The idea', 'The part the options cannot describe.', ideaFields()) +
     step(
-      3,
+      4,
       'Our techniques',
       `${techniques.length} of ${allowance} used at this level.`,
       `<fieldset class="choices"><legend class="sr">Techniques</legend>${tech}</fieldset>`
     ) +
-    step(4, 'Where the colour goes', 'No charge either way.', `<fieldset class="choices"><legend class="sr">Palette</legend>${palette}</fieldset>`) +
+    step(5, 'Where the colour goes', 'No charge either way.', `<fieldset class="choices"><legend class="sr">Palette</legend>${palette}</fieldset>`) +
     step(
-      5,
+      6,
       'The day, and getting it there',
       '',
       `<div class="stack">
@@ -226,13 +281,6 @@ function renderChoices() {
              note: merchant.delivery.note,
            }).replace('type="checkbox"', 'type="checkbox" data-setup')}
          </fieldset>
-         <label class="field" style="margin:0">
-           <span class="field__label label">Anything we should know</span>
-           <span class="field__hint">A reference, a room, a colour you hate. It goes on the sheet.</span>
-           <textarea class="textarea" data-notes maxlength="400"
-             placeholder="It is for a launch in a white gallery. Nothing pink."></textarea>
-           <span class="counter num" data-notes-count>0 / 400</span>
-         </label>
        </div>`
     );
 }
@@ -253,7 +301,7 @@ function paintSheet(p, earliest) {
     techniqueIds: techniques,
     groups,
     earliest,
-    notes,
+    brief,
   });
 
   const el = $('[data-amount]');
@@ -348,9 +396,10 @@ host.addEventListener('change', (e) => {
 });
 
 host.addEventListener('input', (e) => {
-  if (!e.target.hasAttribute('data-notes')) return;
-  notes = e.target.value;
-  $('[data-notes-count]').textContent = `${notes.length} / 400`;
+  const field = e.target.getAttribute('data-brief');
+  if (!field) return;
+  brief[field] = e.target.value;
+  if (field === 'idea') $('[data-idea-count]').textContent = `${brief.idea.length} / ${IDEA_MAX}`;
   paintSheet(priced(), shownWhen);
 });
 
@@ -371,12 +420,14 @@ host.addEventListener('click', (e) => {
   });
 });
 
-/** The textarea is destroyed by every re-render, so its value is put back. */
+/** The brief fields are destroyed by every re-render, so they are put back. */
 function restoreNotes() {
-  const box = $('[data-notes]');
-  if (!box) return;
-  box.value = notes;
-  $('[data-notes-count]').textContent = `${notes.length} / 400`;
+  for (const [field, value] of Object.entries(brief)) {
+    const el = $(`[data-brief="${field}"]`);
+    if (el) el.value = value;
+  }
+  const count = $('[data-idea-count]');
+  if (count) count.textContent = `${brief.idea.length} / ${IDEA_MAX}`;
 }
 
 /* -------------------------------------------------------------------------
@@ -390,7 +441,15 @@ $('[data-book]').addEventListener('click', () => {
     productId: product.id,
     selections: { ...selections },
     addons: [...techniques],
-    inscription: notes.trim(),
+    // The brief is design intent, not an inscription. It travels on the
+    // line's `meta`, which the commerce core carries without interpreting.
+    meta: {
+      brief: {
+        occasion: brief.occasion.trim(),
+        idea: brief.idea.trim(),
+        avoid: brief.avoid.trim(),
+      },
+    },
     qty: 1,
   });
 

@@ -24,17 +24,19 @@ $('[data-commission-body]').innerHTML = `
   figure moves with you. ${Math.round(c.depositPct * 100)}% books the slot and the price holds for
   ${c.quoteValidDays} days. No form, no band, no email in a week.`;
 
-/* The four levels, as a ladder — this is the decision that moves the price
-   most, so it is worth showing before anyone opens the brief. */
+/* The four levels, as a ladder. Shown against the smallest scale so each one
+   carries a real figure — "× 1.90" is a number only the studio can read. */
+const smallest = Math.min(...catalogue.optionGroups.scale.options.map((o) => o.price));
+
 $('[data-levels]').innerHTML = catalogue.optionGroups.ambition.options
   .map(
     (o) => `
     <li style="border-top:1px solid var(--hair);padding-top:var(--s-3)">
       <p class="piece__head">
         <span class="t-3">${esc(o.label)}</span>
-        <span class="num dim sm">× ${o.factor.toFixed(2)} · ${o.leadDays} days</span>
+        <span class="num dim sm">from ${money(Math.round(smallest * o.factor))} · ${o.leadDays} days</span>
       </p>
-      <p class="sm dim" style="margin-top:var(--s-1)">${esc(o.note)} Up to ${o.allows} techniques.</p>
+      <p class="sm dim" style="margin-top:var(--s-1)">${esc(o.note)}</p>
     </li>`
   )
   .join('');
@@ -43,6 +45,13 @@ $('[data-levels]').innerHTML = catalogue.optionGroups.ambition.options
    Editions
    ------------------------------------------------------------------------- */
 const editions = catalogue.products.filter((p) => p.kind === 'edition');
+const repeated = editions.filter((p) => p.id !== 'offcuts');
+const WORDS = ['no', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten'];
+
+$('[data-work-lede]').textContent =
+  `${WORDS[repeated.length] ?? repeated.length} cakes we make again and again, ` +
+  `from ${money(Math.min(...repeated.map((p) => p.price)))} — and the commissions, ` +
+  `which are different every time.`;
 $('[data-found]').textContent = `${editions.length} pieces`;
 
 $('[data-shelf]').innerHTML = editions
