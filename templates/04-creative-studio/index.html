@@ -24,31 +24,49 @@
 
 <main id="main">
 
-  <!-- The claim. Type at display scale, a piece pushed up beside it, and
-       nothing else competing. -->
-  <section class="page sec">
-    <div class="g">
-      <div class="c-8">
-        <p class="label" data-kicker></p>
-        <h1 class="t-mega" style="margin-top:var(--s-4)" data-headline></h1>
-      </div>
-      <div class="c-4">
-        <p class="lede" data-lede></p>
-        <div class="row" style="margin-top:var(--s-5)">
-          <a class="btn btn--acid btn--lg" href="commission.html" data-commission-link>Design a cake</a>
-          <a class="btn btn--lg" href="work.html" data-work-link>Buy one we already make</a>
-        </div>
+  <!-- The claim. Type at display scale, and a piece pushed up beside it.
+
+       That second half was in this comment from the first commit and was
+       never built: the hero was type on a flat field, which made the first
+       screen the one place on the site that used none of the template's own
+       separation method. It now does all three — the piece runs off the
+       right edge of the document (bleed), it hangs below the section into
+       the one after it (overlap), and the words stay on the twelve-column
+       measure while it does (visible grid).
+
+       The piece is a real commission, and the figure under it is computed
+       from its brief by the same function the calculator uses. See home.js.
+       -->
+  <section class="hero sec">
+    <div class="hero__words">
+      <p class="label" data-kicker></p>
+      <h1 class="t-mega" style="margin-top:var(--s-4)" data-headline></h1>
+    </div>
+    <figure class="hero__piece" data-hero-piece hidden></figure>
+    <div class="hero__say">
+      <p class="lede" data-lede></p>
+      <div class="row" style="margin-top:var(--s-5)">
+        <a class="btn btn--acid btn--lg" href="commission.html" data-commission-link>Design a cake</a>
+        <a class="btn btn--lg" href="work.html" data-work-link>Buy one we already make</a>
       </div>
     </div>
   </section>
 
   <!-- Two ways to buy, named plainly. Somebody who does not know the word
-       "commission" should not have to work it out from context. -->
+       "commission" should not have to work it out from context.
+
+       "Either" and "Or" rather than 01 and 02. The page already numbers
+       things: the section markers below run 01, 02, 03, and the pieces in a
+       grid carry their own. A third numbering that also started at 01 meant
+       the page held two different "01"s, and once section 01 became the
+       commissions it held two that said 01 and the word commission. These
+       two are a choice between alternatives, not a sequence, so a word that
+       means "a choice between alternatives" is the honest mark. -->
   <section class="page sec--tight">
     <hr class="rule">
     <div class="g" style="margin-top:var(--s-5)">
       <div class="c-5">
-        <p class="label label--acid">01 &mdash; A commission</p>
+        <p class="label label--acid">Either &mdash; a commission</p>
         <p class="t-2" style="margin-top:var(--s-3)">A cake we design with you</p>
         <p class="prose dim" style="margin-top:var(--s-3)" data-commission-blurb></p>
         <p style="margin-top:var(--s-4)">
@@ -56,7 +74,7 @@
         </p>
       </div>
       <div class="c-5 start-7">
-        <p class="label">02 &mdash; An edition</p>
+        <p class="label">Or &mdash; an edition</p>
         <p class="t-2" style="margin-top:var(--s-3)">A cake we already make</p>
         <p class="prose dim" style="margin-top:var(--s-3)" data-edition-blurb></p>
         <p style="margin-top:var(--s-4)">
@@ -82,12 +100,19 @@
   </section>
 
   <!-- Work. An asymmetric grid: the pieces are not the same size, because
-       they are not the same thing. -->
+       they are not the same thing.
+
+       This section was filled with editions, and so was section 03 — the
+       home page of a studio whose headline sells commissions showed the
+       shelf twice and a commission never. These are commissions, and each
+       one carries the brief it was built from and the number that brief
+       produces. That is the proof of the claim at the top of the page;
+       everything else on the site only asserts it. -->
   <section class="page sec">
     <div class="marker">
       <span class="marker__n">01</span>
-      <span class="marker__name label">Editions &mdash; order now</span>
-      <a class="sm marker__why" href="work.html" data-work-link-2>All of it</a>
+      <span class="marker__name label">Commissions &mdash; and what they came to</span>
+      <a class="sm marker__why" href="commission.html" data-commission-link-2>Price your own</a>
     </div>
     <div class="g" data-work></div>
   </section>
@@ -114,15 +139,19 @@
     <div class="g" data-editions></div>
   </section>
 
-  <!-- The studio note. -->
+  <!-- The studio note.
+
+       The page shows three finished pieces and nothing of the place they
+       were made, which for a studio selling the fact that one person builds
+       each piece start to finish is the wrong omission. The bench goes
+       here, at the end, where the note explains why the diary is short. -->
   <section class="page sec--tight" style="padding-bottom:var(--s-7)">
     <hr class="rule">
     <div class="g" style="margin-top:var(--s-5)">
-      <div class="c-5 start-2">
+      <figure class="c-6 start-2 bench" data-bench hidden></figure>
+      <div class="c-4 start-9">
         <p class="t-2" data-studio-head></p>
-      </div>
-      <div class="c-4 start-8">
-        <p class="prose dim" data-studio-body></p>
+        <p class="prose dim" style="margin-top:var(--s-4)" data-studio-body></p>
       </div>
     </div>
   </section>

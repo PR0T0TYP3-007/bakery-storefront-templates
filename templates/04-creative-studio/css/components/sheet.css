@@ -211,3 +211,15 @@
 @media (prefers-reduced-motion: reduce) {
   .look__media img { transition: none; }
 }
+
+/* The look swatches in the commission builder, on touch.
+
+   Same reason as `.piece` in piece.css: the colour lives behind a hover, and
+   on a phone there is none -- so the nine looks you choose a direction from
+   were nine grey squares. Appended rather than wrapped around the rule
+   above so the override is one readable block. */
+@media (hover: none) {
+  .look .look__media img {
+    filter: grayscale(0.12) contrast(1.08) brightness(0.96);
+  }
+}

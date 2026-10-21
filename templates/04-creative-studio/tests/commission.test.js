@@ -23,6 +23,8 @@ import {
   isCommission,
 } from '../js/commission.js';
 import { priceLine } from '../../../shared/core/pricing.js';
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 
 const merchant = {
   id: 'fold',
@@ -308,4 +310,72 @@ test('money never drifts into floating-point dust', () => {
       assert.equal(Math.round((p.deposit + p.balance) * 100), Math.round(p.subtotal * 100));
     }
   }
+});
+
+
+/* --------------------------------------------------------------------------
+   The past work on the home page
+
+   Those three pieces are stored as the brief that produced them and priced
+   at render time by `priceCommission`, so the figures under them cannot
+   drift away from the calculator the visitor is about to use. That is the
+   whole argument of this template, and it rests entirely on the ids in the
+   config being real ones.
+
+   Nothing on the page would tell you if they were not. An unknown scale id
+   contributes no base, an unknown technique contributes no money and no
+   days, and the result is a plausible-looking smaller number under a real
+   photograph -- the failure mode is a quiet lie, not a crash. These tests
+   read the shipped JSON rather than a fixture for exactly that reason.
+   -------------------------------------------------------------------------- */
+const readJSON = (rel) =>
+  JSON.parse(readFileSync(fileURLToPath(new URL(rel, import.meta.url)), 'utf8'));
+
+const foldMerchant = readJSON('../data/merchant.fold.json');
+const foldCatalogue = readJSON('../data/products.fold.json');
+
+test('every past commission names options and techniques that exist', () => {
+  const work = foldMerchant.voice.work ?? [];
+  assert.ok(work.length, 'no past work in config');
+
+  for (const w of work) {
+    for (const [groupId, optionId] of Object.entries(w.brief)) {
+      const group = foldCatalogue.optionGroups[groupId];
+      assert.ok(group, `${w.id}: no option group "${groupId}"`);
+      assert.ok(
+        group.options.some((o) => o.id === optionId),
+        `${w.id}: "${groupId}" has no option "${optionId}"`
+      );
+    }
+    for (const id of w.techniques ?? []) {
+      assert.ok(
+        foldCatalogue.addons.some((a) => a.id === id && a.kind === 'technique'),
+        `${w.id}: no technique "${id}"`
+      );
+    }
+    assert.ok(w.image, `${w.id}: no image`);
+    assert.ok(w.alt && w.alt.length > 10, `${w.id}: alt text is missing or too short`);
+  }
+});
+
+test('every past commission prices above the studio minimum', () => {
+  for (const w of foldMerchant.voice.work ?? []) {
+    const p = priceCommission(foldMerchant, foldCatalogue, w.brief, w.techniques ?? []);
+    assert.equal(
+      p.belowMinimum,
+      false,
+      `${w.id} prices at ${p.subtotal}, under the ${foldMerchant.commission.minimum} minimum`
+    );
+    assert.ok(p.subtotal > 0, `${w.id} priced at zero`);
+    assert.ok(p.leadDays > 0, `${w.id} has no lead time`);
+  }
+});
+
+test('a technique that is not in the catalogue would change the figure', () => {
+  // Guards the guard: proves the test above can actually fail, rather than
+  // passing because unknown ids are silently tolerated everywhere.
+  const w = (foldMerchant.voice.work ?? [])[0];
+  const real = priceCommission(foldMerchant, foldCatalogue, w.brief, w.techniques ?? []);
+  const typo = priceCommission(foldMerchant, foldCatalogue, w.brief, ['hand-piped-detail']);
+  assert.notEqual(real.subtotal, typo.subtotal);
 });

@@ -47,7 +47,7 @@ export function pieceTile(product, { when, n, media = '' } = {}) {
         ${
           product.image
             ? `<img src="${photo(product.image, 'md')}"
-                 srcset="${photo(product.image, 'sm')} 480w, ${photo(product.image, 'md')} 800w, ${photo(product.image, 'lg')} 1600w"
+                 srcset="${photo(product.image, 'sm')} 240w, ${photo(product.image, 'md')} 800w, ${photo(product.image, 'lg')} 1600w"
                  sizes="(min-width: 60rem) 32vw, 90vw"
                  alt="${esc(product.name)}" loading="lazy" decoding="async" width="800" height="1000">`
             : ''

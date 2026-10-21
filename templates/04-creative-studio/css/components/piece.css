@@ -36,6 +36,38 @@
 .piece:hover .piece__media img,
 .piece:focus-within .piece__media img { scale: 1.03; filter: contrast(1.04); }
 
+/* Where there is no hover, there is no reveal.
+
+   The treatment above is a studio look that resolves into colour when you
+   point at it. On a touch screen nothing points, so every cake on this site
+   was permanently black and white -- on a phone, a cake studio showed no cake
+   in colour anywhere except the product page. A reveal that cannot fire is
+   not an art direction, it is a photograph nobody can see.
+
+   So on touch the grayscale comes almost all the way off and the contrast
+   lift stays. The pages still look art-directed and the cake still looks
+   like the colour it is. Keyed to `hover`, not to a width: a laptop with a
+   touchscreen keeps the hover version, which is the right answer for it. */
+@media (hover: none) {
+  .piece .piece__media img {
+    filter: grayscale(0.12) contrast(1.1) brightness(0.96);
+  }
+  /* Sold out still reads as sold out: that one is information rather than
+     styling, and it carries its own word regardless. */
+  .piece[data-state='out'] .piece__media img {
+    filter: grayscale(1) brightness(0.5);
+  }
+}
+
+/* The brief under a past commission: the options that produced the figure
+   beside it. Quiet, because the photograph and the number are the point and
+   this is the receipt. */
+.piece__brief {
+  margin-top: var(--s-2);
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .piece:hover .piece__media img,
   .piece:focus-within .piece__media img { scale: 1; }

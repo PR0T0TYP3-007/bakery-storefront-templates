@@ -49,7 +49,17 @@ a:not([class]) {
 }
 a:not([class]):hover { background-size: 100% 40%; color: var(--ground); }
 
-img, svg, video { max-width: 100%; display: block; }
+/* `height: auto` is not decoration here, it is the half of this rule that
+   makes the other half work. `width` and `height` on the tag are
+   presentational hints, so without it every image carries a real height of
+   whatever its markup claims: set `max-width: 100%` alone and a scaled-down
+   image keeps its full height and squashes.
+
+   It also silently disables `aspect-ratio`. A definite width and a definite
+   height beat a ratio, so `.bench img` asked for 16/10, got the attribute's
+   1000px instead, and the photograph rendered as a tall empty column -- a
+   rule that computed exactly as written and did nothing. */
+img, svg, video { max-width: 100%; height: auto; display: block; }
 
 ul, ol { margin: 0 0 var(--s-4); padding-left: 1.15em; }
 li { margin-bottom: var(--s-2); }

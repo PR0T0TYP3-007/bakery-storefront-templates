@@ -22,21 +22,40 @@
    "unusual composition" that cannot be read on a phone is just a defect,
    and the brief rejects desktop-first designs with poor mobile. */
 @media (min-width: 60rem) {
-  .c-2 { grid-column: span 2; }
-  .c-3 { grid-column: span 3; }
-  .c-4 { grid-column: span 4; }
-  .c-5 { grid-column: span 5; }
-  .c-6 { grid-column: span 6; }
-  .c-7 { grid-column: span 7; }
-  .c-8 { grid-column: span 8; }
-  .c-9 { grid-column: span 9; }
-  .c-10 { grid-column: span 10; }
-  .c-12 { grid-column: span 12; }
+  /* `grid-column-end`, not the `grid-column` shorthand.
+
+     The shorthand puts `span N` in the *start* slot and leaves the end as
+     `auto`. Add a `.start-N` beside it and that start is overwritten — and
+     an item with a definite start and an auto end spans exactly one track.
+     So every offset element on this template was one column wide: the
+     "A cake we already make" paragraph rendered at 60px, about one word
+     per line, and the studio note the same. It looked like a text-wrapping
+     problem and it was a specificity problem.
+
+     Setting the end leaves the start alone, so `.c-5.start-7` is columns
+     7 to 11 and a bare `.c-5` still spans five from wherever it lands. */
+  .c-2 { grid-column-end: span 2; }
+  .c-3 { grid-column-end: span 3; }
+  .c-4 { grid-column-end: span 4; }
+  .c-5 { grid-column-end: span 5; }
+  .c-6 { grid-column-end: span 6; }
+  .c-7 { grid-column-end: span 7; }
+  .c-8 { grid-column-end: span 8; }
+  .c-9 { grid-column-end: span 9; }
+  .c-10 { grid-column-end: span 10; }
+  .c-12 { grid-column-end: span 12; }
+
+  /* Every start the markup actually uses. `.start-3` and `.start-9` were
+     missing, so two more elements silently ignored their offset and sat
+     wherever auto-placement put them. */
   .start-2 { grid-column-start: 2; }
+  .start-3 { grid-column-start: 3; }
   .start-4 { grid-column-start: 4; }
+  .start-5 { grid-column-start: 5; }
   .start-6 { grid-column-start: 6; }
   .start-7 { grid-column-start: 7; }
   .start-8 { grid-column-start: 8; }
+  .start-9 { grid-column-start: 9; }
 }
 @media (max-width: 59.99rem) {
   .g > * { grid-column: 1 / -1; }
@@ -127,3 +146,175 @@
 .row { display: flex; flex-wrap: wrap; gap: var(--s-3); align-items: center; }
 .row--between { justify-content: space-between; }
 .push { margin-inline-start: auto; }
+
+/* The editions aside sits in the second row of the work grid, beside the
+   lifted piece. It is aligned to the bottom of its cell so it reads as the
+   end of the section rather than as a caption hanging in space. */
+@media (min-width: 60rem) {
+  .editions__aside { align-self: end; padding-bottom: var(--s-5); }
+}
+
+/* --------------------------------------------------------------------------
+   The hero
+
+   A full-bleed grid rather than a `.page` with something pulled out of it.
+   The named lines do the work: the words sit inside the page measure, and
+   the piece starts at the line the words end on and runs to the document's
+   right edge. No negative margins, and no `100vw` — which this file already
+   warns is a sideways scrollbar waiting to happen.
+
+   Three children in source order: the headline, the piece, then the lede
+   and the buttons. That order is what a phone gets, and it is the right one
+   — claim, evidence, invitation. The desktop grid re-places them without
+   changing it, so nothing depends on a visual order a keyboard would not
+   follow.
+   -------------------------------------------------------------------------- */
+.hero {
+  display: grid;
+  gap: var(--s-5);
+  padding-inline: var(--gutter);
+}
+
+/* A `<figure>` arrives carrying the browser's own `margin: 1em 40px`. In a
+   grid item that margin is inside the track, so the piece stopped 40px short
+   of the document edge and the bleed -- the entire point of this layout --
+   silently did not happen. It looked close enough to right to miss by eye;
+   it took measuring the element's own box to see. */
+.hero__piece { margin: 0; }
+
+@media (min-width: 60rem) {
+  .hero {
+    padding-inline: 0;
+    column-gap: var(--gutter);
+    row-gap: var(--s-6);
+    align-items: start;
+
+    /* The side tracks are the centering margin and nothing else: whatever
+       is left once the measure has taken its width, but never less than the
+       gutter. The two middle tracks then split what remains in a fixed
+       ratio.
+
+       The first version sized those two as fractions of `--page` directly.
+       `--page` is 1560px, so on any viewport narrower than that the pair
+       asked for more room than existed, both were compressed to what would
+       fit, and they came out equal -- a 50/50 hero where a 62/38 one was
+       written. Fractions of the space that is actually there cannot do
+       that. */
+    --side: max(var(--gutter), (100% - var(--page)) / 2);
+
+    /* The gutter between the words and the piece is a track, not a gap, and
+       `column-gap` is zero.
+
+       With a column gap, grid puts one between the side track and the words
+       as well, so the headline began 29px further in than every `.page`
+       section above and below it. On a template whose column grid is drawn
+       on the screen, the first line of the page sitting off that grid is
+       not a subtlety. Grid has no way to skip a single gap, so the one gap
+       that is wanted becomes a column of its own.
+
+       `--side` reproduces `.page`'s own left edge exactly: the centering
+       margin once the measure has its width, never less than the gutter. */
+    column-gap: 0;
+    grid-template-columns:
+      [full-start] var(--side)
+      [main-start] minmax(0, 61.5fr)
+      [inner] var(--gutter)
+      [split] minmax(0, 38.5fr)
+      [main-end] var(--side)
+      [full-end];
+  }
+
+  .hero__words { grid-column: main-start / inner; grid-row: 1; }
+
+  /* The headline is sized by its own column, not by the window.
+
+     `--t-mega` is `9.5vw`, which was tuned when the headline had two thirds
+     of the page to itself. Giving the piece its column took the headline to
+     61.5% while the type carried on sizing itself against the full viewport,
+     so it ran to five lines and pushed the lede and both buttons below the
+     fold -- the studio's primary call to action, off the first screen,
+     because a photograph moved in next door.
+
+     Container units tie the two together: whatever the ratio above is set
+     to, the headline fills its column and stops. The clamp keeps the same
+     floor and ceiling as the token. */
+  .hero__words { container-type: inline-size; }
+  .hero__words > h1 { font-size: clamp(2.8rem, 14.6cqw, 8rem); }
+
+  /* Under the headline, not beside it. At `t-mega` the headline runs four
+     or five lines deep, and a paragraph set level with its first line reads
+     as a second column competing for the start of the page. */
+  .hero__say {
+    grid-column: main-start / inner;
+    grid-row: 2;
+    max-width: 46ch;
+  }
+
+  .hero__piece {
+    grid-column: split / full-end;
+    grid-row: 1 / span 2;
+    /* Hangs past the bottom of the section into the one below. What follows
+       is a hairline rule and two columns of text, so the piece crosses that
+       rule rather than stopping politely above it — which is the overlap
+       this template separates with. */
+    margin-bottom: calc(var(--s-7) * -1);
+    position: relative;
+    z-index: 2;
+  }
+}
+
+/* The hero piece's caption: the title, the brief that made it, and the
+   figure. Set across the bottom of the photograph rather than under it, so
+   the piece stays one object as it crosses into the section below. */
+.hero__piece img {
+  display: block;
+  width: 100%;
+  /* Portrait at every width. The source is a tall piece, and a 4:3 frame
+     cropped it to the middle tier — at 375px that is not a cake, it is a
+     texture. A cake studio can crop a photograph; it cannot crop the cake
+     out of it. */
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  filter: contrast(1.04);
+}
+
+.hero__cap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s-2) var(--s-4);
+  padding-top: var(--s-3);
+  /* The photograph runs to the edge of the document; its caption must not.
+     Text set flush to the window edge reads as a rendering accident, and
+     the figure is the last thing on the line. */
+  padding-inline-end: var(--gutter);
+}
+
+.hero__cap-brief { flex: 1 1 auto; min-width: 0; }
+
+/* The figure is the point of the caption and of the template, so it is set
+   in the display face at the size of a heading, not as a footnote. */
+.hero__fig {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--t-2);
+  margin-inline-start: auto;
+}
+
+
+
+/* The bench, closing the page. Square-cornered and unframed like every other
+   photograph here, and carrying the same contrast lift the hero does rather
+   than the grayscale -- it is the one picture of the people, and a studio
+   does not show its own room in black and white to say it is warm. */
+.bench { margin: 0; }
+
+.bench img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  filter: contrast(1.04);
+}
+
+.bench__cap { margin-top: var(--s-3); }

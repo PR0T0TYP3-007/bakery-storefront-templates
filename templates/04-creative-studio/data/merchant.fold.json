@@ -149,7 +149,59 @@
   "voice": {
     "kicker": "Oranienstraße, Berlin · Since 2019",
     "headline": "One-off cakes, priced on the page.",
-    "lede": "A commission is a cake designed with you and built on our bench — for a wedding, a launch, a birthday. Answer six questions and the price appears as you go, instead of arriving by email next week."
+    "lede": "A commission is a cake designed with you and built on our bench — for a wedding, a launch, a birthday. Answer six questions and the price appears as you go, instead of arriving by email next week.",
+    "work": [
+      {
+        "id": "kreuzberg-wedding",
+        "image": "photo-1646424810738-c0560ba9fd6c",
+        "alt": "A three-tier cake, pale on a black field, every swag piped by hand",
+        "title": "A wedding, Kreuzberg",
+        "note": "Three tiers, one colour, every line put on by hand.",
+        "brief": {
+          "scale": "l",
+          "ambition": "composed",
+          "palette": "mono"
+        },
+        "techniques": [
+          "piped"
+        ]
+      },
+      {
+        "id": "mitte-launch",
+        "image": "photo-1759769583882-556d39191357",
+        "alt": "A single tier in deep green, raked in ripples, with gold pearls across the top edge",
+        "title": "A launch, Mitte",
+        "note": "One tier, one green, gold only where the light already lands.",
+        "brief": {
+          "scale": "s",
+          "ambition": "sculptural",
+          "palette": "mono"
+        },
+        "techniques": [
+          "gold"
+        ]
+      },
+      {
+        "id": "neukolln-sixtieth",
+        "image": "photo-1726594220127-beca2cc920a1",
+        "alt": "A white tier with wildflowers piped in orange and ochre, on a terracotta stand",
+        "title": "A sixtieth, Neukölln",
+        "note": "Her garden, piped flower by flower from a photograph.",
+        "brief": {
+          "scale": "s",
+          "ambition": "composed",
+          "palette": "contrast"
+        },
+        "techniques": [
+          "piped"
+        ]
+      }
+    ],
+    "bench": {
+      "image": "photo-1649773289945-93a96051fd18",
+      "alt": "Two hands laying a ribbon of pink buttercream around a cake on a turntable",
+      "caption": "One of us builds it, start to finish."
+    }
   },
   "gifting": {
     "messageMax": 240,

@@ -67,6 +67,11 @@ ends and the next begins is told by position: the twelve-column grid is visible,
 bleed past the measure, and elements overlap. That is the separation method, and it is
 why removing the boxes does not make the page ambiguous.
 
+The hero is built on all three: the piece runs off the right edge of the document, hangs
+into the section below it, and the words hold the twelve-column measure while it does. For
+a while it was not — the first screen was type on a flat field, which made the one view
+that establishes the identity the one view that used none of it. See D21.
+
 ---
 
 ## 3. The signature: a commission that prices itself

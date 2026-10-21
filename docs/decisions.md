@@ -597,3 +597,52 @@ layers and checks every text node on every page in both brands.
 the tokens as they are set, so the table cannot drift away from the CSS — and demos sit on
 paper, because that is where the components they demonstrate actually sit.
 
+---
+
+### D21 — A template's separation method has to appear on its first screen
+
+**Decision.** Template 04's hero carries a real commission that bleeds off the right edge of
+the document and hangs into the section below it. Section 01 of the home page shows
+commissions rather than editions, each with the brief it was built from and the figure that
+brief produces.
+
+**Why the hero.** The markup comment above that section read *"Type at display scale, a piece
+pushed up beside it"* from the first commit, and the piece was never built. D8 assigns this
+template **overlap, bleed and a visible grid** as its separation method — and the first
+screen, the one that has to establish the identity, used none of the three. It was type on a
+flat field, which is the one composition this template is not.
+
+**Why the work section.** Sections 01 and 03 both showed editions. The home page of a studio
+whose headline is *"One-off cakes, priced on the page"* displayed the fixed-price shelf twice
+and a commission never, because there was no commission photography and no past work in
+config. The claim was asserted at the top of the page and never once shown.
+
+**The figures are computed, not stored.** Each past piece is saved as the brief that made it
+— scale, ambition, palette, techniques — and `priceCommission` prices it at render time. The
+same function quotes the visitor. A stored number would make the proof of the template's one
+claim a hardcoded string that starts lying the day somebody edits the scale prices. There are
+tests over the shipped JSON, because the failure mode of a mistyped technique id is not a
+crash: it is a plausible smaller number under a real photograph.
+
+**What the browser found that reading did not.**
+
+- A `<figure>` carries the browser's own `margin: 1em 40px`. Inside a grid item that margin
+  sits in the track, so the piece stopped 40px short of the edge and **the bleed silently did
+  not happen** — while looking near enough to right to pass by eye.
+- Sizing the two middle tracks as fractions of `--page` (1560px) meant that on any narrower
+  viewport both asked for more room than existed, were compressed to fit, and came out
+  **equal** — a 50/50 hero where 62/38 was written.
+- A column gap puts a gap between the side track and the first content track too, so the
+  headline began one gutter further in than every other section. On a template that draws its
+  column grid on the screen, that is the first line of the page sitting off the grid.
+- `--t-mega` is `9.5vw`. Sized against the window rather than its column, the headline ran to
+  five lines once the piece took its share and pushed **both calls to action below the fold**.
+  It is now `14.6cqw`, so it fills whatever column the ratio gives it.
+
+**And one defect that was never a design decision.** The studio treatment is monochrome
+resolving to colour on hover. `hover` does not exist on a touch screen, so on a phone every
+cake on the site was permanently black and white, with no way to see one in colour outside
+the product page. **A reveal that cannot fire is not an art direction; it is a photograph
+nobody can see.** Under `@media (hover: none)` the grayscale comes almost all the way off and
+the contrast lift stays. Keyed to `hover` rather than to a width, so a touchscreen laptop
+keeps the version that suits it.

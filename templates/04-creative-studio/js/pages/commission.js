@@ -107,7 +107,7 @@ function ambitionRow(o) {
       <span class="look__face">
         <span class="look__media">
           <img src="${photo(o.image, 'md')}"
-               srcset="${photo(o.image, 'sm')} 480w, ${photo(o.image, 'md')} 800w"
+               srcset="${photo(o.image, 'sm')} 240w, ${photo(o.image, 'md')} 800w"
                sizes="(min-width: 60rem) 22vw, 45vw"
                alt="A ${o.label.toLowerCase()} commission" loading="lazy" decoding="async"
                width="800" height="1000">
