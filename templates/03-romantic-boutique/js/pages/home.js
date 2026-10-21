@@ -141,7 +141,16 @@ growAndKeep({
 /* The cake that is mostly a sentence, the card that goes in the box with it,
    and a second plate dropped below. The proposition is demonstrated rather
    than described — it is a page about words, so showing the words is the
-   least it can do. */
+   least it can do.
+
+   None of these three is lazy, and the two small ones used to be. They are
+   inside the first screen, and `loading="lazy"` on an image that is already
+   in the viewport does not save a request — it just defers one the page is
+   waiting on. Over localhost that is invisible. Over a real connection the
+   apertures sat empty for a second or two, and an empty aperture is not a
+   blank space: it is a solid plum oval, so the hero rendered as a headline
+   with two purple discs beside it and looked broken rather than loading.
+   This is the kind of defect a fast local server hides completely. */
 const star = cakes.find((p) => p.id === 'written') ?? cakes[0];
 const second = cakes.find((p) => p.id === 'heart') ?? cakes[1];
 
@@ -159,7 +168,7 @@ $('[data-hero]').innerHTML = `
          srcset="${photo(second.image, 'sm')} 240w, ${photo(second.image, 'md')} 800w"
          sizes="(min-width: 60rem) 14vw, 32vw"
          alt="${esc(second.name)} — ${esc(second.subtitle)}"
-         width="800" height="800" loading="lazy" decoding="async">
+         width="800" height="800" decoding="async">
   </div>
 
   <div class="hero__sprig aperture aperture--oval aperture--square">
@@ -167,7 +176,7 @@ $('[data-hero]').innerHTML = `
          srcset="../../shared/img/photo-1617201947772-5581fac22966-sm.jpg 240w, ../../shared/img/photo-1617201947772-5581fac22966-md.jpg 800w"
          sizes="(min-width: 60rem) 10vw, 24vw"
          alt="A single violet, photographed against violet cloth"
-         width="800" height="800" loading="lazy" decoding="async">
+         width="800" height="800" decoding="async">
   </div>
 
   <div class="hero__card">

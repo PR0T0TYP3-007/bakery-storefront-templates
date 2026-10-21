@@ -173,6 +173,15 @@ function paintShopfront(shot) {
  * headings should still get them in order and should still know it is an
  * order. The times are the list markers, so they are set as real content
  * rather than as generated counters.
+ *
+ * Not lazy. Measured on a 1320x1150 screen the strip starts at 731px, which
+ * is inside the first screen, and `loading="lazy"` on an image that is
+ * already in the viewport defers a request the page is waiting on rather
+ * than saving one. The sheets would have shown as three empty panels of
+ * `--surface-3` on anything slower than localhost — which is how this was
+ * found: not here, but on the deployed site, where the same mistake in
+ * Template 03's hero rendered the apertures as solid plum discs and made a
+ * working page look broken.
  */
 function paintMorning(steps) {
   const el = $('[data-morning]');
@@ -191,7 +200,7 @@ function paintMorning(steps) {
                srcset="${escape(imgSrc(s.image, 320))} 240w, ${escape(imgSrc(s.image, 800))} 800w"
                sizes="(min-width: 52rem) 30vw, 88vw"
                alt="${escape(s.alt)}"
-               width="800" height="600" loading="lazy" decoding="async">
+               width="800" height="600" decoding="async">
           <figcaption class="pinned__cap">
             <span class="morning__at">${escape(s.at)}</span>
             <span>${escape(s.what)}</span>
