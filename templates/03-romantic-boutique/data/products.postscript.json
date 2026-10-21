@@ -1,32 +1,89 @@
 {
   "_note": "Eight cakes and the things that go with them. Every photograph here is of the cake it is attached to, and no photograph in this template is used by any other template — see D16 and D19.",
-
   "categories": [
-    { "id": "cake", "label": "Cakes" },
-    { "id": "small", "label": "Small things" }
+    {
+      "id": "cake",
+      "label": "Cakes"
+    },
+    {
+      "id": "small",
+      "label": "Small things"
+    }
   ],
-
   "_occasions": "Browsing by occasion is a §7 requirement. These are the reasons people actually give at the counter, including the two nobody puts on a website.",
   "occasions": [
-    { "id": "birthday", "label": "A birthday", "note": "The one we write on most" },
-    { "id": "anniversary", "label": "An anniversary", "note": "Yours, or someone else's" },
-    { "id": "wedding", "label": "A wedding", "note": "Small ones. We are two rooms." },
-    { "id": "newbaby", "label": "A new baby", "note": "Sent to the house, usually" },
-    { "id": "thanks", "label": "To say thank you", "note": "Or well done, or good luck" },
-    { "id": "sorry", "label": "To say sorry", "note": "It works more often than you would think" },
-    { "id": "nothing", "label": "For no reason", "note": "Our favourite kind of order" }
+    {
+      "id": "birthday",
+      "label": "A birthday",
+      "note": "The one we write on most"
+    },
+    {
+      "id": "anniversary",
+      "label": "An anniversary",
+      "note": "Yours, or someone else's"
+    },
+    {
+      "id": "wedding",
+      "label": "A wedding",
+      "note": "Small ones. We are two rooms."
+    },
+    {
+      "id": "newbaby",
+      "label": "A new baby",
+      "note": "Sent to the house, usually"
+    },
+    {
+      "id": "thanks",
+      "label": "To say thank you",
+      "note": "Or well done, or good luck"
+    },
+    {
+      "id": "sorry",
+      "label": "To say sorry",
+      "note": "It works more often than you would think"
+    },
+    {
+      "id": "nothing",
+      "label": "For no reason",
+      "note": "Our favourite kind of order"
+    }
   ],
-
   "optionGroups": {
     "servings": {
       "id": "servings",
       "label": "How many it has to feed",
       "required": true,
       "options": [
-        { "id": "two", "label": "Two of you", "note": "Six inches across", "price": 0, "serves": "2–4" },
-        { "id": "small", "label": "Six to eight", "note": "Seven inches, one tier", "price": 14, "serves": "6–8" },
-        { "id": "medium", "label": "Twelve to sixteen", "note": "Eight inches, deep", "price": 32, "serves": "12–16", "leadDays": 1 },
-        { "id": "large", "label": "Twenty-five or so", "note": "Two tiers", "price": 68, "serves": "22–28", "leadDays": 2 }
+        {
+          "id": "two",
+          "label": "Two of you",
+          "note": "Six inches across",
+          "price": 0,
+          "serves": "2–4"
+        },
+        {
+          "id": "small",
+          "label": "Six to eight",
+          "note": "Seven inches, one tier",
+          "price": 14,
+          "serves": "6–8"
+        },
+        {
+          "id": "medium",
+          "label": "Twelve to sixteen",
+          "note": "Eight inches, deep",
+          "price": 32,
+          "serves": "12–16",
+          "leadDays": 1
+        },
+        {
+          "id": "large",
+          "label": "Twenty-five or so",
+          "note": "Two tiers",
+          "price": 68,
+          "serves": "22–28",
+          "leadDays": 2
+        }
       ]
     },
     "sponge": {
@@ -34,11 +91,42 @@
       "label": "What is inside",
       "required": true,
       "options": [
-        { "id": "vanilla", "label": "Vanilla", "note": "Madagascan, seeds and all", "price": 0 },
-        { "id": "lemon", "label": "Lemon", "note": "Sharp, with a syrup soak", "price": 0 },
-        { "id": "chocolate", "label": "Dark chocolate", "note": "70%, not sweet", "price": 4, "allergens": ["soya"] },
-        { "id": "pistachio", "label": "Pistachio and rose", "note": "The one we are known for", "price": 9, "allergens": ["nuts"] },
-        { "id": "redvelvet", "label": "Red velvet", "note": "Buttermilk, proper cream cheese", "price": 4 }
+        {
+          "id": "vanilla",
+          "label": "Vanilla",
+          "note": "Madagascan, seeds and all",
+          "price": 0
+        },
+        {
+          "id": "lemon",
+          "label": "Lemon",
+          "note": "Sharp, with a syrup soak",
+          "price": 0
+        },
+        {
+          "id": "chocolate",
+          "label": "Dark chocolate",
+          "note": "70%, not sweet",
+          "price": 4,
+          "allergens": [
+            "soya"
+          ]
+        },
+        {
+          "id": "pistachio",
+          "label": "Pistachio and rose",
+          "note": "The one we are known for",
+          "price": 9,
+          "allergens": [
+            "nuts"
+          ]
+        },
+        {
+          "id": "redvelvet",
+          "label": "Red velvet",
+          "note": "Buttermilk, proper cream cheese",
+          "price": 4
+        }
       ]
     },
     "finish": {
@@ -46,29 +134,103 @@
       "label": "The outside",
       "required": true,
       "options": [
-        { "id": "smooth", "label": "Smooth buttercream", "note": "Plain, and the best surface to write on", "price": 0 },
-        { "id": "swept", "label": "Swept", "note": "Palette-knife marks left in", "price": 0 },
-        { "id": "pressed", "label": "Pressed flowers", "note": "Real ones, set into the surface", "price": 12, "leadDays": 1 },
+        {
+          "id": "smooth",
+          "label": "Smooth buttercream",
+          "note": "Plain, and the best surface to write on",
+          "price": 0
+        },
+        {
+          "id": "swept",
+          "label": "Swept",
+          "note": "Palette-knife marks left in",
+          "price": 0
+        },
+        {
+          "id": "pressed",
+          "label": "Pressed flowers",
+          "note": "Real ones, set into the surface",
+          "price": 12,
+          "leadDays": 1
+        },
         {
           "id": "sugarroses",
           "label": "Sugar roses",
           "note": "Made by hand, two days ahead",
           "price": 28,
           "leadDays": 2,
-          "requiresServings": ["medium", "large"]
+          "requiresServings": [
+            "medium",
+            "large"
+          ]
         }
       ]
     }
   },
-
   "addons": [
-    { "id": "candles", "label": "Candles", "note": "Long, thin, in the box beside it", "price": 3 },
-    { "id": "ribbon", "label": "Ribbon and a sealed box", "note": "Grosgrain, and our stamp in wax", "price": 6 },
-    { "id": "flowers", "label": "A few stems to go with it", "note": "Whatever is good that morning", "price": 14, "leadDays": 1 },
-    { "id": "sliceboxes", "label": "Slice boxes", "note": "Ten of them, for sending people home", "price": 8 }
+    {
+      "id": "candles",
+      "label": "Candles",
+      "note": "Long, thin, in the box beside it",
+      "price": 3
+    },
+    {
+      "id": "ribbon",
+      "label": "Ribbon and a sealed box",
+      "note": "Grosgrain, and our stamp in wax",
+      "price": 6
+    },
+    {
+      "id": "flowers",
+      "label": "A few stems to go with it",
+      "note": "Whatever is good that morning",
+      "price": 14,
+      "leadDays": 1
+    },
+    {
+      "id": "sliceboxes",
+      "label": "Slice boxes",
+      "note": "Ten of them, for sending people home",
+      "price": 8
+    }
   ],
-
   "products": [
+    {
+      "id": "wedding",
+      "kind": "cake",
+      "category": "cake",
+      "name": "The Wedding Cake",
+      "subtitle": "Three tiers, white on white, and a fortnight of notice",
+      "price": 185,
+      "leadDays": 14,
+      "image": "photo-1776267889855-44d0b8011c29",
+      "occasions": [
+        "wedding",
+        "anniversary"
+      ],
+      "allergens": [
+        "gluten",
+        "dairy",
+        "egg"
+      ],
+      "description": "Smooth white tiers with sugar flowers worked one at a time and left entirely white. It is the only thing we make that needs a fortnight, and the only one we will ask to talk to you about first — not because it is complicated, but because nobody should order the cake for their wedding out of a grid.",
+      "options": [
+        "servings",
+        "sponge",
+        "finish"
+      ],
+      "defaults": {
+        "servings": "large",
+        "sponge": "vanilla",
+        "finish": "smooth"
+      },
+      "inscribable": false,
+      "addons": [
+        "ribbon",
+        "flowers",
+        "sliceboxes"
+      ]
+    },
     {
       "id": "written",
       "kind": "cake",
@@ -79,14 +241,40 @@
       "leadDays": 2,
       "image": "photo-1762950350879-650b940db566",
       "popular": true,
-      "occasions": ["birthday", "anniversary", "thanks", "sorry", "nothing"],
-      "allergens": ["gluten", "dairy", "egg"],
+      "occasions": [
+        "birthday",
+        "anniversary",
+        "thanks",
+        "sorry",
+        "nothing"
+      ],
+      "allergens": [
+        "gluten",
+        "dairy",
+        "egg"
+      ],
       "description": "Pale blue, with the words set across the middle and whatever is on the bench piped around them — rosettes, hearts, silver pearls. It holds more lettering than anything else we make, and it ends up looking like whoever ordered it, which is the point. Quiet message, quiet cake. Loud one, and you get this.",
-      "options": ["servings", "sponge", "finish"],
-      "defaults": { "servings": "small", "sponge": "vanilla", "finish": "smooth" },
+      "options": [
+        "servings",
+        "sponge",
+        "finish"
+      ],
+      "defaults": {
+        "servings": "small",
+        "sponge": "vanilla",
+        "finish": "smooth"
+      },
       "inscribable": true,
-      "plaque": { "perLine": 16, "lines": 3, "note": "Piped across the top in buttercream" },
-      "addons": ["candles", "ribbon", "sliceboxes"]
+      "plaque": {
+        "perLine": 16,
+        "lines": 3,
+        "note": "Piped across the top in buttercream"
+      },
+      "addons": [
+        "candles",
+        "ribbon",
+        "sliceboxes"
+      ]
     },
     {
       "id": "heart",
@@ -98,14 +286,36 @@
       "leadDays": 1,
       "image": "photo-1771129859451-26dd3fa2e757",
       "popular": true,
-      "occasions": ["anniversary", "sorry", "nothing"],
-      "allergens": ["gluten", "dairy", "egg"],
+      "occasions": [
+        "anniversary",
+        "sorry",
+        "nothing"
+      ],
+      "allergens": [
+        "gluten",
+        "dairy",
+        "egg"
+      ],
       "description": "Six inches, heart-shaped, and meant for two people and one evening. It is the cake people buy when there is no occasion at all, which is the reason we started making it.",
-      "options": ["sponge", "finish"],
-      "defaults": { "sponge": "redvelvet", "finish": "smooth" },
+      "options": [
+        "sponge",
+        "finish"
+      ],
+      "defaults": {
+        "sponge": "redvelvet",
+        "finish": "smooth"
+      },
       "inscribable": true,
-      "plaque": { "perLine": 12, "lines": 2, "note": "Piped on the surface, two short lines at most" },
-      "addons": ["candles", "ribbon", "flowers"]
+      "plaque": {
+        "perLine": 12,
+        "lines": 2,
+        "note": "Piped on the surface, two short lines at most"
+      },
+      "addons": [
+        "candles",
+        "ribbon",
+        "flowers"
+      ]
     },
     {
       "id": "pressed-heart",
@@ -116,13 +326,28 @@
       "price": 42,
       "leadDays": 3,
       "image": "photo-1526857799880-2eab75fed0c1",
-      "occasions": ["wedding", "anniversary", "nothing"],
-      "allergens": ["gluten", "dairy", "egg"],
+      "occasions": [
+        "wedding",
+        "anniversary",
+        "nothing"
+      ],
+      "allergens": [
+        "gluten",
+        "dairy",
+        "egg"
+      ],
       "description": "The lace is pressed into set royal icing by hand and left entirely white. There is no good way to write on it, so this is the one cake here that goes out with the card doing all the talking.",
-      "options": ["sponge"],
-      "defaults": { "sponge": "vanilla" },
+      "options": [
+        "sponge"
+      ],
+      "defaults": {
+        "sponge": "vanilla"
+      },
       "inscribable": false,
-      "addons": ["ribbon", "flowers"]
+      "addons": [
+        "ribbon",
+        "flowers"
+      ]
     },
     {
       "id": "blossom",
@@ -133,14 +358,40 @@
       "price": 68,
       "leadDays": 3,
       "image": "photo-1609357871650-96ae6d79503b",
-      "occasions": ["birthday", "newbaby", "thanks", "wedding"],
-      "allergens": ["gluten", "dairy", "egg"],
+      "occasions": [
+        "birthday",
+        "newbaby",
+        "thanks",
+        "wedding"
+      ],
+      "allergens": [
+        "gluten",
+        "dairy",
+        "egg"
+      ],
       "description": "One tier, finished in the palest blue we can mix, with whatever blossom is actually out that week set against it. In February that means something forced; in April it means the tree on Bartlett Street.",
-      "options": ["servings", "sponge", "finish"],
-      "defaults": { "servings": "small", "sponge": "lemon", "finish": "pressed" },
+      "options": [
+        "servings",
+        "sponge",
+        "finish"
+      ],
+      "defaults": {
+        "servings": "small",
+        "sponge": "lemon",
+        "finish": "pressed"
+      },
       "inscribable": true,
-      "plaque": { "perLine": 14, "lines": 2, "note": "On a small iced plaque, set into the flowers" },
-      "addons": ["candles", "ribbon", "flowers", "sliceboxes"]
+      "plaque": {
+        "perLine": 14,
+        "lines": 2,
+        "note": "On a small iced plaque, set into the flowers"
+      },
+      "addons": [
+        "candles",
+        "ribbon",
+        "flowers",
+        "sliceboxes"
+      ]
     },
     {
       "id": "garden",
@@ -151,14 +402,40 @@
       "price": 74,
       "leadDays": 3,
       "image": "photo-1596567836640-3c13eb102106",
-      "occasions": ["birthday", "wedding", "thanks", "nothing"],
-      "allergens": ["gluten", "dairy", "egg"],
+      "occasions": [
+        "birthday",
+        "wedding",
+        "thanks",
+        "nothing"
+      ],
+      "allergens": [
+        "gluten",
+        "dairy",
+        "egg"
+      ],
       "description": "Swept cream buttercream under herbs and leaves — bay, mint, whatever is sturdy enough to last the afternoon. It photographs better than it has any right to, which is not why we make it.",
-      "options": ["servings", "sponge", "finish"],
-      "defaults": { "servings": "medium", "sponge": "vanilla", "finish": "swept" },
+      "options": [
+        "servings",
+        "sponge",
+        "finish"
+      ],
+      "defaults": {
+        "servings": "medium",
+        "sponge": "vanilla",
+        "finish": "swept"
+      },
       "inscribable": true,
-      "plaque": { "perLine": 16, "lines": 2, "note": "On a plaque, tucked among the leaves" },
-      "addons": ["candles", "ribbon", "flowers", "sliceboxes"]
+      "plaque": {
+        "perLine": 16,
+        "lines": 2,
+        "note": "On a plaque, tucked among the leaves"
+      },
+      "addons": [
+        "candles",
+        "ribbon",
+        "flowers",
+        "sliceboxes"
+      ]
     },
     {
       "id": "strawberry",
@@ -169,14 +446,39 @@
       "price": 98,
       "leadDays": 4,
       "image": "photo-1623428454614-abaf00244e52",
-      "occasions": ["wedding", "birthday", "anniversary"],
-      "allergens": ["gluten", "dairy", "egg"],
+      "occasions": [
+        "wedding",
+        "birthday",
+        "anniversary"
+      ],
+      "allergens": [
+        "gluten",
+        "dairy",
+        "egg"
+      ],
       "description": "Scraped back so the sponge shows through, built in two tiers and loaded with strawberries and whatever flowers are in. It only exists between May and September, because the rest of the year the fruit is not worth putting on a cake.",
-      "options": ["servings", "sponge", "finish"],
-      "defaults": { "servings": "large", "sponge": "vanilla", "finish": "swept" },
+      "options": [
+        "servings",
+        "sponge",
+        "finish"
+      ],
+      "defaults": {
+        "servings": "large",
+        "sponge": "vanilla",
+        "finish": "swept"
+      },
       "inscribable": true,
-      "plaque": { "perLine": 16, "lines": 2, "note": "On a plaque at the base of the top tier" },
-      "addons": ["candles", "ribbon", "flowers", "sliceboxes"]
+      "plaque": {
+        "perLine": 16,
+        "lines": 2,
+        "note": "On a plaque at the base of the top tier"
+      },
+      "addons": [
+        "candles",
+        "ribbon",
+        "flowers",
+        "sliceboxes"
+      ]
     },
     {
       "id": "ombre",
@@ -187,14 +489,37 @@
       "price": 120,
       "leadDays": 6,
       "image": "photo-1542007920-992d2c424d09",
-      "occasions": ["wedding", "anniversary"],
-      "allergens": ["gluten", "dairy", "egg"],
+      "occasions": [
+        "wedding",
+        "anniversary"
+      ],
+      "allergens": [
+        "gluten",
+        "dairy",
+        "egg"
+      ],
       "description": "The roses are made one at a time, dried for two days and shaded from deep pink at the base to nearly white at the top. It is the longest job in the shop and the one we most like doing.",
-      "options": ["servings", "sponge", "finish"],
-      "defaults": { "servings": "large", "sponge": "pistachio", "finish": "sugarroses" },
+      "options": [
+        "servings",
+        "sponge",
+        "finish"
+      ],
+      "defaults": {
+        "servings": "large",
+        "sponge": "pistachio",
+        "finish": "sugarroses"
+      },
       "inscribable": true,
-      "plaque": { "perLine": 14, "lines": 2, "note": "On a plaque between the first and second tier" },
-      "addons": ["ribbon", "flowers", "sliceboxes"]
+      "plaque": {
+        "perLine": 14,
+        "lines": 2,
+        "note": "On a plaque between the first and second tier"
+      },
+      "addons": [
+        "ribbon",
+        "flowers",
+        "sliceboxes"
+      ]
     },
     {
       "id": "rose-tier",
@@ -205,14 +530,37 @@
       "price": 145,
       "leadDays": 8,
       "image": "photo-1581745069539-1e60d7f965f4",
-      "occasions": ["wedding", "anniversary"],
-      "allergens": ["gluten", "dairy", "egg"],
+      "occasions": [
+        "wedding",
+        "anniversary"
+      ],
+      "allergens": [
+        "gluten",
+        "dairy",
+        "egg"
+      ],
       "description": "Three tiers, garden roses in two colours, and a week of notice because the flowers are made before the cake is. Past this size we will tell you honestly to ask somebody with a bigger kitchen.",
-      "options": ["servings", "sponge", "finish"],
-      "defaults": { "servings": "large", "sponge": "vanilla", "finish": "sugarroses" },
+      "options": [
+        "servings",
+        "sponge",
+        "finish"
+      ],
+      "defaults": {
+        "servings": "large",
+        "sponge": "vanilla",
+        "finish": "sugarroses"
+      },
       "inscribable": true,
-      "plaque": { "perLine": 14, "lines": 2, "note": "On a plaque at the base" },
-      "addons": ["ribbon", "flowers", "sliceboxes"]
+      "plaque": {
+        "perLine": 14,
+        "lines": 2,
+        "note": "On a plaque at the base"
+      },
+      "addons": [
+        "ribbon",
+        "flowers",
+        "sliceboxes"
+      ]
     }
   ]
 }

@@ -32,6 +32,8 @@ const { merchant } = session.state;
 
 for (const el of $$('[data-home-link]')) el.href = link('index.html');
 
+$('[data-edgemark]').textContent = `${merchant.name} — ${merchant.card.stock}`;
+
 const lineId = new URLSearchParams(location.search).get('line');
 const line = lineId ? session.state.cart.lines.find((l) => l.id === lineId) ?? null : null;
 const product = line ? session.product(line.productId) : null;
@@ -100,7 +102,11 @@ function save() {
 function paint() {
   const laid = layoutCard(hasCard(card) ? card : null, merchant);
 
-  $('[data-card-preview]').innerHTML = cardPreview({ card: hasCard(card) ? card : null, merchant });
+  $('[data-card-preview]').innerHTML = cardPreview({
+    card: hasCard(card) ? card : null,
+    merchant,
+    grow: true,
+  });
 
   // Lines, not characters. A counter that says you have room is exactly what
   // the market already offers, and it is what lets a message reach the

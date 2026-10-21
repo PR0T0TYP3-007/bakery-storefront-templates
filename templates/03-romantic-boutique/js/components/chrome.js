@@ -52,8 +52,12 @@ export function renderMasthead(current) {
     <div class="page masthead__in">
       <nav class="nav nav--left" aria-label="Pages">${items}</nav>
 
-      <a class="wordmark" href="${link('index.html')}">
-        <span class="wordmark__name">${esc(merchant.name)}</span>
+      <a class="wordmark" href="${link('index.html')}" data-wordmark>
+        <span class="wordmark__plot">
+          <span class="lg-layer lg-layer--back" data-mark-back aria-hidden="true"></span>
+          <span class="wordmark__name" data-mark-name>${esc(merchant.name)}</span>
+          <span class="lg-layer lg-layer--front" data-mark-front aria-hidden="true"></span>
+        </span>
         <span class="wordmark__where">${esc(town)}</span>
       </a>
 

@@ -165,3 +165,87 @@
   grid-template-columns: repeat(auto-fit, minmax(min(17rem, 100%), 1fr));
   align-items: start;
 }
+
+/* --------------------------------------------------------------------------
+   The wreath
+
+   Borrowed in idea from Type Garden: flowers grow as you type. Two things
+   are ours, and both are the reason it can be here at all.
+
+   It grows *around* the sheet. The sheet shows exactly what the recipient
+   receives, so a flower drawn on it would make the customer think the shop
+   prints flowers on the card — the preview would be lying in the one place
+   it cannot. The margin blooms instead.
+
+   And it is decoration with nothing in it: aria-hidden, no focus, no
+   pointer, and the figcaption beside it already states the message in the
+   interface face. Nobody loses anything by not seeing it.
+   -------------------------------------------------------------------------- */
+/* When a wreath is on, the card takes the geometry's own fraction of the
+   figure — the middle 68% — and the bleed then fills exactly the 32% left
+   over. So the wreath always fits its column instead of escaping it, which
+   is what gave the style guide 55px of sideways scroll at 375px.
+
+   `min()` rather than a flat 68%: past a 518px figure the card hits its
+   22rem ceiling and the wreath, at 1.47x that, still has room. */
+.letter--growing .letter__stack {
+  position: relative;
+  width: min(68%, 22rem);
+  margin-inline: auto;
+}
+
+/* The wreath is larger than the card it surrounds, so it bleeds outwards
+   from the stack rather than being padded inside it. Padding the stack was
+   the first attempt and it shrank the card from 352px to 171px — the
+   flourish eating the thing it was meant to frame.
+
+   The inset is *not* here. garden.js places every flower relative to a box
+   in which the framed thing occupies a known fraction, and writes the
+   matching inset onto the element itself. Keeping a copy in this file meant
+   a wreath round anything but the card quietly used the card's box — a
+   contract between two files that nothing could enforce. Now there is no
+   contract: the geometry decides, and this file does not get a vote. */
+.wreath {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.wreath__stems {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.wreath__flower {
+  position: absolute;
+  translate: -50% -50%;
+  aspect-ratio: 1;
+  height: auto;
+  overflow: visible;
+}
+
+.letter--growing .letter__sheet,
+.letter--growing .letter__spill { position: relative; z-index: 1; }
+
+/* Each flower settles in rather than appearing. Because the wreath is
+   deterministic, a flower that is already there never re-runs this — only
+   the newcomers animate, which is what makes it read as growth rather than
+   as a repaint. */
+@media (prefers-reduced-motion: no-preference) {
+  /* `.wreath__flower`, not `.wreath > g` — the flowers became their own
+     SVGs when the single stretched viewBox was dropped, and the old
+     selector silently stopped matching anything. An animation that quietly
+     does nothing is the hardest kind of dead CSS to notice. */
+  .wreath__flower { animation: bloom 420ms var(--ease) backwards; }
+  .wreath__stems { animation: fade 700ms var(--ease) backwards; }
+
+  @keyframes bloom {
+    from { opacity: 0; scale: 0.2; rotate: -25deg; }
+  }
+  @keyframes fade {
+    from { opacity: 0; }
+  }
+}

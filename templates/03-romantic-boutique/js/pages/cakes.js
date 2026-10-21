@@ -15,6 +15,9 @@ import * as session from '../services/session.js';
 import { cakeTile, priceFloor } from '../components/cakes.js';
 import { money } from '../../../../shared/core/format.js';
 
+const WORDS = ['No', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve'];
+const count = (n) => WORDS[n] ?? String(n);
+
 await startPage({ nav: 'Cakes' });
 
 const { merchant, catalogue } = session.state;
@@ -22,23 +25,37 @@ const cakes = catalogue.products.filter((p) => p.kind === 'cake');
 
 for (const el of $$('[data-home-link]')) el.href = link('index.html');
 
+$('[data-edgemark]').textContent = `${merchant.name} — ${merchant.since}`;
+
 const wanted = new URLSearchParams(location.search).get('occasion');
 const occasion = (catalogue.occasions ?? []).find((o) => o.id === wanted) ?? null;
 
 /* ---- Heading ------------------------------------------------------------ */
 const cheapest = Math.min(...cakes.map((p) => priceFloor(p).low));
 
+/* The title's last word goes in the hand. A presentational split of the
+   merchant's own words — the sentence is unchanged, and a label of one word
+   simply does not get split. */
+function inHand(text) {
+  const words = String(text).trim().split(' ');
+  if (words.length < 2) return esc(text);
+  const tail = words.pop();
+  return `${esc(words.join(' '))} <span class="script">${esc(tail)}</span>`;
+}
+
 if (occasion) {
   document.title = `${occasion.label} — ${merchant.name}`;
   $('[data-crumb]').textContent = occasion.label;
-  $('[data-title]').textContent = `${occasion.label}.`;
+  $('[data-title]').innerHTML = inHand(`${occasion.label}.`);
+  $('[data-watermark]').textContent = occasion.label.replace(/^(An?|To say) /i, '');
 } else {
-  $('[data-title]').textContent = 'The cakes';
+  $('[data-title]').innerHTML = inHand('The cakes');
+  $('[data-watermark]').textContent = count(cakes.length).toLowerCase();
 }
 
 $('[data-lede]').textContent = occasion
   ? `What we would send for that. ${occasion.note}.`
-  : `Eight of them, from ${money(cheapest)}, made in two rooms on ${merchant.locations[0].address.split(',')[0].replace(/^\d+\s+/, '')}. Every one can have something written on it except the one that cannot, and that one says so.`;
+  : `${count(cakes.length)} of them, from ${money(cheapest)}, made in two rooms on ${merchant.locations[0].address.split(',')[0].replace(/^\d+\s+/, '')}. Every one can have something written on it except the two that cannot, and those two say so.`;
 
 /* ---- Occasions ---------------------------------------------------------- */
 $('[data-occasions]').innerHTML = [
@@ -68,7 +85,7 @@ const shown = occasion ? cakes.filter((p) => p.occasions?.includes(occasion.id))
 // short, common attribute name matched something in the masthead.
 $('[data-found]').textContent =
   shown.length === cakes.length
-    ? `${cakes.length} cakes`
+    ? `All ${cakes.length}`
     : `${shown.length} of ${cakes.length}`;
 
 $('[data-grid]').innerHTML = shown

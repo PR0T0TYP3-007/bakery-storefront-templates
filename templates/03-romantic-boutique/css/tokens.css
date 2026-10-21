@@ -5,14 +5,14 @@
    The distance check that produced these is in docs/03-romantic-boutique.md.
    Against the four shipped templates:
 
-     ground      mulberry       — 228 / 298 / 448 / 473 channels away, and the
+     ground      plum           — 236 / 326 / 440 / 465 channels away, and the
                                   first ground in the set that is a colour
                                   rather than a neutral
      display     Julius Sans One — incised sans capitals; not serif, not
                                   grotesque, not rounded, not quirky
-     accent      blush          — 299 / 320 / 393 / 423 away. The cliché of
-                                  this direction, and measurably the one
-                                  accent region nobody had used
+     accent      blush + lilac  — 299 and 290 from the nearest shipped
+                                  accent. The cliché of this direction, and
+                                  measurably the one region nobody had used
      separation  masked apertures on an uninterrupted ground. Nothing here
                  has a rule, a box, a card or a shadow.
    ========================================================================== */
@@ -43,58 +43,124 @@
 
 :root {
   /* ---- Colour -----------------------------------------------------------
-     One ground, one deeper tone of it, one accent. The photographs are the
-     only other colour on the page, which is why they need no treatment:
-     against mulberry a full-colour cake is already the brightest thing in
-     the room. */
-  --ground: #8e2a58;
-  --deep: #6b1c41;
-  --deepest: #5e1434;
+     A plum ground, two deeper violets under it, and two accents.
 
-  --ink: #fdf2ee;        /*  7.29:1 on the ground, 10.23:1 on the deep  */
-  --ink-2: #f0cdd6;      /*  5.49:1 / 7.72:1                           */
-  /* 4.65:1 on the ground. It was #e3aebd, which this template's own live
-     contrast table measured at 4.22 — under AA for body text. Two tokens
-     failed that first pass; both were mine, and both were written down as
-     passing. D13 is why they were caught before anything shipped. */
-  --ink-3: #e8b9c6;
+     The ground moved from mulberry `#8e2a58` to plum on the client's note
+     that the template wanted more purple, and the distance check agreed
+     rather than merely tolerating it: plum sits 236 channels from Template
+     04's near-black where mulberry sat 228, so going purpler made the
+     template *more* distinct, not less. Every ink ratio went up with it.
 
-  --blush: #ffb8c6;      /*  4.93:1 on the ground, 6.92:1 on the deep   */
-  --blush-ink: #5e1434;  /*  7.95:1 as the ink on a blush button        */
+     The reference is ECBG Studio in Chicago, whose ground measures
+     `#3a0326` — a deep aubergine. It is the one real studio in this market
+     working in this register, and it is where the two-tone accent and the
+     oversized script come from too.
+
+     The page descends as you scroll: plum, violet, aubergine. Light going
+     out of a room. */
+  --ground: #86286a;
+  --deep: #56205c;
+  --deepest: #3f1747;
+
+  --ink: #fdf1f6;        /*  7.56 on the ground · 10.87 deep · 13.40 deepest */
+  --ink-2: #eec6dd;      /*  5.45 / 7.83 / 9.65                             */
+  /* 4.66 on the ground. The plum shift pushed the old #e8b9c6 to 4.32 —
+     under AA — which the live table caught before anything was committed.
+     That is twice now that moving a ground has quietly broken a tertiary
+     ink, and twice that measuring it was the only reason anyone knew. */
+  --ink-3: #e4b4d2;
+
+  /* Two accents, both measured against every shipped accent. Blush leads;
+     lilac is for the second voice — a quiet marker, a kept date, the
+     watermark's cousin. A *mid* violet is not available: #a86bff measures
+     164 channels from Template 02's grape, which is the collision D8
+     exists to prevent. Pale purple clears at 290. */
+  --blush: #ffb8c6;      /*  5.12 on the ground · 290+ from every accent    */
+  --lilac: #d9b8ff;      /*  4.85 on the ground · 290 from grape            */
+  --blush-ink: #43102f;  /*  9.55 as the ink on a blush button              */
+
+  /* The garland's foliage. Decorative, and never used for anything a
+     customer must read — but it is measured anyway, because a green in a
+     template whose neighbour owns a green accent is exactly the kind of
+     thing that gets called a collision later. It sits 247 channels from the
+     nearest shipped accent and 335 from Template 05's green, which is
+     further than two of our own accents are from each other. */
+  --leaf: #a8c9b4;
 
   /* Status. Pitched light, because everything here sits on a dark chromatic
      ground and a saturated red would disappear into it. */
-  --ok: #9fe8bf;         /*  5.63:1  */
-  --warn: #ffd79a;       /*  5.89:1  */
-  --bad: #ffb3ab;        /*  4.69:1  */
+  --ok: #9fe8bf;         /*  5.85  */
+  --warn: #ffd79a;       /*  6.11  */
+  --bad: #ffadb8;        /*  4.72  */
 
   /* Rules exist only inside form fields and tables — nothing structural in
      this template is separated by a line. --rule-strong is anything a
-     customer must be able to see; it clears the 3:1 of SC 1.4.11. It was
-     #c98da4, which measured 2.99. One hundredth under is still under. */
-  --rule-strong: #d49eb3;
-  --hair: #a24568;
+     customer must be able to see; it clears the 3:1 of SC 1.4.11. */
+  --rule-strong: #cf93b4;  /*  3.36  */
+  --hair: #9d4486;
+
+  /* Deliberately below every threshold, and only ever used on something
+     aria-hidden: the oversized script that sits behind a section like a
+     watermark. 1.16:1 against the ground — it is texture, and nothing
+     depends on seeing it.
+
+     It is also the one token whose value is set by what sits *on top* of
+     it rather than by what sits behind it. At the first value, #9b3c80,
+     body ink over the watermark measured 5.70 but secondary ink measured
+     4.10 and tertiary 3.51 — both under AA, in the one place where a
+     decorative flourish was quietly eating the contrast of real text.
+     Darkening it fixes half of that; the other half is the rule in
+     base.css that no dimmed ink may sit over a watermark at all. */
+  --ghost: #923175;
+
+  /* The scrim over a photographic band.
+     82% aubergine, and the number is a proof rather than a preference: laid
+     over a *pure white* pixel — the brightest anything a merchant uploads
+     can be — it still leaves body ink at 7.74:1, secondary at 5.58 and
+     blush at 5.24. So text over a photographic band meets AA whatever the
+     photograph turns out to be, including one we have never seen. A scrim
+     tuned to look right against our own photography is a scrim that fails
+     on the merchant's. */
+  --scrim: rgb(63 23 71 / 0.82);
 
   /* ---- Type -------------------------------------------------------------
-     Display is a hairline incised capital. It is a signature, not a
-     paragraph: short strings, always tracked out, never below 1rem. */
+     Three faces, three jobs, and the one rule that keeps this template from
+     being the stock bakery theme: the script is *diegetic*.
+
+     It was allowed in exactly one place — inside a depiction of
+     handwriting. ECBG showed a second place worth having, and it is the
+     single biggest reason their pages feel romantic where ours felt
+     austere: a large italic clause, in the accent colour, set *inside* a
+     headline otherwise in the display face. So the rule is now three
+     places, and still never a fourth:
+
+       1. depicting handwriting — the card, the piped plaque
+       2. one emotional clause per headline, at display scale, in blush
+       3. an aria-hidden watermark behind a section
+
+     Never a label, never a button, never a price, never below 1.25rem. */
   --font-display: 'Julius Sans One', 'Optima', 'Candara', sans-serif;
   --font-hand: 'Petit Formal Script', 'Segoe Script', cursive;
   --font-ui: 'Karla', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
-  /* A narrow scale. This template's drama is the colour and the apertures,
-     so the type stays quiet and well-mannered — the opposite decision from
-     Template 04, deliberately. */
-  --t-1: clamp(2rem, 5.2vw, 3.6rem);
-  --t-2: clamp(1.5rem, 3vw, 2.1rem);
-  --t-3: clamp(1.15rem, 1.8vw, 1.4rem);
+  /* The scale was the other half of "it looks quiet". The old --t-1 topped
+     out at 3.6rem, which on a 1440px screen is a caption pretending to be a
+     headline. Display type here is the composition now, the way the
+     photography is — which is what the reference does and what this
+     template was not doing. */
+  --t-display: clamp(2.4rem, 5.2vw, 4.6rem);
+  --t-1: clamp(2.1rem, 4.4vw, 3.4rem);
+  --t-2: clamp(1.7rem, 3.6vw, 2.75rem);
+  --t-3: clamp(1.2rem, 1.9vw, 1.5rem);
   --t-4: 1.0625rem;
   --sm: 0.9rem;
   --xs: 0.78rem;
 
   /* Tracking. The display face needs air to read as engraving rather than
-     as thin type; the label voice needs more still. */
+     as thin type; the label voice needs more still. Display type that is
+     very large needs *less*, or the words come apart. */
   --track: 0.08em;
+  --track-tight: 0.04em;
   --track-wide: 0.18em;
 
   /* ---- Space ------------------------------------------------------------ */

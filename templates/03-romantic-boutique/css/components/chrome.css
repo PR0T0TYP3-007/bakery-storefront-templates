@@ -16,7 +16,64 @@
   display: block;
   text-align: center;
   justify-self: center;
+  position: relative;
 }
+
+/* The garden on the shop's own name, home page only.
+
+   Two layers, one under the letters and one over them, with the word itself
+   between. That sandwich is the whole effect: a stem can pass behind a
+   capital and come out in front of the next one, which is what makes it
+   look grown rather than applied.
+
+   Legibility is protected by the generator, not by this file — a rose that
+   lands on a letter's body is pushed to the back layer four times out of
+   five. What this file guarantees is that the name is real text, sitting in
+   normal flow, with nothing drawn into it. */
+.wordmark__plot {
+  position: relative;
+  display: inline-block;
+}
+
+.lg-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  /* The garden is wider and taller than the word it grows from, and must be
+     allowed out of the box without being clipped or pushing the masthead
+     around. */
+  overflow: visible;
+}
+.lg-layer--back { z-index: 0; }
+.lg-layer--front { z-index: 2; }
+.lg-layer .lg { overflow: visible; display: block; }
+
+.wordmark__name {
+  position: relative;
+  z-index: 1;
+}
+
+/* Growth: stems draw themselves on, then leaves and roses arrive in the
+   order they grew. `--o` is the generator's own growth step, so the plant
+   unfolds in the order it would have if it were really growing rather than
+   all at once. */
+@media (prefers-reduced-motion: no-preference) {
+  .lg-stem {
+    stroke-dasharray: var(--len, 200);
+    stroke-dashoffset: var(--len, 200);
+    animation: lg-draw 900ms var(--ease) forwards;
+    animation-delay: calc(200ms + var(--o, 0) * 160ms);
+  }
+  .lg-leaf,
+  .lg-rose {
+    transform-origin: var(--ox) var(--oy);
+    animation: lg-open 620ms var(--ease) backwards;
+    animation-delay: calc(500ms + var(--o, 0) * 160ms);
+  }
+  @keyframes lg-draw { to { stroke-dashoffset: 0; } }
+  @keyframes lg-open { from { opacity: 0; scale: 0.1; } }
+}
+
 .wordmark__name {
   display: block;
   font-family: var(--font-display);

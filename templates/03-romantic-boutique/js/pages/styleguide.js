@@ -21,6 +21,7 @@ import { startPage, $, $$, esc, photo } from './_page.js';
 import * as session from '../services/session.js';
 import { cakeTile } from '../components/cakes.js';
 import { cardPreview, plaquePreview } from '../components/cardpreview.js';
+import { BLEED, CARD, wreath } from '../garden.js';
 import { openDatePicker } from '../components/datepicker.js';
 import { toast } from '../components/toast.js';
 import { icons } from '../components/icons.js';
@@ -42,7 +43,9 @@ const TOKENS = [
   ['--ink', 'Text'],
   ['--ink-2', 'Secondary'],
   ['--ink-3', 'Tertiary'],
-  ['--blush', 'The one accent'],
+  ['--blush', 'The accent'],
+  ['--lilac', 'The second accent'],
+  ['--ghost', 'Watermark (decorative)'],
   ['--ok', 'Good'],
   ['--warn', 'Attention'],
   ['--bad', 'Wrong'],
@@ -75,6 +78,23 @@ const ratio = (a, b) => {
   return (hi + 0.05) / (lo + 0.05);
 };
 
+/**
+ * The scrim's worst case, composited live.
+ *
+ * A photographic band is only as readable as its brightest pixel, and the
+ * brightest a photograph can be is pure white. So this lays the scrim over
+ * white and measures what is left — which is a guarantee about every
+ * photograph, including the ones a merchant has not uploaded yet, rather
+ * than an observation about ours.
+ */
+function scrimOverWhite() {
+  const m = token('--scrim').match(/[\d.]+/g) ?? [];
+  const [r, g, b, a] = [Number(m[0]), Number(m[1]), Number(m[2]), Number(m[3] ?? 1)];
+  const mix = (c) => Math.round(a * c + (1 - a) * 255);
+  const hex = (n) => n.toString(16).padStart(2, '0');
+  return `#${hex(mix(r))}${hex(mix(g))}${hex(mix(b))}`;
+}
+
 const PAIRS = [
   ['Body on the ground', '--ink', '--ground', 4.5],
   ['Secondary on the ground', '--ink-2', '--ground', 4.5],
@@ -84,13 +104,34 @@ const PAIRS = [
   ['Tertiary on the deeper band', '--ink-3', '--deep', 4.5],
   ['Body on the deepest band', '--ink', '--deepest', 4.5],
   ['Secondary on the deepest band', '--ink-2', '--deepest', 4.5],
-  ['Accent on the ground', '--blush', '--ground', 4.5],
-  ['Accent on the deeper band', '--blush', '--deep', 4.5],
+  ['Blush on the ground', '--blush', '--ground', 4.5],
+  ['Blush on the deeper band', '--blush', '--deep', 4.5],
   ['Button ink on the accent', '--blush-ink', '--blush', 4.5],
   ['Good on the ground', '--ok', '--ground', 4.5],
   ['Attention on the ground', '--warn', '--ground', 4.5],
   ['Wrong on the ground', '--bad', '--ground', 4.5],
+  ['Lilac on the ground', '--lilac', '--ground', 4.5],
   ['Structural rule on the ground', '--rule-strong', '--ground', 3],
+  /* The watermark is decorative and deliberately below every threshold —
+     but text sits *over* it, and a token measured only against the ground
+     cannot see that. These three are the pairings that actually matter, and
+     the first version of this palette failed two of them. */
+  ['Body over the watermark', '--ink', '--ghost', 4.5],
+  // Not failures — pairings the stylesheet does not allow to happen. Body
+  // ink is the only thing permitted over a watermark, and base.css promotes
+  // the dimmed inks inside any band that has one. They are listed because
+  // they are the reason the rule exists: at the first ghost value these
+  // measured 4.10 and 3.51, on real sentences, in a decorative flourish
+  // nobody had thought to measure.
+  ['Secondary over the watermark', '--ink-2', '--ghost', 4.5, 'forbidden'],
+  ['Tertiary over the watermark', '--ink-3', '--ghost', 4.5, 'forbidden'],
+];
+
+/* The photographic bands, measured against the worst photograph possible. */
+const SCRIM_PAIRS = [
+  ['Body on a photographic band', '--ink', 4.5],
+  ['Secondary on a photographic band', '--ink-2', 4.5],
+  ['Blush on a photographic band', '--blush', 4.5],
 ];
 
 $('[data-contrast]').innerHTML = `
@@ -101,11 +142,13 @@ $('[data-contrast]').innerHTML = `
       </tr>
     </thead>
     <tbody>
-      ${PAIRS.map(([label, fg, bg, need]) => {
+      ${PAIRS.map(([label, fg, bg, need, flag]) => {
         const r = ratio(token(fg), token(bg));
         const pass = r >= need;
-        const verdict =
-          need === 3
+        const forbidden = flag === 'forbidden';
+        const verdict = forbidden
+          ? 'Not permitted'
+          : need === 3
             ? pass
               ? 'SC 1.4.11'
               : 'Fails 1.4.11'
@@ -116,16 +159,37 @@ $('[data-contrast]').innerHTML = `
                 : 'Fails';
         return `<tr>
             <th>${esc(label)}</th>
-            <td class="dim">${need}:1</td>
+            <td class="dim">${forbidden ? '—' : `${need}:1`}</td>
             <td class="num">${r.toFixed(2)}:1</td>
-            <td><span class="state" data-state="${pass ? 'in' : 'out'}">${verdict}</span></td>
+            <td><span class="state" data-state="${forbidden ? 'note' : pass ? 'in' : 'out'}">${verdict}</span></td>
           </tr>`;
       }).join('')}
+      ${(() => {
+        const bg = scrimOverWhite();
+        return SCRIM_PAIRS.map(([label, fg, need]) => {
+          const r = ratio(token(fg), bg);
+          const pass = r >= need;
+          return `<tr>
+              <th>${esc(label)}</th>
+              <td class="dim">${need}:1</td>
+              <td class="num">${r.toFixed(2)}:1</td>
+              <td><span class="state" data-state="${pass ? 'in' : 'out'}">${
+                pass ? (r >= 7 ? 'AAA' : 'AA') : 'Fails'
+              }</span></td>
+            </tr>`;
+        }).join('');
+      })()}
     </tbody>
   </table>
   <p class="xs dimmer" style="margin-top:var(--s-3)">
-    The hairline is deliberately below these thresholds. It is atmosphere, nothing depends
-    on seeing it, and anything that actually separates content uses the stronger token.
+    The hairline and the watermark are deliberately below these thresholds against the
+    ground. They are atmosphere, both are aria-hidden, and nothing depends on seeing
+    either. The three rows for text <em>over</em> the watermark are the ones that matter:
+    secondary and tertiary ink both failed there on the first pass, which is why no dimmed
+    ink is allowed over one now. The last three rows composite the scrim over a
+    <em>pure white</em> pixel — the brightest anything a photograph can be — so they are a
+    guarantee about every photographic band, including ones built on a merchant's own
+    pictures rather than on ours.
   </p>`;
 
 /* -------------------------------------------------------------------------
@@ -230,6 +294,44 @@ function paintTargets() {
 }
 
 /* -------------------------------------------------------------------------
+   The wreath's contract with the stylesheet
+
+   garden.js places flowers relative to a box in which the card occupies the
+   middle 68% x 70%, and the CSS has to produce exactly that box. The two
+   live in different files and nothing fails loudly when they disagree — the
+   flowers simply land in the wrong place. So it is checked here, against
+   what the browser has actually computed.
+   ------------------------------------------------------------------------- */
+{
+  const probe = document.createElement('div');
+  probe.className = 'wreath';
+  probe.style.cssText = 'position:absolute;visibility:hidden';
+  const host = document.createElement('div');
+  host.style.cssText = 'position:relative;width:400px;height:400px';
+  host.append(probe);
+  document.body.append(host);
+
+  const cs = getComputedStyle(probe);
+  // Inset resolves against the 400px host, so the percentage comes back out
+  // by dividing — a top of -85.72px is -21.43%.
+  const gotY = Number(((parseFloat(cs.top) / 400) * 100).toFixed(2));
+  const gotX = Number(((parseFloat(cs.left) / 400) * 100).toFixed(2));
+  host.remove();
+
+  const ok = Math.abs(gotX - BLEED.x) < 0.1 && Math.abs(gotY - BLEED.y) < 0.1;
+
+  $('[data-letters]').insertAdjacentHTML(
+    'beforebegin',
+    `<p class="note ${ok ? 'note--good' : 'note--bad'} sm" style="margin-bottom:var(--s-4)">
+       ${ok ? icons.check : icons.alert}<span>
+       <strong>Wreath geometry ${ok ? 'agrees with the stylesheet' : 'has drifted'}.</strong>
+       garden.js wants a bleed of ${BLEED.x}% x ${BLEED.y}%, so the card fills the middle
+       ${CARD.halfW * 2}% x ${CARD.halfH * 2}% of the box. The CSS is giving
+       ${gotX}% x ${gotY}%. ${wreath('x'.repeat(200)).length} flowers at the cap.</span></p>`
+  );
+}
+
+/* -------------------------------------------------------------------------
    The card, at both ends of what the stock takes
    ------------------------------------------------------------------------- */
 const CARDS = [
@@ -266,7 +368,7 @@ $('[data-letters]').innerHTML = CARDS.map(
   ([label, card]) => `
     <div>
       <p class="label" style="margin-bottom:var(--s-3)">${esc(label)}</p>
-      ${cardPreview({ card, merchant })}
+      ${cardPreview({ card, merchant, grow: true })}
     </div>`
 ).join('');
 

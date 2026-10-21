@@ -25,22 +25,28 @@
 
 <main id="main">
 
-  <section class="band band--tight page">
-    <p class="crumbs"><a href="index.html" data-home-link>Postscript</a> &middot; <span data-crumb>The cakes</span></p>
-    <h1 class="t-1" style="margin-top:var(--s-4)" data-title>The cakes</h1>
-    <p class="lede" style="margin-top:var(--s-4)" data-lede></p>
+  <section class="band band--clip page">
+    <p class="watermark watermark--right" aria-hidden="true" data-watermark></p>
+    <p class="edgemark" data-edgemark aria-hidden="true"></p>
+    <div class="over">
+      <p class="crumbs"><a href="index.html" data-home-link>Postscript</a> &middot; <span data-crumb>The cakes</span></p>
+      <h1 class="t-display" style="margin-top:var(--s-4)" data-title>The cakes</h1>
+      <p class="lede" style="margin-top:var(--s-5)" data-lede></p>
+    </div>
   </section>
 
   <!-- Occasion is how people arrive, so it is the filter rather than a
        secondary facet buried in a sidebar. -->
-  <section class="band band--tight page">
-    <div class="mark"><h2 class="label">What is it for?</h2></div>
-    <ul class="occasions" data-occasions></ul>
+  <section class="band band--tight band--deep">
+    <div class="page">
+      <div class="mark mark--n"><h2 class="label">What is it for?</h2></div>
+      <ul class="occasions" data-occasions></ul>
+    </div>
   </section>
 
   <section class="band page">
-    <p class="sm dim" data-found aria-live="polite"></p>
-    <div class="cols" style="margin-top:var(--s-5)" data-grid></div>
+    <div class="mark mark--n"><h2 class="label" data-found aria-live="polite"></h2></div>
+    <div class="cols" data-grid></div>
     <p class="note" data-none hidden></p>
   </section>
 </main>

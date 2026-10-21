@@ -9,6 +9,7 @@
 <meta property="og:description" content="Choose the cake, write the card, and see it set in the hand it will be written in — before you pay, not after.">
 
 <link rel="preload" href="assets/fonts/julius-sans-one.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/petit-formal-script.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/karla.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/tokens.css">
 <link rel="stylesheet" href="css/base.css">
@@ -28,23 +29,33 @@
 
 <main id="main">
 
-  <!-- The claim, and the thing itself beside it. A card set in the hand is
-       the whole proposition, so it is on the page before any argument for
-       it. -->
-  <section class="band page">
-    <div class="spread spread--offset-r">
-      <div class="stack stack--loose">
-        <p class="label" data-kicker></p>
-        <h1 class="t-1" data-headline></h1>
-        <p class="lede" data-lede></p>
-        <div class="row">
-          <a class="btn btn--blush" href="cakes.html" data-cakes-link>See the cakes</a>
-          <a class="btn" href="card.html" data-card-link>Write a card first</a>
-        </div>
-        <p class="sm dimmer" data-kept hidden></p>
-      </div>
+  <!-- The claim, and the thing itself beside it.
 
-      <div class="hero" data-hero></div>
+       A card set in the hand is the whole proposition, so it is on the page
+       before any argument for it — overlapping the cake, because that is
+       how the two of them arrive. -->
+  <section class="band band--tall band--clip hero-band">
+    <div class="page">
+      <p class="edgemark" data-edgemark aria-hidden="true"></p>
+
+      <div class="hero">
+        <div class="hero__words over">
+          <p class="label" data-kicker></p>
+          <div class="headline-wrap">
+            <span class="lg-layer lg-layer--back" data-head-back aria-hidden="true"></span>
+            <h1 class="t-display" data-headline></h1>
+            <span class="lg-layer lg-layer--front" data-head-front aria-hidden="true"></span>
+          </div>
+          <p class="lede" data-lede></p>
+          <div class="row">
+            <a class="btn btn--blush" href="cakes.html" data-cakes-link>See the cakes</a>
+            <a class="btn" href="card.html" data-card-link>Write a card first</a>
+          </div>
+          <p class="sm dimmer" data-kept hidden></p>
+        </div>
+
+        <div class="hero__plates" data-hero></div>
+      </div>
     </div>
   </section>
 
@@ -53,58 +64,100 @@
        different about it. -->
   <section class="band band--deep">
     <div class="page">
-      <div class="mark"><h2 class="label">What we do</h2></div>
+      <div class="mark mark--n"><h2 class="label">What we do</h2></div>
       <div class="cols" data-what></div>
     </div>
   </section>
 
   <!-- The reason to order here rather than anywhere else. -->
-  <section class="band page">
-    <div class="spread spread--offset">
-      <div class="aperture aperture--oval aperture--square">
-        <img src="../../shared/img/photo-1529251333259-d36cccaf22ea-md.jpg"
-             srcset="../../shared/img/photo-1529251333259-d36cccaf22ea-sm.jpg 480w, ../../shared/img/photo-1529251333259-d36cccaf22ea-md.jpg 800w"
-             sizes="(min-width: 60rem) 36vw, 86vw"
-             alt="A fountain pen and pressed violets on a written sheet of paper"
-             loading="lazy" decoding="async" width="800" height="800">
+  <section class="band band--clip page">
+    <p class="watermark watermark--right" aria-hidden="true">by hand</p>
+    <div class="mark mark--n over"><h2 class="label">Why the card</h2></div>
+    <div class="spread spread--offset over">
+      <div class="plate-pair">
+        <div class="aperture aperture--oval aperture--square">
+          <img src="../../shared/img/photo-1529251333259-d36cccaf22ea-md.jpg"
+               srcset="../../shared/img/photo-1529251333259-d36cccaf22ea-sm.jpg 240w, ../../shared/img/photo-1529251333259-d36cccaf22ea-md.jpg 800w"
+               sizes="(min-width: 60rem) 22vw, 44vw"
+               alt="A fountain pen and pressed violets on a written sheet of paper"
+               loading="lazy" decoding="async" width="800" height="540">
+        </div>
+        <div class="aperture aperture--arch aperture--tall">
+          <img src="../../shared/img/photo-1543769657-fcf1236421bc-md.jpg"
+               srcset="../../shared/img/photo-1543769657-fcf1236421bc-sm.jpg 240w, ../../shared/img/photo-1543769657-fcf1236421bc-md.jpg 800w"
+               sizes="(min-width: 60rem) 22vw, 44vw"
+               alt="Close handwriting in ink across a page"
+               loading="lazy" decoding="async" width="800" height="1067">
+        </div>
       </div>
       <div class="stack stack--loose measure">
-        <h2 class="t-2">The card is the part people keep.</h2>
+        <h2 class="t-1" data-card-head></h2>
         <div class="prose" data-card-why></div>
         <a class="btn" href="card.html" data-card-link>Try it without buying anything</a>
       </div>
     </div>
   </section>
 
+  <!-- A photograph the full width of the page, with one line over it.
+       The ground was flat plum from top to bottom; two photographic bands
+       are what stop a long page reading as a single colour. -->
+  <section class="band band--photo">
+    <div class="band__bg">
+      <img src="../../shared/img/photo-1776267889855-44d0b8011c29-lg.jpg"
+           srcset="../../shared/img/photo-1776267889855-44d0b8011c29-md.jpg 800w, ../../shared/img/photo-1776267889855-44d0b8011c29-lg.jpg 1600w"
+           sizes="100vw"
+           alt="" aria-hidden="true" loading="lazy" decoding="async" width="1600" height="2400">
+    </div>
+    <div class="page statement">
+      <div class="mark mark--n"><h2 class="label">The biggest thing we make</h2></div>
+      <p class="t-display" data-statement></p>
+      <div class="row">
+        <a class="btn btn--blush" href="cake.html?id=wedding" data-wedding-link>See the wedding cake</a>
+      </div>
+    </div>
+  </section>
+
   <!-- Browsing by occasion: a §7 requirement, and the way people actually
        arrive. -->
-  <section class="band band--tight page">
-    <div class="mark"><h2 class="label">What is it for?</h2></div>
-    <ul class="occasions" data-occasions></ul>
+  <section class="band band--photo">
+    <div class="band__bg">
+      <img src="../../shared/img/photo-1530916123588-1e1f619bb71e-lg.jpg"
+           srcset="../../shared/img/photo-1530916123588-1e1f619bb71e-md.jpg 800w, ../../shared/img/photo-1530916123588-1e1f619bb71e-lg.jpg 1600w"
+           sizes="100vw"
+           alt="" aria-hidden="true" loading="lazy" decoding="async" width="1600" height="1063">
+    </div>
+    <div class="page">
+      <div class="mark mark--n"><h2 class="label">What is it for?</h2></div>
+      <ul class="occasions" data-occasions></ul>
+    </div>
   </section>
 
   <!-- The range. -->
   <section class="band page">
-    <div class="mark row row--between">
+    <div class="mark mark--n">
       <h2 class="label">The cakes</h2>
-      <a class="sm" href="cakes.html" data-cakes-link>All of them</a>
+      <a class="sm" href="cakes.html" data-cakes-link data-all-link>All of them</a>
     </div>
     <div class="cols" data-cakes></div>
   </section>
 
   <!-- The shop. -->
-  <section class="band band--deepest">
-    <div class="page spread spread--offset-r">
-      <div class="stack measure">
-        <h2 class="t-2" data-shop-head></h2>
-        <div class="prose dim" data-shop-body></div>
-      </div>
-      <div class="aperture aperture--arch aperture--wide">
-        <img src="../../shared/img/photo-1543769657-fcf1236421bc-md.jpg"
-             srcset="../../shared/img/photo-1543769657-fcf1236421bc-sm.jpg 480w, ../../shared/img/photo-1543769657-fcf1236421bc-md.jpg 800w"
-             sizes="(min-width: 60rem) 44vw, 86vw"
-             alt="Close handwriting in ink across a page"
-             loading="lazy" decoding="async" width="800" height="533">
+  <section class="band band--deepest band--clip">
+    <p class="watermark watermark--left" aria-hidden="true">Bath</p>
+    <div class="page over">
+      <div class="mark mark--n"><h2 class="label">The shop</h2></div>
+      <div class="spread spread--offset-r">
+        <div class="stack measure">
+          <h2 class="t-1" data-shop-head></h2>
+          <div class="prose dim" data-shop-body></div>
+        </div>
+        <div class="aperture aperture--arch aperture--wide">
+          <img src="../../shared/img/photo-1562023693-ca3a992c9ea6-md.jpg"
+               srcset="../../shared/img/photo-1562023693-ca3a992c9ea6-sm.jpg 240w, ../../shared/img/photo-1562023693-ca3a992c9ea6-md.jpg 800w"
+               sizes="(min-width: 60rem) 44vw, 86vw"
+               alt="Slices of layered cake on a stand with roses behind them"
+               loading="lazy" decoding="async" width="800" height="1200">
+        </div>
       </div>
     </div>
   </section>

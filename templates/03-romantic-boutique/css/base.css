@@ -147,3 +147,86 @@ button, input, select, textarea { font: inherit; color: inherit; }
   letter-spacing: 0.01em;
   font-size: 1.25rem;
 }
+
+/* --------------------------------------------------------------------------
+   Display type
+
+   This is where "it looks quiet" was coming from. The old scale topped out
+   at 3.6rem, which on a wide screen is a caption wearing a headline's job.
+   Display type is part of the composition here now, the way the photography
+   is — which is what ECBG does and what this template was not doing.
+   -------------------------------------------------------------------------- */
+.t-display {
+  font-family: var(--font-display);
+  font-size: var(--t-display);
+  line-height: 0.96;
+  letter-spacing: var(--track-tight);
+  text-wrap: balance;
+  margin: 0;
+}
+
+/* The emotional clause, set in the hand, inside a headline otherwise in the
+   display face.
+
+   This is the single biggest thing taken from the reference, and it is the
+   reason their pages feel like a love letter where ours felt like an
+   invitation to a funeral. Rule 2 of three: display scale, accent colour,
+   one clause per headline, never a label and never a button.
+
+   Optically it sits lower and smaller than the caps around it — a script's
+   x-height and baseline do not agree with an incised capital's — so it is
+   nudged rather than left to fend for itself. */
+.script {
+  font-family: var(--font-hand);
+  font-style: normal;
+  color: var(--blush);
+  letter-spacing: 0;
+  /* Smaller than the capitals around it, not larger. A script's letters are
+     drawn at a bigger apparent size than an incised capital's for the same
+     em, so matching the numbers makes the clause shout — which is what the
+     first attempt did, and it read as a mistake rather than as a flourish. */
+  font-size: 0.86em;
+  line-height: 0.85;
+  display: inline-block;
+  transform: translateY(0.04em);
+  text-transform: none;
+}
+
+/* The watermark: an oversized script behind a section, at 1.33:1 against the
+   ground. It is texture and nothing else — aria-hidden everywhere it is
+   used, never carrying a word the page needs. The style guide's contrast
+   table names it and states that it is deliberately below the thresholds,
+   so nobody later "fixes" it into legibility. */
+.watermark {
+  position: absolute;
+  z-index: 0;
+  font-family: var(--font-hand);
+  font-size: clamp(5rem, 22vw, 18rem);
+  line-height: 0.8;
+  color: var(--ghost);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+.watermark--right { right: -0.1em; }
+.watermark--left { left: -0.1em; }
+
+/* Anything sitting over a watermark needs a stacking context of its own, or
+   the ghost paints on top of the words it is meant to sit behind. */
+.over { position: relative; z-index: 1; }
+
+/* No dimmed ink over a watermark.
+   A decorative flourish must not quietly take a real sentence below AA, and
+   a token measured only against the ground cannot see that it has. Inside a
+   band that carries a watermark, the dimmed inks are promoted to full ink:
+   5.70:1 over the ghost at worst, against 4.10 and 3.51 before. `:has()`
+   rather than a hand-applied class, so a watermark added later cannot
+   forget to bring the rule with it. */
+.band:has(> .watermark) .lede,
+.band:has(> .watermark) .dim,
+.band:has(> .watermark) .dimmer,
+.band:has(.page > .watermark) .lede,
+.band:has(.page > .watermark) .dim,
+.band:has(.page > .watermark) .dimmer {
+  color: var(--ink);
+}

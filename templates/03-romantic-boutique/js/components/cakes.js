@@ -57,20 +57,20 @@ export function priceFloor(product) {
  * with elementFromPoint in the style guide rather than asserted here.
  *
  * @param {object} product
- * @param {{when?:Date, shape?:string}} [opts]
+ * @param {{when?:Date, shape?:string, frame?:'arch'|'oval'}} [opts]
  */
-export function cakeTile(product, { when, shape = 'aperture--tall' } = {}) {
+export function cakeTile(product, { when, shape = 'aperture--tall', frame = 'arch' } = {}) {
   const { low, ranged } = priceFloor(product);
   const seasonal = when ? !soldOnDay(product, when) : false;
 
   return `
     <article class="cake">
       <a class="cake__link" href="${hrefFor(product)}" tabindex="-1" aria-hidden="true"></a>
-      <div class="aperture aperture--arch ${shape}">
+      <div class="aperture aperture--${frame} ${shape}">
         ${
           product.image
             ? `<img src="${photo(product.image, 'md')}"
-                 srcset="${photo(product.image, 'sm')} 480w, ${photo(product.image, 'md')} 800w, ${photo(product.image, 'lg')} 1600w"
+                 srcset="${photo(product.image, 'sm')} 240w, ${photo(product.image, 'md')} 800w, ${photo(product.image, 'lg')} 1600w"
                  sizes="(min-width: 60rem) 28vw, 86vw"
                  alt="${esc(product.name)}" loading="lazy" decoding="async" width="800" height="1066">`
             : `<span class="aperture--empty">${esc(product.name.slice(0, 1))}</span>`

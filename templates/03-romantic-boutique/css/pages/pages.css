@@ -5,29 +5,110 @@
 /* --------------------------------------------------------------------------
    Home — the hero
 
-   The card overlaps the arch. Overlap is not this template's separation
-   method (that is Template 04's), and it is used exactly once, here, for a
-   reason that is about the subject rather than the system: the card and the
-   cake arrive in the same box, so they are shown touching.
+   A collage, not a column beside a picture. The reference runs its
+   wordmark down the edge, butts photographs into the type and lets a
+   smaller plate sit over a larger one; that overlapping is most of why its
+   pages read as composed rather than assembled.
+
+   Overlap is Template 04's *separation method*, which this template does
+   not borrow. Here it is used in one place, on the subject's own terms: the
+   card and the cake overlap because they arrive in the same box.
    -------------------------------------------------------------------------- */
-.hero { position: relative; }
+.hero-band { padding-block: var(--s-5) var(--s-8); }
+
+.hero {
+  display: grid;
+  gap: var(--s-6);
+  align-items: center;
+}
+@media (min-width: 62rem) {
+  .hero { grid-template-columns: 1fr 1fr; gap: var(--s-7); }
+}
+
+.hero__words { display: grid; gap: var(--s-5); align-content: center; }
+
+/* --------------------------------------------------------------------------
+   The headline writes itself out, and the wreath comes up round it
+
+   The card page grows its wreath because somebody is typing into it. Nobody
+   types on a home page, so the same gesture is played instead: the words
+   arrive one after another and the flowers follow them.
+
+   Every word is in the DOM from the first byte and only its opacity moves,
+   so the sentence is whole for a screen reader, for search, and for anyone
+   with motion turned off. Nothing here is a reveal that hides real content.
+   -------------------------------------------------------------------------- */
+.headline-wrap { position: relative; }
+.headline-wrap > h1 { position: relative; z-index: 1; }
+
+.word { display: inline-block; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero__words .word {
+    animation: write 520ms var(--ease) backwards;
+    animation-delay: calc(var(--i, 0) * 105ms);
+  }
+  @keyframes write {
+    from { opacity: 0; translate: 0 0.3em; filter: blur(5px); }
+  }
+
+}
+.hero__words .lede { max-width: 34ch; }
+
+/* The plates. A tall arch, a small oval dropped over its lower left, and
+   the card over its lower right. Percentages rather than pixels, so the
+   whole arrangement scales with the column instead of falling apart in the
+   gap between two breakpoints. */
+.hero__plates { position: relative; }
+
+.hero__main { width: min(100%, 34rem); margin-left: auto; }
+
+.hero__small {
+  position: absolute;
+  left: 0;
+  bottom: 6%;
+  width: 30%;
+  max-width: 9.5rem;
+}
+
+/* The violet. Small, low on the left, and the only thing in the hero that
+   is not cake or card — it is there to put the template's own colour into
+   the first screen as something real rather than as a flat fill. */
+.hero__sprig {
+  position: absolute;
+  left: -5%;
+  top: 3%;
+  width: 24%;
+  max-width: 8.5rem;
+}
+
 .hero__card {
   position: relative;
-  margin-top: -18%;
+  margin-top: -16%;
   margin-left: auto;
   /* The sheet is rotated, so its corner reaches further right than its box
      does. Sitting flush against the column's right edge put that corner
      eight pixels past the document and gave the whole page a sideways
-     scroll — the same class of bug as Template 04's 100vw bleed, and
-     invisible until it was measured. */
+     scroll — invisible until it was measured. */
   margin-right: 4%;
-  width: min(72%, 17rem);
+  width: min(66%, 16rem);
 }
 .hero__card .letter__stack { width: 100%; }
-.hero__card .letter__sheet { transform: rotate(-2deg); }
+.hero__card .letter__sheet { transform: rotate(-2.5deg); }
 
-@media (max-width: 48rem) {
-  .hero__card { margin-top: -14%; width: min(80%, 15rem); }
+@media (max-width: 62rem) {
+  .hero__main { margin-inline: auto; }
+  .hero__small { width: 26%; bottom: 10%; }
+  .hero__card { margin-top: -14%; width: min(62%, 14rem); }
+}
+@media (max-width: 62rem) {
+  .hero__sprig { width: 18%; }
+}
+/* Below this there is no room for a third plate without the collage turning
+   into a pile, so the two that carry meaning stay and the flourish goes. */
+@media (max-width: 30rem) {
+  .hero__small,
+  .hero__sprig { display: none; }
 }
 
 /* --------------------------------------------------------------------------

@@ -10,6 +10,10 @@
 .page {
   width: min(100% - (var(--gutter) * 2), var(--page));
   margin-inline: auto;
+  /* The edge mark and the watermark are offset from the measure, not from
+     the viewport. Without this they resolve against the band, which spans
+     the whole window, and the edge mark lands outside it. */
+  position: relative;
 }
 
 /* Bands are direct children of <main> and already full width. Template 04
@@ -44,6 +48,30 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* When the file is missing the browser renders the alt text *inside* the
+     img box, and a sentence is wider than the box — so it spilled out of
+     the aperture and across the band. The brief rejects designs that only
+     work with perfect demonstration content, and a merchant with one
+     missing photograph is the most ordinary imperfection there is.
+
+     Styling the img itself is what catches the broken case: these
+     properties are invisible while the photograph loads and become the
+     fallback's styling when it does not. */
+  overflow: hidden;
+  font-family: var(--font-ui);
+  font-size: var(--xs);
+  line-height: 1.4;
+  color: var(--ink-3);
+  text-align: center;
+  /* Two things that are tempting here and must not be: `display: grid`, for
+     centring the fallback text, and `padding`, for giving it a margin.
+
+     An <img> is a replaced element. A grid display takes `object-fit` out
+     of the picture entirely, and padding insets the *content box* that
+     `object-fit: cover` fills — so the photograph is drawn inside the
+     padding and every rounded aperture ends up with a square photo sitting
+     in it. Both times, the fix for the broken case broke the working one,
+     and both times it was visible only by looking. */
 }
 .aperture--arch { border-radius: var(--arch); }
 .aperture--oval { border-radius: var(--oval); }
@@ -129,3 +157,139 @@
   flex: none;
   transform: translateY(-0.25em);
 }
+
+/* --------------------------------------------------------------------------
+   Numbered section marks
+
+   ECBG numbers its sections — 01, 02, 03 — which costs nothing and does two
+   things at once: it gives a long page a spine, and it makes the shop look
+   like it has an editorial point of view rather than a list of modules.
+   The number is decorative; the label is the real heading.
+   -------------------------------------------------------------------------- */
+.mark--n { counter-increment: section; }
+.mark--n::after {
+  content: counter(section, decimal-leading-zero);
+  font-family: var(--font-display);
+  font-size: var(--xs);
+  letter-spacing: var(--track-wide);
+  color: var(--blush);
+  margin-left: auto;
+  padding-left: var(--s-4);
+}
+main { counter-reset: section; }
+
+/* --------------------------------------------------------------------------
+   The edge mark — the shop's name set vertically down the side of the page
+
+   Straight from the reference, where "ECBG" runs down the left edge of the
+   hero. It is the cheapest possible way to make a page look art-directed
+   rather than assembled, and because it is the shop's own name it is also
+   the only decoration here that carries information.
+
+   Hidden below 62rem: at phone width there is no margin to put it in, and
+   a decoration that steals a gutter from the content is not a decoration.
+   -------------------------------------------------------------------------- */
+.edgemark {
+  display: none;
+}
+@media (min-width: 62rem) {
+  .edgemark {
+    display: block;
+    position: absolute;
+    left: calc(var(--gutter) * -1 + 0.25rem);
+    top: 0;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: var(--font-display);
+    font-size: clamp(0.8rem, 1.1vw, 1rem);
+    letter-spacing: 0.55em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+}
+
+/* A band that holds a watermark or an edge mark has to be the positioning
+   context for it, and must not let either spill sideways into a scrollbar. */
+.band { position: relative; }
+.band--clip { overflow: hidden; }
+
+/* --------------------------------------------------------------------------
+   Full-bleed photography
+
+   The reference butts photographs straight into the type with no margin at
+   all, and it is most of why the page feels composed. Bands are already
+   direct children of <main>, so this needs no 100vw trick — Template 04
+   learned what that costs.
+   -------------------------------------------------------------------------- */
+.bleed { width: 100%; }
+.bleed > img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* Two photographs at different scales, one dropped below the other, rather
+   than a tidy pair of equal cells. Asymmetry is the whole point. */
+.plate-pair {
+  display: grid;
+  gap: var(--s-4);
+  grid-template-columns: repeat(auto-fit, minmax(min(11rem, 100%), 1fr));
+  align-items: start;
+}
+.plate-pair > :nth-child(2) { transform: translateY(var(--s-6)); }
+
+/* A staggered row. Every second tile drops, so a row of four reads as a
+   composition rather than as a grid that has gone wrong. Only above the
+   width where the row is actually a row — stacked on a phone, a stagger is
+   just an uneven gap. */
+@media (min-width: 62rem) {
+  .cols--stagger > :nth-child(even) { transform: translateY(var(--s-6)); }
+}
+@media (max-width: 48rem) {
+  .plate-pair > :nth-child(2) { transform: none; }
+}
+
+/* --------------------------------------------------------------------------
+   Photographic bands
+
+   The ground was flat plum from top to bottom, and a flat ground is what a
+   page looks like before anyone has art-directed it. A band can now carry a
+   photograph behind it instead, held down by a scrim that guarantees its
+   contrast rather than hoping for it.
+
+   The image is a real <img> rather than a background-image, so it takes part
+   in srcset, lazy loading and the preload scanner like every other
+   photograph here — and so a merchant swapping it does not have to edit CSS.
+   -------------------------------------------------------------------------- */
+.band--photo {
+  position: relative;
+  isolation: isolate;
+}
+.band__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+.band__bg > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* The scrim sits in the same layer as the photograph, not on the band, so
+   content inside the band needs no z-index gymnastics to clear it. */
+.band__bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--scrim);
+}
+
+/* A statement band: one short line, large, over a photograph. Deliberately
+   the only place in the template where display type sits on an image. */
+.statement {
+  min-height: min(78vh, 34rem);
+  display: grid;
+  align-content: center;
+  gap: var(--s-5);
+}
+.statement .t-display { max-width: 18ch; }

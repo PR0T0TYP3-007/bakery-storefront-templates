@@ -23,6 +23,7 @@
  */
 
 import { layoutCard, layoutInscription, normalise } from '../card.js';
+import { wreathSVG } from '../garden.js';
 import { icons } from './icons.js';
 
 const esc = (s) =>
@@ -56,9 +57,10 @@ function spoken(card) {
  * @param {{to?:string, message?:string, from?:string}|null} opts.card
  * @param {object} opts.merchant
  * @param {boolean} [opts.compact]  no caption; for a basket row or a receipt
+ * @param {boolean} [opts.grow]     let a wreath grow around it as it is written
  * @returns {string}
  */
-export function cardPreview({ card, merchant, compact = false }) {
+export function cardPreview({ card, merchant, compact = false, grow = false }) {
   const laid = layoutCard(card, merchant);
 
   if (laid.state !== 'set') {
@@ -115,9 +117,20 @@ export function cardPreview({ card, merchant, compact = false }) {
            .join('')}
        </figcaption>`;
 
+  /* Around the sheet, never on it. The sheet is the honest part — it shows
+     exactly what the recipient gets — so the flourish lives in the margin
+     and the preview keeps its word. */
+  const garden = grow
+    ? wreathSVG([card?.to, card?.message, card?.from].filter(Boolean).join(' '), {
+        tones: ['var(--blush)', 'var(--lilac)', 'var(--ink-2)'],
+        stemColour: 'var(--blush)',
+      })
+    : '';
+
   return `
-    <figure class="letter" data-fits="${laid.fits}">
+    <figure class="letter${garden ? ' letter--growing' : ''}" data-fits="${laid.fits}">
       <div class="letter__stack" aria-hidden="true">
+        ${garden}
         <div class="letter__sheet" style="--per:${laid.hand.perLine}">
           ${sheet}
           <span class="letter__mark">${esc(merchant.shortName ?? merchant.name)}</span>
