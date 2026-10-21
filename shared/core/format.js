@@ -55,6 +55,19 @@ export function dateLong(d) {
   }).format(d);
 }
 
+/**
+ * The weekday's own name: "Monday", never "Today".
+ *
+ * `dayWord` is for talking to a customer, so it says Today and Tomorrow.
+ * That makes it useless for looking a day up in `merchant.hours`, whose
+ * keys are weekday names — a lookup by `dayWord(today())` matches nothing
+ * and reports every shop shut every day. This is the one for matching.
+ * @param {Date} d
+ */
+export function weekdayName(d) {
+  return new Intl.DateTimeFormat(cfg.locale, { weekday: 'long' }).format(d);
+}
+
 /** "Today" | "Tomorrow" | "Tuesday" */
 export function dayWord(d) {
   const t = today();

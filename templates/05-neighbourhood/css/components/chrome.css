@@ -6,7 +6,7 @@
   position: sticky;
   top: 0;
   z-index: 50;
-  background: var(--paper);
+  background: var(--surface);
   border-bottom: 1px solid var(--rule);
 }
 
@@ -172,8 +172,17 @@
   border-bottom: 1px solid var(--green-dark);
 }
 
+/* Full white, and the hierarchy comes from the letterform instead.
+   Dimming white text works on a pale ground because there is a long way down
+   before it stops being readable. On the green bar there is not: white is
+   5.37 on it, so AA runs out at about 88% opacity, and 100% to 88% is not a
+   difference anybody can see. The old 72% measured 3.58.
+
+   What still separates a label from a statement on a coloured bar is what
+   separated them before anyone had opacity — it is smaller, it is tracked,
+   and it is uppercase. That is already how `.label` is built. */
 .collect .label {
-  color: rgba(255, 255, 255, 0.72);
+  color: #fff;
 }
 
 .collect__inner {
@@ -190,7 +199,15 @@
   gap: var(--s-2);
   min-height: var(--tap);
   padding: 0 0.8rem;
-  background: rgba(255, 255, 255, 0.14);
+  /* Tinted down, not up.
+     A translucent *white* chip lightens the bar under it, and white text on
+     the result measured 4.11 against the 4.5 it needs — the bar itself is
+     5.37, so the chip was the only thing breaking it, and the hover state
+     made it worse (3.41). Tinting with black instead reads as the same
+     recessed chip and takes the pair to 6.74, with hover going up to 7.97
+     rather than down. It holds for the second merchant's teal too: 8.40
+     and 9.70. */
+  background: rgba(0, 0, 0, 0.14);
   color: #fff;
   border: 1.5px solid rgba(255, 255, 255, 0.4);
   border-radius: var(--r);
@@ -200,7 +217,7 @@
 }
 
 .collect__btn:hover {
-  background: rgba(255, 255, 255, 0.24);
+  background: rgba(0, 0, 0, 0.24);
   border-color: #fff;
 }
 
@@ -214,7 +231,10 @@
   align-items: center;
   gap: var(--s-2);
   font-size: var(--t-sm);
-  color: rgba(255, 255, 255, 0.82);
+  /* 82% measured 4.16 on the green. Same reasoning as the label above: the
+     countdown stands out because `.cutoff b` is bold, not because the words
+     around it are faded. */
+  color: #fff;
 }
 
 .cutoff b {
@@ -267,7 +287,7 @@
 }
 
 .note--flat {
-  background: var(--paper-2);
+  background: var(--surface-2);
   border-left-color: var(--ink-3);
 }
 

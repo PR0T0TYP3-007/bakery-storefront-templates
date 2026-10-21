@@ -35,40 +35,93 @@
 :root {
   /* ------------------------------------------------------------------------
      Colour
-     Bright near-neutral ground, cool near-black, three status hues. Status is
-     never carried by colour alone — every state has a word beside it.
 
-     Deliberately NOT the printed-paper cream of Template 01. Both templates
-     sitting on a warm cream with a serif headline was what made them read as
-     one brand rather than two. Here the warmth comes from the green and the
-     photography, and the ground stays out of the way.
+     A painted shopfront, with paper pinned to it.
+
+     The ground was `#faf9f6`, a near-white — and it measured **25 channels**
+     from Template 01's cream. Every other pair of grounds in the set clears
+     192. That is the exact complaint that created D8 ("looks good in style
+     but it seems similar to the spirit of the first one"), and Template 05
+     is the one template that was never actually moved: D11 rewrote its
+     voice and left its colour alone.
+
+     Sage clears all four: 234 from cream, 204 from sun, 206 from plum, 442
+     from near-black. It is not warm, and no warm ground was available — the
+     search returns nothing between cream and sun that is not already
+     spoken for, and the warmest colours that do clear are pinks, which now
+     belong to Template 03. So the warmth comes from the photography, the
+     type and the paper, and the ground is the wall behind them.
+
+     One consequence, measured, a rule rather than a preference:
+
+     **The accent cannot sit on the ground.** `--green` measures 2.47:1
+        on sage. Darkening it until it reads takes it to `#0a4c2e`, which is
+        144 channels from Template 01's clay — it would pass contrast by
+        failing the distance check that this whole re-skin exists to satisfy.
+     So the green stays where it is (218 channels clear) and never appears as
+     text on the ground. It is a sign colour: it belongs on the paper, not on
+     the wall. The board, the header, the dialog and the ticket are sheets of
+     paper so that it has somewhere legal to live.
+
+     One thing this file claimed and should not have: that three levels of
+     ink cannot fit on a mid-tone ground. They fit. What did not fit was
+     `#4c5a43`, which was spaced against a near-white page and measured 3.39
+     here — and the page used it for every label, every caption and every
+     line of small print on the wall, so the rule written above it was
+     enforced by nothing and failed in twelve places on the home page alone.
+     Re-spaced for this ground it clears AA on all five surfaces. A palette
+     carried over from a different ground is not evidence about the ground.
      ------------------------------------------------------------------------ */
-  --paper: #faf9f6;
-  --paper-2: #f0efea;
-  --paper-3: #e3e1da;
-  --surface: #ffffff;
+  /* The wall. Three tones, used only *as* wall — the page, and bands of it.
+     Nothing inside a panel is allowed to tint itself with these; a hover
+     state borrowed from the wall is how the two systems got confused in the
+     first place. */
+  --paper: #9ab894;
+  --paper-2: #8fae8a;
+  --paper-3: #84a37f;
 
-  --ink: #1a1a18;
-  --ink-2: #4e4e49;
-  --ink-3: #7b7a73;
+  /* The paper pinned to it. Warm white, not pure — the warmth has to come
+     from somewhere and this is where — with two tints for the states that
+     happen *on* paper: pressed, and hollow.
 
-  --rule: rgba(26, 26, 24, 0.14);
-  --rule-2: rgba(26, 26, 24, 0.3);
+     Every ink and every sign colour clears AA on all three. That is the
+     point of having them: the two restrictions below are restrictions on
+     the wall, and the way out of a restriction is not to ration the colour
+     but to put the content on a surface that can hold it. The board, the
+     header, the dialog and the ticket are all sheets of paper for exactly
+     that reason.
+
+     `--surface-3` is the one exception and it carries no text: green
+     measures 4.25 on it. It is for image wells and skeletons — the shape
+     of something that has not arrived. The drawn monogram that stands in
+     for a missing photograph is the one mark on it, and that is ink. */
+  --surface: #fbfaf5;
+  --surface-2: #f2f0e7;  /* pressed — hover, selected, disabled */
+  --surface-3: #e8e5d9;  /* hollow — image wells, skeletons. No text. */
+
+  --ink: #18220f;      /* 7.58 on the ground · 15.77 on paper */
+  --ink-2: #283320;    /* 6.09 · 4.75 on the deepest band · 12.68 on paper */
+  --ink-3: #394433;    /* 4.71 on the ground · 9.81 on paper. Legal on both. */
+
+  --rule: rgba(24, 34, 15, 0.18);
+  --rule-2: rgba(24, 34, 15, 0.34);
   --rule-strong: var(--ink);
 
-  /* Carries the warmth and the brand. Brighter and more saturated than before
-     so it is genuinely present rather than a polite accent. */
-  --green: #0e7a4e;
+  /* Sign colours. All three are measured on paper, where they are used, and
+     none of them is allowed to be text on the ground. */
+  --green: #0e7a4e;      /* 5.14 on paper · white on it 5.14 */
   --green-dark: #0a5c3a;
-  --green-wash: #e3f3ea;
+  --green-wash: #e6f1e6;
 
-  --honey: #9a6410;
-  --honey-wash: #f8eed8;
+  --honey: #7a4e08;      /* 8.39 on paper */
+  --honey-wash: #f6ecd6;
 
-  --clay: #a33f28;
-  --clay-wash: #f8e8e3;
+  --clay: #8c3420;       /* 7.65 on paper */
+  --clay-wash: #f7e6e1;
 
-  --focus: #0e7a4e;
+  /* Ink, not green. A focus ring has to clear 3:1 against whatever is
+     behind it, and the green manages 2.47 on the ground. */
+  --focus: #18220f;
 
   /* ------------------------------------------------------------------------
      Type
@@ -151,8 +204,14 @@
    so a rebrand never touches component CSS.
    -------------------------------------------------------------------------- */
 [data-brand='corner-crumb'] {
-  --green: #10627a;
+  --green: #10627a;      /* 6.59 on paper · white on it 6.59 */
   --green-dark: #0b4a5c;
   --green-wash: #e0eff4;
-  --focus: #10627a;
+
+  /* Not the teal, even though it would pass. It measures 3.17:1 on the sage
+     ground — over the 3:1 line by three hundredths, which is a coincidence
+     rather than a decision, and it would break the first time anybody
+     nudged the wall a shade. The rule for the default brand holds here:
+     sign colours live on the paper, and the ring is ink. */
+  --focus: #18220f;
 }

@@ -232,7 +232,7 @@
   margin-top: auto;
   padding: 0;
   border: 0;
-  background: var(--paper);
+  background: var(--surface);
   border-radius: 12px 12px 0 0;
   box-shadow: var(--lift);
   max-height: 86vh;
@@ -263,7 +263,7 @@
   justify-content: space-between;
   gap: var(--s-3);
   padding: var(--s-4) var(--gutter);
-  background: var(--paper);
+  background: var(--surface);
   border-bottom: 1px solid var(--rule);
 }
 

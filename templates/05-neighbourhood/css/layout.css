@@ -142,3 +142,80 @@
 .push {
   margin-left: auto;
 }
+
+/* --------------------------------------------------------------------------
+   The masthead
+
+   Words and one photograph. Unequal on purpose: the words lead, and the
+   picture is the width of a pinned print rather than of a hero image. A
+   50/50 split would make the photograph an equal claim on the page, and the
+   board below is still the hero.
+
+   Single column below 60rem, with the photograph *after* the words — on a
+   phone the headline has to be the first thing, not a picture you scroll
+   past to reach it.
+   -------------------------------------------------------------------------- */
+.masthead {
+  display: grid;
+  gap: var(--s-5);
+  align-items: end;
+}
+
+@media (min-width: 60rem) {
+  .masthead {
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: var(--s-7);
+  }
+}
+
+/* Bottom-aligned, not centred. Centring the words against a tall photograph
+   leaves equal slack above and below them and the pair reads as two things
+   that happen to be side by side. Sitting both on the same line — the last
+   line of the lede and the rule under the caption — is what makes it one
+   composition. */
+.masthead__words {
+  align-self: end;
+  padding-bottom: var(--s-2);
+}
+
+/* Landscape, and that is a composition decision rather than a crop
+   preference. A portrait photograph beside four lines of type makes a column
+   of words about 250px tall sit next to a picture about 630px tall, and no
+   alignment rescues that — centred it floats, bottom-aligned it leaves a
+   dead quarter-page above the kicker. At 5/4 the two columns finish within
+   about a line of each other and the masthead reads as one block.
+
+   The counter shot carries its subject across the middle of the frame, so a
+   centred crop keeps both the bench behind and the baskets in front. */
+.masthead__shot img {
+  aspect-ratio: 5 / 4;
+  object-position: 50% 55%;
+}
+
+/* Today's hours. The signage face at small size with the tracking a painted
+   board gives it — this is the line a shop puts on the door, and it should
+   look like it. */
+.masthead__hours {
+  margin-top: var(--s-4);
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--rule-2);
+  font-family: var(--font-display);
+  font-variation-settings: var(--display-settings);
+  font-weight: 600;
+  font-size: var(--t-sm);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.masthead__hours:empty {
+  display: none;
+}
+
+/* Below the split the photograph is a wide strip rather than a portrait —
+   a tall picture on a phone pushes the board off the bottom of the screen,
+   and the board is what the page is for. */
+@media (max-width: 60rem) {
+  .masthead__shot img {
+    aspect-ratio: 3 / 2;
+  }
+}

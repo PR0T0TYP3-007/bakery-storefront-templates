@@ -20,7 +20,21 @@
 <style>
   .sg { padding-block: var(--s-6); border-top: 1px solid var(--rule); }
   .sg:first-of-type { border-top: 0; }
-  .sg__demo { margin-top: var(--s-4); }
+  /* Demos sit on paper, because every component in them sits on paper in
+     the template. Shown straight on the wall they were not just unlike the
+     real thing — the status chips measured 2.47, 3.31 and 3.68 there, so
+     the page documenting the contrast rules was the only page breaking
+     them. A style guide that puts a component somewhere the template never
+     puts it is documenting a component that does not exist. */
+  .sg__demo {
+    margin-top: var(--s-4);
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    padding: var(--s-4);
+  }
+  /* The swatches are the exception: they are colour samples, not components,
+     and several are wall tones that should be seen against the wall. */
+  .sg__demo.swatches { background: none; border: 0; padding: 0; }
   .swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr)); gap: var(--s-3); }
   .sw__chip { height: 3.5rem; border-radius: var(--r); border: 1px solid var(--rule); }
   .sw code { font-family: ui-monospace, Menlo, monospace; font-size: .75rem; color: var(--ink-3); }
@@ -28,6 +42,18 @@
   .spec { font-family: ui-monospace, Menlo, monospace; font-size: .75rem; color: var(--ink-3); }
   .toc { position: sticky; top: calc(var(--header-h) + var(--s-3)); }
   .toc a { display: block; padding: .3rem 0; font-size: var(--t-sm); font-weight: 600; }
+
+  /* The contrast table. Ruled like the board, and on paper — a table of
+     readings about what is legible had better be legible itself, and half
+     these colours are not legible on the wall. */
+  .ct-scroll { overflow-x: auto; }
+  .ct { background: var(--surface); border: 1px solid var(--rule); }
+  .ct th, .ct td { text-align: left; padding: var(--s-2) var(--s-3); white-space: nowrap; }
+  .ct thead th { border-bottom: 2px solid var(--ink); font-size: var(--t-sm); }
+  .ct tbody tr + tr th, .ct tbody tr + tr td { border-top: 1px solid var(--rule); }
+  .ct tbody th { font-weight: 600; font-size: var(--t-sm); }
+  .ct td { font-variant-numeric: tabular-nums; font-size: var(--t-sm); }
+  .ct td .label { opacity: .85; }
 </style>
 </head>
 <body>
@@ -52,7 +78,23 @@
         <h2 class="t-2">Colour</h2>
         <p class="sm">Status is never carried by colour alone — every state has a word beside it,
         and the sold-out marker is a square where the others are circles.</p>
+
+        <p class="sm">Two systems, and which one a colour belongs to is the rule the
+        whole template runs on: the <strong>wall</strong> is painted, the
+        <strong>paper</strong> is pinned to it. Ink and sign colours live on the
+        paper. The table below is measured in the browser from the tokens as they
+        are actually set, so it cannot drift away from the CSS.</p>
+
         <div class="sg__demo swatches" data-swatches></div>
+
+        <h3 class="t-3" style="margin-top:var(--s-6)">Measured, not asserted</h3>
+        <p class="sm">Contrast of every ink and sign colour against every surface.
+        <strong>AA</strong> is 4.5:1 for body text; <strong>3+</strong> clears large
+        text and non-text contrast only; <strong>no</strong> clears neither. The two
+        red columns on the wall are why the board is a sheet of paper.</p>
+        <div class="sg__demo ct-scroll">
+          <table class="ct" data-contrast></table>
+        </div>
       </section>
 
       <!-- Type -->

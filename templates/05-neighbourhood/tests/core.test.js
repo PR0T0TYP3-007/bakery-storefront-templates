@@ -16,6 +16,7 @@ import {
   allergensFor, soldOnDay, describeSelections, INSCRIPTION_MAX,
 } from '../../../shared/core/rules.js';
 
+import { weekdayName, dayWord } from '../../../shared/core/format.js';
 import { priceLine, orderTotals } from '../../../shared/core/pricing.js';
 import { dayState, earliestFor, isClosed, capacityFor, findZone, shelf, slotsFor } from '../../../shared/core/fulfilment.js';
 import { emptyCart, addLine, updateLine, setQty, removeLine, count, readyBy, staleLines, signature } from '../../../shared/core/cart.js';
@@ -600,4 +601,31 @@ test('staleLines reports a price that has moved since the item went in', () => {
 test('staleLines ignores lines added before prices were recorded', () => {
   const cart = addLine(emptyCart(), line({ addedPrice: undefined }));
   assert.equal(staleLines(cart, () => 99).length, 0);
+});
+
+
+/* --------------------------------------------------------------------------
+   Naming a weekday
+
+   `merchant.hours` is keyed by weekday name, and the obvious function to
+   reach for is `dayWord` — which answers "Today" for today. Looking the
+   day up with it matches nothing, and the page then tells every customer
+   the shop is closed, every day, including the days it is open. These two
+   assertions are the whole bug.
+   -------------------------------------------------------------------------- */
+test('weekdayName names the day, where dayWord says Today', () => {
+  const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const now = today();
+
+  assert.equal(dayWord(now), 'Today');
+  assert.ok(DAYS.includes(weekdayName(now)), `${weekdayName(now)} is not a weekday`);
+  assert.equal(weekdayName(now), DAYS[now.getDay()]);
+});
+
+test('weekdayName is right for every day of a week, not just today', () => {
+  const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  for (let i = 0; i < 7; i++) {
+    const d = addDays(today(), i);
+    assert.equal(weekdayName(d), DAYS[d.getDay()]);
+  }
 });

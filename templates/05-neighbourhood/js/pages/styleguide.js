@@ -19,12 +19,14 @@ await startPage({ nav: null, mobileTicket: false });
    Colour
    ------------------------------------------------------------------------- */
 const TOKENS = [
-  ['--paper', 'Ground'],
-  ['--paper-2', 'Ground, raised'],
-  ['--surface', 'Card'],
+  ['--paper', 'The wall'],
+  ['--paper-2', 'The wall, banded'],
+  ['--surface', 'The paper'],
+  ['--surface-2', 'Paper, pressed'],
+  ['--surface-3', 'Paper, hollow'],
   ['--ink', 'Text, rules'],
   ['--ink-2', 'Secondary'],
-  ['--ink-3', 'Tertiary'],
+  ['--ink-3', 'Tertiary — paper only'],
   ['--green', 'Available, primary'],
   ['--honey', 'Low stock'],
   ['--clay', 'Sold out, errors'],
@@ -39,6 +41,79 @@ $('[data-swatches]').innerHTML = TOKENS.map(([token, role]) => {
       <code>${esc(token)}</code><br><code>${esc(value)}</code>
     </div>`;
 }).join('');
+
+/* -------------------------------------------------------------------------
+   The contrast table
+
+   Measured here rather than written into the page, because a number typed
+   into a style guide is a claim about the CSS and this one is a reading of
+   it. Change a token and the table changes with it — including going red,
+   which is the point.
+
+   The ratio is the WCAG 2.x relative-luminance formula, which is the one the
+   AA thresholds are defined against.
+   ------------------------------------------------------------------------- */
+const SURFACES = [
+  ['--surface', 'Paper'],
+  ['--surface-2', 'Pressed'],
+  ['--surface-3', 'Hollow'],
+  ['--paper', 'The wall'],
+  ['--paper-3', 'Wall, deepest'],
+];
+
+const FOREGROUNDS = [
+  ['--ink', 'Ink'],
+  ['--ink-2', 'Secondary'],
+  ['--ink-3', 'Tertiary'],
+  ['--green', 'Green'],
+  ['--honey', 'Honey'],
+  ['--clay', 'Clay'],
+];
+
+/** '#rrggbb' or 'rgb(r g b)' to [r,g,b]. */
+function channels(value) {
+  const hex = value.match(/^#([0-9a-f]{6})$/i);
+  if (hex) return [0, 2, 4].map((i) => parseInt(hex[1].slice(i, i + 2), 16));
+  const nums = value.match(/\d+(\.\d+)?/g);
+  return nums ? nums.slice(0, 3).map(Number) : [0, 0, 0];
+}
+
+function luminance(value) {
+  const [r, g, b] = channels(value).map((c) => {
+    const n = c / 255;
+    return n <= 0.04045 ? n / 12.92 : ((n + 0.055) / 1.055) ** 2.4;
+  });
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+}
+
+function contrast(a, b) {
+  const [hi, lo] = [luminance(a), luminance(b)].sort((x, y) => y - x);
+  return (hi + 0.05) / (lo + 0.05);
+}
+
+const table = $('[data-contrast]');
+if (table) {
+  const read = (t) => css.getPropertyValue(t).trim();
+
+  const head = `<thead><tr><th scope="col">On</th>${SURFACES.map(
+    ([, label]) => `<th scope="col">${esc(label)}</th>`
+  ).join('')}</tr></thead>`;
+
+  const body = FOREGROUNDS.map(([token, label]) => {
+    const cells = SURFACES.map(([surface]) => {
+      const ratio = contrast(read(token), read(surface));
+      const verdict = ratio >= 4.5 ? 'AA' : ratio >= 3 ? '3+' : 'no';
+      const colour =
+        verdict === 'AA' ? 'var(--green)' : verdict === '3+' ? 'var(--honey)' : 'var(--clay)';
+      return `<td style="color:${colour}">
+        <strong>${ratio.toFixed(2)}</strong> <span class="label">${verdict}</span>
+      </td>`;
+    }).join('');
+    return `<tr><th scope="row">${esc(label)}</th>${cells}</tr>`;
+  }).join('');
+
+  table.innerHTML = `${head}<tbody>${body}</tbody>`;
+}
 
 /* -------------------------------------------------------------------------
    Board, against hostile fixtures

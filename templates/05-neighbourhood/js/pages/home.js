@@ -10,10 +10,11 @@ import {
   boardHead,
   skeletonRows,
   bindAdd,
+  imgSrc,
 } from '../components/board.js';
 import { renderTicket, bindTicket, mountMobileTicket } from '../components/ticket.js';
 import { toast } from '../components/toast.js';
-import { dayWord, date as fmtDate, whenPhrase, dayWordMid } from '../../../../shared/core/format.js';
+import { dayWord, date as fmtDate, whenPhrase, dayWordMid, weekdayName } from '../../../../shared/core/format.js';
 import { today, sameDay, dateKey } from '../../../../shared/core/dates.js';
 import { shelf } from '../../../../shared/core/fulfilment.js';
 
@@ -94,6 +95,116 @@ function paintVoice() {
   set('[data-kicker]', voice.kicker);
   set('[data-headline]', voice.headline);
   set('[data-lede]', voice.lede);
+
+  paintShopfront(voice.shopfront);
+  paintMorning(voice.morning);
+  paintOpenToday();
+}
+
+/**
+ * Today's hours, under the lede.
+ *
+ * Read off `merchant.hours` rather than written into the markup — a shop
+ * that is shut on Mondays should say so on a Monday, and a second merchant
+ * keeping different hours should not need this sentence edited. The cutoff
+ * is appended only where the merchant actually has one.
+ */
+function paintOpenToday() {
+  const el = $('[data-open-today]');
+  if (!el) return;
+
+  const { merchant } = session.state;
+  const name = weekdayName(today());
+  const row = (merchant.hours ?? []).find((h) => h.day === name);
+
+  if (!row || !row.open) {
+    /* Closed today. The next day it opens is more use than the fact that it
+       is shut, so say both. */
+    const order = (merchant.hours ?? []).map((h) => h.day);
+    const from = order.indexOf(name);
+    const next =
+      order.slice(from + 1).concat(order.slice(0, from + 1))
+        .map((d) => (merchant.hours ?? []).find((h) => h.day === d))
+        .find((h) => h && h.open);
+    el.textContent = next
+      ? `Closed today · open ${next.day} from ${next.open}`
+      : 'Closed today';
+    return;
+  }
+
+  const cutoff = merchant.cutoffHour;
+  el.textContent =
+    `Open today ${row.open}–${row.close}` +
+    (cutoff ? ` · order by ${cutoff} for today` : '');
+}
+
+const escape = (v) =>
+  String(v ?? '').replace(/[&<>"']/g, (c) =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]
+  );
+
+/**
+ * The photograph beside the headline.
+ *
+ * Hidden in the markup and shown only once a merchant has actually supplied
+ * one. A shop with no photograph gets the masthead it had before — words on
+ * the wall — rather than an empty frame with a caption under it, which is
+ * what a hardcoded figure would have given them.
+ */
+function paintShopfront(shot) {
+  const el = $('[data-shopfront]');
+  if (!el || !shot?.image) return;
+
+  el.innerHTML = `
+    <img src="${escape(imgSrc(shot.image, 800))}"
+         srcset="${escape(imgSrc(shot.image, 800))} 800w, ${escape(imgSrc(shot.image, 1600))} 1600w"
+         sizes="(min-width: 60rem) 38vw, 92vw"
+         alt="${escape(shot.alt)}"
+         width="800" height="1200" fetchpriority="high" decoding="async">
+    ${shot.caption ? `<figcaption class="pinned__cap">${escape(shot.caption)}</figcaption>` : ''}`;
+  el.hidden = false;
+}
+
+/**
+ * The morning, in three photographs.
+ *
+ * An ordered list, because the whole point is that these happen in sequence
+ * and before the shop opens — a reader who gets this page as a list of
+ * headings should still get them in order and should still know it is an
+ * order. The times are the list markers, so they are set as real content
+ * rather than as generated counters.
+ */
+function paintMorning(steps) {
+  const el = $('[data-morning]');
+  if (!el) return;
+  if (!Array.isArray(steps) || !steps.length) {
+    el.closest('section')?.remove();
+    return;
+  }
+
+  el.innerHTML = steps
+    .map(
+      (s) => `
+      <li class="morning__step">
+        <figure class="pinned">
+          <img src="${escape(imgSrc(s.image, 800))}"
+               srcset="${escape(imgSrc(s.image, 320))} 240w, ${escape(imgSrc(s.image, 800))} 800w"
+               sizes="(min-width: 52rem) 30vw, 88vw"
+               alt="${escape(s.alt)}"
+               width="800" height="600" loading="lazy" decoding="async">
+          <figcaption class="pinned__cap">
+            <span class="morning__at">${escape(s.at)}</span>
+            <span>${escape(s.what)}</span>
+          </figcaption>
+        </figure>
+      </li>`
+    )
+    .join('');
+
+  /* The last time in the list is the moment the doors open, so the section's
+     own note is read off the data rather than written twice. */
+  const foot = $('[data-morning-foot]');
+  if (foot) foot.textContent = `Open from ${steps[steps.length - 1].at}`;
 }
 
 function paintCapabilities() {

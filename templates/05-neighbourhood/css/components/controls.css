@@ -176,7 +176,7 @@
 }
 
 .qty button:hover:not([disabled]) {
-  background: var(--paper-2);
+  background: var(--surface-2);
 }
 
 .qty button[disabled] {
@@ -332,7 +332,7 @@
 }
 
 .opt:hover {
-  background: var(--paper-2);
+  background: var(--surface-2);
 }
 
 .opt input {
@@ -381,7 +381,7 @@
 .opt:has(input:disabled) {
   opacity: 0.5;
   cursor: not-allowed;
-  background: var(--paper-2);
+  background: var(--surface-2);
 }
 
 .opt__body {

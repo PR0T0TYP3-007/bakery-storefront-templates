@@ -10,7 +10,7 @@
   padding: 0;
   border: 1px solid var(--ink);
   border-radius: var(--r);
-  background: var(--paper);
+  background: var(--surface);
   color: var(--ink);
   box-shadow: var(--lift);
 }
@@ -168,7 +168,7 @@
 
 .dp__nav button:hover:not([disabled]) {
   border-color: var(--ink);
-  background: var(--paper-2);
+  background: var(--surface-2);
 }
 
 .dp__nav button[disabled] {
@@ -336,7 +336,7 @@
 .slot:has(input:disabled) {
   opacity: 0.5;
   cursor: not-allowed;
-  background: var(--paper-2);
+  background: var(--surface-2);
 }
 
 .slot__time {

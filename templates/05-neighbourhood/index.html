@@ -45,17 +45,57 @@
 <main id="main">
 
   <!-- ====================================================================
-       Masthead — deliberately short. The board is the hero, not a photograph.
+       Masthead
+
+       Still short, and the board is still the hero — but no longer type
+       alone on a painted wall. One photograph of the actual counter, pinned
+       up beside the words the way a shop pins a photograph in its window.
+
+       It is a square-cornered sheet with a rule under it, because the rule
+       is this template's way of separating one thing from another. Rounded
+       apertures belong to Template 03 and overlap to Template 04; borrowing
+       either here is the exact failure D8 exists to catch.
        ==================================================================== -->
   <section class="wrap section--tight">
-    <p class="label" data-kicker>Bellevue Road, London · Since 2014</p>
-    <h1 class="t-hero" style="margin-top:var(--s-2);max-width:14ch" data-headline>
-      Your bread's out by half seven.
-    </h1>
-    <p class="lede" style="margin-top:var(--s-3)" data-lede>
-      Order by 11 and it's yours today. The board below shows what's baking — and if
-      you're collecting today, how much is left.
-    </p>
+    <div class="masthead">
+      <div class="masthead__words">
+        <p class="label" data-kicker>Bellevue Road, London · Since 2014</p>
+        <h1 class="t-hero" style="margin-top:var(--s-2);max-width:14ch" data-headline>
+          Your bread's out by half seven.
+        </h1>
+        <p class="lede" style="margin-top:var(--s-3)" data-lede>
+          Order by 11 and it's yours today. The board below shows what's baking — and if
+          you're collecting today, how much is left.
+        </p>
+        <!-- The one thing anybody actually walks up to a bakery wanting to
+             know. Read off the merchant's own hours, so it is never a
+             sentence that disagrees with the footer. -->
+        <p class="masthead__hours" data-open-today></p>
+      </div>
+      <figure class="pinned masthead__shot" data-shopfront hidden></figure>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       The morning
+
+       Three photographs with times under them. Not a gallery: this template's
+       single idea is *today* — order by eleven, out by half seven, what is on
+       the board is what there is — and these are the hours that happen before
+       anybody can read the board. The warmth comes from the shop being shown
+       at work, which is the only kind a bakery has.
+
+       Times, words and pictures all come from merchant config, because a
+       second shop bakes to a different clock.
+       ==================================================================== -->
+  <section class="wrap section--tight" aria-labelledby="morning-h">
+    <div class="sechead">
+      <div class="sechead__title">
+        <h2 class="t-2" id="morning-h">Before the doors</h2>
+      </div>
+      <p class="label" data-morning-foot></p>
+    </div>
+    <ol class="morning" data-morning></ol>
   </section>
 
   <!-- ====================================================================

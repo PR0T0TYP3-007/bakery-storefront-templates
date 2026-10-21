@@ -93,7 +93,11 @@
   "maxDaysAhead": 30,
   "dailyCapacity": 25,
   "delivery": null,
-  "availability": { "lastFewAt": 0.10, "lastFewMin": 1, "goingFastAt": 0.28 },
+  "availability": {
+    "lastFewAt": 0.1,
+    "lastFewMin": 1,
+    "goingFastAt": 0.28
+  },
   "allergens": [
     "gluten",
     "dairy",
@@ -104,6 +108,31 @@
   "voice": {
     "kicker": "Two corners of Portland · Since 2019",
     "headline": "Cupcakes, by the box.",
-    "lede": "Order by 10 and it's yours today, from Division or Alberta. The board shows what's on the shelf right now."
+    "lede": "Order by 10 and it's yours today, from Division or Alberta. The board shows what's on the shelf right now.",
+    "shopfront": {
+      "image": "photo-1771498637378-c5ff74b70b52",
+      "alt": "The Division Street case, each door lettered by hand",
+      "caption": "Division Street, a little after seven."
+    },
+    "morning": [
+      {
+        "at": "03:00",
+        "what": "Batter, two hundred at a time, while it is still dark out.",
+        "image": "photo-1513844316321-dd2466411c4c",
+        "alt": "Hands working dough along a floured bench"
+      },
+      {
+        "at": "05:30",
+        "what": "Out of the tins and onto racks to cool. Frosting waits for cool.",
+        "image": "photo-1547197309-082bdc50ce8b",
+        "alt": "Hands setting trays down in the bakery kitchen"
+      },
+      {
+        "at": "07:00",
+        "what": "Both shops open. What is on the shelf is what we made this morning.",
+        "image": "photo-1738898326912-83ec04de4ccf",
+        "alt": "The counter, boxes stacked and the bench visible behind it"
+      }
+    ]
   }
 }

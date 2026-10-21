@@ -546,3 +546,54 @@ and move the row; and `rules.js` stopped falling an impossible option back onto 
 that was itself impossible — Ombré defaults to sugar roses, which need one of the larger
 sizes, so shrinking the cake left the finish on the option the kitchen had just refused.
 Both have tests.
+
+---
+
+### D20 — The ground was never fixed, and fixing it is a re-skin, not a repaint
+
+**Decision.** Template 05's ground moves from `#faf9f6` to sage `#9ab894`, and with it the
+template gains a structural distinction it did not have: a **wall** and the **paper pinned to
+it**. The board, the header, the dialog and the ticket are sheets of paper. The page behind
+them is painted.
+
+**Why it had to move.** D8 was written because of a complaint about Template 05 — "looks good
+in style but it seems similar to the spirit of the first one" — and D11 answered it by
+rewriting the voice. The colour was never touched. Measured, Template 05's ground sat **25
+channels** from Template 01's cream while every other pair in the set cleared 192. The one
+template the rule existed for was the one still failing it.
+
+```
+         01 cream  02 sun  03 plum  04 near-black
+05 sage      234     204      206            442      (was 25 / 178 / 192 / 418)
+```
+
+**Why a wall-and-paper split rather than just a darker page.** A mid-tone ground takes two
+things away. The tertiary ink and all three sign colours measure between 2.47 and 3.68 on
+sage, so a board drawn straight onto it could not price a loaf in the shop's own green. The
+first instinct was to ration the colours and write the restriction down as a rule. That was
+wrong twice over: the restriction was enforced by nothing — the home page broke it in twelve
+places — and it would have made the board the one surface forbidden to use the brand.
+
+Putting the content on paper gives every ink and every sign colour an AA surface to live on,
+turns the wall into the thing the paper is pinned to, and makes the template's own
+description of itself literally true for the first time. The constraint produced the
+structure; it was not something to work around.
+
+**One claim in this repository was wrong and is withdrawn.** `tokens.css` asserted that three
+levels of ink cannot fit on a mid-tone ground. They fit. What did not fit was a tertiary ink
+spaced against a near-white page and carried over unchanged; re-spaced to `#394433` it clears
+AA on all five surfaces. **A palette inherited from a different ground is not evidence about
+the ground.**
+
+**What measuring found that reading would not.** Nine of the ten pages were clean; the
+failures were all in places where a colour met a surface nobody had thought about together —
+a translucent *white* chip lightening the green bar until white text on it read 4.11, labels
+dimmed to 72% on that same bar at 3.58, and a style guide demonstrating status chips on the
+wall, so the page documenting the contrast rules was the only page breaking them. None of
+these is visible in a diff. All of them are visible to a script that composites the actual
+layers and checks every text node on every page in both brands.
+
+**The companion rule.** The style guide now computes its contrast table in the browser from
+the tokens as they are set, so the table cannot drift away from the CSS — and demos sit on
+paper, because that is where the components they demonstrate actually sit.
+

@@ -6,7 +6,7 @@
  */
 
 import { icons, wheatMark } from './icons.js';
-import { duration, dayWord, date as fmtDate, dayWordMid } from '../../../../shared/core/format.js';
+import { duration, dayWord, date as fmtDate, dayWordMid, weekdayName } from '../../../../shared/core/format.js';
 import { msUntilHour, today, sameDay } from '../../../../shared/core/dates.js';
 import { earliestFor } from '../../../../shared/core/fulfilment.js';
 import * as session from '../services/session.js';
@@ -165,7 +165,7 @@ export function renderFooter() {
   const { merchant, catalogue } = session.state;
   const q = qsFirst();
   const loc = merchant.locations[0];
-  const todayName = new Intl.DateTimeFormat('en-GB', { weekday: 'long' }).format(new Date());
+  const todayName = weekdayName(new Date());
 
   mount.innerHTML = `
     <footer class="foot">

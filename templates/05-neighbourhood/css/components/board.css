@@ -6,8 +6,22 @@
    catalogue of three items or three hundred.
    ========================================================================== */
 
+/* The board is a sheet of paper pinned to the wall, and that is not a
+   metaphor for the sake of a comment — it is load-bearing. On the sage
+   ground the tertiary ink measures 3.39 and the green 2.47, so a list drawn
+   straight onto the wall could use neither, and a list of baked goods that
+   cannot say "from £18" in the shop's own green is not a board.
+
+   Put the list on paper and both are legal again (7.05 and 5.14). The wall
+   stops being a background colour and becomes the thing the paper is pinned
+   to, which is the whole idea of the template and was, until now, only
+   written down. */
 .board {
+  background: var(--surface);
+  border: 1px solid var(--rule);
   border-top: 2px solid var(--ink);
+  border-radius: 0 0 var(--r) var(--r);
+  padding-inline: var(--s-3);
 }
 
 .board__head {
@@ -51,7 +65,7 @@
 }
 
 .row:hover {
-  background: var(--paper-2);
+  background: var(--surface-2);
 }
 
 @media (min-width: 48rem) {
@@ -69,7 +83,7 @@
   height: var(--thumb);
   border-radius: var(--r);
   overflow: hidden;
-  background: var(--paper-3);
+  background: var(--surface-3);
 }
 
 .row__thumb img {
@@ -85,7 +99,7 @@
   height: 100%;
   display: grid;
   place-items: center;
-  background: var(--paper-3);
+  background: var(--surface-3);
   color: var(--ink-3);
   font-family: var(--font-display);
   font-variation-settings: var(--display-settings);
@@ -102,10 +116,20 @@
   min-width: 0;
 }
 
+/* Lettered, not typeset.
+   The board was set end to end in the UI face, and a board set in the UI
+   face is a spreadsheet of bread. A shop board is hand-lettered — that is
+   what makes it a board — so the two things a board actually says, the name
+   and the price, are in the signage face, and everything that is small
+   print stays in the reading face. The tiles already did this; the board,
+   which is the template's hero, was the one place that did not. */
 .row__name {
   min-width: 0;
+  font-family: var(--font-display);
+  font-variation-settings: var(--display-settings);
   font-weight: 600;
-  font-size: var(--t-body);
+  font-size: 1.0625rem;
+  letter-spacing: -0.005em;
   line-height: 1.25;
 }
 
@@ -148,7 +172,13 @@
 
 .row__price {
   grid-area: price;
+  font-family: var(--font-display);
+  font-variation-settings: var(--display-settings);
   font-weight: 700;
+  font-size: 1.0625rem;
+  /* Tabular, because a column of prices that does not line up on the decimal
+     is the one thing a real board never gets wrong. */
+  font-variant-numeric: tabular-nums;
   white-space: nowrap;
   justify-self: end;
 }
@@ -161,8 +191,10 @@
 
 .row__price small {
   display: block;
+  font-family: var(--font-ui);
   font-size: var(--t-label);
   font-weight: 400;
+  letter-spacing: 0;
   color: var(--ink-3);
 }
 
@@ -268,7 +300,7 @@
   position: relative;
   aspect-ratio: 4 / 5;
   overflow: hidden;
-  background: var(--paper-3);
+  background: var(--surface-3);
 }
 
 /* Absolutely positioned on purpose.
@@ -352,7 +384,7 @@
 }
 
 .skel {
-  background: var(--paper-3);
+  background: var(--surface-3);
   border-radius: 2px;
   height: 0.85rem;
   animation: skel 1.4s var(--ease) infinite;
@@ -386,4 +418,122 @@
   .skel {
     animation: none;
   }
+}
+
+/* ==========================================================================
+   Pinned photographs
+
+   The template separates things with rules, so its photographs are mounted
+   the same way: a square-cornered sheet of paper, the picture sitting on it
+   with a hairline under, and the caption below in the signage face.
+
+   No rounded apertures (Template 03), no overlap (Template 04), no shadow.
+   What makes these read as *pinned* rather than as cards is the mount — the
+   paper is visibly bigger than the picture, the way a photograph tacked to a
+   wall has a border and a wall has a shadowless flatness.
+   ========================================================================== */
+.pinned {
+  margin: 0;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  padding: var(--s-3) var(--s-3) var(--s-4);
+}
+
+.pinned img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: var(--surface-3);
+}
+
+.pinned__cap {
+  display: block;
+  margin-top: var(--s-3);
+  padding-top: var(--s-3);
+  border-top: 1px solid var(--rule);
+  font-size: var(--t-sm);
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+
+/* --------------------------------------------------------------------------
+   The morning
+   -------------------------------------------------------------------------- */
+.morning {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s-4);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+}
+
+.morning__step {
+  display: flex;
+}
+
+/* On a phone the three pinned sheets stack, and three stacked photographs
+   are 1122px — they put the board 2.5 screens down, on a page whose whole
+   claim is that the board is the hero. So below the split the strip becomes
+   one screen that swipes.
+
+   Scroll-snap rather than a carousel: no script, no buttons to mis-label,
+   no state to get wrong, and it still works as a plain scrolling list for
+   anyone whose browser ignores the snapping. The gutter is negated and
+   re-added as padding so the first sheet lines up with the heading above it
+   and the last one can still scroll clear of the edge. */
+@media (max-width: 52rem) {
+  .morning {
+    grid-auto-flow: column;
+    grid-auto-columns: 78%;
+    grid-template-columns: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    overscroll-behavior-x: contain;
+    margin-inline: calc(var(--gutter) * -1);
+    padding-inline: var(--gutter);
+    padding-bottom: var(--s-2);
+    scrollbar-width: thin;
+  }
+
+  .morning__step {
+    scroll-snap-align: start;
+  }
+
+  /* Landscape on the phone. A 4:3 sheet at 78% of 375px is still 220px of
+     picture, which is enough to read and short enough that the caption and
+     the next card's edge are both visible — that edge is the only thing
+     telling anybody there is more to the right. */
+  .morning__step .pinned img {
+    aspect-ratio: 16 / 10;
+  }
+}
+.morning__step .pinned {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 4:3 for the first two and the same for the third keeps the three caption
+   rules on one line across the row, which is the only reason the strip reads
+   as one object rather than three pictures that happen to be adjacent. */
+.morning__step .pinned img {
+  aspect-ratio: 4 / 3;
+}
+
+/* The time is the list marker, and it is the one place the signage face gets
+   to behave like signage: set large, in the shop's own green, on paper where
+   the green is legal (5.14) rather than on the wall where it is not. */
+.morning__at {
+  display: block;
+  font-family: var(--font-display);
+  font-variation-settings: var(--display-settings);
+  font-weight: 700;
+  font-size: var(--t-2);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--green);
+  margin-bottom: var(--s-2);
+  font-variant-numeric: tabular-nums;
 }
