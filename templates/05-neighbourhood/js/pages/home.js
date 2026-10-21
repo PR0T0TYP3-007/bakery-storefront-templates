@@ -1,32 +1,26 @@
 /**
- * @file Home — the Counter.
+ * @file Home.
+ *
+ * The shopfront, not the shop. The board and the ticket moved to Our shop:
+ * this page's job is to say what the place is and what it makes, and a
+ * basket that follows you down a home page is a shop page wearing a
+ * photograph. What is left is the claim, the morning, the cakes, and how it
+ * works.
  */
 
 import * as session from '../services/session.js';
 import { renderHeader, renderFooter } from '../components/chrome.js';
-import {
-  renderRow,
-  renderTile,
-  boardHead,
-  skeletonRows,
-  bindAdd,
-  imgSrc,
-} from '../components/board.js';
-import { renderTicket, bindTicket, mountMobileTicket } from '../components/ticket.js';
+import { renderTile, bindAdd, imgSrc } from '../components/board.js';
+import { mountMobileTicket } from '../components/ticket.js';
 import { toast } from '../components/toast.js';
-import { dayWord, date as fmtDate, whenPhrase, dayWordMid, weekdayName } from '../../../../shared/core/format.js';
-import { today, sameDay, dateKey } from '../../../../shared/core/dates.js';
-import { shelf } from '../../../../shared/core/fulfilment.js';
+import { whenPhrase, dayWordMid, weekdayName } from '../../../../shared/core/format.js';
+import { today } from '../../../../shared/core/dates.js';
 
 const $ = (s) => document.querySelector(s);
 
-/* Skeleton first, so the row heights are reserved before data lands. */
-const boardEl = $('[data-board]');
-boardEl.innerHTML = boardHead() + skeletonRows(6);
-
 await session.boot();
 
-renderHeader('Shop');
+renderHeader(null);
 renderFooter();
 mountMobileTicket();
 
@@ -35,33 +29,6 @@ mountMobileTicket();
 // advertising Hazel & Rye's bread. Trimmed at the first sentence, because a
 // tagline may be two and a title should not be.
 document.title = `${session.state.merchant.name} — ${session.state.merchant.tagline.split('.')[0]}`;
-
-/* -------------------------------------------------------------------------
-   The board
-   ------------------------------------------------------------------------- */
-function paintBoard() {
-  const { merchant, catalogue } = session.state;
-  const when = session.state.when;
-  const isToday = sameDay(when, today());
-
-  $('[data-board-day]').textContent = `${dayWord(when)}, ${fmtDate(when, {
-    day: 'numeric',
-    month: 'long',
-  })}`;
-
-  const everyday = catalogue.products.filter((p) => p.kind === 'everyday');
-
-  boardEl.innerHTML =
-    boardHead(when) +
-    (everyday.length
-      ? everyday.map((p) => renderRow(p, { when })).join('')
-      : `<p class="board__empty">Nothing on the board for that day.</p>`);
-
-  // The note under the board has to match what the column above it means.
-  $('[data-board-foot]').textContent = isToday
-    ? "What's left is what's on the shelf right now, and it goes down through the day."
-    : "We haven't baked these yet. Everything here is made fresh that morning.";
-}
 
 /* -------------------------------------------------------------------------
    Cakes — only if this merchant makes them
@@ -147,21 +114,22 @@ const escape = (v) =>
  * The photograph beside the headline.
  *
  * Hidden in the markup and shown only once a merchant has actually supplied
- * one. A shop with no photograph gets the masthead it had before — words on
- * the wall — rather than an empty frame with a caption under it, which is
- * what a hardcoded figure would have given them.
+ * one. A shop with no photograph gets a band of flat wall colour and the
+ * words on it, which is a composition rather than a gap — the scrim is
+ * drawn over the media element, so with no media there is simply nothing to
+ * scrim and the ground shows through.
  */
 function paintShopfront(shot) {
   const el = $('[data-shopfront]');
   if (!el || !shot?.image) return;
 
   el.innerHTML = `
-    <img src="${escape(imgSrc(shot.image, 800))}"
+    <img src="${escape(imgSrc(shot.image, 1600))}"
          srcset="${escape(imgSrc(shot.image, 800))} 800w, ${escape(imgSrc(shot.image, 1600))} 1600w"
-         sizes="(min-width: 60rem) 38vw, 92vw"
+         sizes="(min-width: 60rem) 70vw, 100vw"
          alt="${escape(shot.alt)}"
-         width="800" height="1200" fetchpriority="high" decoding="async">
-    ${shot.caption ? `<figcaption class="pinned__cap">${escape(shot.caption)}</figcaption>` : ''}`;
+         width="1600" height="1200" fetchpriority="high" decoding="async">
+    ${shot.caption ? `<p class="masthead-band__cap">${escape(shot.caption)}</p>` : ''}`;
   el.hidden = false;
 }
 
@@ -229,46 +197,6 @@ function paintCapabilities() {
 }
 
 /* -------------------------------------------------------------------------
-   Your usual — read from this device, not a profile anyone else holds
-   ------------------------------------------------------------------------- */
-function paintUsual() {
-  const el = $('[data-usual]');
-  const last = session.state.store.read('lastOrder', null);
-  const lines = (last?.lines ?? [])
-    .map((l) => ({ ...l, product: session.product(l.productId) }))
-    .filter((l) => l.product);
-
-  if (!lines.length) {
-    el.hidden = true;
-    return;
-  }
-
-  el.hidden = false;
-  $('[data-usual-detail]').textContent = lines
-    .map((l) => `${l.qty > 1 ? `${l.qty} × ` : ''}${l.product.name}`)
-    .join(', ');
-
-  $('[data-usual-add]').onclick = () => {
-    let n = 0;
-    for (const l of lines) {
-      session.add({ productId: l.productId, selections: l.selections, qty: l.qty });
-      n += l.qty;
-    }
-    toast({ title: `${n} item${n === 1 ? '' : 's'} added`, detail: 'Same as last time.' });
-  };
-}
-
-/* -------------------------------------------------------------------------
-   Ticket
-   ------------------------------------------------------------------------- */
-const ticketEl = $('[data-ticket]');
-bindTicket(ticketEl);
-
-function paintTicket() {
-  renderTicket(ticketEl);
-}
-
-/* -------------------------------------------------------------------------
    Wiring
    ------------------------------------------------------------------------- */
 bindAdd(document, (product, movedTo) => {
@@ -280,15 +208,8 @@ bindAdd(document, (product, movedTo) => {
   });
 });
 
-session.on('cart:change', paintTicket);
-session.on('when:change', () => {
-  paintBoard();
-  paintCakes();
-});
+session.on('when:change', paintCakes);
 
 paintVoice();
-paintBoard();
 paintCakes();
 paintCapabilities();
-paintUsual();
-paintTicket();

@@ -22,7 +22,7 @@ import {
   INSCRIPTION_MAX,
 } from '../../../../shared/core/rules.js';
 
-await startPage({ nav: 'Shop' });
+await startPage({ nav: 'shop' });
 
 const q = qsFirst();
 $('[data-home-link]').href = `index.html${q}`;

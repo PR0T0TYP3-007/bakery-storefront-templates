@@ -55,6 +55,23 @@
 
       <aside class="counter__rail" aria-label="Your ticket">
         <div data-ticket></div>
+
+        <!-- Repeat purchase, moved here with the ticket when the home page
+             stopped being a shop. Honest framing: it is your own history,
+             kept on your device, not a profile anyone else holds. -->
+        <section class="section--tight" data-usual hidden>
+          <h2 class="label">Your usual</h2>
+          <div class="ticket" style="margin-top:var(--s-2)">
+            <div class="ticket__body">
+              <p class="sm" data-usual-detail></p>
+              <p style="margin-top:var(--s-3)">
+                <button class="btn btn--quiet btn--block" type="button" data-usual-add>
+                  Order it again
+                </button>
+              </p>
+            </div>
+          </div>
+        </section>
       </aside>
     </div>
   </section>

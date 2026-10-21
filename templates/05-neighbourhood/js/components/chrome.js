@@ -18,15 +18,27 @@ const esc = (s) =>
     ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]
   );
 
+/**
+ * The nav.
+ *
+ * Two destinations, because there are two destinations. It used to list
+ * every category beside the shop link -- Bread, Pastry, Cookies, Cakes --
+ * and each one only set a filter on the shop page, which already has those
+ * same categories as controls on the page itself. So the nav offered four
+ * ways to reach a screen that then offered the same four choices again, and
+ * the thing a nav is for -- telling you how many places there are -- was
+ * being used to tell you about one place four times.
+ *
+ * `id` rather than the label decides the current page. Matching on the
+ * visible text means renaming a link silently drops its active state, which
+ * is a quiet way to break a page's sense of where it is.
+ */
 function navItems() {
-  const { catalogue, merchant } = session.state;
   const q = qsFirst();
-  const items = [{ href: `shop.html${q}`, label: 'Shop' }];
-  for (const c of catalogue.categories) {
-    items.push({ href: `shop.html?cat=${c.id}${q ? `&merchant=${merchant.id}` : ''}`, label: c.label });
-  }
-  items.push({ href: `visit.html${q}`, label: 'Visit' });
-  return items;
+  return [
+    { id: 'shop', href: `shop.html${q}`, label: 'Our shop' },
+    { id: 'visit', href: `visit.html${q}`, label: 'Visit' },
+  ];
 }
 
 /** @param {string} [active] label of the current page */
@@ -55,7 +67,7 @@ export function renderHeader(active) {
             ${navItems()
               .map(
                 (n) =>
-                  `<a href="${n.href}"${n.label === active ? ' aria-current="page"' : ''}>${esc(n.label)}</a>`
+                  `<a href="${n.href}"${n.id === active ? ' aria-current="page"' : ''}>${esc(n.label)}</a>`
               )
               .join('')}
           </nav>
@@ -74,7 +86,12 @@ export function renderHeader(active) {
       </div>
 
       <nav class="mnav wrap" id="mnav" aria-label="Shop" hidden>
-        ${navItems().map((n) => `<a href="${n.href}">${esc(n.label)}</a>`).join('')}
+        ${navItems()
+          .map(
+            (n) =>
+              `<a href="${n.href}"${n.id === active ? ' aria-current="page"' : ''}>${esc(n.label)}</a>`
+          )
+          .join('')}
       </nav>
     </header>
 

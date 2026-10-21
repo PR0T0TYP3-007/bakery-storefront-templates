@@ -25,7 +25,7 @@ const WEEKDAY = new Intl.DateTimeFormat(undefined, { weekday: 'long' });
 const boardEl = $('[data-board]');
 boardEl.innerHTML = boardHead() + skeletonRows(8);
 
-await startPage({ nav: 'Shop' });
+await startPage({ nav: 'shop' });
 
 const params = new URLSearchParams(location.search);
 let category = params.get('cat') || 'all';
@@ -179,6 +179,41 @@ document.addEventListener('click', (e) => {
 /* -------------------------------------------------------------------------
    Ticket + wiring
    ------------------------------------------------------------------------- */
+/* -------------------------------------------------------------------------
+   Your usual — read from this device, not a profile anyone else holds
+
+   Moved from the home page along with the ticket it sits beside. It only
+   ever made sense next to a basket, and the basket is here now.
+   ------------------------------------------------------------------------- */
+function paintUsual() {
+  const el = $('[data-usual]');
+  if (!el) return;
+
+  const last = session.state.store.read('lastOrder', null);
+  const lines = (last?.lines ?? [])
+    .map((l) => ({ ...l, product: session.product(l.productId) }))
+    .filter((l) => l.product);
+
+  if (!lines.length) {
+    el.hidden = true;
+    return;
+  }
+
+  el.hidden = false;
+  $('[data-usual-detail]').textContent = lines
+    .map((l) => `${l.qty > 1 ? `${l.qty} × ` : ''}${l.product.name}`)
+    .join(', ');
+
+  $('[data-usual-add]').onclick = () => {
+    let n = 0;
+    for (const l of lines) {
+      session.add({ productId: l.productId, selections: l.selections, qty: l.qty });
+      n += l.qty;
+    }
+    toast({ title: `${n} item${n === 1 ? '' : 's'} added`, detail: 'Same as last time.' });
+  };
+}
+
 const ticketEl = $('[data-ticket]');
 bindTicket(ticketEl);
 
@@ -197,3 +232,4 @@ session.on('when:change', paintBoard);
 paintTabs();
 paintBoard();
 renderTicket(ticketEl);
+paintUsual();

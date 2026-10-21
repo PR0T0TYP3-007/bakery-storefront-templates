@@ -39,7 +39,7 @@
 </script>
 </head>
 <body>
-<a class="skip" href="#board">Skip to the board</a>
+<a class="skip" href="#main">Skip to content</a>
 <div data-header></div>
 
 <main id="main">
@@ -47,32 +47,36 @@
   <!-- ====================================================================
        Masthead
 
-       Still short, and the board is still the hero — but no longer type
-       alone on a painted wall. One photograph of the actual counter, pinned
-       up beside the words the way a shop pins a photograph in its window.
+       The photograph is the ground the words sit on, not a plate beside
+       them. It fills the band, anchored right, and the wall colour washes
+       across it from the left and fades out before the far edge — so the
+       paint appears to run over the photograph rather than stop at it.
 
-       It is a square-cornered sheet with a rule under it, because the rule
-       is this template's way of separating one thing from another. Rounded
-       apertures belong to Template 03 and overlap to Template 04; borrowing
-       either here is the exact failure D8 exists to catch.
+       Still an <img>, not a CSS background. A background image is invisible
+       to a screen reader and to anyone who turns images off, and this one is
+       the shop itself, which is content. It is positioned and scrimmed
+       instead, which looks identical and keeps its alt text.
+
+       The scrim is also what makes the text legible, so it is not decoration
+       and it is not optional — see the contrast note in layout.css.
        ==================================================================== -->
-  <section class="wrap section--tight">
-    <div class="masthead">
+  <section class="masthead-band" data-masthead-band>
+    <div class="masthead-band__media" data-shopfront hidden></div>
+    <div class="wrap masthead-band__inner">
       <div class="masthead__words">
         <p class="label" data-kicker>Bellevue Road, London · Since 2014</p>
         <h1 class="t-hero" style="margin-top:var(--s-2);max-width:14ch" data-headline>
           Your bread's out by half seven.
         </h1>
         <p class="lede" style="margin-top:var(--s-3)" data-lede>
-          Order by 11 and it's yours today. The board below shows what's baking — and if
-          you're collecting today, how much is left.
+          Order by 11 and it's yours today, and what we have is what we baked
+          this morning.
         </p>
         <!-- The one thing anybody actually walks up to a bakery wanting to
              know. Read off the merchant's own hours, so it is never a
              sentence that disagrees with the footer. -->
         <p class="masthead__hours" data-open-today></p>
       </div>
-      <figure class="pinned masthead__shot" data-shopfront hidden></figure>
     </div>
   </section>
 
@@ -98,56 +102,12 @@
     <ol class="morning" data-morning></ol>
   </section>
 
-  <!-- ====================================================================
-       The Counter: board on the left, ticket on the right
-       ==================================================================== -->
-  <section class="wrap section" id="board">
-    <div class="counter">
-
-      <div>
-        <div class="sechead">
-          <div class="sechead__title">
-            <h2 class="t-1">The board</h2>
-            <p class="label" data-board-day>—</p>
-          </div>
-          <a class="link" href="shop.html">Everything in the shop</a>
-        </div>
-
-        <div class="board" data-board>
-          <noscript>
-            <p class="note" style="margin-block:var(--s-4)">
-              The live board needs JavaScript. Our
-              <a class="link" href="visit.html">hours and address</a> are still here,
-              or give us a ring on 020 7946 0712.
-            </p>
-          </noscript>
-        </div>
-
-        <p class="sm" style="margin-top:var(--s-3)" data-board-foot></p>
-      </div>
-
-      <aside class="counter__rail" aria-label="Your ticket">
-        <div data-ticket></div>
-
-        <!-- Repeat purchase. Honest framing: it is your own history, kept on
-             your device, not a profile anyone else holds. -->
-        <section class="section--tight" data-usual hidden>
-          <h2 class="label">Your usual</h2>
-          <div class="ticket" style="margin-top:var(--s-2)">
-            <div class="ticket__body">
-              <p class="sm" data-usual-detail></p>
-              <p style="margin-top:var(--s-3)">
-                <button class="btn btn--quiet btn--block" type="button" data-usual-add>
-                  Order it again
-                </button>
-              </p>
-            </div>
-          </div>
-        </section>
-      </aside>
-
-    </div>
-  </section>
+  <!-- The board and the ticket used to sit here, between the morning and
+       the cakes. They are the shop, not the shopfront: a home page that
+       opens a basket on you is a shop page with a photograph on top. Both
+       now live on Our shop, which is the one place in the nav and the one
+       place they belong. The cakes below stay, because a cake takes notice
+       and is the thing worth showing before anybody is ready to buy. -->
 
   <!-- ====================================================================
        Cakes — the one place photography leads

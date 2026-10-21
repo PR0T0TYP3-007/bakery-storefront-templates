@@ -144,52 +144,129 @@
 }
 
 /* --------------------------------------------------------------------------
-   The masthead
+   The masthead band
 
-   Words and one photograph. Unequal on purpose: the words lead, and the
-   picture is the width of a pinned print rather than of a hero image. A
-   50/50 split would make the photograph an equal claim on the page, and the
-   board below is still the hero.
+   A photograph anchored to the right of a full-width band, with the wall
+   colour washed across it from the left and faded out before the far edge.
+   The paint reads as if it has been rolled over the picture.
 
-   Single column below 60rem, with the photograph *after* the words — on a
-   phone the headline has to be the first thing, not a picture you scroll
-   past to reach it.
+   Three things make it work rather than look like a photo with a box on it:
+
+   1. The gradient's stops are not evenly spaced. An even fade puts the
+      half-transparent point in the middle of the text, where it is most
+      visible as a gradient. Holding the colour solid for the first 30% and
+      running the fade across the back half keeps the words on flat colour
+      and puts the transition over the picture, where it belongs.
+
+   2. It never reaches fully transparent until the very edge, so the right
+      side of the photograph is still tinted and still belongs to the page
+      rather than sitting in it like a window.
+
+   3. The band has no max-width, but its contents do — `.wrap` inside it —
+      so the colour and the photograph run edge to edge while the type stays
+      on the same measure as every other section.
+
+   Contrast: the words sit over the solid end of the gradient, never over
+   the photograph, so ink on the band is ink on `--paper` and measures the
+   same as ink anywhere else. That is the reason for the solid first third,
+   and it is not a stylistic preference — text over a photograph cannot be
+   measured once and trusted, because the photograph changes per merchant.
    -------------------------------------------------------------------------- */
-.masthead {
-  display: grid;
-  gap: var(--s-5);
-  align-items: end;
+.masthead-band {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--paper);
+}
+
+.masthead-band__inner {
+  position: relative;
+  z-index: 2;
+  padding-block: var(--s-7);
+}
+
+.masthead-band__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.masthead-band__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 55%;
+}
+
+/* The wash. A pseudo-element rather than a second div: it is pure paint and
+   has nothing to say to anybody reading the page with their ears. */
+.masthead-band__media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    to right,
+    var(--paper) 0%,
+    var(--paper) 30%,
+    color-mix(in oklab, var(--paper) 72%, transparent) 55%,
+    color-mix(in oklab, var(--paper) 22%, transparent) 82%,
+    color-mix(in oklab, var(--paper) 8%, transparent) 100%
+  );
+}
+
+/* The caption rides in the bottom right, over the part of the photograph the
+   wash has mostly let go of.
+
+   It carries an opaque ink backing, and that is the whole point: the pixels
+   under it belong to whatever photograph the merchant supplied, so there is
+   no contrast figure to check. The first version used white text and a
+   text-shadow, which is a hope rather than a measurement — and the contrast
+   sweep caught it at 2.18 against the band. On its own ink the pair is
+   15.41 and cannot be changed by swapping the picture. */
+.masthead-band__cap {
+  position: absolute;
+  z-index: 2;
+  right: var(--gutter);
+  bottom: var(--s-4);
+  margin: 0;
+  max-width: 30ch;
+  padding: var(--s-2) var(--s-3);
+  background: var(--ink);
+  color: var(--surface);
+  font-size: var(--t-sm);
+  text-align: right;
 }
 
 @media (min-width: 60rem) {
-  .masthead {
-    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
-    gap: var(--s-7);
+  /* A hero earns its height from the photograph, not from the words. The
+     band was sized by its text and came out about 230px — a strip, which
+     crops the picture to a letterbox and reads as a banner rather than a
+     shopfront. A floor lets the photograph be a photograph, and the words
+     centre against it. */
+  .masthead-band { min-height: 30rem; display: grid; align-items: center; }
+  .masthead-band__inner { padding-block: var(--s-8); width: 100%; }
+  .masthead__words { max-width: 34rem; }
+}
+
+/* Below the split the photograph is behind the whole band rather than to one
+   side of it, so the wash turns vertical: solid under the words, letting go
+   towards the bottom where the picture is. A horizontal fade on a phone puts
+   the headline over the photograph, which is the one thing the desktop
+   version is arranged to avoid. */
+@media (max-width: 59.99rem) {
+  .masthead-band__media::after {
+    background: linear-gradient(
+      to bottom,
+      var(--paper) 0%,
+      var(--paper) 42%,
+      color-mix(in oklab, var(--paper) 70%, transparent) 68%,
+      color-mix(in oklab, var(--paper) 30%, transparent) 100%
+    );
   }
-}
-
-/* Bottom-aligned, not centred. Centring the words against a tall photograph
-   leaves equal slack above and below them and the pair reads as two things
-   that happen to be side by side. Sitting both on the same line — the last
-   line of the lede and the rule under the caption — is what makes it one
-   composition. */
-.masthead__words {
-  align-self: end;
-  padding-bottom: var(--s-2);
-}
-
-/* Landscape, and that is a composition decision rather than a crop
-   preference. A portrait photograph beside four lines of type makes a column
-   of words about 250px tall sit next to a picture about 630px tall, and no
-   alignment rescues that — centred it floats, bottom-aligned it leaves a
-   dead quarter-page above the kicker. At 5/4 the two columns finish within
-   about a line of each other and the masthead reads as one block.
-
-   The counter shot carries its subject across the middle of the frame, so a
-   centred crop keeps both the bench behind and the baskets in front. */
-.masthead__shot img {
-  aspect-ratio: 5 / 4;
-  object-position: 50% 55%;
+  .masthead-band__media img { object-position: 50% 70%; }
+  .masthead-band__inner { padding-bottom: 14rem; }
+  .masthead-band__cap { left: var(--gutter); right: var(--gutter); text-align: left; max-width: none; }
 }
 
 /* Today's hours. The signage face at small size with the tracking a painted
