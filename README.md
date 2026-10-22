@@ -58,7 +58,23 @@ template is missing, a preview is missing, `_page.js` did not ship, or a `packag
 or `tests` directory leaked into the public output.
 
 Preview screenshots live in `assets/previews/`. Regenerate them after a visual change —
-they are real captures, so a stale one misrepresents the template.
+they are real captures, so a stale one misrepresents the template:
+
+```bash
+node tools/previews.mjs        # dev server must be running on :4321
+```
+
+This instruction used to be the sentence above and nothing else, and it was missed across
+nine commits that redesigned three of the five templates: the listing page advertised a
+palette, a hero and a section that no longer existed. A manual step described in prose is a
+step that gets skipped, so it is a script now.
+
+Two things in it are not obvious and should not be removed. It captures twice into one
+browser profile, because the first pass fills the HTTP cache and the second has nothing left
+to wait for. And it passes `--run-all-compositor-stages-before-draw`: without it, headless
+draws the frame before compositing has finished and images inside clipped or transformed
+boxes come out blank while their neighbours render — which looked exactly like a slow
+network and was not.
 
 ### Three things a project Pages site needs
 
