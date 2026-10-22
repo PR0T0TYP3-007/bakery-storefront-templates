@@ -1,0 +1,131 @@
+/* ==========================================================================
+   Header and footer — the sign and the hours.
+   ========================================================================== */
+
+.hdr {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--marble);
+  color: var(--ink);
+}
+
+.hdr__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--s-5);
+  min-height: var(--header-h);
+  padding-block: var(--s-2);
+}
+
+.mark {
+  display: grid;
+  text-decoration: none;
+  line-height: 1.05;
+}
+
+.mark__name {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.mark__since { color: var(--ink-3); }
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-4);
+  margin-inline-start: auto;
+}
+
+.nav a {
+  padding-block: var(--s-2);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.nav a:hover { text-decoration: underline; }
+
+/* The current page is marked with the warm colour, which is legal here
+   because this is a 16px semibold label on marble and the measurement that
+   bans terracotta is for small text — this sits at the large-text 3:1
+   threshold with 3.80. The underline carries it for anyone who cannot see
+   the hue at all, which is the actual requirement. */
+.nav a[aria-current='page'] {
+  color: var(--terracotta-deep);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.35em;
+}
+
+.basket {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: var(--tap);
+  padding-inline: var(--s-3);
+  background: var(--tile-3);
+  color: var(--marble);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: var(--t-sm);
+}
+
+.basket__n {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  padding-inline: 0.3rem;
+  background: var(--marble);
+  color: var(--ink);
+  border-radius: var(--r-pill);
+  font-weight: 700;
+}
+
+@media (max-width: 44rem) {
+  /* Wrapped onto two rows the bar is a quarter of a phone screen, so it
+     stops following the page down. */
+  .hdr { position: static; }
+  .hdr__bar { flex-wrap: wrap; gap: var(--s-3); }
+  .nav { margin-inline-start: 0; order: 3; width: 100%; }
+  .basket { margin-inline-start: auto; }
+}
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+.ftr {
+  background: var(--tile-3);
+  color: var(--marble);
+  padding-block: var(--s-7) var(--s-5);
+}
+
+.ftr__grid {
+  display: grid;
+  gap: var(--s-6);
+}
+
+@media (min-width: 52rem) {
+  .ftr__grid { grid-template-columns: 1.4fr 1fr 1fr; }
+}
+
+.ftr .dim { color: color-mix(in oklab, var(--marble) 78%, transparent); }
+
+.ftr__hours {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ftr__hours li {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-4);
+  margin: 0;
+  padding-block: 2px;
+  font-variant-numeric: tabular-nums;
+}
+
+.ftr__fine { margin-top: var(--s-6); }

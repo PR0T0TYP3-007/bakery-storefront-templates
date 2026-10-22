@@ -1,0 +1,51 @@
+/* ==========================================================================
+   Buttons and links.
+
+   The primary action is the deep tile with marble on it (10.04), not
+   terracotta. Terracotta measures 4.13 for white and 4.05 for ink — both
+   under 4.5 — so it can fill a shape but cannot carry a label.
+   ========================================================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  min-height: var(--tap);
+  padding-inline: var(--s-4);
+  border: 0;
+  background: var(--tile-3);
+  color: var(--marble);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--t-sm);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.btn:hover { background: var(--tile-2); }
+
+.btn--quiet {
+  background: transparent;
+  color: var(--ink);
+  outline: 2px solid var(--ink);
+  outline-offset: -2px;
+}
+
+.btn--quiet:hover { background: var(--marble-2); }
+
+.btn--block { width: 100%; }
+
+.link {
+  color: inherit;
+  font-weight: 600;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+}
+
+.note {
+  padding: var(--s-4);
+  background: var(--marble-2);
+  color: var(--ink);
+}

@@ -1,0 +1,141 @@
+/* ==========================================================================
+   The shelf and the year.
+
+   Tiles that abut. There is no border and no gap anywhere in this file —
+   the join between two surfaces is the separation method, and adding a rule
+   would quietly turn this into Template 01.
+   ========================================================================== */
+
+.shelf__group + .shelf__group { margin-top: var(--s-6); }
+
+.shelf__label {
+  color: var(--ink-3);
+  margin-bottom: var(--s-3);
+}
+
+/* --------------------------------------------------------------------------
+   One thing on the shelf
+   -------------------------------------------------------------------------- */
+.tile-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--s-4);
+  min-height: calc(var(--tile-unit) * 2);
+  padding: var(--s-4);
+  background: var(--marble);
+  color: var(--ink);
+}
+
+/* The one the calendar has opened is the reason anybody is here today, so it
+   takes the shade. A checkerboard of alternating fills was the first try and
+   it fell apart: `auto-fill` means the column count is unknown, so an
+   nth-child rhythm lands wherever it likes. The grout does that job, and
+   this single shade says which tile matters. */
+.tile-card--occasion {
+  background: var(--marble-2);
+}
+
+/* Wide, it reads as a shelf label rather than a tall box with a hole in it:
+   the name on the left, the price out at the end. */
+@media (min-width: 44rem) {
+  .tile-card--occasion {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    /* Laid flat it does not need two tiles of height, and keeping the square
+       minimum left it floating in a half-empty box. */
+    min-height: calc(var(--tile-unit) * 1.5);
+  }
+
+  .tile-card--occasion .tile-card__price {
+    font-size: var(--t-3);
+  }
+}
+
+.tile-card__day {
+  color: var(--terracotta-deep);
+}
+
+.tile-card__name a {
+  text-decoration: none;
+}
+
+.tile-card__name a:hover { text-decoration: underline; }
+
+/* The whole tile is the hit area; the link keeps the accessible name. */
+.tile-card { position: relative; }
+.tile-card__name a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.tile-card__sub {
+  color: var(--ink-2);
+  margin-top: var(--s-1);
+}
+
+.tile-card__price {
+  font-size: 1.125rem;
+}
+
+/* --------------------------------------------------------------------------
+   What is coming
+   -------------------------------------------------------------------------- */
+.coming {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  /* Same grout as the shelf, over the darker surface. */
+  gap: var(--grout);
+  background: var(--tile-3);
+  outline: var(--grout) solid var(--tile-3);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--cell)), 1fr));
+}
+
+.coming__item {
+  margin: 0;
+  padding: var(--s-5);
+  background: var(--tile-2);
+  color: var(--marble);
+}
+
+/* The nearest one is the one that matters, so it takes the marble: in a
+   band of tile it is the only pale thing, which is as loud as this system
+   gets without drawing anything.
+
+   It was terracotta first, and the sweep caught it at 4.04 for all three of
+   its lines — the exact failure tokens.css already bans in writing. The
+   warmth survives in the day label, where terracotta-deep measures 6.14. */
+.coming__item:first-child {
+  background: var(--marble);
+  color: var(--ink);
+}
+
+.coming__day {
+  color: color-mix(in oklab, var(--marble) 80%, transparent);
+}
+
+/* The dimmed marble is for the tile surface; on marble it would vanish. */
+.coming__item:first-child .coming__day {
+  color: var(--terracotta-deep);
+}
+
+.coming__name { margin-top: var(--s-2); }
+
+.coming__when {
+  margin-top: var(--s-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.coming__note {
+  margin-top: var(--s-3);
+  max-width: 34ch;
+}
+
+.coming__item:first-child .coming__note,
+.coming__item:first-child .coming__when {
+  color: var(--ink-2);
+}

@@ -1,0 +1,207 @@
+/* ==========================================================================
+   FORN DE LA PLAÇA — layout.css
+
+   THE SEPARATION METHOD: tiled modules on a painted panel.
+
+   Hydraulic floor tiles — rajoles hidràuliques — are in every old shop and
+   flat in Barcelona. They are square, they repeat, and crucially they butt
+   against one another with no gutter: the join between two tiles is the only
+   division there is. No frame, no shadow, no card — just the hairline of
+   grout where two tiles meet, which is a join rather than a drawn edge.
+
+   So content here sits in square and half-square cells that touch. Where one
+   thing ends and the next begins is told by the change of surface and that
+   hairline, never by a rule around a thing or by a mount under it.
+
+   This is the axis D23 requires to be unique, and it is:
+     01 hairline rules and cards     02 drawn outlines and offset shadow
+     03 masked apertures             04 overlap, bleed, visible grid
+     05 ruled rows on pinned paper   06 tiled modules that abut
+   ========================================================================== */
+
+.wrap {
+  width: min(100% - (var(--gutter) * 2), var(--page));
+  margin-inline: auto;
+}
+
+/* Prose runs narrower than the tile grid, so the page changes shape as you
+   move down it. */
+.wrap-read {
+  width: min(100% - (var(--gutter) * 2), 62rem);
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: var(--s-7);
+}
+
+.section--tight {
+  padding-block: var(--s-5);
+}
+
+/* --------------------------------------------------------------------------
+   The tile grid
+
+   `--tile-unit` is the module. Everything is one of these or a clean
+   multiple, which is what makes it read as tiling rather than as an
+   arbitrary grid. `gap: 0` is not an oversight — it is the whole idea.
+   -------------------------------------------------------------------------- */
+.tiles {
+  display: grid;
+  /* `--cell`, not `--tile-unit`: the module is a floor tile and a floor tile
+     is narrower than a word. `min(100%, …)` keeps the track from overflowing
+     a narrow screen, which `minmax` on its own will happily do. */
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--cell)), 1fr));
+  /* `--grout`, not a border: the gap lets the surface the tiles are laid on
+     show through, so a line never doubles between neighbours and never
+     appears around the outside of the block. */
+  gap: var(--grout);
+  background: var(--marble-3);
+  outline: var(--grout) solid var(--marble-3);
+}
+
+/* `auto-fit` rather than `auto-fill`, for a group that usually holds one or
+   two things: auto-fill keeps the empty tracks, which left a single tile
+   sitting in two thirds of a row with a hole beside it. */
+.tiles--fit {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--cell)), 1fr));
+}
+
+/* The named sizes a cell can be. A tile is square; a cell that holds words
+   is two or four tiles wide and keeps the same height, so the grid stays on
+   its module even when the content does not. */
+.tiles > * { grid-column: span 1; }
+.t-2x { grid-column: span 2; }
+.t-3x { grid-column: span 3; }
+.t-4x { grid-column: span 4; }
+.t-6x { grid-column: span 6; }
+
+@media (max-width: 44rem) {
+  /* Below this a six-tile cell is wider than the screen, so everything
+     collapses to full width rather than scrolling sideways. */
+  .t-2x, .t-3x, .t-4x, .t-6x { grid-column: 1 / -1; }
+}
+
+/* --------------------------------------------------------------------------
+   Panels
+
+   A panel is a region of surface. Two panels of different surface touching
+   is the division; that is why none of them has a border.
+   -------------------------------------------------------------------------- */
+.panel {
+  padding: var(--s-5);
+}
+
+.panel--marble {
+  background: var(--marble);
+  color: var(--ink);
+}
+
+.panel--marble-2 { background: var(--marble-2); color: var(--ink); }
+.panel--tile-2 { background: var(--tile-2); color: var(--marble); }
+.panel--tile-3 { background: var(--tile-3); color: var(--marble); }
+
+/* Terracotta is a fill and nothing on it may be small text — measured at
+   4.13 for white and 4.05 for ink, both under 4.5. A panel in terracotta
+   therefore carries display type only, and the class name says so rather
+   than leaving the next person to find out. */
+.panel--terracotta-display-only {
+  background: var(--terracotta);
+  color: var(--ink);
+}
+
+/* --------------------------------------------------------------------------
+   The tile pattern
+
+   Hydraulic tiles repeat in fours and the pattern is geometric. This is
+   drawn in CSS rather than loaded as an image: it is one gradient stack, it
+   scales to any width, and it costs no request.
+
+   Decorative and aria-hidden. It is paint, which is also why it is the one
+   place --ochre is allowed — ochre fails as text on both surfaces (2.70 and
+   2.42) and is fine as a painted quarter of a tile.
+   -------------------------------------------------------------------------- */
+.pattern {
+  height: var(--tile-unit);
+  background-color: var(--tile-2);
+  background-image:
+    conic-gradient(from 90deg at 50% 50%,
+      var(--terracotta) 0deg 90deg,
+      transparent 90deg 180deg,
+      var(--ochre) 180deg 270deg,
+      transparent 270deg 360deg),
+    conic-gradient(from 0deg at 0% 0%,
+      var(--marble-3) 0deg 90deg,
+      transparent 90deg 360deg);
+  background-size: var(--tile-unit) var(--tile-unit);
+  background-position: 0 0;
+  opacity: 0.9;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Nothing moves. The pattern is a floor, and floors do not animate. */
+}
+
+/* --------------------------------------------------------------------------
+   The band — a full-width stripe of one surface
+   -------------------------------------------------------------------------- */
+.band {
+  padding-inline: var(--gutter);
+}
+
+.band--marble { background: var(--marble); color: var(--ink); }
+/* Tiles are laid on this one, so it is a shade down from the tiles. */
+.band--marble-2 { background: var(--marble-2); color: var(--ink); }
+.band--tile-3 { background: var(--tile-3); color: var(--marble); }
+
+/* --------------------------------------------------------------------------
+   Section heads
+
+   A painted sign: the small word above, the name below it. No rule under
+   it — a rule is Template 01's and Template 05's division, not this one.
+   The head sits on its own surface and the surface is the separation.
+   -------------------------------------------------------------------------- */
+.sechead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-2) var(--s-5);
+  margin-bottom: var(--s-5);
+}
+
+.sechead__title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s-3);
+}
+
+/* --------------------------------------------------------------------------
+   Helpers
+   -------------------------------------------------------------------------- */
+.stack > * + * { margin-top: var(--s-4); }
+.stack-2 > * + * { margin-top: var(--s-2); }
+.stack-3 > * + * { margin-top: var(--s-3); }
+.stack-5 > * + * { margin-top: var(--s-5); }
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+.row--between { justify-content: space-between; }
+.push { margin-inline-start: auto; }
+
+.split {
+  display: grid;
+  gap: var(--s-5);
+  align-items: start;
+}
+
+@media (min-width: 56rem) {
+  .split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s-7); }
+  .split--wide-left { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
+}

@@ -72,8 +72,18 @@ Each of these cost real time or shipped a defect. Do not re-learn them.
 
 **Verification routine that actually catches things**, run before any push:
 1. All suites pass, `node build.mjs` succeeds.
-2. Contrast sweep over every page × every merchant, compositing translucent layers (the
-   script is in session history; it walks text nodes and composites ancestor backgrounds).
+2. Contrast sweep over every page × every merchant: `tools/contrast-sweep.js`. It used to
+   live in session history, which meant it was rewritten each time and got rewritten wrong
+   at least once. Run it in the page:
+
+   ```js
+   fetch('/tools/contrast-sweep.js').then(r => r.text()).then(eval);
+   __contrastSweep();   // [] is the pass
+   ```
+
+   It composites every translucent ancestor background, and it parses `oklab()` — Chrome
+   serialises `color-mix(in oklab, …)` that way, and a naive number-grab reads it as black
+   and invents failures.
 3. Phone width (375) and desktop (1320) — overflow and sideways scroll.
 4. `dist/` opened in a browser.
 5. Previews regenerated.
@@ -322,16 +332,43 @@ Done:
   and config integrity (every year entry points at a product that exists — the failure mode
   is an empty shelf on one day a year that nobody notices until Sant Joan).
 
-Next, in order:
-1. `css/base.css` and `css/layout.css` — the tile separation system. Square modules that
-   butt with no gutter over a painted panel; the join is the division. No radius, no shadow.
-2. `js/services/api.js` — copy 05's and point it at the new data files and merchant id.
-3. `index.html` + `js/pages/home.js` — hero, then **what is on the bench now** and
-   **what is coming**, driven by `year.js`.
-4. The rest of the nine pages, then the style guide.
+**22 Oct, second stretch — the home page is up and verified.**
 
-Not started: photography (the template needs its own set — see §5 item 1), the tile pattern
-unit, the Catalan/Spanish/English glossing mechanism.
+- `css/base.css`, `css/layout.css` and the three component files
+  (`chrome.css`, `calendar.css`, `controls.css`).
+- `js/services/api.js`, `index.html`, `js/pages/home.js`,
+  `js/components/chrome.js`, `js/components/calendar.js`.
+- `tools/contrast-sweep.js` — a reusable in-page sweep (see §3). The project had been doing
+  this by hand; it now lives in the repo.
+
+Four things the build got wrong and what they cost, because each is the kind of mistake that
+would otherwise be made again:
+
+| Wrong | Why it happened | Now |
+|---|---|---|
+| `.tiles` sized its columns on `--tile-unit` | The tile module is 3.5–5.5rem, which is a floor tile and narrower than a word. Every product name broke one letter per line. | `--cell` (four tiles) is the content module; `--tile-unit` stays the paint module. |
+| A checkerboard of alternating fills, via `nth-child(4n+2)` | `auto-fill` means the column count is unknown at authoring time, so the rhythm landed diagonally. | One surface; the **grout** (`--grout`, 2px of the panel showing through `gap`) is the whole separation method. |
+| The nearest "què ve" item filled with terracotta | It is the warm colour and it looked right. It measured **4.04** for all three of its lines — the exact failure `tokens.css` bans in writing, written by the same person who wrote the ban. | Marble: in a band of tile it is the only pale thing, which is as loud as this system needs. Terracotta survives in the day label at 6.14. |
+| The shop note said "two rooms and four marble tables" | Invented from an address. D13. | `voice.shop` in the merchant config; the template names nothing. |
+
+Also fixed on the way: the footer was listing **Monday, Tuesday** on a Catalan page, because
+`hours[].day` is an English key in the shared schema. `chrome.js` now treats the English name
+as an index into the week and lets `Intl` say it in the merchant's locale — the data stays
+English so the shared code keeps working.
+
+Verified: contrast sweep clean at 1320 and 375, no sideways scroll at either, all 230 tests
+pass, `node build.mjs` picks 06 up (44 pages).
+
+Next, in order:
+1. The remaining eight pages: `botiga`, `producte` (where `seasonLine()` earns the template),
+   `calendari`, `cistella`, `pagament`, `confirmacio`, `visita`, `404`.
+2. The style guide.
+3. Photography (the template needs its own set — see §5 item 1).
+
+Not started: the Catalan/Spanish/English glossing mechanism. Still unverified: the fonts
+against Catalan glyphs — ç, à, è, í, ï, ú and the interpunct ·. The home page renders
+"Plaça", "Massapà" and "què" correctly, so Zilla Slab and Source Sans 3 look sound, but the
+interpunct has not been seen yet.
 
 ## 7. Session conventions
 

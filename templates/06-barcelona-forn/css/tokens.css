@@ -154,6 +154,16 @@
      a clean multiple, which is what makes it read as tiling rather than as
      an arbitrary grid. */
   --tile-unit: clamp(3.5rem, 7vw, 5.5rem);
+
+  /* A content cell is four tiles. The module is the right size for a painted
+     floor and far too small for a word, so anything carrying text sits on a
+     multiple of it rather than on the unit itself. */
+  --cell: calc(var(--tile-unit) * 4);
+
+  /* The grout. Two pixels, which is what a real hydraulic floor leaves: not
+     a border drawn around a thing, but the surface underneath showing where
+     two tiles meet. The separation method is this line and nothing else. */
+  --grout: 2px;
   --tap: 2.75rem;        /* 44px minimum target */
 
   /* ------------------------------------------------------------------------

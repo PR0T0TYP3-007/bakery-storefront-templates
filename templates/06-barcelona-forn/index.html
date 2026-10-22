@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forn de la Plaça — pa i pastisseria al Poble-sec</title>
+<meta name="description" content="Forn de barri al carrer de Blai, Poble-sec, des de 1954. El calendari mana: tortell pels Reis, bunyols per Quaresma, coca per Sant Joan.">
+<meta property="og:title" content="Forn de la Plaça — pa i pastisseria al Poble-sec">
+<meta property="og:description" content="El calendari mana. Hi ha coses que només es fan quan toca.">
+
+<link rel="preload" href="assets/fonts/zillaslab.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/sourcesans.woff2" as="font" type="font/woff2" crossorigin>
+
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/calendar.css">
+<link rel="stylesheet" href="css/components/controls.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Bakery",
+  "name": "Forn de la Plaça",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Carrer de Blai 44",
+    "addressLocality": "Barcelona",
+    "postalCode": "08004",
+    "addressCountry": "ES"
+  },
+  "servesCuisine": "Bakery",
+  "priceRange": "€"
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#ara">Vés al taulell</a>
+<div data-header></div>
+
+<main id="main">
+
+  <!-- ====================================================================
+       The claim.
+
+       Short, because the page's real content is the shelf and the shelf is
+       immediately below it. "El calendari mana" — the calendar decides — is
+       the whole template in three words, and the sentence under it says the
+       consequence rather than explaining the charm.
+       ==================================================================== -->
+  <section class="wrap section">
+    <p class="label dim" data-kicker>Carrer de Blai, Poble-sec · Des de 1954</p>
+    <h1 class="t-hero" style="margin-top:var(--s-3);max-width:12ch" data-headline>El calendari mana.</h1>
+    <p class="lede" style="margin-top:var(--s-4)" data-lede></p>
+  </section>
+
+  <!-- A band of floor. Decorative, and the one place ochre is allowed. -->
+  <div class="pattern" aria-hidden="true"></div>
+
+  <!-- ====================================================================
+       Ara al taulell — what is on the bench today.
+
+       This is the shop. Everything the calendar has opened plus everything
+       made every morning, on marble because marble is the surface that
+       carries text here.
+       ==================================================================== -->
+  <section class="band band--marble-2 section" id="ara">
+    <div class="wrap">
+      <div class="sechead">
+        <div class="sechead__title">
+          <h2 class="t-1">Ara al taulell</h2>
+          <p class="label dim" data-today>—</p>
+        </div>
+        <a class="link" href="botiga.html">Tot el que fem</a>
+      </div>
+
+      <div class="shelf" data-now>
+        <noscript>
+          <p class="note">
+            El taulell d'avui necessita JavaScript. Les nostres
+            <a href="visita.html">hores i adreça</a> hi són igualment,
+            o truqueu-nos al 93 441 00 00.
+          </p>
+        </noscript>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       Què ve — what is coming, with the days until it.
+
+       The counterpart to the shelf, and the reason the template exists: a
+       Catalan forn is as much a schedule as a shop. Ordering a tortell in
+       March gets you the date it comes back rather than a "sold out".
+       ==================================================================== -->
+  <section class="wrap section" id="ve">
+    <div class="sechead">
+      <div class="sechead__title">
+        <h2 class="t-1">Què ve</h2>
+      </div>
+      <a class="link" href="calendari.html">L'any sencer</a>
+    </div>
+    <ol class="coming" data-coming></ol>
+  </section>
+
+  <!-- ====================================================================
+       The shop, briefly. Two rooms, one oven, four marble tables.
+       ==================================================================== -->
+  <section class="band band--tile-3 section">
+    <div class="wrap split split--wide-left">
+      <div>
+        <p class="label dim">El forn</p>
+        <p class="t-2" style="margin-top:var(--s-3)" data-shop-head></p>
+      </div>
+      <div class="prose" data-shop-body></div>
+    </div>
+  </section>
+
+</main>
+
+<footer data-footer></footer>
+
+<script type="module" src="js/pages/home.js"></script>
+</body>
+</html>

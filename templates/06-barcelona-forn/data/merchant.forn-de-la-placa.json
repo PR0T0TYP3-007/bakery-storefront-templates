@@ -95,6 +95,13 @@
       "image": null,
       "alt": "El taulell de marbre del forn, amb les rajoles hidràuliques del terra",
       "caption": "El taulell, a mig matí."
+    },
+    "shop": {
+      "head": "Al carrer de Blai, davant del mercat.",
+      "body": [
+        "Obrim a dos quarts de vuit. El pa surt en dues fornades, la primera a les vuit i la segona cap a la una, i la pastisseria es fa de matinada.",
+        "El que és de temporada hi és mentre dura. No en guardem per després: quan s'acaba, s'acaba, i torna l'any que ve quan toca."
+      ]
     }
   },
   "year": [
