@@ -529,10 +529,30 @@ whose entire subject is dates had a false count in the paragraph explaining how 
 days' names listed by `Intl.ListFormat`, so they cannot drift from the config. Small numbers
 are spelled out, because a sentence that opens with a digit reads like a spreadsheet.
 
+**23 Oct — `visit.html` and `404.html`. Template 06 now has every page but the style guide.**
+
+**Visit** opens with the room rather than the address, same hero construction as the home page
+because it is the same idea and a second way of doing it would just be a second way. Today's
+row in the hours table is marked by surface **and** by the word "today", since a row that only
+differs in colour is not marked for everyone. When the shop is shut it says when it opens
+again, rather than leaving the table to be read backwards. The map link is a search for the
+address, not a pin — coordinates would have been invented.
+
+All of it comes from a new `visit` block in the merchant config, so a second forn on a
+different street gets a different page from the same markup.
+
+**404** says the one true thing in this shop's voice — *"We never made that one."* — and then
+renders the real shelf underneath via `renderShelf`, so it is never out of date with the shop
+and a dead end hands somebody a croissant instead of only apologising.
+
+One class removed on the way: the 404 referenced `.btn--on-tile`, which lives in `order.css`
+and that page does not load. Worth a look if a page ever styles oddly — the CSS is per-page
+here, not one bundle.
+
 Next, in order:
-1. `visit`, `404`.
-2. The style guide.
-3. Template 07.
+1. The style guide.
+2. Template 07.
+
 
 
 Open design note from the client: *"could need improvement in design"* — accepted, no specifics

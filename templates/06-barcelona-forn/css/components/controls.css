@@ -127,3 +127,14 @@
   text-decoration: underline;
   cursor: pointer;
 }
+
+/* A quiet button on a warm band. The default outlines in --ink, which is
+   2.78 on terracotta-deep and effectively invisible there. */
+.btn--on-warm {
+  color: var(--marble);
+  outline-color: var(--marble);
+}
+
+.btn--on-warm:hover {
+  background: color-mix(in srgb, var(--marble) 16%, transparent);
+}

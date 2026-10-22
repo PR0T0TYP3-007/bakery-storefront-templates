@@ -229,5 +229,24 @@
       "day": "Christmas",
       "note": "Neules and torró, and the tió at home."
     }
-  ]
+  ],
+  "visit": {
+    "lede": "Carrer de Blai is the pedestrian street that runs down the middle of Poble-sec. We are on it, about halfway along, with the marble counter you can see from the door.",
+    "getting": [
+      {
+        "how": "Metro",
+        "what": "Paral·lel (L2, L3) or Poble Sec (L3). Either way you walk down into the neighbourhood."
+      },
+      {
+        "how": "On foot",
+        "what": "Carrer de Blai has no cars on it. Come in from either end and keep going until you smell it."
+      },
+      {
+        "how": "By bike",
+        "what": "There are racks at the Paral·lel end. We have nowhere to put one inside, sorry."
+      }
+    ],
+    "room": "Four marble tables and a counter you can stand at. It fills up between eight and nine with people on their way somewhere, and empties again by half past ten.",
+    "phone": "93 441 00 00"
+  }
 }

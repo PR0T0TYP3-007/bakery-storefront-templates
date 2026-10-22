@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Visit us — Forn de la Plaça</title>
+<meta name="description" content="Carrer de Blai 44, Poble-sec. When we are open, how to get here, and what the room is like.">
+
+<link rel="preload" href="assets/fonts/zillaslab.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/sourcesans.woff2" as="font" type="font/woff2" crossorigin>
+
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/calendar.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/visit.css">
+</head>
+<body>
+<a class="skip" href="#hours">Skip to the hours</a>
+<div data-header></div>
+
+<main id="main">
+
+  <!-- ====================================================================
+       The room first.
+
+       The brief asks for "a place you sit in, not just buy from", and this
+       is the page where that is the entire subject. So it opens with the
+       room rather than with an address: the address is below, where
+       somebody who already decided to come will look for it.
+       ==================================================================== -->
+  <section class="visit-hero">
+    <img class="visit-hero__img" src="assets/img/obrador-lg.jpg" alt="" fetchpriority="high" data-room-img>
+    <div class="visit-hero__wash" aria-hidden="true"></div>
+
+    <div class="wrap visit-hero__words">
+      <p class="label">Visit us</p>
+      <h1 class="t-hero" style="margin-top:var(--s-3);max-width:16ch">Carrer de Blai 44.</h1>
+      <p class="lede" style="margin-top:var(--s-4)" data-lede></p>
+    </div>
+
+    <div class="pattern visit-hero__floor" aria-hidden="true"></div>
+  </section>
+
+  <!-- ====================================================================
+       Hours. Today's line is marked, because that is the question almost
+       everybody on this page is actually asking.
+       ==================================================================== -->
+  <section class="band band--marble-2 section" id="hours">
+    <div class="wrap split split--wide-left">
+      <div>
+        <div class="sechead">
+          <div class="sechead__title">
+            <h2 class="t-1">Hours</h2>
+            <p class="label dim" data-today>—</p>
+          </div>
+        </div>
+
+        <table class="hours">
+          <caption class="vh">Opening hours by day</caption>
+          <tbody data-hours></tbody>
+        </table>
+
+        <p class="note" style="margin-top:var(--s-5)" data-shut hidden></p>
+      </div>
+
+      <div>
+        <p class="label dim">The room</p>
+        <p class="prose" style="margin-top:var(--s-3)" data-room></p>
+
+        <p class="label dim" style="margin-top:var(--s-6)">Calling</p>
+        <p class="t-2" style="margin-top:var(--s-2)"><a class="link" data-phone href="#">—</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       Getting here
+       ==================================================================== -->
+  <section class="band band--terracotta section">
+    <div class="wrap">
+      <div class="sechead">
+        <div class="sechead__title">
+          <h2 class="t-1">Getting here</h2>
+        </div>
+      </div>
+
+      <dl class="ways" data-ways></dl>
+
+      <p class="sm" style="margin-top:var(--s-6)">
+        <span data-address>—</span>
+        · <a class="link" data-map href="#" target="_blank" rel="noopener noreferrer">Open in a map</a>
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer data-footer></footer>
+
+<script type="module" src="js/pages/visit.js"></script>
+</body>
+</html>

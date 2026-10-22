@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Not on the counter — Forn de la Plaça</title>
+<meta name="robots" content="noindex">
+
+<link rel="preload" href="assets/fonts/zillaslab.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/sourcesans.woff2" as="font" type="font/woff2" crossorigin>
+
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/calendar.css">
+<link rel="stylesheet" href="css/components/controls.css">
+</head>
+<body>
+<a class="skip" href="#gone">Skip to content</a>
+<div data-header></div>
+
+<main id="main">
+  <!-- ====================================================================
+       The shop's own joke, which is also the truth: things here exist when
+       their day comes round, and this one never had one. Short, because a
+       404 that explains itself at length is a 404 nobody reads.
+       ==================================================================== -->
+  <section class="band band--terracotta section" id="gone">
+    <div class="wrap">
+      <p class="label">404</p>
+      <h1 class="t-hero" style="margin-top:var(--s-3);max-width:15ch">
+        We never made that one.
+      </h1>
+      <p class="lede" style="margin-top:var(--s-4)">
+        The link may be old, or it may be something we have stopped doing.
+        Everything we do make is still here.
+      </p>
+
+      <p class="row" style="margin-top:var(--s-6)">
+        <a class="btn" href="shop.html">The shop</a>
+        <a class="btn btn--quiet btn--on-warm" href="calendar.html">The year</a>
+      </p>
+    </div>
+  </section>
+
+  <!-- What is actually on the counter today. A 404 that hands somebody the
+       thing they could have had beats one that only apologises. -->
+  <section class="band band--marble-2 section">
+    <div class="wrap">
+      <div class="sechead">
+        <div class="sechead__title">
+          <h2 class="t-1">On the counter</h2>
+          <p class="label dim" data-today>—</p>
+        </div>
+        <a class="link" href="index.html">Back to the front</a>
+      </div>
+
+      <div class="shelf" data-now></div>
+    </div>
+  </section>
+</main>
+
+<footer data-footer></footer>
+
+<script type="module" src="js/pages/notfound.js"></script>
+</body>
+</html>

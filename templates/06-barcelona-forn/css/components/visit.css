@@ -1,0 +1,153 @@
+/* ==========================================================================
+   Visit us.
+
+   Same hero construction as the home page — the room full bleed, the blue
+   washing across it, the floor along the join — because it is the same idea
+   and a second way of doing it would just be a second way of doing it.
+   ========================================================================== */
+
+.visit-hero {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  align-items: end;
+  min-height: min(34rem, 62vh);
+  padding-block: var(--s-7) calc(var(--s-7) + var(--tile-unit) * 0.5);
+  overflow: hidden;
+  background: var(--tile-3);
+}
+
+.visit-hero__img {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.92) contrast(1.02);
+}
+
+.visit-hero__wash {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(
+      to right,
+      var(--tile-3) 0%,
+      color-mix(in srgb, var(--tile-3) 86%, transparent) 30%,
+      color-mix(in srgb, var(--tile) 46%, transparent) 62%,
+      color-mix(in srgb, var(--tile) 10%, transparent) 100%),
+    linear-gradient(
+      to top,
+      color-mix(in srgb, var(--tile-3) 78%, transparent) 0%,
+      transparent 55%);
+}
+
+.visit-hero__words {
+  position: relative;
+  z-index: 2;
+  color: var(--marble);
+  max-width: 44rem;
+}
+
+.visit-hero__floor {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 1;
+  height: calc(var(--tile-unit) * 0.5);
+  background-size: calc(var(--tile-unit) * 0.5) calc(var(--tile-unit) * 0.5);
+}
+
+@media (max-width: 52rem) {
+  .visit-hero { min-height: 0; }
+
+  .visit-hero__wash {
+    background: linear-gradient(
+      to top,
+      var(--tile-3) 0%,
+      color-mix(in srgb, var(--tile-3) 92%, transparent) 44%,
+      color-mix(in srgb, var(--tile) 54%, transparent) 80%,
+      color-mix(in srgb, var(--tile) 18%, transparent) 100%);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Hours
+
+   A table, because it is one. Rows separated by the grout rather than by a
+   rule, so it belongs to the rest of the template.
+   -------------------------------------------------------------------------- */
+.hours {
+  margin-top: var(--s-4);
+  border-collapse: separate;
+  border-spacing: 0 var(--grout);
+}
+
+.hours__row > * {
+  padding: var(--s-3) var(--s-4);
+  background: var(--marble);
+  text-align: left;
+  font-weight: 400;
+}
+
+.hours__row td {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.hours__row th {
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+/* Today. The surface changes AND the row says the word, because a row that
+   only differs in colour is not marked for everybody. */
+.hours__row.is-today > * {
+  background: var(--tile-3);
+  color: var(--marble);
+}
+
+.hours__mark {
+  margin-inline-start: var(--s-3);
+  padding: 1px var(--s-2);
+  background: var(--marble);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: var(--t-label);
+  font-weight: 700;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+}
+
+/* --------------------------------------------------------------------------
+   Getting here
+   -------------------------------------------------------------------------- */
+.ways {
+  display: grid;
+  gap: var(--grout);
+  margin: 0;
+  background: color-mix(in srgb, var(--marble) 24%, transparent);
+  outline: var(--grout) solid color-mix(in srgb, var(--marble) 24%, transparent);
+}
+
+@media (min-width: 52rem) {
+  .ways { grid-template-columns: repeat(3, 1fr); }
+}
+
+.way {
+  display: grid;
+  align-content: start;
+  gap: var(--s-2);
+  padding: var(--s-4);
+  background: var(--terracotta-deep);
+}
+
+.way__how { color: var(--marble); }
+
+.way__what {
+  margin: 0;
+  color: color-mix(in srgb, var(--marble) 92%, transparent);
+  max-width: 36ch;
+}
