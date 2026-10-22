@@ -135,7 +135,7 @@ Recently completed: per-template narrators, the copy rewrite with `docs/copy-ref
 From the client (Slack, 22 Oct): two more templates — *"a spanish/barcelonan cafe feel to it
 and a traditional french onatarian feel"*.
 
-### 6.2 OPEN QUESTION — ask before building 07
+### 6.2 RESOLVED — 07 is Franco-Ontarian heritage baking
 
 "Onatarian" is almost certainly **Ontarian**, which has two readings:
 
@@ -144,9 +144,8 @@ and a traditional french onatarian feel"*.
 - **Reading B — a classic French *pâtisserie* located in Ontario.** Baguettes, croissants,
   éclairs.
 
-**Reading B is dangerous**: an elegant French pâtisserie is Template 01 (Editorial Atelier)
-in different clothes — refined serif, catalogue of precise cakes. Reading A is genuinely
-distinct and matches Canada as a target market. **Confirm with the client before starting 07.**
+**Confirmed 22 Oct: Reading A.** Sugar pie, butter tarts, maple, bilingual. Reading B was
+rejected because an elegant French pâtisserie is Template 01 in different clothes.
 
 ### 6.3 THE BINDING CONSTRAINT: the palette space is nearly full
 
@@ -177,6 +176,58 @@ survivor also sits at the top of the saturation range — muted versions do not 
 | teal `#27827c` | 18 — olive and magenta only |
 | tile blue `#2a6f97` | 57 — including olive/mustard `#a88a2e` |
 | indigo `#3f55c6` | 296 — roomiest |
+
+### 6.3b D8 CANNOT ACCOMMODATE 06 AND 07 AS BRIEFED — decision needed
+
+Extending the measurement to accents closes the question. Searching every hue for an accent
+that clears 190 from all five shipped accents and can carry white text:
+
+| Family | Accents available |
+|---|---|
+| red / rust | **none** |
+| orange / amber | **none** |
+| yellow | **none** |
+| green | **none** |
+| teal | **none** |
+| crimson | **none** |
+| blue | 3 |
+| violet | 3 |
+| magenta / pink | 65 |
+
+Every warm accent both briefs imply is taken, mostly by Template 01's clay: terracotta is 106
+from it, maple amber 97, currant red 30, tile ochre 140, ochre 155.
+
+The rule is not being applied unfairly — the shipped set genuinely honours it, with a minimum
+ground distance of 192 and a minimum accent distance of 214. The space really is that full.
+
+**So something has to give, and it is a decision about the rule, not about the designs.**
+
+**Option A — amend D8 for a seven-template set.** D8 was written for five, in response to a
+complaint about two near-identical *grounds* 25 channels apart. A floor that now permits only
+magenta accents has stopped serving the brief's intent ("five different creative identities")
+and started preventing it. Proposal: keep 190 for grounds; replace the flat accent floor with
+a requirement that **any two templates differ decisively on at least three of the four axes**
+(ground, display class, accent, separation method) rather than all four clearing a fixed
+number. Under that rule 06 could take an authentic terracotta accent while differing
+decisively on ground, type and separation.
+*Risk:* D8 exists because the client complained once already. Loosening it without saying so
+invites the same complaint.
+
+**Option B — take only the colours that exist.** 06 gets a cobalt tile-blue ground
+(`#1b5e8c`, clears at 195) with a **magenta** accent — defensible, since Barcelona's
+Modernisme mosaics and Escribà's theatrical cakes genuinely run to strong pinks. 07 then needs
+a ground clearing 190 from cobalt as well; olive/mustard `#a88a2e` survives at 191, which
+reads as wheat and maple. Its accent would have to be violet or navy, neither of which is
+Franco-Ontarian.
+*Risk:* 07's palette would be chosen by arithmetic rather than by the culture, which is the
+failure Template 05 took three passes to climb out of.
+
+**Option C — build 06 only, now.** 06 has a genuine, authentic answer inside the current rule.
+Defer 07 until the rule question is settled.
+
+**Recommendation: Option A, with the amendment written down and shown to the client.** The
+measurements above are the argument for it, and they are reproducible. Option B produces a
+Franco-Ontarian template whose colours have nothing to do with Franco-Ontarians.
 
 ### 6.4 Proposed direction (to confirm)
 
@@ -215,6 +266,38 @@ and tiles better than the websites):
   pronounceable in both languages — a bilingual branding idea worth noting).
 - **Butter tarts:** Betty's Pies & Tarts, Cobourg; Ontario has butter tart trails and
   competitions.
+
+### 6.5b Research findings so far
+
+**Barcelona.**
+- **Forn Baluard** is the strongest reference and reveals something the brief missed: it
+  writes in **Catalan, not Spanish** — "Quatre generacions de forners han fet de Baluard una
+  manera d'entendre el pa." Products are Catalan: Pa Barceloneta, Coca Llarga amb Oli
+  d'Oliva, Xapata, Pa de Sègol. Voice is lyrical and sensory, storytelling about family.
+- **Escribà** is brand-led and aspirational — "ilusionar, sorprender y crear momentos únicos
+  e irrepetibles" — and sells *pasteles personalizados* and wedding cakes. Written in Spanish.
+- **Hofmann's site is the culinary school, not the pastry shop.** That reference is partly
+  misdirected; the pastry shop would need finding separately.
+- **The language is itself the identity.** A Barcelona bakery writing in Catalan rather than
+  Spanish is authentic, immediately distinctive, and no other template has a language axis.
+
+**Franco-Ontarian.**
+- **The flag is green and white** — green for summer, white for winter, fleur-de-lys for the
+  francophonie, trillium for Ontario. Designed 1975 at the University of Sudbury by Gaétan
+  Gervais with students; an official emblem of Ontario since 2020. *Measured: the flag green
+  fails as a ground — 142 from Template 04's near-black. Dark greens are all too close to it.*
+- **The butter tart descends from the tarte au sucre.** 17th-century women in New France
+  adapted French sugar pie using maple sugar; the butter tart is the English-Canadian version
+  sweetened with brown sugar. The first documented recipe (Barrie, Ontario, 1900) used
+  **currants, not raisins** — and the raisin question is a live cultural argument.
+- **Art-Is-In Bakery** named itself so that "art-is-in" sounds like *artisan* in French — a
+  bilingual pun as branding.
+- **The French Baker** (Ottawa, 1995, Jérôme Mantel) writes in English with French words,
+  not truly bilingually. Motto: "Keep it simple, keep it good."
+- **The strongest concept available:** every item carries two names that are *not
+  translations* — tarte au sucre and butter tart are relatives, not synonyms. A bilingual
+  template where switching language changes what things are called *and* surfaces the
+  heritage relationship is unique in the set and unavailable to a Parisian pâtisserie.
 
 ### 6.6 Voice
 
