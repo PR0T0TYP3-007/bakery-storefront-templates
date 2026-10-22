@@ -1,0 +1,223 @@
+{
+  "id": "forn-de-la-placa",
+  "name": "Forn de la Plaça",
+  "shortName": "Forn de la Plaça",
+  "tagline": "Pa i pastisseria al Poble-sec des de 1954.",
+  "since": "1954",
+  "locale": "ca-ES",
+  "currency": "EUR",
+  "timeZone": "Europe/Madrid",
+  "taxRate": 0.1,
+  "taxMode": "inclusive",
+  "taxNote": "Tots els preus inclouen l'IVA del 10%, el tipus reduït per a l'alimentació.",
+  "capabilities": {
+    "delivery": false,
+    "customCakes": true,
+    "gifting": false
+  },
+  "locations": [
+    {
+      "id": "blai",
+      "name": "Carrer de Blai",
+      "default": true,
+      "address": "Carrer de Blai 44, 08004 Barcelona",
+      "slots": [
+        "08:00–10:00",
+        "10:00–12:00",
+        "12:00–14:00",
+        "17:00–20:00"
+      ]
+    }
+  ],
+  "email": "hola@forndelaplaca.cat",
+  "hours": [
+    {
+      "day": "Monday",
+      "open": null
+    },
+    {
+      "day": "Tuesday",
+      "open": "07:30",
+      "close": "14:00"
+    },
+    {
+      "day": "Wednesday",
+      "open": "07:30",
+      "close": "14:00"
+    },
+    {
+      "day": "Thursday",
+      "open": "07:30",
+      "close": "14:00"
+    },
+    {
+      "day": "Friday",
+      "open": "07:30",
+      "close": "20:00"
+    },
+    {
+      "day": "Saturday",
+      "open": "08:00",
+      "close": "20:00"
+    },
+    {
+      "day": "Sunday",
+      "open": "08:30",
+      "close": "14:00"
+    }
+  ],
+  "closedWeekdays": [
+    "Monday"
+  ],
+  "closedDates": [
+    "2026-08-10",
+    "2026-08-11",
+    "2026-08-12",
+    "2026-08-13",
+    "2026-08-14"
+  ],
+  "cutoffHour": 12,
+  "maxDaysAhead": 30,
+  "dailyCapacity": 24,
+  "allergens": [
+    "gluten",
+    "ou",
+    "llet",
+    "fruits secs",
+    "soja"
+  ],
+  "allergenStatement": "Un obrador, i al damunt hi passa cada dia gluten, ou, llet, fruits secs i soja. Res no surt d'aquí certificat lliure de cap d'ells. Digueu-nos-ho quan encarregueu i us direm què podem fer.",
+  "voice": {
+    "kicker": "Carrer de Blai, Poble-sec · Des de 1954",
+    "headline": "El calendari mana.",
+    "lede": "Hi ha coses que només es fan quan toca. Ara mateix al taulell hi ha el que hi ha, i el que ve, ve.",
+    "shopfront": {
+      "image": null,
+      "alt": "El taulell de marbre del forn, amb les rajoles hidràuliques del terra",
+      "caption": "El taulell, a mig matí."
+    }
+  },
+  "year": [
+    {
+      "id": "reis",
+      "productId": "tortell-reis",
+      "on": "01-06",
+      "sells": [
+        14,
+        1
+      ],
+      "day": "Reis",
+      "note": "Hi ha una figureta i una fava a dins. A qui li toca la fava, paga el tortell."
+    },
+    {
+      "id": "sant-antoni",
+      "productId": "tortell-sant-antoni",
+      "on": "01-17",
+      "sells": [
+        4,
+        1
+      ],
+      "day": "Sant Antoni",
+      "note": "El tortell dels Tres Tombs."
+    },
+    {
+      "id": "llardons",
+      "productId": "coca-llardons",
+      "easter": -52,
+      "sells": [
+        5,
+        2
+      ],
+      "day": "Dijous Gras",
+      "note": "L'últim excés abans de la Quaresma."
+    },
+    {
+      "id": "bunyols",
+      "productId": "bunyols",
+      "easter": -46,
+      "sells": [
+        0,
+        46
+      ],
+      "day": "Quaresma",
+      "note": "Tota la Quaresma, cada dia."
+    },
+    {
+      "id": "sant-josep",
+      "productId": "crema-catalana",
+      "on": "03-19",
+      "sells": [
+        3,
+        1
+      ],
+      "day": "Sant Josep",
+      "note": "Es crema davant vostre."
+    },
+    {
+      "id": "sant-jordi",
+      "productId": "coca-sant-jordi",
+      "on": "04-23",
+      "sells": [
+        5,
+        1
+      ],
+      "day": "Sant Jordi",
+      "note": "Un llibre, una rosa i una coca."
+    },
+    {
+      "id": "mona",
+      "productId": "mona",
+      "easter": 1,
+      "sells": [
+        7,
+        1
+      ],
+      "day": "Pasqua",
+      "note": "El padrí la regala al fillol. Tantes figures com anys té."
+    },
+    {
+      "id": "sant-joan",
+      "productId": "coca-sant-joan",
+      "on": "06-23",
+      "sells": [
+        7,
+        1
+      ],
+      "day": "Revetlla de Sant Joan",
+      "note": "Fruita confitada i pinyons. Per la nit, a la platja."
+    },
+    {
+      "id": "diada",
+      "productId": "coca-llarga",
+      "on": "09-11",
+      "sells": [
+        2,
+        1
+      ],
+      "day": "La Diada",
+      "note": null
+    },
+    {
+      "id": "tots-sants",
+      "productId": "panellets",
+      "on": "11-01",
+      "sells": [
+        10,
+        1
+      ],
+      "day": "Tots Sants",
+      "note": "Massapà i pinyons. La castanyada és la mateixa nit."
+    },
+    {
+      "id": "nadal",
+      "productId": "neules-torro",
+      "on": "12-25",
+      "sells": [
+        21,
+        2
+      ],
+      "day": "Nadal",
+      "note": "Neules i torró, i el tió a casa."
+    }
+  ]
+}

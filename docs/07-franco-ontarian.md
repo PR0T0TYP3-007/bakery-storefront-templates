@@ -63,7 +63,7 @@ no price calculator. It is closer to a glossary than a configurator.
 |---|---|---|---|---|---|---|---|
 | Ground | cream | sun | plum | near-black | eucalyptus | cobalt | **`#a88a2e` wheat gold** |
 | Accent | clay | grape | blush | acid | green | terracotta | **`#3f3a7d` wild blueberry** |
-| Type class | serif | rounded geo | incised | expressive | grotesque | humanist slab | **condensed grotesque / enamel sign** |
+| Type class | serif | rounded geo | incised | expressive | grotesque | slab serif | **antique wood-type condensed** |
 | Separation | hairline rules | drawn outline | apertures | overlap | ruled rows | tiled modules | **stacked enamel plates** |
 
 Ground clears every shipped ground (closest 192 from plum, 196 from sun and from eucalyptus)
@@ -97,10 +97,16 @@ warm ground the distance check leaves.
 darker tone, stacked and slightly overlapping at the corners — enamelware, not cards. The rim
 is the division. No shadow, no radius beyond 2px, no hairline rules (01), no apertures (03).
 
-**Type.** A condensed grotesque with the character of a painted enamel sign — rural Ontario
-general-store lettering, which is also what bilingual signage in the north looks like. Caps
-for the French name, sentence case for the English, so the two languages are visually distinct
-before you read them.
+**Type.** Antique wood-type condensed — the compressed, slightly irregular lettering of a
+rural general-store sign, which is also what bilingual signage in the north looks like.
+
+*Corrected during planning:* this was first written as "condensed grotesque", which collides
+with Template 05's grotesque. D23 requires the type class to be unique across the set, and a
+condensed grotesque is still a grotesque. Wood type is a genuinely separate class and a better
+fit for painted enamel anyway.
+
+Caps for the French name, sentence case for the English, so the two languages are visually
+distinct before you read them.
 
 **Both names, always.** Product headings carry the French name and the English name with a
 rule between them, the same size. Neither is a subtitle. That typographic decision *is* the

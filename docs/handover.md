@@ -296,6 +296,43 @@ the reference set.
 
 ---
 
+## 6.7 Template 06 — build progress
+
+**Started 22 Oct.** Foundation in, no pages yet.
+
+Done:
+- Directory scaffold; `js/services/session.js` and `components/toast.js` copied from 05
+  (the service seam is genuinely the same, only the data files differ).
+- `css/tokens.css` — full palette, every pairing measured before it was written. Two rules
+  that came out of the measurement and must not be broken:
+  **ink on marble, white on tile** (ink is 2.35 on tile), and
+  **terracotta carries no small text in any direction** (3.80 on marble, 4.13 white on it,
+  4.05 ink on it — all just under 4.5, which is the most dangerous place for a colour to be).
+  The primary action therefore uses `--tile-3` with marble on it, not terracotta. `--ochre`
+  is paint only.
+- Fonts downloaded to `assets/fonts/`: Zilla Slab (display, slab serif — the one type class
+  the set lacked) and Source Sans 3 (UI). **Not yet verified against Catalan glyphs** —
+  check ç, à, è, í, ï, ú and the interpunct · render before trusting them.
+- `js/year.js` — the signature. Pure, DOM-free. Easter is computed with the anonymous
+  Gregorian computus because three of the shop's biggest days hang off it; hardcoding would
+  be wrong every year but one, and silently.
+- `data/merchant.forn-de-la-placa.json` + `products.*.json` — 11 year entries, 17 products,
+  all Catalan.
+- 25 tests passing: Easter against published dates 1818–2038, Dijous Gras always a Thursday,
+  and config integrity (every year entry points at a product that exists — the failure mode
+  is an empty shelf on one day a year that nobody notices until Sant Joan).
+
+Next, in order:
+1. `css/base.css` and `css/layout.css` — the tile separation system. Square modules that
+   butt with no gutter over a painted panel; the join is the division. No radius, no shadow.
+2. `js/services/api.js` — copy 05's and point it at the new data files and merchant id.
+3. `index.html` + `js/pages/home.js` — hero, then **what is on the bench now** and
+   **what is coming**, driven by `year.js`.
+4. The rest of the nine pages, then the style guide.
+
+Not started: photography (the template needs its own set — see §5 item 1), the tile pattern
+unit, the Catalan/Spanish/English glossing mechanism.
+
 ## 7. Session conventions
 
 - Nothing is pushed without being asked. The client has asked each time so far.

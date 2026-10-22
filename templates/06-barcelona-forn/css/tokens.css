@@ -1,0 +1,196 @@
+/* ==========================================================================
+   FORN DE LA PLAÇA — tokens.css
+   Every colour, type step, space, border and duration in the template.
+
+   Rebranding this template for a different forn should mean editing this
+   file and swapping the logo. Nothing else.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Fonts
+
+   A slab serif. Not the high-contrast display serif of Template 01 and not
+   the grotesque of Template 05 — a Barcelona shopfront is painted by hand,
+   and painted letters have weight in the slab rather than in the stroke
+   contrast. D23 requires the display class to be unique across the set:
+   serif (01), rounded geometric (02), incised capitals (03), expressive
+   (04), grotesque (05), and slab here.
+   -------------------------------------------------------------------------- */
+@font-face {
+  font-family: 'Zilla Slab';
+  src: url('../assets/fonts/zillaslab.woff2') format('woff2');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: 'Source Sans 3';
+  src: url('../assets/fonts/sourcesans.woff2') format('woff2-variations');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+:root {
+  /* ------------------------------------------------------------------------
+     Colour
+
+     A painted tile wall, with marble laid on it.
+
+     The brief said terracotta. Terracotta measures 106 channels from
+     Template 01's clay, and under D8 as originally written that ruled it out
+     along with ochre, maple and every other warm accent — the whole warm end
+     of the spectrum is spoken for. D23 now permits it, because 06 and 01
+     differ decisively on ground (459 apart), display class and separation
+     method. See docs/for-client-distance-rule.md.
+
+     But the ground could never have been terracotta, and that turned out to
+     be the right answer rather than a concession: Barcelona's hydraulic floor
+     tiles are blue, they are in every old shop in the city, and making the
+     tile the ground is more accurate than making the clay the ground.
+
+     TWO RULES, BOTH MEASURED, BOTH NON-NEGOTIABLE:
+
+     1. **Ink on marble, white on tile. Never the reverse.** `--ink` is 15.32
+        on marble and 2.35 on tile. There is no ink that reads on this ground,
+        so content that needs reading sits on marble — which is what marble
+        is for in a café, and what paper was for in Template 05.
+
+     2. **Terracotta carries no small text, in either direction.** On marble
+        it is 3.80, white on it is 4.13, ink on it is 4.05. All three sit just
+        under 4.5, which is the most dangerous place for a colour to be: it
+        looks fine and fails. It is a fill and a large-display colour only —
+        headings at 24px or 18.66px bold, where 3:1 applies. The primary
+        action uses `--tile-3` with marble on it (10.04), not terracotta.
+
+     `--ochre` is decoration and nothing else: 2.70 on marble, 2.42 on tile.
+     It exists for the tile pattern, where it is paint rather than text.
+     ------------------------------------------------------------------------ */
+
+  /* The tile. The page, and the bands of it. */
+  --tile: #1b5e8c;
+  --tile-2: #164e74;
+  --tile-3: #12405e;
+
+  /* The marble. Warm white rather than blue-white, because a cool white on a
+     cobalt ground reads as a screen and marble does not. */
+  --marble: #f6f5f4;
+  --marble-2: #edebe8;   /* pressed — hover, selected */
+  --marble-3: #e2dfd9;   /* hollow — image wells, skeletons. No text. */
+
+  --ink: #151f28;        /* 15.32 on marble · 2.35 on tile: MARBLE ONLY */
+  --ink-2: #344251;      /* 9.43 on marble */
+  --ink-3: #516170;      /* 5.86 on marble */
+
+  --rule: rgba(21, 31, 40, 0.16);
+  --rule-2: rgba(21, 31, 40, 0.32);
+  --rule-strong: var(--ink);
+  /* On the tile the rule has to be light, because the ink one vanishes. */
+  --rule-on-tile: rgba(246, 245, 244, 0.28);
+
+  /* The warm marks. Fills and large type. */
+  --terracotta: #c4603a;
+  --terracotta-deep: #a04a28;
+  --ochre: #c98a2b;      /* PAINT ONLY — fails as text on both surfaces */
+
+  /* Status. Information, so never the accent: a customer must not have to
+     tell "this is the brand colour" from "this is sold out". */
+  --ready: #2f7d4f;      /* 4.63 on marble · white on it 5.04 */
+  --soon: #8f6214;       /* 4.91 on marble · white on it 5.36 */
+  --gone: #9c3326;       /* 6.62 on marble · white on it 7.20 */
+
+  /* Marble, not terracotta. A focus ring has to clear 3:1 against whatever
+     is behind it, and terracotta manages 1.72 on the tile it would most
+     often sit on. Marble clears 6.51 there and the ink clears 15.32 on
+     marble, so the ring switches with the surface. */
+  --focus: var(--marble);
+  --focus-on-marble: var(--ink);
+
+  /* ------------------------------------------------------------------------
+     Type
+     ------------------------------------------------------------------------ */
+  --font-display: 'Zilla Slab', 'Rockwell', 'Courier Bold', Georgia, serif;
+  --font-ui: 'Source Sans 3', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui,
+    sans-serif;
+
+  --t-hero: clamp(2.4rem, 6vw, 4.25rem);
+  --t-1: clamp(1.75rem, 3.4vw, 2.5rem);
+  --t-2: clamp(1.3rem, 2.1vw, 1.65rem);
+  --t-3: 1.1875rem;
+  --t-body: 1rem;        /* 16px floor, never smaller for body copy */
+  --t-sm: 0.875rem;
+  --t-label: 0.75rem;
+
+  --lh-tight: 1.06;
+  --lh-snug: 1.22;
+  --lh-body: 1.6;        /* a touch looser than the others: Catalan words run long */
+
+  --track-label: 0.08em;
+
+  /* ------------------------------------------------------------------------
+     Space — on a tile grid, so the scale is in multiples that tile cleanly.
+     ------------------------------------------------------------------------ */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4.5rem;
+
+  --gutter: clamp(1rem, 3vw, 2.25rem);
+  --page: 1280px;
+  --measure: 62ch;
+
+  /* The tile module. Everything in the separation system is one of these or
+     a clean multiple, which is what makes it read as tiling rather than as
+     an arbitrary grid. */
+  --tile-unit: clamp(3.5rem, 7vw, 5.5rem);
+  --tap: 2.75rem;        /* 44px minimum target */
+
+  /* ------------------------------------------------------------------------
+     Shape — square. Hydraulic tiles have no radius and neither does this.
+     The one exception is the pill on the language switch, which is a control
+     rather than a surface.
+     ------------------------------------------------------------------------ */
+  --r: 0;
+  --r-pill: 999px;
+
+  /* ------------------------------------------------------------------------
+     Elevation — none. The separation method is the join between two tiles,
+     and a shadow would make them float instead of abut. The only shadowed
+     thing in the template is the mobile sheet, because it genuinely is above
+     the page.
+     ------------------------------------------------------------------------ */
+  --lift: 0 1px 2px rgba(18, 64, 94, 0.14), 0 14px 36px rgba(18, 64, 94, 0.22);
+
+  /* ------------------------------------------------------------------------
+     Motion — functional only, under 250ms, never between a tap and a result.
+     ------------------------------------------------------------------------ */
+  --t-fast: 120ms;
+  --t-base: 180ms;
+  --t-slow: 240ms;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --header-h: 3.75rem;
+}
+
+/* --------------------------------------------------------------------------
+   Merchant accent override hook
+   Each merchant may set its own warm mark; the template reads it from here
+   so a rebrand never touches component CSS.
+   -------------------------------------------------------------------------- */
+[data-brand='can-rius'] {
+  --terracotta: #b8552f;
+  --terracotta-deep: #96401f;
+  --ochre: #bf8420;
+}
