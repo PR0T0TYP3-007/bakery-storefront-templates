@@ -201,7 +201,7 @@ $('[data-what]').innerHTML = [
   ],
   [
     'Something written on it',
-    'Piped on the cake in buttercream, and written on a card in ink. Both are set in front of you before you pay.',
+    'Buttercream on the cake, ink on the card. You see both laid out at the size they will be.',
   ],
   [
     'Collected, or brought to the door',
@@ -221,15 +221,13 @@ $('[data-what]').innerHTML = [
 $('[data-card-head]').innerHTML = `The card is the part <span class="script">people keep.</span>`;
 
 $('[data-card-why]').innerHTML = `
-  <p>Everywhere else, the message is a box at the end of checkout with a
-  character counter under it. You type into it and hope. One shop we looked at
-  takes the note on a different page <em>after</em> you have paid, and gives
-  you an hour to do it.</p>
-  <p>A counter tells you that you have room. It does not tell you that your
-  message lands on four lines and the card holds three, or that the longest
-  word in it is wider than the card is. You find that out when they do.</p>
-  <p>So here you write it and watch it set — ${esc(merchant.card.stock.toLowerCase())},
-  in the hand it will be written in, broken where the pen will break it.</p>`;
+  <p>A card this size holds three lines in this hand. Most people write four,
+  and a character counter will not warn them, because the trouble is never the
+  number of characters — it is a long word, or a name that will not sit on one
+  line with the rest of the sentence.</p>
+  <p>So the card sets itself while you type. ${esc(merchant.card.stock.toLowerCase())},
+  in the hand it will be written in, broken where the pen will break it. If it
+  will not fit we say so, and we say which word is the problem.</p>`;
 
 /* ---- Occasions ---------------------------------------------------------- */
 $('[data-occasions]').innerHTML = (catalogue.occasions ?? [])
@@ -265,8 +263,8 @@ const street = merchant.locations[0].address.split(',')[0].replace(/^\d+\s+/, ''
 $('[data-shop-head]').innerHTML = `Two rooms on <span class="script">${esc(street)}.</span>`;
 $('[data-shop-body]').innerHTML = `
   <p>We have been here since ${esc(merchant.since)}. One oven, one bench, and
-  a drawer of card stock. The writing is done by whoever is on the bench that
-  morning, which is why it looks like a person did it.</p>
+  a drawer of card stock. Whoever is on the bench that morning does the
+  writing, so the hand changes a little from week to week.</p>
   <p>${esc(merchant.allergenStatement.split('.').slice(-2).join('.').trim())}</p>`;
 
 /* ---- A date we kept ------------------------------------------------------

@@ -83,7 +83,7 @@
   "maxDaysAhead": 60,
   "dailyCapacity": 40,
   "delivery": {
-    "note": "Round the corner only — three miles, by bike, mornings, still warm.",
+    "note": "Three miles, by bike, mornings only. Past that the bread is cold before it gets to you, so we don't.",
     "freeOver": 40,
     "zones": [
       {
@@ -123,7 +123,7 @@
   "voice": {
     "kicker": "Bellevue Road, London · Since 2014",
     "headline": "Your bread's out by half seven.",
-    "lede": "Order by 11 and it's yours today, and what we have is what we baked this morning.",
+    "lede": "Order by 11 and it's yours today. We bake once, in the morning, and when a thing is gone it is gone until tomorrow.",
     "shopfront": {
       "image": "photo-1738898326912-83ec04de4ccf",
       "alt": "The counter at Hazel & Rye, baskets of bread along the glass and the bench visible behind it",
@@ -132,19 +132,19 @@
     "morning": [
       {
         "at": "03:20",
-        "what": "The first mix goes in. Whoever opened turns the lights on and the oven up.",
+        "what": "First mix goes in. Whoever opened puts the lights on and the oven up to 250.",
         "image": "photo-1513844316321-dd2466411c4c",
         "alt": "A baker's hands rolling rounds of dough along a floured bench"
       },
       {
         "at": "05:45",
-        "what": "Shaped, panned, and left alone. This is the part that cannot be hurried.",
+        "what": "Shaped, panned and left to prove for two hours. Nothing to do but wait.",
         "image": "photo-1547197309-082bdc50ce8b",
         "alt": "Hands setting proved rolls onto a steel tray"
       },
       {
         "at": "07:30",
-        "what": "Doors. The board goes up, and what is on it is what there is.",
+        "what": "Doors open and the board goes up with whatever came out of the oven.",
         "image": "photo-1771498637378-c5ff74b70b52",
         "alt": "A wooden display case, each door lettered by hand in white"
       }

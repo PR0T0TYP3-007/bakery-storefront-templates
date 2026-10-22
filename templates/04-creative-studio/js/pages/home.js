@@ -51,10 +51,10 @@ $('[data-headline]').textContent = merchant.voice.headline;
 $('[data-lede]').textContent = merchant.voice.lede;
 
 $('[data-gap]').innerHTML = `
-  We looked at how this is normally done. You fill in a form, pick a budget
-  <em>band</em>, and wait for someone to email you. Here the brief prices itself
-  as you write it: ${money(c.minimum)} minimum, ${Math.round(c.depositPct * 100)}% to book,
-  and the figure holds for ${c.quoteValidDays} days.`;
+  Usually you fill in a form, pick a budget <em>band</em>, and wait for
+  someone to email you. Here the number moves as you choose:
+  ${money(c.minimum)} minimum, ${Math.round(c.depositPct * 100)}% to book, and it holds for
+  ${c.quoteValidDays} days.`;
 
 /* -------------------------------------------------------------------------
    Work — deliberately uneven, because the pieces are not the same thing
@@ -130,9 +130,9 @@ const aside = `
     <p class="label label--acid">Every one of them</p>
     <p class="t-3" style="margin-top:var(--s-3)">priced the same way</p>
     <p class="sm dim" style="margin-top:var(--s-3)">
-      Each figure above is what that brief comes to in the calculator, not a quote we
-      remembered. From ${esc(money(c.minimum))}, ${Math.round(c.depositPct * 100)}% to book, and
-      the number holds for ${esc(c.quoteValidDays)} days.
+      Those three figures come out of the same calculator you are about to use.
+      From ${esc(money(c.minimum))}, ${Math.round(c.depositPct * 100)}% to book, and the number
+      holds for ${esc(c.quoteValidDays)} days.
     </p>
     <p style="margin-top:var(--s-4)">
       <a class="btn btn--sm" href="commission.html" data-commission-link-4>Price your own</a>
@@ -229,6 +229,5 @@ $('[data-editions]').innerHTML = catalogue.products
    ------------------------------------------------------------------------- */
 $('[data-studio-head]').textContent = `${c.perWeek} commissions a week. That is the whole studio.`;
 $('[data-studio-body]').innerHTML = `
-  ${esc(c.note)} It is also why the diary is the honest part of this site:
-  most days are already taken, and the calendar says so before you have typed
-  anything. ${esc(merchant.taxNote)}`;
+  ${esc(c.note)} Most weeks are taken before they start, and the calendar
+  shows which ones. ${esc(merchant.taxNote)}`;

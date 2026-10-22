@@ -108,7 +108,7 @@
   "voice": {
     "kicker": "Two corners of Portland · Since 2019",
     "headline": "Cupcakes, by the box.",
-    "lede": "Order by 10 and it's yours today, from Division or Alberta. What is on the shelf is what we made this morning.",
+    "lede": "Order by 10 and it's yours today, from Division or Alberta. We frost in the morning and sell until the shelf is empty.",
     "shopfront": {
       "image": "photo-1771498637378-c5ff74b70b52",
       "alt": "The Division Street case, each door lettered by hand",
@@ -117,19 +117,19 @@
     "morning": [
       {
         "at": "03:00",
-        "what": "Batter, two hundred at a time, while it is still dark out.",
+        "what": "Batter goes in, two hundred at a time, while it is still dark out.",
         "image": "photo-1513844316321-dd2466411c4c",
         "alt": "Hands working dough along a floured bench"
       },
       {
         "at": "05:30",
-        "what": "Out of the tins and onto racks to cool. Frosting waits for cool.",
+        "what": "Out of the tins and onto racks. They have to be cold before they are frosted.",
         "image": "photo-1547197309-082bdc50ce8b",
         "alt": "Hands setting trays down in the bakery kitchen"
       },
       {
         "at": "07:00",
-        "what": "Both shops open. What is on the shelf is what we made this morning.",
+        "what": "Both shops open. Whatever we made this morning is on the shelf.",
         "image": "photo-1738898326912-83ec04de4ccf",
         "alt": "The counter, boxes stacked and the bench visible behind it"
       }

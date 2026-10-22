@@ -58,8 +58,12 @@ export function productCard(product, { when, tall = false, flag } = {}) {
   const price = session.priceOf(product, product.defaults, [], 1);
 
   const lead = session.leadFor(product);
-  const leadWord =
-    lead === 0 ? 'Today' : lead === 1 ? '1 day' : `${lead} days`;
+  /* The possessive is part of the phrase, not a character stuck on the end
+     of it: "4 days' notice" takes one and "1 day's notice" takes a
+     different one, and "Today" takes none at all. Gluing an apostrophe on
+     afterwards printed "1 day' notice" on the brownie slab. */
+  const leadPhrase =
+    lead === 0 ? 'Today' : lead === 1 ? "1 day's notice" : `${lead} days' notice`;
 
   return `
     <article class="card" data-state="${state}">
@@ -69,7 +73,7 @@ export function productCard(product, { when, tall = false, flag } = {}) {
         <h3 class="card__name"><a href="${hrefFor(product)}">${esc(product.name)}</a></h3>
         <p class="card__sub">${esc(product.subtitle)}</p>
         <div class="card__foot">
-          <p class="card__price">${money(price.unit)}<span>${esc(leadWord)}' notice</span></p>
+          <p class="card__price">${money(price.unit)}<span>${esc(leadPhrase)}</span></p>
           <span class="btn btn--sm btn--primary" aria-hidden="true">
             ${product.kind === 'custom' ? 'Build it' : 'Have a look'}
           </span>

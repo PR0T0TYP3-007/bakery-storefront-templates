@@ -325,11 +325,25 @@ const PRODUCTS = [
 /* --------------------------------------------------------------------------
    Editorial content
    -------------------------------------------------------------------------- */
+/* The sources here are invented, and they have to stay invented.
+
+   This block previously carried made-up quotes attributed to The New
+   Yorker, Cherry Bombe, Eater NY and Kinfolk — real publications, none of
+   which has written a word about a bakery that does not exist. That is
+   fine in a sketch and not fine in a template, because a template is a
+   thing a merchant installs and fills in: the demo content ships, and the
+   plausible line is the one most likely to be left in place. Fabricated
+   endorsements from named real outlets are a false-advertising problem
+   that would belong to the merchant, not to us.
+
+   So these read as placeholders. A merchant replacing them with real
+   coverage is doing the intended thing; a merchant leaving them is quoting
+   nobody. */
 const PRESS = [
-  { quote: 'The most considered cake in the city, and the least showy about it.', source: 'The New Yorker' },
-  { quote: 'Ines Okonkwo is doing something closer to still-life than to baking.', source: 'Cherry Bombe' },
-  { quote: 'You will queue. It is worth queuing.', source: 'Eater NY' },
-  { quote: 'A shop that treats a birthday cake with the seriousness of a commission.', source: 'Kinfolk' },
+  { quote: 'The most considered cake in the city, and the least showy about it.', source: 'Press quote — replace' },
+  { quote: 'Doing something closer to still-life than to baking.', source: 'Press quote — replace' },
+  { quote: 'You will queue. It is worth queuing.', source: 'Press quote — replace' },
+  { quote: 'Treats a birthday cake with the seriousness of a commission.', source: 'Press quote — replace' },
 ];
 
 const JOURNAL = [
