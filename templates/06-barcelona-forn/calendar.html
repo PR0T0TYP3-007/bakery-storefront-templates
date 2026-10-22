@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The year — Forn de la Plaça</title>
+<meta name="description" content="The whole year at Forn de la Plaça: what is made for which day, and when it comes round again.">
+
+<link rel="preload" href="assets/fonts/zillaslab.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/sourcesans.woff2" as="font" type="font/woff2" crossorigin>
+
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/calendar.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/year.css">
+</head>
+<body>
+<a class="skip" href="#year">Skip to the year</a>
+<div data-header></div>
+
+<main id="main">
+
+  <!-- ====================================================================
+       The year.
+
+       This is the page the rest of the template points at. Everything else
+       shows a slice of the calendar — what is on the counter, what is
+       coming next — and this shows the shape of the whole thing.
+       ==================================================================== -->
+  <section class="wrap section">
+    <h1 class="t-1">The year</h1>
+    <p class="lede" style="margin-top:var(--s-3)" data-lede></p>
+  </section>
+
+  <div class="pattern" aria-hidden="true"></div>
+
+  <section class="band band--marble-2 section" id="year">
+    <div class="wrap">
+      <div class="sechead">
+        <div class="sechead__title">
+          <h2 class="t-2" data-year-head>—</h2>
+        </div>
+
+        <!-- Switching the year is not decoration. Four of these days hang
+             off Easter, so moving the year moves them, and watching them
+             move is the clearest way to say that the dates are computed
+             rather than typed in. -->
+        <nav class="years" aria-label="Which year" data-years></nav>
+      </div>
+
+      <div class="months" data-months>
+        <noscript>
+          <p class="note">
+            The year is worked out in the page, so it needs JavaScript —
+            four of these days move with Easter and cannot be written down
+            once. Call us on 93 441 00 00 and we will tell you what is next.
+          </p>
+        </noscript>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section">
+    <div class="split split--wide-left">
+      <div>
+        <p class="label dim">How this works</p>
+        <p class="t-2" style="margin-top:var(--s-3)">
+          Nothing on this page was typed in.
+        </p>
+      </div>
+      <div class="prose" data-how></div>
+    </div>
+  </section>
+
+</main>
+
+<footer data-footer></footer>
+
+<script type="module" src="js/pages/calendar.js"></script>
+</body>
+</html>

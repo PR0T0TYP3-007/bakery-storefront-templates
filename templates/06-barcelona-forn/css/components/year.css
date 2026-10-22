@@ -1,0 +1,124 @@
+/* ==========================================================================
+   The year.
+
+   Twelve months that abut, with the grout between them — the same floor as
+   everywhere else, laid out as a calendar instead of as a shelf.
+   ========================================================================== */
+
+.years {
+  display: flex;
+  gap: var(--grout);
+  background: var(--marble-3);
+  outline: var(--grout) solid var(--marble-3);
+}
+
+.year {
+  min-height: var(--tap);
+  padding-inline: var(--s-4);
+  border: 0;
+  background: var(--marble);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.year:hover { background: var(--marble-2); }
+
+.year.is-on {
+  background: var(--tile-3);
+  color: var(--marble);
+}
+
+/* --------------------------------------------------------------------------
+   Months
+   -------------------------------------------------------------------------- */
+.months {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+  gap: var(--grout);
+  background: var(--marble-3);
+  outline: var(--grout) solid var(--marble-3);
+}
+
+.month {
+  display: grid;
+  align-content: start;
+  gap: var(--s-3);
+  min-height: calc(var(--tile-unit) * 2);
+  padding: var(--s-4);
+  background: var(--marble);
+  color: var(--ink);
+}
+
+/* A month with nothing in it is still a month. It takes the second surface
+   rather than being left out, because the gaps are part of the shape of the
+   year — four of these in a row is what "summer" looks like here. */
+.month--quiet {
+  background: var(--marble-2);
+}
+
+.month__name { color: var(--ink-3); }
+.month--quiet .month__none { color: var(--ink-3); }
+
+.month__feasts {
+  display: grid;
+  gap: var(--s-4);
+}
+
+/* --------------------------------------------------------------------------
+   One day
+   -------------------------------------------------------------------------- */
+.feast__day { color: var(--terracotta-deep); }
+
+.feast__name { margin-top: var(--s-1); }
+.feast__name a { text-decoration: none; }
+.feast__name a:hover { text-decoration: underline; }
+
+.feast__when {
+  margin-top: var(--s-2);
+  color: var(--ink-2);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s-2);
+}
+
+/* The mark that says this date was worked out rather than written down.
+   Four of the eleven move with Easter and this is the only place the page
+   says which — hence a word, not an icon. */
+.feast__moves {
+  padding: 1px var(--s-2);
+  background: var(--marble-3);
+  color: var(--ink-2);
+  font-family: var(--font-display);
+  font-size: var(--t-label);
+  font-weight: 600;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+}
+
+.month--quiet .feast__moves { background: var(--marble); }
+
+.feast__state { margin-top: var(--s-2); }
+
+.feast__note {
+  margin-top: var(--s-2);
+  color: var(--ink-2);
+  max-width: 34ch;
+}
+
+/* A day already past this year is quieter, but not hidden and not greyed
+   into illegibility: it still says when it comes back round. --ink-3 is
+   4.6 on marble, which is a pass, so "quiet" never means "unreadable". */
+.feast--gone .feast__name,
+.feast--gone .feast__when,
+.feast--gone .feast__note {
+  color: var(--ink-3);
+}
+
+.feast--gone .feast__day {
+  color: var(--ink-3);
+}

@@ -510,11 +510,30 @@ The confirmation reads everything from the query string rather than session stat
 survives a refresh and a bookmark, and it says so plainly when it is opened without a
 reference instead of rendering an empty page.
 
+**23 Oct — `calendar.html`, the page the rest of the template points at.**
+
+Twelve months that abut, each holding what the oven keeps that month. The empty ones are kept
+and say *"Bread and the everyday things"*, because four blank months in a row is what summer
+looks like here and leaving them out would hide the shape of the year.
+
+**The year switcher is the mechanic, not a control.** Three of the eleven days hang off Easter,
+so changing the year moves Dijous Gras, Quaresma and Pasqua while Sant Jordi stays on the 23rd
+of April. A `MOVES` tag marks the three. Verified: Easter 2026 → Mona on Mon 6 Apr; 2027 → Mon
+29 Mar; 2028 → Mon 17 Apr. The chosen year is in the URL (`?y=2027`), and a year outside the
+three is silently corrected rather than rendered empty.
+
+**A wrong number, on the page about numbers.** The first draft of the closing copy said *"seven
+of these days are fixed… the other four hang off Easter."* It is eight and three. A template
+whose entire subject is dates had a false count in the paragraph explaining how its dates work
+— D13 again. Both sentences are now counted from `merchant.year` at render, with the moving
+days' names listed by `Intl.ListFormat`, so they cannot drift from the config. Small numbers
+are spelled out, because a sentence that opens with a digit reads like a spreadsheet.
+
 Next, in order:
-1. `calendar` — the whole year on one page. The data and `js/year.js` are already there.
-2. `visit`, `404`.
-3. The style guide.
-4. Template 07.
+1. `visit`, `404`.
+2. The style guide.
+3. Template 07.
+
 
 Open design note from the client: *"could need improvement in design"* — accepted, no specifics
 given yet. The weakest thing now is probably the basket line at phone width, where the quantity
