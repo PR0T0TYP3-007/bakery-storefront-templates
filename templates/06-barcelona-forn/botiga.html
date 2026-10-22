@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La botiga — Forn de la Plaça</title>
+<meta name="description" content="Tot el que fa el Forn de la Plaça: el pa i la pastisseria de cada matí, i el que només es fa quan toca.">
+
+<link rel="preload" href="assets/fonts/zillaslab.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/sourcesans.woff2" as="font" type="font/woff2" crossorigin>
+
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/calendar.css">
+<link rel="stylesheet" href="css/components/controls.css">
+</head>
+<body>
+<a class="skip" href="#llista">Vés a la llista</a>
+<div data-header></div>
+
+<main id="main">
+
+  <!-- ====================================================================
+       The shop is not a catalogue with the seasonal things filtered out of
+       it. It is the whole year on one page, with the things that are not
+       available today still shown and still saying when they come back.
+       That is the template's argument, so the shop has to make it too.
+       ==================================================================== -->
+  <section class="wrap section section--tight">
+    <h1 class="t-1">La botiga</h1>
+    <p class="lede" style="margin-top:var(--s-3)">
+      Tot el que fem, tot l'any. El que ara no hi és diu quan torna.
+    </p>
+  </section>
+
+  <!-- The filter. Square tiles, one surface against another: the chosen one
+       is the dark tile and the rest are marble. No pill, no border, no
+       underline — the fill is the state. -->
+  <section class="band band--marble-2 section--tight">
+    <div class="wrap">
+      <nav class="filters" aria-label="Filtra per tipus" data-filters></nav>
+
+      <form class="find" role="search" data-find>
+        <label class="vh" for="q">Cerca al forn</label>
+        <input class="find__in" id="q" name="q" type="search" placeholder="Cerca: tortell, pa, coca…" autocomplete="off">
+        <button class="btn" type="submit">Cerca</button>
+      </form>
+    </div>
+  </section>
+
+  <section class="band band--marble-2 section" id="llista">
+    <div class="wrap">
+      <p class="label dim" aria-live="polite" data-count></p>
+      <div style="margin-top:var(--s-4)" data-list>
+        <noscript>
+          <p class="note">
+            La llista necessita JavaScript. Truqueu-nos al 93 441 00 00 i us
+            direm què hi ha avui, o mireu <a href="visita.html">les hores</a>.
+          </p>
+        </noscript>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer data-footer></footer>
+
+<script type="module" src="js/pages/botiga.js"></script>
+</body>
+</html>

@@ -26,19 +26,19 @@
         {
           "id": "s",
           "label": "4 a 6",
-          "price": 14,
+          "price": 0,
           "serves": "4–6"
         },
         {
           "id": "m",
           "label": "8 a 10",
-          "price": 22,
+          "price": 8,
           "serves": "8–10"
         },
         {
           "id": "l",
           "label": "12 a 16",
-          "price": 34,
+          "price": 20,
           "serves": "12–16"
         }
       ]
@@ -77,7 +77,7 @@
       "category": "calendari",
       "name": "Tortell de Reis",
       "subtitle": "Massapà, fruita confitada, una figureta i una fava",
-      "price": 22,
+      "price": 14,
       "leadDays": 2,
       "image": null,
       "allergens": [
@@ -185,7 +185,7 @@
       "category": "calendari",
       "name": "Coca de Sant Jordi",
       "subtitle": "Amb els colors de la senyera",
-      "price": 16,
+      "price": 8,
       "leadDays": 2,
       "image": null,
       "allergens": [
@@ -210,7 +210,7 @@
       "category": "calendari",
       "name": "Mona de Pasqua",
       "subtitle": "Pa de pessic, xocolata, ous durs i plomes",
-      "price": 28,
+      "price": 20,
       "leadDays": 4,
       "image": null,
       "allergens": [
@@ -238,7 +238,7 @@
       "category": "calendari",
       "name": "Coca de Sant Joan",
       "subtitle": "Fruita confitada i pinyons",
-      "price": 18,
+      "price": 10,
       "leadDays": 2,
       "image": null,
       "allergens": [
@@ -251,7 +251,7 @@
         "mida"
       ],
       "defaults": {
-        "mida": "l"
+        "mida": "m"
       },
       "addons": [
         "caixa"

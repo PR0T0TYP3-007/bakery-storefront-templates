@@ -108,3 +108,58 @@ test('occurrences spans the year boundary in both directions', () => {
   assert.ok(years.has(2027), 'next year never appears');
   assert.ok(years.has(2026), 'this year disappears');
 });
+
+/**
+ * Option prices are deltas, not sizes.
+ *
+ * `shared/core/pricing.js` adds the chosen option's price to the product's
+ * own, and Template 05's data is written that way. This template's sizes
+ * were first written as absolute prices, so a tortell cost its own price
+ * plus the whole price of its size again — 22 € became 44 €, and the page
+ * showed "NaN €" only because of a separate bug that happened to mask it.
+ *
+ * The convention has no schema to enforce it, so it has this.
+ */
+test('every option group is a ladder of deltas from zero', () => {
+  for (const [id, group] of Object.entries(catalogue.optionGroups ?? {})) {
+    const prices = group.options.map((o) => o.price ?? 0);
+
+    assert.ok(prices.includes(0),
+      `option group "${id}" has no zero option, so no size is the product's own price`);
+
+    assert.ok(prices.every((n) => n >= 0),
+      `option group "${id}" has a negative delta, which means the base price is not the cheapest`);
+
+    assert.deepEqual([...prices].sort((a, b) => a - b), prices,
+      `option group "${id}" is not ordered cheapest first`);
+  }
+});
+
+test('no product is priced below its cheapest configuration', () => {
+  for (const p of catalogue.products) {
+    for (const groupId of p.options ?? []) {
+      const group = catalogue.optionGroups[groupId];
+      assert.ok(group, `"${p.id}" uses option group "${groupId}", which does not exist`);
+
+      const cheapest = Math.min(...group.options.map((o) => o.price ?? 0));
+      assert.ok(p.price + cheapest > 0,
+        `"${p.id}" at its cheapest size costs ${p.price + cheapest}`);
+
+      /* The shop tile prints "des de <price>", so the product price has to
+         BE the cheapest configuration or that label is a lie. */
+      assert.equal(cheapest, 0,
+        `"${p.id}" has no size at its own price, so "des de" would understate it`);
+    }
+  }
+});
+
+test('every default names an option that exists', () => {
+  for (const p of catalogue.products) {
+    for (const [groupId, want] of Object.entries(p.defaults ?? {})) {
+      const group = catalogue.optionGroups[groupId];
+      assert.ok(group, `"${p.id}" defaults a group "${groupId}" that does not exist`);
+      assert.ok(group.options.some((o) => o.id === want),
+        `"${p.id}" defaults "${groupId}" to "${want}", which is not one of its options`);
+    }
+  }
+});

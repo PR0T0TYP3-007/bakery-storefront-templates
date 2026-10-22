@@ -359,11 +359,49 @@ English so the shared code keeps working.
 Verified: contrast sweep clean at 1320 and 375, no sideways scroll at either, all 230 tests
 pass, `node build.mjs` picks 06 up (44 pages).
 
+**22 Oct, third stretch — `botiga.html` and `producte.html`.**
+
+The shop lists the whole year, including what cannot be sold today, ordered by the calendar
+rather than by the catalogue file: on the taulell now, then nearest, then everything made
+every morning. Filters and search live in the URL, so a filtered shop is a link.
+
+Three things worth knowing, because none is obvious from the code:
+
+1. **Option prices are deltas, not sizes.** `shared/core/pricing.js` adds the chosen option's
+   price to the product's own, which is how Template 05's data is written. 06's sizes were
+   written as absolute prices, so a tortell cost 22 € plus the whole 22 € of its size again.
+   The page showed `NaN €` instead, which hid it — `session.priceOf()` returns a `LinePrice`
+   object, not a number, and `Intl` rendered the object as NaN. Two bugs, one of them masking
+   the other. `mida` is now `0 / +8 / +20`, each product's `price` is its smallest size, and
+   `tests/config.test.js` has three guards for the convention, proved by putting the absolute
+   prices back and watching two of them fail.
+   The coca de Sant Joan's default moved from the largest size to the middle: at 18 € for the
+   largest, a shared ladder would have put its smallest below zero. 18 € is still the price of
+   the one most people buy.
+
+2. **The product page refuses orders it cannot take.** The forn books 30 days out
+   (`maxDaysAhead`). In October a tortell de Reis is 76 days away, and `session.add()` was
+   quietly putting it down for collection three days later — the shared fall-forward knows
+   about lead days and capacity and has never heard of the calendar. It now says *"encara no:
+   n'agafem comandes a partir del 23 de novembre"*. Inside the window, the collection day
+   moves to the day the forn starts making them and `add` takes it from there.
+   **This is the pattern the basket and checkout pages have to follow too** — nothing else
+   stops a January tortell being collected in October.
+
+3. **`toast.js` was rewritten, not copied.** 05's imports `./icons.js`, which this template
+   does not have and should not get: a drawn tick in a circle is the one thing a system built
+   on surfaces meeting surfaces never does. It also interpolated caller strings into
+   `innerHTML`; text goes in as text now.
+
+Verified: contrast sweep clean on both pages at desktop and 375, no sideways scroll, add-to-
+basket works end to end (count, toast, moved-day sentence), a bad `?id=` lands on a real page,
+233 tests pass, build at 46 pages.
+
 Next, in order:
-1. The remaining eight pages: `botiga`, `producte` (where `seasonLine()` earns the template),
-   `calendari`, `cistella`, `pagament`, `confirmacio`, `visita`, `404`.
-2. The style guide.
-3. Photography (the template needs its own set — see §5 item 1).
+1. `cistella` and `pagament` — and the season rule from (2) above belongs in both.
+2. `calendari`, `visita`, `confirmacio`, `404`.
+3. The style guide.
+4. Photography (the template needs its own set — see §5 item 1).
 
 Not started: the Catalan/Spanish/English glossing mechanism. Still unverified: the fonts
 against Catalan glyphs — ç, à, è, í, ï, ú and the interpunct ·. The home page renders

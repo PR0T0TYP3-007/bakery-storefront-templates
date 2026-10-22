@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forn de la Plaça</title>
+<meta name="description" content="Una cosa del Forn de la Plaça: què porta, quan es fa i quants dies cal avisar.">
+
+<link rel="preload" href="assets/fonts/zillaslab.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/sourcesans.woff2" as="font" type="font/woff2" crossorigin>
+
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/calendar.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/thing.css">
+</head>
+<body>
+<a class="skip" href="#cosa">Vés al producte</a>
+<div data-header></div>
+
+<main id="main">
+  <section class="band band--marble-2 section" id="cosa">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Sou aquí">
+        <a class="link" href="botiga.html">La botiga</a>
+        <span aria-hidden="true">·</span>
+        <span data-crumb></span>
+      </nav>
+
+      <div class="thing" data-thing>
+        <noscript>
+          <p class="note">
+            Aquesta pàgina necessita JavaScript. Truqueu-nos al 93 441 00 00
+            i us ho direm, o mireu <a href="visita.html">les hores</a>.
+          </p>
+        </noscript>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer data-footer></footer>
+
+<script type="module" src="js/pages/producte.js"></script>
+</body>
+</html>

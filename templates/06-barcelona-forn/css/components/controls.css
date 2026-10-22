@@ -49,3 +49,81 @@
   background: var(--marble-2);
   color: var(--ink);
 }
+
+/* ==========================================================================
+   Filters and search
+   ========================================================================== */
+
+/* Flex rather than grid, because the number of categories comes from the
+   merchant config. A grid left four of them as three-and-a-hole, with the
+   grout colour sitting in the empty cell; flex stretches the last row. */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--grout);
+  background: var(--marble-3);
+  outline: var(--grout) solid var(--marble-3);
+}
+
+/* A filter is a tile that changes surface, which is the same move the whole
+   template makes. No pill, no ring, no underline. */
+.filter {
+  flex: 1 1 11rem;
+  display: grid;
+  gap: 2px;
+  min-height: var(--tap);
+  padding: var(--s-3) var(--s-4);
+  border: 0;
+  background: var(--marble);
+  color: var(--ink);
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.filter:hover { background: var(--marble-2); }
+
+.filter__label {
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.filter__note { color: var(--ink-3); }
+
+.filter.is-on {
+  background: var(--tile-3);
+  color: var(--marble);
+}
+
+.filter.is-on .filter__note {
+  color: color-mix(in oklab, var(--marble) 80%, transparent);
+}
+
+.find {
+  display: flex;
+  gap: var(--grout);
+  margin-top: var(--s-4);
+}
+
+.find__in {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: var(--tap);
+  padding-inline: var(--s-4);
+  border: 0;
+  background: var(--marble);
+  color: var(--ink);
+}
+
+.find__in::placeholder { color: var(--ink-3); }
+
+/* A button that is a link in all but element. The shop's empty state needs
+   one, and a bare <button> there would be the wrong shape entirely. */
+.btn-as-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}

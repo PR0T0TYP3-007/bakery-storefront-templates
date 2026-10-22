@@ -60,7 +60,9 @@ export function shelfTile(product, { merchant, occasion = null } = {}) {
         </h3>
         ${product.subtitle ? `<p class="tile-card__sub sm">${esc(product.subtitle)}</p>` : ''}
       </div>
-      <p class="tile-card__price money">${esc(money(price, merchant))}</p>
+      <p class="tile-card__price money">${
+        product.options?.length ? '<span class="tile-card__from sm">des de </span>' : ''
+      }${esc(money(price, merchant))}</p>
     </article>`;
 }
 
@@ -141,6 +143,56 @@ export function renderComing(el, { merchant, catalogue, today = new Date(), limi
     .join('');
 
   return next.length;
+}
+
+/**
+ * The year entry that governs a product, if one does.
+ *
+ * The join is `productId` on the merchant's year, not a flag on the product,
+ * because the same cake could be a calendar item at one forn and an everyday
+ * one at another. The calendar belongs to the shop.
+ */
+export function entryFor(merchant, productId) {
+  return (merchant.year ?? []).find((e) => e.productId === productId) ?? null;
+}
+
+/**
+ * One thing in the shop, with its place in the year on it.
+ *
+ * The state line is the point. A shop that hid what it cannot sell today
+ * would be every other shop, and it would throw away the only thing this
+ * template knows: that a tortell in March is not sold out, it is simply
+ * March, and it comes back on the sixth of January.
+ */
+export function shopTile(product, { merchant, today = new Date() } = {}) {
+  const entry = entryFor(merchant, product.id);
+  const season = entry ? seasonLine(entry, { merchant, today }) : null;
+
+  return `
+    <article class="tile-card${season ? ` is-${season.state}` : ''}">
+      <div class="tile-card__body">
+        ${
+          season
+            ? `<p class="state state--${season.state}">
+                 <span class="state__dot" aria-hidden="true"></span>
+                 ${season.state === 'on' ? 'Ara al taulell' : esc(entry.day)}
+               </p>`
+            : ''
+        }
+        <h3 class="tile-card__name t-3">
+          <a href="producte.html?id=${encodeURIComponent(product.id)}">${esc(product.name)}</a>
+        </h3>
+        ${product.subtitle ? `<p class="tile-card__sub sm">${esc(product.subtitle)}</p>` : ''}
+        ${
+          season && season.state === 'coming'
+            ? `<p class="tile-card__when sm">${esc(season.text)}</p>`
+            : ''
+        }
+      </div>
+      <p class="tile-card__price money">${
+        product.options?.length ? '<span class="tile-card__from sm">des de </span>' : ''
+      }${esc(money(product.price, merchant))}</p>
+    </article>`;
 }
 
 /**

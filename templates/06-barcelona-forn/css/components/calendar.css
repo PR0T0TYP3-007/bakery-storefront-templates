@@ -139,3 +139,46 @@
 .coming__item:first-child .coming__when {
   color: var(--ink-2);
 }
+
+/* --------------------------------------------------------------------------
+   Where a thing sits in the year
+
+   Three states, and the colour is never the only carrier: each one says its
+   own words. The dot is decoration on top of a sentence, not the sentence.
+   -------------------------------------------------------------------------- */
+.state {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-family: var(--font-display);
+  font-size: var(--t-label);
+  font-weight: 600;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+}
+
+.state__dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  background: currentColor;
+  flex: none;
+}
+
+.state--on { color: var(--ready); }
+.state--coming { color: var(--soon); }
+
+/* Out of season is a lighter tile, not a greyed-out one: it is still for
+   sale, just not today, and dimming it would say the opposite. */
+.tile-card.is-coming { background: var(--marble-2); }
+
+.tile-card__when {
+  margin-top: var(--s-2);
+  color: var(--ink-2);
+  max-width: 34ch;
+}
+
+.tile-card__from {
+  font-family: var(--font-ui);
+  font-weight: 400;
+  color: var(--ink-2);
+}

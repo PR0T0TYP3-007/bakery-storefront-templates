@@ -1,0 +1,226 @@
+/* ==========================================================================
+   One thing: the product page, and the toast that follows a purchase.
+   ========================================================================== */
+
+.crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s-2);
+  color: var(--ink-2);
+  font-size: var(--t-sm);
+}
+
+.thing__grid {
+  display: grid;
+  gap: var(--s-6);
+  margin-top: var(--s-5);
+  align-items: start;
+}
+
+@media (min-width: 60rem) {
+  /* The words take the room; the form is a fixed column beside them, and it
+     follows the page down because a long description would otherwise scroll
+     the only thing you came here to press off the screen. */
+  .thing__grid {
+    grid-template-columns: minmax(0, 1fr) 22rem;
+    gap: var(--s-7);
+  }
+
+  .thing__buy {
+    position: sticky;
+    top: calc(var(--header-h) + var(--s-5));
+  }
+}
+
+/* --------------------------------------------------------------------------
+   The season sentence
+
+   The template's one real trick, so it is set as a statement and given its
+   own surface rather than being tucked under the subtitle.
+   -------------------------------------------------------------------------- */
+.season {
+  margin-top: var(--s-5);
+  padding: var(--s-4);
+  font-family: var(--font-display);
+  font-size: var(--t-3);
+  font-weight: 600;
+  line-height: var(--lh-snug);
+  max-width: 40ch;
+}
+
+/* Both states take the same surface. Out of season is not a warning: it is
+   information, the sentence already says the date, and the state line above
+   has already said which it is in words and in colour. */
+.season--on,
+.season--coming {
+  background: var(--marble);
+  color: var(--ink);
+}
+
+/* --------------------------------------------------------------------------
+   Allergens
+   -------------------------------------------------------------------------- */
+.alrg {
+  margin-top: var(--s-6);
+  padding-top: var(--s-5);
+  max-width: var(--measure);
+}
+
+.alrg__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--grout);
+  list-style: none;
+  margin: var(--s-3) 0 0;
+  padding: 0;
+}
+
+.alrg__list li {
+  margin: 0;
+  padding: var(--s-2) var(--s-3);
+  background: var(--marble);
+  color: var(--ink);
+  font-size: var(--t-sm);
+}
+
+/* --------------------------------------------------------------------------
+   The buy form
+   -------------------------------------------------------------------------- */
+.thing__buy {
+  display: grid;
+  gap: var(--s-4);
+}
+
+.thing__price {
+  font-size: var(--t-1);
+  line-height: 1;
+}
+
+.thing__buy [data-lead] { margin-top: calc(var(--s-3) * -1); }
+
+.opt {
+  display: grid;
+  gap: var(--grout);
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.opt legend {
+  margin-bottom: var(--s-3);
+  color: var(--ink-3);
+}
+
+/* A row of the form is a tile too: the chosen one changes surface. The
+   native control stays, because a radio that has been restyled into a
+   coloured square is a radio nobody can tell is checked. */
+.opt__row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: baseline;
+  gap: var(--s-3);
+  min-height: var(--tap);
+  padding: var(--s-3);
+  background: var(--marble-2);
+  cursor: pointer;
+}
+
+.opt__row:hover { background: var(--marble-3); }
+
+.opt__row:has(:checked) {
+  background: var(--tile-3);
+  color: var(--marble);
+}
+
+.opt__row:has(:checked) .opt__note {
+  color: color-mix(in oklab, var(--marble) 80%, transparent);
+}
+
+.opt__row input {
+  accent-color: var(--tile-3);
+  margin: 0;
+  align-self: center;
+}
+
+.opt__row:has(:checked) input { accent-color: var(--marble); }
+
+.opt__price { white-space: nowrap; }
+
+.qty {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+}
+
+.qty__in {
+  width: 5rem;
+  min-height: var(--tap);
+  padding-inline: var(--s-3);
+  border: 0;
+  background: var(--marble-2);
+  color: var(--ink);
+  text-align: center;
+}
+
+/* --------------------------------------------------------------------------
+   Toasts
+   -------------------------------------------------------------------------- */
+.toasts {
+  position: fixed;
+  left: var(--s-4);
+  bottom: var(--s-4);
+  z-index: 100;
+  display: grid;
+  gap: var(--grout);
+  width: min(26rem, calc(100% - var(--s-4) * 2));
+}
+
+.toast {
+  padding: var(--s-4);
+  background: var(--tile-3);
+  color: var(--marble);
+}
+
+.toast--bad {
+  background: var(--gone);
+  color: var(--marble);
+}
+
+.toast__body {
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+.toast__body small {
+  display: block;
+  margin-top: var(--s-2);
+  font-family: var(--font-ui);
+  font-weight: 400;
+  font-size: var(--t-sm);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .toast {
+    animation: toast-in var(--t-fast) var(--ease);
+  }
+
+  .toast[data-out] {
+    opacity: 0;
+    transition: opacity 240ms var(--ease);
+  }
+
+  @keyframes toast-in {
+    from { opacity: 0; transform: translateY(0.5rem); }
+  }
+}
+
+/* A thing that cannot be ordered yet. Not a disabled button — a disabled
+   button invites a click and then says nothing — but the date orders open,
+   on the shop's own surface. */
+.tooearly {
+  padding: var(--s-4);
+  background: var(--marble-2);
+  color: var(--ink);
+}
