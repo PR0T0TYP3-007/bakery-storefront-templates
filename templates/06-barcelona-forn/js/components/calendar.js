@@ -241,6 +241,43 @@ export function shopTile(product, { merchant, today = new Date() } = {}) {
 }
 
 /**
+ * The reason a collection day will not work for what is in the basket.
+ *
+ * `dayState` knows about lead times, opening hours, holidays and capacity.
+ * It has never heard of the calendar, so on its own it will happily agree
+ * to hand over a tortell de Reis in October. The product page refuses to
+ * put an out-of-window item in the basket at all, but nothing stopped the
+ * day being dragged backwards afterwards — so the basket checks again, and
+ * so does the checkout.
+ *
+ * @returns {string|null} the sentence, or null when the day is fine
+ */
+export function seasonBlocker(lines, { merchant, products, when }) {
+  for (const line of lines ?? []) {
+    const entry = entryFor(merchant, line.productId);
+    if (!entry) continue;
+
+    const next = nextFor(entry, when);
+    if (!next || next.status === 'on') continue;
+
+    const name = products.find((p) => p.id === line.productId)?.name ?? entry.day;
+
+    /* The year, whenever it is not the one being looked at. Picking a day in
+       late November rolls Tots Sants round to the following year, and "from
+       22 October" with no year reads as a date that has already gone. */
+    const crossesYear = next.from.getFullYear() !== when.getFullYear();
+    const from = new Intl.DateTimeFormat(merchant.locale, {
+      day: 'numeric',
+      month: 'long',
+      ...(crossesYear ? { year: 'numeric' } : {}),
+    }).format(next.from);
+
+    return `We do not make ${name} on that day. They are for ${entry.day}, from ${from}.`;
+  }
+  return null;
+}
+
+/**
  * The sentence a product page needs when it is out of season.
  *
  * This is the template's one genuinely useful trick, and it only works if it

@@ -203,3 +203,33 @@ test('every default names an option that exists', () => {
     }
   }
 });
+
+/**
+ * Closed days are day NUMBERS, not names.
+ *
+ * `shared/core/fulfilment.js` does `day.getDay()`, which returns 0–6, and
+ * compares it against `closedWeekdays`. This file held `["Monday"]`, which
+ * never matched anything, so the basket cheerfully offered Monday collection
+ * at a shop that is shut on Mondays. Nothing failed, nothing warned — the
+ * comparison was simply always false.
+ *
+ * The two lists also have to agree with each other, because `hours` is what
+ * the footer prints and `closedWeekdays` is what the booking logic reads.
+ */
+test('closed weekdays are numbers, and agree with the printed hours', () => {
+  const WEEK = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+  for (const d of merchant.closedWeekdays ?? []) {
+    assert.equal(typeof d, 'number',
+      `closedWeekdays holds ${JSON.stringify(d)}; fulfilment.js compares Date#getDay(), a number`);
+    assert.ok(Number.isInteger(d) && d >= 0 && d <= 6, `${d} is not a weekday index`);
+  }
+
+  const shutByNumber = new Set(merchant.closedWeekdays ?? []);
+  const shutByHours = new Set(
+    merchant.hours.filter((h) => !h.open).map((h) => WEEK.indexOf(h.day))
+  );
+
+  assert.deepEqual([...shutByNumber].sort(), [...shutByHours].sort(),
+    'the days with no opening hours and the days the booking logic refuses are different lists');
+});

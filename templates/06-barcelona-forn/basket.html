@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your basket — Forn de la Plaça</title>
+<meta name="description" content="What you have asked us to put aside, and the day you are collecting it.">
+<meta name="robots" content="noindex">
+
+<link rel="preload" href="assets/fonts/zillaslab.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/sourcesans.woff2" as="font" type="font/woff2" crossorigin>
+
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/calendar.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/thing.css">
+<link rel="stylesheet" href="css/components/order.css">
+</head>
+<body>
+<a class="skip" href="#basket">Skip to the basket</a>
+<div data-header></div>
+
+<main id="main">
+  <section class="band band--marble-2 section" id="basket">
+    <div class="wrap">
+      <h1 class="t-1">Your basket</h1>
+
+      <div class="order" data-order hidden>
+        <div class="order__lines" data-lines></div>
+
+        <aside class="order__side" data-side>
+          <!-- The collection day lives with the total, not buried under the
+               lines: for a shop whose whole argument is the calendar, when
+               you are coming is as much the order as what is in it. -->
+          <section class="panel panel--marble when" aria-labelledby="when-h">
+            <h2 class="label" id="when-h">Collecting</h2>
+            <p class="when__day t-3" data-when-day>—</p>
+
+            <label class="vh" for="when">Collection day</label>
+            <input class="when__in" id="when" type="date" data-when>
+
+            <p class="when__note sm" role="status" data-when-note></p>
+
+            <p class="sm dim when__where" data-where></p>
+          </section>
+
+          <section class="panel panel--tile-3 totals" aria-labelledby="total-h">
+            <h2 class="label" id="total-h">Total</h2>
+            <dl class="totals__list" data-totals></dl>
+            <a class="btn btn--block btn--on-tile" href="checkout.html" data-go>Checkout</a>
+            <p class="sm dim" style="margin-top:var(--s-3)" data-tax></p>
+          </section>
+        </aside>
+      </div>
+
+      <div data-empty hidden>
+        <p class="lede" style="margin-top:var(--s-4)">
+          Nothing in it yet.
+        </p>
+        <p style="margin-top:var(--s-5)">
+          <a class="btn" href="shop.html">See the shop</a>
+        </p>
+      </div>
+
+      <noscript>
+        <p class="note" style="margin-top:var(--s-5)">
+          The basket needs JavaScript. Call us on 93 441 00 00 and we will put
+          it aside for you, or see <a href="visit.html">our hours</a>.
+        </p>
+      </noscript>
+    </div>
+  </section>
+</main>
+
+<footer data-footer></footer>
+
+<script type="module" src="js/pages/basket.js"></script>
+</body>
+</html>

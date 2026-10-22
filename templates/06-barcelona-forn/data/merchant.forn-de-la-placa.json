@@ -67,7 +67,7 @@
     }
   ],
   "closedWeekdays": [
-    "Monday"
+    1
   ],
   "closedDates": [
     "2026-08-10",

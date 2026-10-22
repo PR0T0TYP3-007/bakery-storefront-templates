@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checkout — Forn de la Plaça</title>
+<meta name="description" content="When you are collecting, who we should ask for, and paying.">
+<meta name="robots" content="noindex">
+
+<link rel="preload" href="assets/fonts/zillaslab.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/sourcesans.woff2" as="font" type="font/woff2" crossorigin>
+
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/calendar.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/thing.css">
+<link rel="stylesheet" href="css/components/order.css">
+</head>
+<body>
+<a class="skip" href="#checkout">Skip to the form</a>
+<div data-header></div>
+
+<main id="main">
+  <section class="band band--marble-2 section" id="checkout">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a class="link" href="basket.html">Your basket</a>
+        <span aria-hidden="true">·</span>
+        <span>Checkout</span>
+      </nav>
+
+      <h1 class="t-1" style="margin-top:var(--s-4)">Checkout</h1>
+
+      <div class="order" data-order hidden>
+        <form class="pay" data-pay novalidate>
+          <!-- Collection only. `capabilities.delivery` is false for this
+               merchant, and a delivery option that cannot be chosen is
+               worse than no option at all. The page says so once, plainly,
+               rather than showing a disabled control. -->
+          <section class="panel panel--marble">
+            <h2 class="label">Collecting</h2>
+            <p class="t-3" style="margin-top:var(--s-2)" data-when-day>—</p>
+            <p class="sm dim" style="margin-top:var(--s-2)" data-where></p>
+            <p class="sm" style="margin-top:var(--s-3)">
+              <a class="link" href="basket.html">Change the day</a>
+            </p>
+          </section>
+
+          <section class="panel panel--marble">
+            <h2 class="label" id="slot-h">What time</h2>
+            <p class="sm dim" style="margin-top:var(--s-2)">
+              Roughly. Nobody is counting.
+            </p>
+            <div class="slots" style="margin-top:var(--s-3)" role="radiogroup"
+                 aria-labelledby="slot-h" data-slots></div>
+            <p class="sm field__bad" style="margin-top:var(--s-3)" data-slot-bad hidden></p>
+          </section>
+
+          <section class="panel panel--marble">
+            <h2 class="label">Who we should ask for</h2>
+
+            <div class="pay__pair" style="margin-top:var(--s-3)">
+              <p class="field">
+                <label for="name">Name</label>
+                <input id="name" name="name" type="text" autocomplete="name" required>
+                <span class="sm field__bad" data-bad-for="name" hidden></span>
+              </p>
+
+              <p class="field">
+                <label for="phone">Phone</label>
+                <input id="phone" name="phone" type="tel" autocomplete="tel" required>
+                <span class="sm field__hint">So we can call if something goes wrong.</span>
+                <span class="sm field__bad" data-bad-for="phone" hidden></span>
+              </p>
+            </div>
+
+            <p class="field" style="margin-top:var(--s-4)">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required>
+              <span class="sm field__hint">For the receipt, and nothing else.</span>
+              <span class="sm field__bad" data-bad-for="email" hidden></span>
+            </p>
+
+            <p class="field" style="margin-top:var(--s-4)">
+              <label for="note">Anything we should know</label>
+              <textarea id="note" name="note" rows="3"></textarea>
+              <span class="sm field__hint">Allergies, a name to pipe, the time you are really coming.</span>
+            </p>
+          </section>
+
+          <section class="panel panel--marble">
+            <h2 class="label">Paying</h2>
+            <p class="sm dim" style="margin-top:var(--s-2)" data-card-hint></p>
+
+            <p class="field" style="margin-top:var(--s-3)">
+              <label for="card">Card number</label>
+              <input id="card" name="card" type="text" inputmode="numeric"
+                     autocomplete="off" placeholder="4242 4242 4242 4242" required>
+              <span class="sm field__bad" data-bad-for="card" hidden></span>
+            </p>
+          </section>
+
+          <div data-declined></div>
+
+          <button class="btn btn--block" type="submit" data-submit>Place the order</button>
+
+          <p class="sm dim" data-tax></p>
+        </form>
+
+        <aside class="order__side">
+          <section class="panel panel--tile-3 totals" aria-labelledby="sum-h">
+            <h2 class="label" id="sum-h">Your order</h2>
+            <ul class="sum" data-sum></ul>
+            <dl class="totals__list" data-totals></dl>
+          </section>
+        </aside>
+      </div>
+
+      <div data-empty hidden>
+        <p class="lede" style="margin-top:var(--s-4)">
+          There is nothing to pay for yet.
+        </p>
+        <p style="margin-top:var(--s-5)">
+          <a class="btn" href="shop.html">See the shop</a>
+        </p>
+      </div>
+
+      <noscript>
+        <p class="note" style="margin-top:var(--s-5)">
+          Ordering needs JavaScript. Call us on 93 441 00 00 and we will take
+          it over the phone.
+        </p>
+      </noscript>
+    </div>
+  </section>
+</main>
+
+<footer data-footer></footer>
+
+<script type="module" src="js/pages/checkout.js"></script>
+</body>
+</html>

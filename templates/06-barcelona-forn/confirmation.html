@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Order placed — Forn de la Plaça</title>
+<meta name="description" content="Your order is in. Here is when to come and what to say.">
+<meta name="robots" content="noindex">
+
+<link rel="preload" href="assets/fonts/zillaslab.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/sourcesans.woff2" as="font" type="font/woff2" crossorigin>
+
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/calendar.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/order.css">
+</head>
+<body>
+<a class="skip" href="#done">Skip to your order</a>
+<div data-header></div>
+
+<main id="main">
+  <section class="band band--terracotta section" id="done">
+    <div class="wrap">
+      <p class="label">Order placed</p>
+      <h1 class="t-hero" style="margin-top:var(--s-3);max-width:16ch" data-head>Thank you.</h1>
+      <p class="lede" style="margin-top:var(--s-4)" data-say></p>
+    </div>
+  </section>
+
+  <section class="band band--marble-2 section">
+    <div class="wrap split split--wide-left">
+      <div>
+        <h2 class="t-2">What to say at the counter</h2>
+        <p class="ref" data-ref>—</p>
+        <p class="sm dim" style="margin-top:var(--s-3)">
+          Or just give your name. We will have written it on the box.
+        </p>
+      </div>
+
+      <div class="prose">
+        <p>
+          We do not send a confirmation email in this demonstration, so take a
+          note of the reference if you want one. Nothing has been charged.
+        </p>
+        <p>
+          If something changes, call us on <strong>93 441 00 00</strong> before
+          the morning of collection and we will sort it out.
+        </p>
+        <p style="margin-top:var(--s-5)">
+          <a class="btn" href="shop.html">Back to the shop</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer data-footer></footer>
+
+<script type="module" src="js/pages/confirmation.js"></script>
+</body>
+</html>

@@ -477,12 +477,48 @@ Also fixed: drinks are `kind: 'everyday'`, so they were appearing in the counter
 as on their own card. The counter answers "what is baked today" and a coffee is not an answer
 to that.
 
+**22 Oct, sixth stretch — basket, checkout, confirmation.**
+
+The whole order path works end to end: add, change quantity, change the collection day, pick a
+time, pay, land on a reference. Verified by driving it, including both failure cards.
+
+**A real bug, found by testing a Monday.** `closedWeekdays` in this merchant file held
+`["Monday"]`, but `shared/core/fulfilment.js` compares `Date#getDay()`, which is a **number**.
+Every other merchant file in the repo uses numbers. The comparison was simply always false, so
+the shop had been quietly offering Monday collection since the config was written — nothing
+threw, nothing warned. `config.test.js` now asserts the values are weekday indices *and* that
+they agree with the `hours` list the footer prints; proved by putting the string back and
+watching it fail.
+
+**`dayState` returns a word, and a word is not an answer.** "lead" tells a customer nothing, so
+each of the five states becomes the sentence somebody at the counter would say — *"We are
+closed on Mondays"*, *"We are shut that week — the whole shop goes to the beach"*, *"That day
+is full. We only make so much."*
+
+**The season rule is now in three places**, because `dayState` has never heard of the calendar:
+the product page refuses to add an out-of-window item, and `seasonBlocker()` in
+`components/calendar.js` re-checks in the basket (the day can be dragged backwards afterwards)
+and again at the top of the checkout (stale tab, edited URL). Its message carries the year
+whenever the season rolls into the next one — "from 22 October" with no year reads as a date
+that has already gone.
+
+**Payment failure is shown, not described.** `4242…` goes through, `4000 0000 0000 0002`
+declines, `4000 0000 0000 0119` fails to reach the provider. The basket is cleared only after
+the order exists, so a declined card leaves the customer with their basket intact.
+
+The confirmation reads everything from the query string rather than session state, so it
+survives a refresh and a bookmark, and it says so plainly when it is opened without a
+reference instead of rendering an empty page.
+
 Next, in order:
-1. `basket` and `checkout` — and the season rule (orders refused beyond the booking window)
-   belongs in both.
-2. `calendar`, `visit`, `confirmation`, `404`.
+1. `calendar` — the whole year on one page. The data and `js/year.js` are already there.
+2. `visit`, `404`.
 3. The style guide.
 4. Template 07.
+
+Open design note from the client: *"could need improvement in design"* — accepted, no specifics
+given yet. The weakest thing now is probably the basket line at phone width, where the quantity
+box and the remove link each take a row of their own.
 
 Not started: the Catalan/Spanish/English glossing mechanism. Still unverified: the fonts
 against Catalan glyphs — ç, à, è, í, ï, ú and the interpunct ·. The home page renders
