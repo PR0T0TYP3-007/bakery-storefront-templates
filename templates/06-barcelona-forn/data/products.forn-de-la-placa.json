@@ -15,6 +15,11 @@
       "id": "pa",
       "label": "Bread",
       "note": null
+    },
+    {
+      "id": "begudes",
+      "label": "To drink",
+      "note": "All day"
     }
   ],
   "optionGroups": {
@@ -447,6 +452,111 @@
       "defaults": {},
       "addons": [],
       "description": null
+    },
+    {
+      "id": "cafe-sol",
+      "kind": "everyday",
+      "category": "begudes",
+      "name": "Cafè sol",
+      "subtitle": "A single shot, in a small cup",
+      "price": 1.4,
+      "leadDays": 0,
+      "image": {
+        "src": "cafe-sol",
+        "alt": "A cup of black coffee on a marble counter"
+      },
+      "allergens": [],
+      "options": [],
+      "defaults": {},
+      "addons": [],
+      "description": "What you order standing at the counter. One euro forty, and nobody hurries you."
+    },
+    {
+      "id": "tallat",
+      "kind": "everyday",
+      "category": "begudes",
+      "name": "Tallat",
+      "subtitle": "Espresso cut with a little hot milk",
+      "price": 1.6,
+      "leadDays": 0,
+      "image": null,
+      "allergens": [
+        "milk"
+      ],
+      "options": [],
+      "defaults": {},
+      "addons": [],
+      "description": "A cortado, if you grew up calling it that. The milk is there to take the edge off, not to fill the cup."
+    },
+    {
+      "id": "cafe-amb-llet",
+      "kind": "everyday",
+      "category": "begudes",
+      "name": "Cafè amb llet",
+      "subtitle": "Coffee and hot milk, a full cup",
+      "price": 1.9,
+      "leadDays": 0,
+      "image": {
+        "src": "espresso",
+        "alt": "Espresso pulling into a glass"
+      },
+      "allergens": [
+        "milk"
+      ],
+      "options": [],
+      "defaults": {},
+      "addons": [],
+      "description": "The morning one. Most people have it with a croissant and read the paper standing up."
+    },
+    {
+      "id": "xocolata",
+      "kind": "everyday",
+      "category": "begudes",
+      "name": "Xocolata desfeta",
+      "subtitle": "Thick drinking chocolate, spoon included",
+      "price": 3.2,
+      "leadDays": 0,
+      "image": null,
+      "allergens": [
+        "milk"
+      ],
+      "options": [],
+      "defaults": {},
+      "addons": [],
+      "description": "Thick enough that the spoon stands in it. Winter, and with xurros if we have them."
+    },
+    {
+      "id": "te",
+      "kind": "everyday",
+      "category": "begudes",
+      "name": "Te",
+      "subtitle": "A pot, with leaves not bags",
+      "price": 2.4,
+      "leadDays": 0,
+      "image": {
+        "src": "tea",
+        "alt": "A teapot in low morning light"
+      },
+      "allergens": [],
+      "options": [],
+      "defaults": {},
+      "addons": [],
+      "description": "Mint, camomile or black. The pot holds two cups and the second is always better."
+    },
+    {
+      "id": "orxata",
+      "kind": "everyday",
+      "category": "begudes",
+      "name": "Orxata",
+      "subtitle": "Tiger nut milk, cold, from June",
+      "price": 2.8,
+      "leadDays": 0,
+      "image": null,
+      "allergens": [],
+      "options": [],
+      "defaults": {},
+      "addons": [],
+      "description": "From June until it gets cold again. Made with tiger nuts, served so cold it hurts a little."
     }
   ]
 }

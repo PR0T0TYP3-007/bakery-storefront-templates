@@ -121,31 +121,132 @@
    place --ochre is allowed — ochre fails as text on both surfaces (2.70 and
    2.42) and is fine as a painted quarter of a tile.
    -------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------
+   THE HERO
+
+   The first version was a claim on a flat blue field with a photograph in a
+   box to the right of it. That is a layout, not a design: the room was
+   reduced to a thumbnail, the blue did nothing but sit there, and the page
+   opened cold.
+
+   This one stacks everything in one place — photograph, wash, type, floor —
+   so the room is the page rather than an illustration on it.
+
+     - The photograph fills the section and is cropped by it, not fitted
+       into a box.
+     - `--tile` washes in from the left and the bottom, opaque where the
+       words are and gone by the right-hand edge. The page colour and the
+       photograph become one surface, which is also what makes white type
+       legible without a flat grey scrim over the whole picture.
+     - The tiled floor runs along the bottom edge as the join, the way the
+       hydraulic tiles meet the wall in the shop.
+   -------------------------------------------------------------------------- */
 .hero {
+  position: relative;
+  isolation: isolate;
   display: grid;
   align-items: end;
-  gap: var(--s-5);
+  min-height: min(44rem, 82vh);
+  /* The floor is laid over the bottom edge, so the words have to clear it.
+     Without this the motto sat underneath the tiles and was unreadable. */
+  padding-block: var(--s-7) calc(var(--s-7) + var(--tile-unit) * 0.5);
+  overflow: hidden;
+  background: var(--tile-3);
 }
 
-/* Narrow, the side panel would be a stripe, and the band under the hero is
-   already doing this job. This sits BEFORE the media query: both rules have
-   the same specificity, so the later one wins whatever the width, and with
-   them the other way round the panel never appeared at all. */
-.hero__pattern,
-.hero__shot { display: none; }
+.hero__img {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* The room is warm and the page is blue; without this the photograph is a
+     stranger on the page. A touch of saturation and warmth pulls it toward
+     the palette rather than forcing the palette toward it. */
+  filter: saturate(0.92) contrast(1.02);
+}
 
-@media (min-width: 60rem) {
-  /* The claim takes the left; the tiling takes the rest. Before this the
-     right-hand sixty per cent of the first screen was flat ground, which
-     read as a page that had not finished loading. */
-  .hero {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
-    gap: var(--s-7);
-    align-items: stretch;
+/* The wash. Two gradients, not one: along the page and up from the floor,
+   so the type sits in the deepest part of both and the top right of the
+   photograph stays a photograph. */
+.hero__wash {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(
+      to right,
+      var(--tile-3) 0%,
+      color-mix(in srgb, var(--tile-3) 88%, transparent) 26%,
+      color-mix(in srgb, var(--tile) 52%, transparent) 58%,
+      color-mix(in srgb, var(--tile) 12%, transparent) 100%),
+    linear-gradient(
+      to top,
+      color-mix(in srgb, var(--tile-3) 80%, transparent) 0%,
+      transparent 55%);
+}
+
+.hero__words {
+  position: relative;
+  z-index: 2;
+  color: var(--marble);
+  max-width: 46rem;
+}
+
+.hero__kicker {
+  color: color-mix(in srgb, var(--marble) 86%, transparent);
+}
+
+.hero__claim {
+  margin-top: var(--s-4);
+  max-width: 18ch;
+  text-wrap: balance;
+}
+
+.hero__lede {
+  margin-top: var(--s-5);
+  max-width: 42ch;
+  color: color-mix(in srgb, var(--marble) 94%, transparent);
+}
+
+/* The motto, where it belongs: under the claim, explaining it, rather than
+   being the claim. It is the shop's own words so it keeps its own language. */
+.hero__motto {
+  margin-top: var(--s-6);
+  padding-top: var(--s-4);
+  border-top: 2px solid var(--ochre);
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: var(--t-3);
+  font-weight: 600;
+  color: var(--marble);
+}
+
+/* The join. Half the band height of the one further down the page, because
+   here it is an edge rather than a section. */
+.hero__floor {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  z-index: 1;
+  height: calc(var(--tile-unit) * 0.5);
+  background-size: calc(var(--tile-unit) * 0.5) calc(var(--tile-unit) * 0.5);
+}
+
+@media (max-width: 52rem) {
+  .hero { min-height: 0; }
+
+  /* Narrow, a left-to-right wash puts the type over the busiest part of the
+     picture. It runs bottom-to-top instead. */
+  .hero__wash {
+    background: linear-gradient(
+      to top,
+      var(--tile-3) 0%,
+      color-mix(in srgb, var(--tile-3) 92%, transparent) 42%,
+      color-mix(in srgb, var(--tile) 58%, transparent) 78%,
+      color-mix(in srgb, var(--tile) 20%, transparent) 100%);
   }
-
-  .hero__pattern { display: block; }
-  .hero__shot { display: block; }
 }
 
 .pattern {
@@ -165,11 +266,6 @@
   opacity: 0.9;
 }
 
-/* The same floor, stood on its end beside the claim. */
-.hero__pattern {
-  height: auto;
-  min-height: calc(var(--tile-unit) * 4);
-}
 
 @media (prefers-reduced-motion: no-preference) {
   /* Nothing moves. The pattern is a floor, and floors do not animate. */
@@ -183,6 +279,15 @@
 }
 
 .band--marble { background: var(--marble); color: var(--ink); }
+
+/* The warm band. `--terracotta-deep`, NOT `--terracotta`.
+
+   tokens.css bans small text on `--terracotta` in either direction, and that
+   ban stands: it measures 4.13 for white and 4.05 for ink. The deep one is a
+   different colour — marble on it is 5.50, which is a comfortable pass, and
+   it is the only way this page gets a warm surface that can hold words.
+   Ink on it is 2.78, so it is white-on-warm only, like the tile. */
+.band--terracotta { background: var(--terracotta-deep); color: var(--marble); }
 /* Tiles are laid on this one, so it is a shade down from the tiles. */
 .band--marble-2 { background: var(--marble-2); color: var(--ink); }
 .band--tile-3 { background: var(--tile-3); color: var(--marble); }
@@ -246,20 +351,6 @@
    no border. A photograph is another surface, and surfaces meeting is the
    whole separation system.
    -------------------------------------------------------------------------- */
-.hero__shot {
-  margin: 0;
-  align-self: stretch;
-}
-
-.hero__shot img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  /* A floor under it, so the first screen is never a blank rectangle while
-     the photograph is still in flight. */
-  background: var(--tile-2);
-}
-
 .shopnote__shot {
   margin: var(--s-5) 0 0;
 }

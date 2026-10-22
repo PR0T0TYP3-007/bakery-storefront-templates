@@ -247,3 +247,80 @@
   font-weight: 400;
   color: var(--ink-2);
 }
+
+/* ==========================================================================
+   The card
+
+   What you can drink and what it costs, read top to bottom like the card
+   propped against the till. A grid of tiles would have made six coffees look
+   like six cakes; they are not the same kind of decision and they should not
+   be the same shape on the page.
+   ========================================================================== */
+.card {
+  margin: 0;
+  display: grid;
+}
+
+.card__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-4);
+  padding-block: var(--s-3);
+}
+
+/* The one place in this template with a rule between things. It earns it:
+   a price list is read across the gap, and the eye needs the line to get
+   from the name to the number. Everywhere else, surfaces do the dividing. */
+.card__row + .card__row {
+  border-top: 1px solid color-mix(in srgb, var(--marble) 28%, transparent);
+}
+
+.card__name {
+  display: grid;
+  gap: 2px;
+  font-family: var(--font-display);
+  font-size: var(--t-3);
+  font-weight: 600;
+}
+
+.card__name a { text-decoration: none; }
+.card__name a:hover { text-decoration: underline; }
+
+/* 90%, not the 82% these started at. On the warm band that measured 4.26 —
+   a dimmed white has to be measured against whatever it is dimmed onto, and
+   the alpha that reads as "quieter" on a dark blue is a fail on terracotta.
+   This is 4.79. */
+.card__sub {
+  font-family: var(--font-ui);
+  font-weight: 400;
+  color: color-mix(in srgb, var(--marble) 90%, transparent);
+}
+
+.card__price {
+  margin: 0;
+  font-size: 1.125rem;
+  white-space: nowrap;
+}
+
+.drink__shot {
+  margin: 0;
+}
+
+.drink__shot img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  background: var(--terracotta);
+}
+
+.drink__shot figcaption {
+  margin-top: var(--s-3);
+  color: color-mix(in srgb, var(--marble) 90%, transparent);
+}
+
+@media (max-width: 56rem) {
+  /* Stacked, the photograph goes first: it is what says "sit down". */
+  .drink__shot { order: -1; margin-bottom: var(--s-5); }
+  .drink__shot img { aspect-ratio: 3 / 2; }
+}

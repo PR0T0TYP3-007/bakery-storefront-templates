@@ -121,7 +121,13 @@ export function renderShelf(el, { merchant, catalogue, today = new Date() }) {
     .map((o) => ({ product: byId.get(o.entry.productId), occasion: o.entry }))
     .filter((x) => x.product);
 
-  const everyday = catalogue.products.filter((p) => p.kind === 'everyday');
+  /* Food only. The drinks are `kind: 'everyday'` too — they are made every
+     day — but the counter answers "what is baked today", and a coffee is not
+     an answer to that. They have their own card further down the page, and
+     listing them in both places made the counter look like a menu. */
+  const everyday = catalogue.products.filter(
+    (p) => p.kind === 'everyday' && p.category !== 'begudes'
+  );
 
   el.innerHTML = `
     ${

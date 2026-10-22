@@ -434,6 +434,49 @@ The hero photograph is deliberately **not** lazy and its `src` is in the markup,
 by JS — Templates 03 and 05 both shipped a lazy hero that showed as an empty coloured box for
 seconds on a real network.
 
+**22 Oct, fifth stretch — the premise, and a hero worth the name.**
+
+The client's note: *"the image just sitting at the right in a box is bland and bad design"*,
+*"make it a company that sells pastries, cakes and drinks — coffee, tea, espresso"*, and
+*"from the overall design I don't feel anything."* All three are fair, and the third is the
+real one.
+
+**The premise was wrong, not just the hero.** `docs/06-barcelona-forn.md` §5 already says the
+brief asks for *"a place you sit in, not just buy from"* and that the photography should be
+*"interiors as much as product"*. The build had drifted into a bread timetable. A forn on
+Carrer de Blai is where the street has breakfast standing at the counter, so the catalogue now
+has six drinks — cafè sol, tallat, cafè amb llet, xocolata desfeta, te, orxata — and the home
+page has a price card for them on a warm band.
+
+**The hero.** A claim on a flat blue field with a photograph in a box beside it is a layout,
+not a design: the room was a thumbnail and the page opened cold. Now the room is the page —
+full bleed, type set into it, `--tile` washing in from the left and up from the floor so the
+photograph and the page are one surface, and the hydraulic floor running along the bottom edge
+as the join. Below 52rem the wash runs bottom-to-top instead, because left-to-right puts the
+type over the busiest part of the picture.
+
+**The headline moved too.** "The calendar decides." is the template's idea but it is a *rule*,
+and a page that opens with a rule is exactly why this read as a timetable. The claim is now
+*"Coffee every morning. Cake when its day comes."* and the motto sits under it, in Catalan,
+where it explains rather than announces.
+
+**`--terracotta-deep` is now a band colour.** The ban in `tokens.css` is on `--terracotta`
+(4.13 white / 4.05 ink) and it stands. The deep one measures 5.50 for marble on it, and it is
+the only warm surface in the palette that can hold words — without it the page had no warmth
+anywhere that was not a photograph.
+
+**The sweep was wrong again, the same way.** Chrome serialises `color-mix(in srgb, …)` as
+`color(srgb 0.96 0.96 0.95 / 0.86)` — channels 0–1, not 0–255 — and the naive number-grab read
+the whole hero as black-on-black and reported two failures that were not there. Second time
+this class of bug has bitten. `tools/contrast-sweep.js` now parses `color(srgb …)` and
+**throws** on any colour space it does not know, rather than guessing. The one real failure it
+found after the fix was genuine: dimmed white at 82% measures 4.26 on terracotta-deep, so the
+card's subtitles are 90%.
+
+Also fixed: drinks are `kind: 'everyday'`, so they were appearing in the counter grid as well
+as on their own card. The counter answers "what is baked today" and a coffee is not an answer
+to that.
+
 Next, in order:
 1. `basket` and `checkout` — and the season rule (orders refused beyond the booking window)
    belongs in both.

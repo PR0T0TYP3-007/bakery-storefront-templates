@@ -10,10 +10,13 @@
  *      pass. So this walks up to the first opaque ancestor and paints the
  *      stack back down.
  *
- *   2. Chrome serialises `color-mix(in oklab, …)` as `oklab(…)`. A naive
- *      `/[\d.]+/` parse reads the lightness, a and b as three tiny sRGB
- *      channels — i.e. black — and reports four failures in a footer that
- *      was fine. The first run of this file did exactly that.
+ *   2. Chrome serialises colours in whatever space they were written in.
+ *      `color-mix(in oklab, …)` comes back as `oklab(…)`; `color-mix(in
+ *      srgb, …)` comes back as `color(srgb 0.96 0.96 0.95 / 0.86)`, with
+ *      channels in 0–1 rather than 0–255. A naive `/[\d.]+/` parse reads
+ *      either as three tiny sRGB channels — i.e. black — and invents
+ *      failures. This has now bitten twice: once in a footer that was
+ *      fine, and once across a hero that was fine.
  *
  * Usage, in the browser console or via the preview tools:
  *
@@ -41,8 +44,23 @@ window.__contrastSweep = function contrastSweep(root = document.body) {
 
   function parse(str) {
     const n = (str.match(/-?[\d.]+(?:e-?\d+)?/g) || []).map(Number);
-    if (str.startsWith('oklab')) return oklabToRgb(n[0], n[1], n[2], n[3] === undefined ? 1 : n[3]);
     if (str === 'transparent' || !n.length) return [0, 0, 0, 0];
+
+    if (str.startsWith('oklab')) {
+      return oklabToRgb(n[0], n[1], n[2], n[3] === undefined ? 1 : n[3]);
+    }
+
+    /* color(srgb r g b / a) — channels are 0–1 here, not 0–255. */
+    if (str.startsWith('color(srgb')) {
+      return [n[0] * 255, n[1] * 255, n[2] * 255, n[3] === undefined ? 1 : n[3]];
+    }
+
+    /* Anything else in a space this does not know would be read as sRGB and
+       scored wrongly, which is worse than refusing. Shout instead. */
+    if (str.startsWith('color(') || /^(oklch|lab|lch|hwb)\(/.test(str)) {
+      throw new Error(`contrast-sweep cannot parse "${str}" — add the space`);
+    }
+
     return [n[0], n[1], n[2], n[3] === undefined ? 1 : n[3]];
   }
 

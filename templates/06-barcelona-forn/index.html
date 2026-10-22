@@ -42,32 +42,33 @@
 <main id="main">
 
   <!-- ====================================================================
-       The claim.
+       The hero.
 
-       Short, because the page's real content is the counter and the counter
-       is immediately below it. "The calendar decides" is the whole template
-       in three words, and the sentence under it says the consequence rather
-       than explaining the charm.
+       It was a claim on a flat blue field with a photograph in a box beside
+       it, which is a layout, not a design — the room was a thumbnail and the
+       page had no warmth anywhere in it.
+
+       Now the room IS the hero: full bleed, type set into it, and the blue
+       ground washing in from the left so the photograph and the page are one
+       surface instead of two. The floor runs along the bottom edge as the
+       join, the way the tiles meet the wall in the shop itself.
        ==================================================================== -->
-  <section class="wrap section hero">
-    <div>
-      <p class="label dim" data-kicker>Carrer de Blai, Poble-sec · Since 1954</p>
-      <h1 class="t-hero" style="margin-top:var(--s-3);max-width:14ch" data-headline>The calendar decides.</h1>
-      <p class="lede" style="margin-top:var(--s-4)" data-lede></p>
+  <section class="hero">
+    <img class="hero__img" src="assets/img/room-lg.jpg" alt="" fetchpriority="high" data-shopfront>
+    <div class="hero__wash" aria-hidden="true"></div>
+
+    <div class="wrap hero__words">
+      <p class="label hero__kicker" data-kicker>Carrer de Blai, Poble-sec · Since 1954</p>
+      <h1 class="t-hero hero__claim" data-headline>Coffee every morning. Cake when its day comes.</h1>
+      <p class="lede hero__lede" data-lede></p>
+
+      <p class="hero__motto" lang="ca" data-motto></p>
     </div>
 
-    <!-- The counter. Deliberately NOT lazy and NOT deferred: it is the
-         first thing on the page, and Templates 03 and 05 both shipped a
-         `loading="lazy"` hero that showed as an empty coloured box for
-         seconds on a real network. The src is in the markup rather than
-         painted on by JS for the same reason. -->
-    <figure class="hero__shot">
-      <img src="assets/img/counter-lg.jpg" alt="" fetchpriority="high" data-shopfront>
-    </figure>
+    <!-- The floor, along the join. -->
+    <div class="pattern hero__floor" aria-hidden="true"></div>
   </section>
 
-  <!-- A band of the same floor. -->
-  <div class="pattern" aria-hidden="true"></div>
 
   <!-- ====================================================================
        On the counter now.
@@ -95,6 +96,35 @@
           </p>
         </noscript>
       </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       To drink.
+
+       The half of the shop the first build left out entirely. A forn in
+       Barcelona is where the street has breakfast standing at the counter,
+       and a page that only sells loaves is not that place.
+
+       It is a list, not a grid of tiles: six things at four prices, read
+       top to bottom like the card propped on the counter.
+       ==================================================================== -->
+  <section class="band band--terracotta section" id="drink">
+    <div class="wrap split split--wide-left">
+      <div>
+        <div class="sechead">
+          <div class="sechead__title">
+            <h2 class="t-1">To drink</h2>
+          </div>
+        </div>
+        <dl class="card" data-drinks></dl>
+      </div>
+
+      <figure class="drink__shot">
+        <img src="assets/img/cafe-sol-md.jpg" alt="A cup of black coffee on a marble counter"
+             loading="lazy" decoding="async">
+        <figcaption class="sm">Cafè sol, at the counter, standing up.</figcaption>
+      </figure>
     </div>
   </section>
 

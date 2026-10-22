@@ -42,6 +42,7 @@ if (voice) {
   set('[data-kicker]', voice.kicker);
   set('[data-headline]', voice.headline);
   set('[data-lede]', voice.lede);
+  set('[data-motto]', voice.motto);
 }
 
 /* The pictures are in the markup so they start downloading with the page;
@@ -75,6 +76,36 @@ const comingCount = renderComing($('[data-coming]'), { merchant, catalogue, toda
 /* A forn with nothing coming in the next stretch should not show an empty
    heading. The section removes itself rather than standing there blank. */
 if (!comingCount) $('#coming')?.remove();
+
+/* -------------------------------------------------------------------------
+   The card: what you can drink, and what it costs
+   ------------------------------------------------------------------------- */
+const drinks = catalogue.products.filter((p) => p.category === 'begudes');
+const drinkEl = $('[data-drinks]');
+
+if (drinkEl && drinks.length) {
+  const money = new Intl.NumberFormat(merchant.locale, {
+    style: 'currency',
+    currency: merchant.currency,
+    minimumFractionDigits: 2,
+  });
+
+  drinkEl.innerHTML = drinks
+    .map(
+      (p) => `
+        <div class="card__row">
+          <dt class="card__name">
+            <a href="product.html?id=${encodeURIComponent(p.id)}" lang="ca">${esc(p.name)}</a>
+            <span class="card__sub sm">${esc(p.subtitle)}</span>
+          </dt>
+          <dd class="card__price money">${esc(money.format(p.price))}</dd>
+        </div>`
+    )
+    .join('');
+} else if (drinkEl) {
+  /* A forn with no drinks in its catalogue should not show an empty card. */
+  $('#drink')?.remove();
+}
 
 /* -------------------------------------------------------------------------
    The shop note
