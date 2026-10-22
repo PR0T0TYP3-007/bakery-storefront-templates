@@ -17,22 +17,23 @@ export const esc = (s) =>
 export const isoDate = (d) =>
   `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 
-/** "6 de gener" — Catalan dates take "de" before the month. */
-export function dayMonth(d, locale = 'ca-ES') {
+/** "6 January". The locale decides the order, so this never has to. */
+export function dayMonth(d, locale = 'en-GB') {
   return new Intl.DateTimeFormat(locale, { day: 'numeric', month: 'long' }).format(d);
 }
 
 /**
  * How far off something is, in words.
  *
- * Days rather than a date, because "d'aquí a 9 dies" is the thing a customer
- * is actually working out, and a date makes them do the arithmetic. Past
- * about a month the number stops meaning anything and the date is better.
+ * Days rather than a date, because "in 9 days" is the thing a customer is
+ * actually working out and a date makes them do the arithmetic themselves.
+ * Past about a month the number stops meaning anything, so this returns
+ * null and the caller shows the date on its own.
  */
-export function inDays(days, locale = 'ca-ES') {
-  if (days <= 0) return 'ara mateix';
-  if (days === 1) return 'demà';
-  if (days <= 30) return `d'aquí a ${days} dies`;
+export function inDays(days) {
+  if (days <= 0) return 'today';
+  if (days === 1) return 'tomorrow';
+  if (days <= 30) return `in ${days} days`;
   return null;
 }
 
@@ -55,13 +56,13 @@ export function shelfTile(product, { merchant, occasion = null } = {}) {
     <article class="tile-card${occasion ? ' tile-card--occasion' : ''}">
       <div class="tile-card__body">
         ${occasion ? `<p class="tile-card__day label">${esc(occasion.day)}</p>` : ''}
-        <h3 class="tile-card__name t-3">
-          <a href="producte.html?id=${encodeURIComponent(product.id)}">${esc(product.name)}</a>
+        <h3 class="tile-card__name t-3" lang="ca">
+          <a href="product.html?id=${encodeURIComponent(product.id)}">${esc(product.name)}</a>
         </h3>
         ${product.subtitle ? `<p class="tile-card__sub sm">${esc(product.subtitle)}</p>` : ''}
       </div>
       <p class="tile-card__price money">${
-        product.options?.length ? '<span class="tile-card__from sm">des de </span>' : ''
+        product.options?.length ? '<span class="tile-card__from sm">from </span>' : ''
       }${esc(money(price, merchant))}</p>
     </article>`;
 }
@@ -96,7 +97,7 @@ export function renderShelf(el, { merchant, catalogue, today = new Date() }) {
         : ''
     }
     <div class="shelf__group">
-      ${seasonal.length ? '<p class="label dim shelf__label">I cada matí</p>' : ''}
+      ${seasonal.length ? '<p class="label dim shelf__label">And every morning</p>' : ''}
       <div class="tiles">
         ${everyday.map((p) => shelfTile(p, { merchant })).join('')}
       </div>
@@ -127,11 +128,11 @@ export function renderComing(el, { merchant, catalogue, today = new Date(), limi
   el.innerHTML = next
     .map((o) => {
       const product = byId.get(o.entry.productId);
-      const when = inDays(o.days, merchant.locale);
+      const when = inDays(o.days);
       return `
         <li class="coming__item">
-          <p class="coming__day label">${esc(o.entry.day)}</p>
-          <h3 class="coming__name t-2">${esc(product ? product.name : o.entry.day)}</h3>
+          <p class="coming__day label" lang="ca">${esc(o.entry.day)}</p>
+          <h3 class="coming__name t-2" lang="ca">${esc(product ? product.name : o.entry.day)}</h3>
           <p class="coming__when sm">
             <time datetime="${esc(isoDate(o.on))}">${esc(dayMonth(o.on, merchant.locale))}</time>${
               when ? ` · ${esc(when)}` : ''
@@ -175,12 +176,12 @@ export function shopTile(product, { merchant, today = new Date() } = {}) {
           season
             ? `<p class="state state--${season.state}">
                  <span class="state__dot" aria-hidden="true"></span>
-                 ${season.state === 'on' ? 'Ara al taulell' : esc(entry.day)}
+                 ${season.state === 'on' ? 'On the counter now' : `<span lang="ca">${esc(entry.day)}</span>`}
                </p>`
             : ''
         }
-        <h3 class="tile-card__name t-3">
-          <a href="producte.html?id=${encodeURIComponent(product.id)}">${esc(product.name)}</a>
+        <h3 class="tile-card__name t-3" lang="ca">
+          <a href="product.html?id=${encodeURIComponent(product.id)}">${esc(product.name)}</a>
         </h3>
         ${product.subtitle ? `<p class="tile-card__sub sm">${esc(product.subtitle)}</p>` : ''}
         ${
@@ -190,7 +191,7 @@ export function shopTile(product, { merchant, today = new Date() } = {}) {
         }
       </div>
       <p class="tile-card__price money">${
-        product.options?.length ? '<span class="tile-card__from sm">des de </span>' : ''
+        product.options?.length ? '<span class="tile-card__from sm">from </span>' : ''
       }${esc(money(product.price, merchant))}</p>
     </article>`;
 }
@@ -199,22 +200,25 @@ export function shopTile(product, { merchant, today = new Date() } = {}) {
  * The sentence a product page needs when it is out of season.
  *
  * This is the template's one genuinely useful trick, and it only works if it
- * answers the real question. "Esgotat" is not true — nothing sold out, it is
- * simply March. So it says when it comes back.
+ * answers the real question. "Sold out" is not true — nothing sold out, it
+ * is simply March. So it says when the thing comes back.
+ *
+ * The feast day keeps its Catalan name, because that is its name.
  */
 export function seasonLine(entry, { merchant, today = new Date() }) {
   const next = nextFor(entry, today);
   if (!next) return null;
-  if (next.status === 'on') return { state: 'on', text: 'Ara al taulell.' };
+  if (next.status === 'on') return { state: 'on', text: 'On the counter now.' };
 
-  const when = inDays(next.days, merchant.locale);
+  const when = inDays(next.days);
   const date = dayMonth(next.on, merchant.locale);
   return {
     state: 'coming',
     iso: isoDate(next.on),
+    day: entry.day,
     text: when
-      ? `Es fa per ${entry.day}. Torna el ${date}, ${when}.`
-      : `Es fa per ${entry.day}, el ${date}.`,
+      ? `Made for ${entry.day}. Back on ${date}, ${when}.`
+      : `Made for ${entry.day}, on ${date}.`,
   };
 }
 

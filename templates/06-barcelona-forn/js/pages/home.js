@@ -19,7 +19,7 @@ const $ = (s) => document.querySelector(s);
 
 await session.boot();
 
-renderHeader('inici');
+renderHeader('home');
 renderFooter();
 
 const { merchant, catalogue } = session.state;
@@ -65,7 +65,7 @@ const comingCount = renderComing($('[data-coming]'), { merchant, catalogue, toda
 
 /* A forn with nothing coming in the next stretch should not show an empty
    heading. The section removes itself rather than standing there blank. */
-if (!comingCount) $('#ve')?.remove();
+if (!comingCount) $('#coming')?.remove();
 
 /* -------------------------------------------------------------------------
    The shop note

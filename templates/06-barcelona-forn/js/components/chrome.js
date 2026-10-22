@@ -1,8 +1,8 @@
 /**
  * @file The header and footer.
  *
- * A forn's sign and its hours. Both are painted on marble, because the tile
- * cannot carry small text — see tokens.css.
+ * A bakery's sign and its hours. Both are painted on marble, because the
+ * tile cannot carry small text — see tokens.css.
  */
 
 import * as session from '../services/session.js';
@@ -13,23 +13,13 @@ const esc = (s) =>
   );
 
 /**
- * The nav.
- *
- * Three places, because there are three places. Template 05 learned that a
- * nav listing every category is the nav telling you about one place several
- * times; the shop page does its own filtering.
- *
- * `id` rather than the label decides the current page, so renaming a link
- * cannot silently drop its active state.
- */
-/**
- * The weekday, in the shop's language.
+ * The weekday, written out.
  *
  * `hours[].day` is an English key because the shared schema is English and
- * every template reads it — translating the data would have broken that. So
- * the English name is treated as an index into the week and Intl says it
- * again in the merchant's locale, which fixes a Catalan page that was
- * quietly listing "Monday" in its own footer.
+ * every template reads it. Rather than print the key, the English name is
+ * treated as an index into the week and `Intl` says it in the merchant's
+ * locale — so a shop that switches locale gets its own weekday names and
+ * the data never has to move.
  */
 const WEEK = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
@@ -42,11 +32,21 @@ function weekday(day, locale) {
   return name.charAt(0).toUpperCase() + name.slice(1);
 }
 
+/**
+ * The nav.
+ *
+ * Three places, because there are three places. Template 05 learned that a
+ * nav listing every category is the nav telling you about one place several
+ * times; the shop page does its own filtering.
+ *
+ * `id` rather than the label decides the current page, so renaming a link
+ * cannot silently drop its active state.
+ */
 function navItems() {
   return [
-    { id: 'botiga', href: 'botiga.html', label: 'La botiga' },
-    { id: 'calendari', href: 'calendari.html', label: "L'any" },
-    { id: 'visita', href: 'visita.html', label: 'Visiteu-nos' },
+    { id: 'shop', href: 'shop.html', label: 'The shop' },
+    { id: 'calendar', href: 'calendar.html', label: 'The year' },
+    { id: 'visit', href: 'visit.html', label: 'Visit us' },
   ];
 }
 
@@ -63,11 +63,11 @@ export function renderHeader(active) {
     <header class="hdr">
       <div class="wrap hdr__bar">
         <a class="mark" href="index.html">
-          <span class="mark__name">${esc(merchant.shortName)}</span>
-          <span class="mark__since label">des de ${esc(merchant.since)}</span>
+          <span class="mark__name" lang="ca">${esc(merchant.shortName)}</span>
+          <span class="mark__since label">since ${esc(merchant.since)}</span>
         </a>
 
-        <nav class="nav" aria-label="Principal">
+        <nav class="nav" aria-label="Main">
           ${navItems()
             .map(
               (n) =>
@@ -76,8 +76,8 @@ export function renderHeader(active) {
             .join('')}
         </nav>
 
-        <a class="basket" href="cistella.html">
-          Cistella <span class="basket__n num" data-basket-count>0</span>
+        <a class="basket" href="basket.html">
+          Basket <span class="basket__n num" data-basket-count>0</span>
         </a>
       </div>
     </header>`;
@@ -101,22 +101,22 @@ export function renderFooter() {
     <div class="ftr">
       <div class="wrap ftr__grid">
         <div>
-          <p class="t-2">${esc(merchant.name)}</p>
+          <p class="t-3" lang="ca">${esc(merchant.name)}</p>
           <p class="sm dim" style="margin-top:var(--s-2)">${esc(merchant.tagline)}</p>
         </div>
 
         <div>
-          <p class="label dim">On som</p>
-          <p class="sm" style="margin-top:var(--s-2)">${esc(loc.address)}</p>
+          <p class="label dim">Where we are</p>
+          <p class="sm" style="margin-top:var(--s-2)" lang="ca">${esc(loc.address)}</p>
         </div>
 
         <div>
-          <p class="label dim">Hores</p>
+          <p class="label dim">Hours</p>
           <ul class="ftr__hours sm" style="margin-top:var(--s-2)">
             ${merchant.hours
               .map(
                 (h) => `<li><span>${esc(weekday(h.day, merchant.locale))}</span><span>${
-                  h.open ? `${esc(h.open)}–${esc(h.close)}` : 'Tancat'
+                  h.open ? `${esc(h.open)}–${esc(h.close)}` : 'Closed'
                 }</span></li>`
               )
               .join('')}

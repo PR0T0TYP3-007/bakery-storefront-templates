@@ -18,7 +18,7 @@ const $ = (s) => document.querySelector(s);
 
 await session.boot();
 
-renderHeader('botiga');
+renderHeader('shop');
 renderFooter();
 
 const { merchant, catalogue } = session.state;
@@ -39,14 +39,14 @@ if (product) {
 } else {
   /* A bad id is somebody's old bookmark, or a thing the forn stopped making.
      Both deserve the shop rather than a dead end. */
-  document.title = `No ho trobem — ${merchant.name}`;
-  $('[data-crumb]').textContent = 'No ho trobem';
+  document.title = `Not found — ${merchant.name}`;
+  $('[data-crumb]').textContent = 'Not found';
   $('[data-thing]').innerHTML = `
-    <h1 class="t-1" style="margin-top:var(--s-5)">No tenim res amb aquest nom.</h1>
+    <h1 class="t-1" style="margin-top:var(--s-5)">We don't have anything by that name.</h1>
     <p class="lede" style="margin-top:var(--s-3)">
-      Potser ha canviat de nom, o potser ja no ho fem.
+      It may have changed its name, or we may not make it any more.
     </p>
-    <p style="margin-top:var(--s-5)"><a class="btn" href="botiga.html">Mira la botiga</a></p>`;
+    <p style="margin-top:var(--s-5)"><a class="btn" href="shop.html">See the shop</a></p>`;
 }
 
 /* -------------------------------------------------------------------------
@@ -69,7 +69,7 @@ function render(p) {
       <div class="thing__say">
         ${stateLine(entry, season)}
 
-        <h1 class="t-1" style="margin-top:var(--s-3)">${esc(p.name)}</h1>
+        <h1 class="t-1" style="margin-top:var(--s-3)" lang="ca">${esc(p.name)}</h1>
         ${p.subtitle ? `<p class="lede" style="margin-top:var(--s-3)">${esc(p.subtitle)}</p>` : ''}
 
         ${seasonBlock(season)}
@@ -91,7 +91,7 @@ function render(p) {
         ${addons.length ? addonBlock(addons) : ''}
 
         <div class="qty">
-          <label class="label" for="qty">Quantes</label>
+          <label class="label" for="qty">How many</label>
           <input class="qty__in num" id="qty" name="qty" type="number"
                  inputmode="numeric" min="1" max="20" step="1" value="1">
         </div>
@@ -106,11 +106,11 @@ function render(p) {
 /**
  * Whether orders are open for this yet.
  *
- * The forn takes orders `maxDaysAhead` out — thirty days here. In October a
- * tortell de Reis is seventy-six days away, so it cannot be ordered and
- * saying "afegeix a la cistella" would be a lie that only comes apart at
- * checkout. It is not sold out either. It is just too early, and the honest
- * thing is to say when it stops being too early.
+ * The bakery takes orders `maxDaysAhead` out — thirty days here. In October
+ * a tortell de Reis is seventy-six days away, so it cannot be ordered and an
+ * "add to basket" button would be a lie that only comes apart at checkout.
+ * It is not sold out either. It is just too early, and the honest thing is
+ * to say when it stops being too early.
  */
 function ordering(entry) {
   if (!entry) return { open: true };
@@ -129,13 +129,13 @@ function ordering(entry) {
 function buyButton(entry) {
   const order = ordering(entry);
   if (order.open) {
-    return '<button class="btn btn--block" type="submit">Afegeix a la cistella</button>';
+    return '<button class="btn btn--block" type="submit">Add to basket</button>';
   }
   return `
     <div class="tooearly">
-      <p class="label">Encara no</p>
+      <p class="label">Not yet</p>
       <p class="sm" style="margin-top:var(--s-2)">
-        N'agafem comandes a partir del
+        We take orders for this from
         <time datetime="${esc(isoDate(order.opens))}">${esc(dayMonth(order.opens, merchant.locale))}</time>.
       </p>
     </div>`;
@@ -143,7 +143,10 @@ function buyButton(entry) {
 
 function stateLine(entry, season) {
   if (!season) return '';
-  const words = season.state === 'on' ? 'Ara al taulell' : esc(entry.day);
+  const words =
+    season.state === 'on'
+      ? 'On the counter now'
+      : `<span lang="ca">${esc(entry.day)}</span>`;
   return `
     <p class="state state--${season.state}">
       <span class="state__dot" aria-hidden="true"></span>${words}
@@ -176,7 +179,7 @@ function allergenBlock(p) {
   if (!p.allergens?.length) return '';
   return `
     <div class="alrg">
-      <p class="label dim">Hi ha</p>
+      <p class="label dim">Contains</p>
       <ul class="alrg__list">
         ${p.allergens.map((a) => `<li>${esc(a)}</li>`).join('')}
       </ul>
@@ -202,7 +205,7 @@ function optionGroup(group, p) {
             <label class="opt__row">
               <input type="radio" name="${esc(group.id)}" value="${esc(o.id)}">
               <span class="opt__label">${esc(o.label)}${
-                o.serves ? `<span class="opt__note sm dim"> persones</span>` : ''
+                o.serves ? '<span class="opt__note sm dim"> people</span>' : ''
               }</span>
               <span class="opt__price money">${esc(money(p.price + (o.price ?? 0)))}</span>
             </label>`
@@ -214,7 +217,7 @@ function optionGroup(group, p) {
 function addonBlock(addons) {
   return `
     <fieldset class="opt">
-      <legend class="label">Si voleu</legend>
+      <legend class="label">If you'd like</legend>
       ${addons
         .map(
           (a) => `
@@ -266,10 +269,10 @@ function wire(p, options, entry) {
     const lead = session.leadFor(p, selections);
     form.querySelector('[data-lead]').textContent =
       lead === 0
-        ? 'Es fa cada matí; no cal avisar.'
+        ? 'Made every morning; no notice needed.'
         : lead === 1
-          ? "Cal avisar-nos un dia abans."
-          : `Cal avisar-nos ${lead} dies abans.`;
+          ? "We need a day's notice."
+          : `We need ${lead} days' notice.`;
   }
 
   form.addEventListener('change', repaint);
@@ -293,9 +296,9 @@ function wire(p, options, entry) {
     /* `add` moves the collection day forward when the chosen one cannot take
        the order. Saying so here is the only reason it returns that. */
     toast({
-      title: `${p.name}, a la cistella.`,
+      title: `${p.name}, in the basket.`,
       detail: movedTo
-        ? `No hi arribàvem a temps, així que ho hem passat al ${new Intl.DateTimeFormat(
+        ? `We couldn't make it in time, so it's down for ${new Intl.DateTimeFormat(
             merchant.locale,
             { day: 'numeric', month: 'long' }
           ).format(movedTo)}.`

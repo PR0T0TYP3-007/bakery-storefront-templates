@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="ca">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>La botiga — Forn de la Plaça</title>
-<meta name="description" content="Tot el que fa el Forn de la Plaça: el pa i la pastisseria de cada matí, i el que només es fa quan toca.">
+<title>The shop — Forn de la Plaça</title>
+<meta name="description" content="Everything Forn de la Plaça makes: the bread and pastry of every morning, and the things made only when their day comes round.">
 
 <link rel="preload" href="assets/fonts/zillaslab.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/sourcesans.woff2" as="font" type="font/woff2" crossorigin>
@@ -17,7 +17,7 @@
 <link rel="stylesheet" href="css/components/controls.css">
 </head>
 <body>
-<a class="skip" href="#llista">Vés a la llista</a>
+<a class="skip" href="#list">Skip to the list</a>
 <div data-header></div>
 
 <main id="main">
@@ -29,9 +29,9 @@
        That is the template's argument, so the shop has to make it too.
        ==================================================================== -->
   <section class="wrap section section--tight">
-    <h1 class="t-1">La botiga</h1>
+    <h1 class="t-1">The shop</h1>
     <p class="lede" style="margin-top:var(--s-3)">
-      Tot el que fem, tot l'any. El que ara no hi és diu quan torna.
+      Everything we make, all year. Whatever isn't here today says when it's back.
     </p>
   </section>
 
@@ -40,24 +40,24 @@
        underline — the fill is the state. -->
   <section class="band band--marble-2 section--tight">
     <div class="wrap">
-      <nav class="filters" aria-label="Filtra per tipus" data-filters></nav>
+      <nav class="filters" aria-label="Filter by kind" data-filters></nav>
 
       <form class="find" role="search" data-find>
-        <label class="vh" for="q">Cerca al forn</label>
-        <input class="find__in" id="q" name="q" type="search" placeholder="Cerca: tortell, pa, coca…" autocomplete="off">
-        <button class="btn" type="submit">Cerca</button>
+        <label class="vh" for="q">Search the bakery</label>
+        <input class="find__in" id="q" name="q" type="search" placeholder="Try: tortell, bread, coca…" autocomplete="off">
+        <button class="btn" type="submit">Search</button>
       </form>
     </div>
   </section>
 
-  <section class="band band--marble-2 section" id="llista">
+  <section class="band band--marble-2 section" id="list">
     <div class="wrap">
       <p class="label dim" aria-live="polite" data-count></p>
       <div style="margin-top:var(--s-4)" data-list>
         <noscript>
           <p class="note">
-            La llista necessita JavaScript. Truqueu-nos al 93 441 00 00 i us
-            direm què hi ha avui, o mireu <a href="visita.html">les hores</a>.
+            The list needs JavaScript. Call us on 93 441 00 00 and we'll tell
+            you what's in today, or see <a href="visit.html">our hours</a>.
           </p>
         </noscript>
       </div>
@@ -68,6 +68,6 @@
 
 <footer data-footer></footer>
 
-<script type="module" src="js/pages/botiga.js"></script>
+<script type="module" src="js/pages/shop.js"></script>
 </body>
 </html>

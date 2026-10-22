@@ -3,41 +3,41 @@
   "categories": [
     {
       "id": "del-dia",
-      "label": "Del dia",
-      "note": "Cada matí"
+      "label": "Every day",
+      "note": "Made each morning"
     },
     {
       "id": "calendari",
-      "label": "Del calendari",
-      "note": "Quan toca"
+      "label": "From the calendar",
+      "note": "When their day comes"
     },
     {
       "id": "pa",
-      "label": "Pa",
+      "label": "Bread",
       "note": null
     }
   ],
   "optionGroups": {
     "mida": {
       "id": "mida",
-      "label": "Per a quanta gent",
+      "label": "How many people",
       "required": true,
       "options": [
         {
           "id": "s",
-          "label": "4 a 6",
+          "label": "4 to 6",
           "price": 0,
           "serves": "4–6"
         },
         {
           "id": "m",
-          "label": "8 a 10",
+          "label": "8 to 10",
           "price": 8,
           "serves": "8–10"
         },
         {
           "id": "l",
-          "label": "12 a 16",
+          "label": "12 to 16",
           "price": 20,
           "serves": "12–16"
         }
@@ -47,23 +47,23 @@
   "addons": [
     {
       "id": "figura",
-      "label": "Figura de xocolata",
-      "note": "Per a la mona",
+      "label": "Chocolate figure",
+      "note": "For the mona",
       "price": 6,
       "leadDays": 0,
       "kind": "extra"
     },
     {
       "id": "ous",
-      "label": "Ous durs pintats",
-      "note": "Tants com anys té",
+      "label": "Painted hard-boiled eggs",
+      "note": "As many as years old",
       "price": 3,
       "leadDays": 0,
       "kind": "extra"
     },
     {
       "id": "caixa",
-      "label": "Caixa del forn",
+      "label": "Bakery box",
       "note": null,
       "price": 2,
       "leadDays": 0,
@@ -76,15 +76,15 @@
       "kind": "calendar",
       "category": "calendari",
       "name": "Tortell de Reis",
-      "subtitle": "Massapà, fruita confitada, una figureta i una fava",
+      "subtitle": "Marzipan, candied fruit, a figurine and a bean",
       "price": 14,
       "leadDays": 2,
       "image": null,
       "allergens": [
         "gluten",
-        "ou",
-        "llet",
-        "fruits secs"
+        "egg",
+        "milk",
+        "nuts"
       ],
       "options": [
         "mida"
@@ -95,22 +95,22 @@
       "addons": [
         "caixa"
       ],
-      "description": "Es fa des de Nadal fins al dia de Reis i prou. A dins hi ha una figureta i una fava seca: qui troba la fava paga el tortell, i qui troba la figureta porta la corona."
+      "description": "Made from Christmas until the sixth of January and not a day longer. Inside there is a small figurine and a dried broad bean: whoever finds the bean pays for the tortell, and whoever finds the figurine wears the crown."
     },
     {
       "id": "tortell-sant-antoni",
       "kind": "calendar",
       "category": "calendari",
       "name": "Tortell de Sant Antoni",
-      "subtitle": "Rodó, amb massapà",
+      "subtitle": "Round, with marzipan",
       "price": 18,
       "leadDays": 2,
       "image": null,
       "allergens": [
         "gluten",
-        "ou",
-        "llet",
-        "fruits secs"
+        "egg",
+        "milk",
+        "nuts"
       ],
       "options": [
         "mida"
@@ -121,77 +121,77 @@
       "addons": [
         "caixa"
       ],
-      "description": "El 17 de gener, pels Tres Tombs."
+      "description": "The seventeenth of January, for the Tres Tombs."
     },
     {
       "id": "coca-llardons",
       "kind": "calendar",
       "category": "calendari",
       "name": "Coca de llardons",
-      "subtitle": "Llardons, sucre i pinyons",
+      "subtitle": "Pork crackling, sugar and pine nuts",
       "price": 12,
       "leadDays": 1,
       "image": null,
       "allergens": [
         "gluten",
-        "ou",
-        "fruits secs"
+        "egg",
+        "nuts"
       ],
       "options": [],
       "defaults": {},
       "addons": [],
-      "description": "Es menja el Dijous Gras, que és l'últim dia abans de la Quaresma. Greixosa i salada i dolça alhora."
+      "description": "Eaten on Dijous Gras, the last day before Lent. Fatty and salty and sweet all at once."
     },
     {
       "id": "bunyols",
       "kind": "calendar",
       "category": "calendari",
       "name": "Bunyols de Quaresma",
-      "subtitle": "Fregits al matí, ensucrats",
+      "subtitle": "Fried in the morning, rolled in sugar",
       "price": 9,
       "leadDays": 0,
       "image": null,
       "allergens": [
         "gluten",
-        "ou",
-        "llet"
+        "egg",
+        "milk"
       ],
       "options": [],
       "defaults": {},
       "addons": [],
-      "description": "Tota la Quaresma. Es fan al matí i es mengen el mateix dia; l'endemà ja no són el mateix."
+      "description": "All through Lent. Made in the morning and eaten the same day; by the next day they are not the same thing."
     },
     {
       "id": "crema-catalana",
       "kind": "calendar",
       "category": "calendari",
       "name": "Crema catalana",
-      "subtitle": "Canyella, llimona, sucre cremat",
+      "subtitle": "Cinnamon, lemon, burnt sugar",
       "price": 5,
       "leadDays": 0,
       "image": null,
       "allergens": [
-        "ou",
-        "llet"
+        "egg",
+        "milk"
       ],
       "options": [],
       "defaults": {},
       "addons": [],
-      "description": "Per Sant Josep, el 19 de març. Es crema amb ferro al moment."
+      "description": "For Sant Josep, the nineteenth of March. Burnt with an iron to order."
     },
     {
       "id": "coca-sant-jordi",
       "kind": "calendar",
       "category": "calendari",
       "name": "Coca de Sant Jordi",
-      "subtitle": "Amb els colors de la senyera",
+      "subtitle": "In the colours of the Catalan flag",
       "price": 8,
       "leadDays": 2,
       "image": null,
       "allergens": [
         "gluten",
-        "ou",
-        "llet"
+        "egg",
+        "milk"
       ],
       "options": [
         "mida"
@@ -202,22 +202,22 @@
       "addons": [
         "caixa"
       ],
-      "description": "El 23 d'abril. Es regala amb un llibre i una rosa."
+      "description": "The twenty-third of April. Given with a book and a rose."
     },
     {
       "id": "mona",
       "kind": "calendar",
       "category": "calendari",
       "name": "Mona de Pasqua",
-      "subtitle": "Pa de pessic, xocolata, ous durs i plomes",
+      "subtitle": "Sponge, chocolate, hard-boiled eggs and feathers",
       "price": 20,
       "leadDays": 4,
       "image": null,
       "allergens": [
         "gluten",
-        "ou",
-        "llet",
-        "fruits secs"
+        "egg",
+        "milk",
+        "nuts"
       ],
       "options": [
         "mida"
@@ -230,22 +230,22 @@
         "ous",
         "caixa"
       ],
-      "description": "La regala el padrí al fillol el dilluns de Pasqua. Tradicionalment hi van tants ous com anys té la criatura, fins que es fa gran i aleshores ja no."
+      "description": "Given by the godparent to the godchild on Easter Monday. Traditionally it carries as many eggs as the child has years, until the child is grown and then it stops."
     },
     {
       "id": "coca-sant-joan",
       "kind": "calendar",
       "category": "calendari",
       "name": "Coca de Sant Joan",
-      "subtitle": "Fruita confitada i pinyons",
+      "subtitle": "Candied fruit and pine nuts",
       "price": 10,
       "leadDays": 2,
       "image": null,
       "allergens": [
         "gluten",
-        "ou",
-        "llet",
-        "fruits secs"
+        "egg",
+        "milk",
+        "nuts"
       ],
       "options": [
         "mida"
@@ -256,14 +256,14 @@
       "addons": [
         "caixa"
       ],
-      "description": "Per la revetlla del 23 de juny. Se'n fan moltes i s'acaben totes."
+      "description": "For the night of the twenty-third of June. We make a great many and they all go."
     },
     {
       "id": "coca-llarga",
       "kind": "calendar",
       "category": "calendari",
       "name": "Coca llarga",
-      "subtitle": "Oli d'oliva i sucre",
+      "subtitle": "Olive oil and sugar",
       "price": 10,
       "leadDays": 1,
       "image": null,
@@ -273,102 +273,102 @@
       "options": [],
       "defaults": {},
       "addons": [],
-      "description": "Senzilla. Oli, sucre i prou."
+      "description": "Plain. Oil, sugar, nothing else."
     },
     {
       "id": "panellets",
       "kind": "calendar",
       "category": "calendari",
       "name": "Panellets",
-      "subtitle": "Massapà i pinyons, i també coco i cafè",
+      "subtitle": "Marzipan and pine nuts, and coconut and coffee too",
       "price": 24,
       "leadDays": 2,
       "image": null,
       "allergens": [
-        "ou",
-        "fruits secs"
+        "egg",
+        "nuts"
       ],
       "options": [],
       "defaults": {},
       "addons": [
         "caixa"
       ],
-      "description": "Per Tots Sants. Es venen a pes; mig quilo són uns vint-i-cinc."
+      "description": "For Tots Sants. Sold by weight; half a kilo is about twenty-five."
     },
     {
       "id": "neules-torro",
       "kind": "calendar",
       "category": "calendari",
       "name": "Neules i torró",
-      "subtitle": "Neules fines, torró d'Agramunt",
+      "subtitle": "Thin neules, torró from Agramunt",
       "price": 20,
       "leadDays": 2,
       "image": null,
       "allergens": [
         "gluten",
-        "ou",
-        "fruits secs"
+        "egg",
+        "nuts"
       ],
       "options": [],
       "defaults": {},
       "addons": [
         "caixa"
       ],
-      "description": "Per Nadal."
+      "description": "For Christmas."
     },
     {
       "id": "xuixo",
       "kind": "everyday",
       "category": "del-dia",
       "name": "Xuixo",
-      "subtitle": "Fregit, ensucrat, ple de crema",
+      "subtitle": "Fried, sugared, filled with custard",
       "price": 3,
       "leadDays": 0,
       "batchSize": 40,
       "image": null,
       "allergens": [
         "gluten",
-        "ou",
-        "llet"
+        "egg",
+        "milk"
       ],
       "options": [],
       "defaults": {},
       "addons": [],
-      "description": "De Girona, no de Barcelona, però aquí se'n fan cada matí."
+      "description": "From Girona, not Barcelona, but they are made here every morning."
     },
     {
       "id": "ensaimada",
       "kind": "everyday",
       "category": "del-dia",
       "name": "Ensaïmada",
-      "subtitle": "Espiral, sucre llustre",
+      "subtitle": "A spiral, dusted with icing sugar",
       "price": 3,
       "leadDays": 0,
       "batchSize": 30,
       "image": null,
       "allergens": [
         "gluten",
-        "ou"
+        "egg"
       ],
       "options": [],
       "defaults": {},
       "addons": [],
-      "description": "De Mallorca. Es fa amb saïm i es deixa reposar tota la nit."
+      "description": "From Mallorca. Made with lard and left to rest overnight."
     },
     {
       "id": "croissant",
       "kind": "everyday",
       "category": "del-dia",
       "name": "Croissant de mantega",
-      "subtitle": "Res més que mantega",
+      "subtitle": "Butter and nothing else",
       "price": 2,
       "leadDays": 0,
       "batchSize": 60,
       "image": null,
       "allergens": [
         "gluten",
-        "ou",
-        "llet"
+        "egg",
+        "milk"
       ],
       "options": [],
       "defaults": {},
@@ -380,7 +380,7 @@
       "kind": "everyday",
       "category": "pa",
       "name": "Pa de pagès",
-      "subtitle": "Massa mare, 24 hores",
+      "subtitle": "Sourdough, twenty-four hours",
       "price": 4,
       "leadDays": 0,
       "batchSize": 50,
@@ -391,21 +391,21 @@
       "options": [],
       "defaults": {},
       "addons": [],
-      "description": "Rodó, de crosta gruixuda. Dura tres dies."
+      "description": "Round, thick-crusted. Keeps three days."
     },
     {
       "id": "pa-de-segol",
       "kind": "everyday",
       "category": "pa",
       "name": "Pa de sègol amb nous",
-      "subtitle": "Sègol i nous",
+      "subtitle": "Rye and walnuts",
       "price": 5,
       "leadDays": 0,
       "batchSize": 20,
       "image": null,
       "allergens": [
         "gluten",
-        "fruits secs"
+        "nuts"
       ],
       "options": [],
       "defaults": {},
@@ -417,7 +417,7 @@
       "kind": "everyday",
       "category": "pa",
       "name": "Barra de quart",
-      "subtitle": "La de cada dia",
+      "subtitle": "The everyday loaf",
       "price": 1,
       "leadDays": 0,
       "batchSize": 120,

@@ -2,14 +2,14 @@
   "id": "forn-de-la-placa",
   "name": "Forn de la Plaça",
   "shortName": "Forn de la Plaça",
-  "tagline": "Pa i pastisseria al Poble-sec des de 1954.",
+  "tagline": "Bread and pastry in Poble-sec, Barcelona, since 1954.",
   "since": "1954",
-  "locale": "ca-ES",
+  "locale": "en-GB",
   "currency": "EUR",
   "timeZone": "Europe/Madrid",
   "taxRate": 0.1,
   "taxMode": "inclusive",
-  "taxNote": "Tots els preus inclouen l'IVA del 10%, el tipus reduït per a l'alimentació.",
+  "taxNote": "All prices include VAT at 10%, the reduced rate for food.",
   "capabilities": {
     "delivery": false,
     "customCakes": true,
@@ -81,26 +81,26 @@
   "dailyCapacity": 24,
   "allergens": [
     "gluten",
-    "ou",
-    "llet",
-    "fruits secs",
-    "soja"
+    "egg",
+    "milk",
+    "nuts",
+    "soy"
   ],
-  "allergenStatement": "Un obrador, i al damunt hi passa cada dia gluten, ou, llet, fruits secs i soja. Res no surt d'aquí certificat lliure de cap d'ells. Digueu-nos-ho quan encarregueu i us direm què podem fer.",
+  "allergenStatement": "One kitchen, and gluten, egg, milk, nuts and soy all pass through it every day. Nothing leaves here certified free of any of them. Tell us when you order and we will tell you what we can do.",
   "voice": {
-    "kicker": "Carrer de Blai, Poble-sec · Des de 1954",
-    "headline": "El calendari mana.",
-    "lede": "Hi ha coses que només es fan quan toca. Ara mateix al taulell hi ha el que hi ha, i el que ve, ve.",
+    "kicker": "Carrer de Blai, Poble-sec · Since 1954",
+    "headline": "The calendar decides.",
+    "lede": "Some things are only made when their day comes round. What is on the counter this morning is what there is, and what is coming is coming.",
     "shopfront": {
       "image": null,
-      "alt": "El taulell de marbre del forn, amb les rajoles hidràuliques del terra",
-      "caption": "El taulell, a mig matí."
+      "alt": "The bakery's marble counter, with the hydraulic floor tiles below it",
+      "caption": "The counter, mid-morning."
     },
     "shop": {
-      "head": "Al carrer de Blai, davant del mercat.",
+      "head": "On Carrer de Blai, opposite the market.",
       "body": [
-        "Obrim a dos quarts de vuit. El pa surt en dues fornades, la primera a les vuit i la segona cap a la una, i la pastisseria es fa de matinada.",
-        "El que és de temporada hi és mentre dura. No en guardem per després: quan s'acaba, s'acaba, i torna l'any que ve quan toca."
+        "We open at half past seven. Bread comes out in two batches, the first at eight and the second around one, and the pastry is made overnight.",
+        "Whatever is in season is here while it lasts. We do not hold any back: when it is gone it is gone, and it comes round again next year."
       ]
     }
   },
@@ -114,7 +114,7 @@
         1
       ],
       "day": "Reis",
-      "note": "Hi ha una figureta i una fava a dins. A qui li toca la fava, paga el tortell."
+      "note": "There is a figurine and a dried bean baked inside. Whoever gets the bean pays for the tortell."
     },
     {
       "id": "sant-antoni",
@@ -125,7 +125,7 @@
         1
       ],
       "day": "Sant Antoni",
-      "note": "El tortell dels Tres Tombs."
+      "note": "The tortell for the Tres Tombs procession."
     },
     {
       "id": "llardons",
@@ -136,7 +136,7 @@
         2
       ],
       "day": "Dijous Gras",
-      "note": "L'últim excés abans de la Quaresma."
+      "note": "The last excess before Lent."
     },
     {
       "id": "bunyols",
@@ -147,7 +147,7 @@
         46
       ],
       "day": "Quaresma",
-      "note": "Tota la Quaresma, cada dia."
+      "note": "All through Lent, every day."
     },
     {
       "id": "sant-josep",
@@ -158,7 +158,7 @@
         1
       ],
       "day": "Sant Josep",
-      "note": "Es crema davant vostre."
+      "note": "Burnt in front of you."
     },
     {
       "id": "sant-jordi",
@@ -169,7 +169,7 @@
         1
       ],
       "day": "Sant Jordi",
-      "note": "Un llibre, una rosa i una coca."
+      "note": "A book, a rose and a coca."
     },
     {
       "id": "mona",
@@ -180,7 +180,7 @@
         1
       ],
       "day": "Pasqua",
-      "note": "El padrí la regala al fillol. Tantes figures com anys té."
+      "note": "The godparent gives it to the godchild. As many figures as the child has years."
     },
     {
       "id": "sant-joan",
@@ -191,7 +191,7 @@
         1
       ],
       "day": "Revetlla de Sant Joan",
-      "note": "Fruita confitada i pinyons. Per la nit, a la platja."
+      "note": "Candied fruit and pine nuts. Eaten on the beach, at night."
     },
     {
       "id": "diada",
@@ -213,7 +213,7 @@
         1
       ],
       "day": "Tots Sants",
-      "note": "Massapà i pinyons. La castanyada és la mateixa nit."
+      "note": "Marzipan and pine nuts. The castanyada is the same night."
     },
     {
       "id": "nadal",
@@ -223,8 +223,8 @@
         21,
         2
       ],
-      "day": "Nadal",
-      "note": "Neules i torró, i el tió a casa."
+      "day": "Christmas",
+      "note": "Neules and torró, and the tió at home."
     }
   ]
 }

@@ -96,10 +96,50 @@ test('allergens named on a product are declared by the merchant', () => {
   }
 });
 
-test('the merchant is Catalan-locale and prices include tax', () => {
-  assert.equal(merchant.locale, 'ca-ES');
+test('the merchant is a euro shop whose prices include tax', () => {
+  assert.equal(merchant.currency, 'EUR');
   assert.equal(merchant.taxMode, 'inclusive',
     'Spanish consumer prices must be shown inclusive of IVA');
+
+  /* The copy is in English and the dates are formatted from this, so the
+     locale is the reader's, not the shop's. What must not drift is the
+     currency and the tax mode, which are the law where the shop is, not a
+     presentation choice. */
+  assert.ok(/^[a-z]{2}(-[A-Z]{2})?$/.test(merchant.locale),
+    `locale "${merchant.locale}" is not a BCP 47 tag Intl will accept`);
+});
+
+/**
+ * The feast days keep their own names.
+ *
+ * The copy is English; the names of the days are not copy. "Sant Joan" is
+ * the name of the night the way "Christmas" is the name of the day, and
+ * four of the products are named after their day — a tortell de Reis for
+ * Reis, bunyols de Quaresma for Quaresma — so translating one end breaks
+ * the pair. Only Nadal moved, because it has an ordinary English name and
+ * nothing is named after it.
+ *
+ * The first version of this test looked for non-ASCII characters, which
+ * proved nothing at all: every one of these names is plain ASCII, so it
+ * would have passed just as happily on a fully translated list. The names
+ * are written out instead.
+ */
+test('the year keeps its own names', () => {
+  const expected = [
+    'Reis',
+    'Sant Antoni',
+    'Dijous Gras',
+    'Quaresma',
+    'Sant Josep',
+    'Sant Jordi',
+    'Pasqua',
+    'Revetlla de Sant Joan',
+    'La Diada',
+    'Tots Sants',
+    'Christmas',
+  ];
+
+  assert.deepEqual(merchant.year.map((e) => e.day), expected);
 });
 
 test('occurrences spans the year boundary in both directions', () => {

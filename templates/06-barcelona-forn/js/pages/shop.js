@@ -1,5 +1,5 @@
 /**
- * @file La botiga — the whole year on one page.
+ * @file The shop — the whole year on one page.
  *
  * The usual shop hides what it cannot sell today. This one does the
  * opposite: a tortell in March is still listed, still priced, and says
@@ -19,13 +19,13 @@ const $ = (s) => document.querySelector(s);
 
 await session.boot();
 
-renderHeader('botiga');
+renderHeader('shop');
 renderFooter();
 
 const { merchant, catalogue } = session.state;
 const today = new Date();
 
-const ALL = { id: '', label: 'Tot', note: null };
+const ALL = { id: '', label: 'Everything', note: null };
 const categories = [ALL, ...catalogue.categories];
 
 /* -------------------------------------------------------------------------
@@ -124,13 +124,13 @@ function byYear(items) {
     .map((x) => x.p);
 }
 
-/** Count sentences, in Catalan, saying what the filter did. */
+/** One sentence saying what the filter did. */
 function countLine(n, { c, q }) {
-  if (!n) return q ? `Res que es digui "${q}".` : 'Res en aquest calaix.';
-  const thing = n === 1 ? '1 cosa' : `${n} coses`;
-  if (q) return `${thing} per "${q}".`;
+  if (!n) return q ? `Nothing here called "${q}".` : 'Nothing in this drawer.';
+  const thing = n === 1 ? '1 thing' : `${n} things`;
+  if (q) return `${thing} for "${q}".`;
   const cat = categories.find((x) => x.id === c);
-  return c ? `${thing} a ${cat ? cat.label.toLowerCase() : c}.` : `${thing}, tot l'any.`;
+  return c ? `${thing} under ${cat ? cat.label.toLowerCase() : c}.` : `${thing}, all year.`;
 }
 
 function paint() {
@@ -144,8 +144,8 @@ function paint() {
   if (!items.length) {
     $('[data-list]').innerHTML = `
       <p class="note">
-        No hi ha res amb aquest nom. Proveu <button class="link btn-as-link" type="button" data-clear>tot el forn</button>,
-        o truqueu-nos al 93 441 00 00.
+        Nothing here by that name. Try <button class="link btn-as-link" type="button" data-clear>the whole bakery</button>,
+        or call us on 93 441 00 00.
       </p>`;
     return;
   }
