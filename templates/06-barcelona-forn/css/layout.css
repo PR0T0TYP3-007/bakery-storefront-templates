@@ -131,7 +131,8 @@
    already doing this job. This sits BEFORE the media query: both rules have
    the same specificity, so the later one wins whatever the width, and with
    them the other way round the panel never appeared at all. */
-.hero__pattern { display: none; }
+.hero__pattern,
+.hero__shot { display: none; }
 
 @media (min-width: 60rem) {
   /* The claim takes the left; the tiling takes the rest. Before this the
@@ -144,6 +145,7 @@
   }
 
   .hero__pattern { display: block; }
+  .hero__shot { display: block; }
 }
 
 .pattern {
@@ -235,4 +237,36 @@
 @media (min-width: 56rem) {
   .split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s-7); }
   .split--wide-left { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
+}
+
+/* --------------------------------------------------------------------------
+   Photographs
+
+   Square-edged and flush, like everything else here: no rounding, no shadow,
+   no border. A photograph is another surface, and surfaces meeting is the
+   whole separation system.
+   -------------------------------------------------------------------------- */
+.hero__shot {
+  margin: 0;
+  align-self: stretch;
+}
+
+.hero__shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* A floor under it, so the first screen is never a blank rectangle while
+     the photograph is still in flight. */
+  background: var(--tile-2);
+}
+
+.shopnote__shot {
+  margin: var(--s-5) 0 0;
+}
+
+.shopnote__shot img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  background: var(--tile-2);
 }

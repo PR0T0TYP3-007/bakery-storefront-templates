@@ -37,6 +37,42 @@ export function inDays(days) {
   return null;
 }
 
+/**
+ * The picture for a thing, or the floor where there is no honest picture.
+ *
+ * Six of the seventeen things this forn makes have a photograph. The other
+ * eleven are the calendar items — a tortell de Reis, a mona, panellets,
+ * neules, the cocas, a xuixo — and no honest stock photograph of any of
+ * them exists. Unsplash returns Mallorcan beaches for "ensaimada" and a
+ * generic ring cake for "tortell", and captioning a generic ring cake
+ * "Tortell de Reis" is exactly what D16 bans: the photography may not lie
+ * about the product.
+ *
+ * So the ones without a photograph get the tiled floor instead. It is the
+ * same pattern as the hero, it costs no request, and it is not pretending
+ * to be anything — which a stand-in photograph of somebody else's cake
+ * would be.
+ */
+export function picture(product, { eager = false, size = 'md' } = {}) {
+  const img = product.image;
+
+  /* No empty box where the photograph would be. A patterned rectangle in a
+     grid of photographs reads as an image that failed to load, however
+     carefully it is drawn — the first two goes at this proved it. The tile
+     gets the tiling as its own surface instead, through
+     `.tile-card--notshot`, and the words sit on it. */
+  if (!img) return '';
+
+  return `
+    <img class="shot" src="assets/img/${esc(img.src)}-${esc(size)}.jpg"
+         alt="${esc(img.alt)}"
+         ${eager ? 'fetchpriority="high"' : 'loading="lazy" decoding="async"'}>`;
+}
+
+/** The class that says which of the two a tile is. */
+export const shotClass = (product) =>
+  product.image ? 'tile-card--shot' : 'tile-card--notshot';
+
 const money = (n, merchant) =>
   new Intl.NumberFormat(merchant.locale, {
     style: 'currency',
@@ -53,7 +89,8 @@ const money = (n, merchant) =>
 export function shelfTile(product, { merchant, occasion = null } = {}) {
   const price = product.price;
   return `
-    <article class="tile-card${occasion ? ' tile-card--occasion' : ''}">
+    <article class="tile-card ${shotClass(product)}${occasion ? ' tile-card--occasion' : ''}">
+      ${picture(product)}
       <div class="tile-card__body">
         ${occasion ? `<p class="tile-card__day label">${esc(occasion.day)}</p>` : ''}
         <h3 class="tile-card__name t-3" lang="ca">
@@ -170,7 +207,8 @@ export function shopTile(product, { merchant, today = new Date() } = {}) {
   const season = entry ? seasonLine(entry, { merchant, today }) : null;
 
   return `
-    <article class="tile-card${season ? ` is-${season.state}` : ''}">
+    <article class="tile-card ${shotClass(product)}${season ? ` is-${season.state}` : ''}">
+      ${picture(product)}
       <div class="tile-card__body">
         ${
           season

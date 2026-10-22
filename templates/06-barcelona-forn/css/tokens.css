@@ -101,10 +101,16 @@
   --ochre: #c98a2b;      /* PAINT ONLY — fails as text on both surfaces */
 
   /* Status. Information, so never the accent: a customer must not have to
-     tell "this is the brand colour" from "this is sold out". */
-  --ready: #2f7d4f;      /* 4.63 on marble · white on it 5.04 */
-  --soon: #8f6214;       /* 4.91 on marble · white on it 5.36 */
-  --gone: #9c3326;       /* 6.62 on marble · white on it 7.20 */
+     tell "this is the brand colour" from "this is sold out".
+
+     All three are measured against ALL THREE marbles, not just the
+     lightest. The green was 4.63 on marble and shipped on that number;
+     the shop page then put a 12px "On the counter now" on marble-2, where
+     it measured 4.24 and failed. A state colour lands on whichever surface
+     the tile happens to be, so it has to clear the darkest of them. */
+  --ready: #26653f;      /* 6.40 / 5.85 / 5.24 on the three marbles */
+  --soon: #7b5410;       /* 6.19 / 5.66 / 5.06 on the three marbles */
+  --gone: #9c3326;       /* 6.62 / 6.05 / 5.42 on the three marbles */
 
   /* Marble, not terracotta. A focus ring has to clear 3:1 against whatever
      is behind it, and terracotta manages 1.72 on the tile it would most

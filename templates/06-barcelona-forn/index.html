@@ -56,9 +56,14 @@
       <p class="lede" style="margin-top:var(--s-4)" data-lede></p>
     </div>
 
-    <!-- The floor, stood on its end. Decorative, and one of the two places
-         ochre is allowed. -->
-    <div class="pattern hero__pattern" aria-hidden="true"></div>
+    <!-- The counter. Deliberately NOT lazy and NOT deferred: it is the
+         first thing on the page, and Templates 03 and 05 both shipped a
+         `loading="lazy"` hero that showed as an empty coloured box for
+         seconds on a real network. The src is in the markup rather than
+         painted on by JS for the same reason. -->
+    <figure class="hero__shot">
+      <img src="assets/img/counter-lg.jpg" alt="" fetchpriority="high" data-shopfront>
+    </figure>
   </section>
 
   <!-- A band of the same floor. -->
@@ -118,6 +123,9 @@
       <div>
         <p class="label dim">The bakery</p>
         <p class="t-2" style="margin-top:var(--s-3)" data-shop-head></p>
+        <figure class="shopnote__shot">
+          <img src="assets/img/obrador-md.jpg" alt="" loading="lazy" decoding="async" data-shop-img>
+        </figure>
       </div>
       <div class="prose" data-shop-body></div>
     </div>

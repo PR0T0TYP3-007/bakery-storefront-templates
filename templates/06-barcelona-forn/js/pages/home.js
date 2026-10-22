@@ -44,8 +44,17 @@ if (voice) {
   set('[data-lede]', voice.lede);
 }
 
+/* The pictures are in the markup so they start downloading with the page;
+   only their alt text comes from config, because the words are the
+   merchant's and an empty alt on a photograph of their shop is a shrug. */
+const shopfront = $('[data-shopfront]');
+if (shopfront && voice?.shopfront?.alt) shopfront.alt = voice.shopfront.alt;
+
+const shopImg = $('[data-shop-img]');
+if (shopImg && voice?.shop?.alt) shopImg.alt = voice.shop.alt;
+
 /* -------------------------------------------------------------------------
-   Today's date, in the shop's own language
+   Today's date
    ------------------------------------------------------------------------- */
 const dayEl = $('[data-today]');
 if (dayEl) {

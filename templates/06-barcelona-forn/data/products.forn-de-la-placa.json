@@ -150,7 +150,10 @@
       "subtitle": "Fried in the morning, rolled in sugar",
       "price": 9,
       "leadDays": 0,
-      "image": null,
+      "image": {
+        "src": "bunyols",
+        "alt": "Fried rings rolled in sugar, on a wire rack"
+      },
       "allergens": [
         "gluten",
         "egg",
@@ -169,7 +172,10 @@
       "subtitle": "Cinnamon, lemon, burnt sugar",
       "price": 5,
       "leadDays": 0,
-      "image": null,
+      "image": {
+        "src": "crema-catalana",
+        "alt": "The sugar on a terracotta dish being burnt with a torch"
+      },
       "allergens": [
         "egg",
         "milk"
@@ -364,7 +370,10 @@
       "price": 2,
       "leadDays": 0,
       "batchSize": 60,
-      "image": null,
+      "image": {
+        "src": "croissant",
+        "alt": "A tray of croissants, just out of the oven"
+      },
       "allergens": [
         "gluten",
         "egg",
@@ -384,7 +393,10 @@
       "price": 4,
       "leadDays": 0,
       "batchSize": 50,
-      "image": null,
+      "image": {
+        "src": "pa-de-pages",
+        "alt": "Round floured loaves cooling on cloth"
+      },
       "allergens": [
         "gluten"
       ],
@@ -402,7 +414,10 @@
       "price": 5,
       "leadDays": 0,
       "batchSize": 20,
-      "image": null,
+      "image": {
+        "src": "pa-de-segol",
+        "alt": "Slices of dark rye studded with walnuts, on a board"
+      },
       "allergens": [
         "gluten",
         "nuts"
@@ -421,7 +436,10 @@
       "price": 1,
       "leadDays": 0,
       "batchSize": 120,
-      "image": null,
+      "image": {
+        "src": "barra",
+        "alt": "Thin loaves in a paper bag"
+      },
       "allergens": [
         "gluten"
       ],

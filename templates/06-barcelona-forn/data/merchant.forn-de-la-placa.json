@@ -92,8 +92,8 @@
     "headline": "The calendar decides.",
     "lede": "Some things are only made when their day comes round. What is on the counter this morning is what there is, and what is coming is coming.",
     "shopfront": {
-      "image": null,
-      "alt": "The bakery's marble counter, with the hydraulic floor tiles below it",
+      "image": "counter",
+      "alt": "The marble counter under its glass domes, with the tiled floor beyond",
       "caption": "The counter, mid-morning."
     },
     "shop": {
@@ -101,7 +101,9 @@
       "body": [
         "We open at half past seven. Bread comes out in two batches, the first at eight and the second around one, and the pastry is made overnight.",
         "Whatever is in season is here while it lasts. We do not hold any back: when it is gone it is gone, and it comes round again next year."
-      ]
+      ],
+      "image": "obrador",
+      "alt": "The bread counter, loaded, late in the morning"
     }
   },
   "year": [

@@ -10,7 +10,7 @@
 
 import * as session from '../services/session.js';
 import { renderHeader, renderFooter } from '../components/chrome.js';
-import { entryFor, seasonLine, dayMonth, isoDate, esc } from '../components/calendar.js';
+import { entryFor, seasonLine, dayMonth, isoDate, picture, esc } from '../components/calendar.js';
 import { nextFor, daysBetween, addDays, startOfDay } from '../year.js';
 import { toast } from '../components/toast.js';
 
@@ -67,6 +67,8 @@ function render(p) {
   $('[data-thing]').innerHTML = `
     <div class="thing__grid">
       <div class="thing__say">
+        <figure class="thing__shot">${picture(p, { eager: true, size: 'lg' })}</figure>
+
         ${stateLine(entry, season)}
 
         <h1 class="t-1" style="margin-top:var(--s-3)" lang="ca">${esc(p.name)}</h1>

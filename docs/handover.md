@@ -397,11 +397,49 @@ Verified: contrast sweep clean on both pages at desktop and 375, no sideways scr
 basket works end to end (count, toast, moved-day sentence), a bad `?id=` lands on a real page,
 233 tests pass, build at 46 pages.
 
+**22 Oct, fourth stretch — photography.**
+
+Eight images in `templates/06-barcelona-forn/assets/img/`, exclusive to this template —
+nothing shared with the other five, which was the client's complaint. Unsplash stock at
+lg/md/sm; `assets/img/CREDITS.md` lists every id and what it shows.
+
+**Six of seventeen products have a photograph, and that is deliberate.** There is no honest
+stock photograph of a tortell de Reis, a mona de Pasqua, panellets, neules i torró, any of
+the four cocas or a xuixo. Searching Unsplash for "ensaimada" returns Mallorcan beaches;
+"tortell de Reis" returns nothing. Captioning a generic ring cake *Tortell de Reis* is exactly
+what **D16** bans, so those eleven do not get a photograph.
+
+What they get instead took four goes, and the three failures are worth knowing:
+
+| Attempt | Why it failed |
+|---|---|
+| The floor at full strength where the picture would be | A saturated ochre-and-terracotta checkerboard beside a croissant reads as a glitch. |
+| The same, toned to marble | Tiled into vertical **stripes** — leaving 90–270° transparent in a conic gradient makes bands, not a checker. |
+| The checker drawn correctly, as the tile's background | At marble-2 on marble-3 it is unmistakably the transparency grid out of an image editor. |
+| **A plain tile of the second surface** | Nothing is missing from a surface. This is the separation method the template already runs on. |
+
+All three failures were trying to fill the hole where a picture would be. The hole is only a
+hole if something is supposed to be in it.
+
+**When the merchant supplies real photography this inverts** — the calendar items are the ones
+worth photographing. Drop files in, point `image` at them in the catalogue, and `picture()` in
+`components/calendar.js` uses them with no other change.
+
+Also moved: `--ready` and `--soon`. The green was measured at 4.63 **on marble** and shipped on
+that number; the shop page then put a 12px "On the counter now" on **marble-2**, where it was
+4.24 and failed the sweep. A state colour lands on whichever surface its tile happens to be, so
+all three are now measured against all three marbles and clear the darkest.
+
+The hero photograph is deliberately **not** lazy and its `src` is in the markup, not painted on
+by JS — Templates 03 and 05 both shipped a lazy hero that showed as an empty coloured box for
+seconds on a real network.
+
 Next, in order:
-1. `cistella` and `pagament` — and the season rule from (2) above belongs in both.
-2. `calendari`, `visita`, `confirmacio`, `404`.
+1. `basket` and `checkout` — and the season rule (orders refused beyond the booking window)
+   belongs in both.
+2. `calendar`, `visit`, `confirmation`, `404`.
 3. The style guide.
-4. Photography (the template needs its own set — see §5 item 1).
+4. Template 07.
 
 Not started: the Catalan/Spanish/English glossing mechanism. Still unverified: the fonts
 against Catalan glyphs — ç, à, è, í, ï, ú and the interpunct ·. The home page renders

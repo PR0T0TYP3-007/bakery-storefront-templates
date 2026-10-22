@@ -27,6 +27,46 @@
   color: var(--ink);
 }
 
+/* A tile with a picture holds it flush to the edges — the padding belongs to
+   the words, not to the photograph. Hence the negative margins rather than a
+   wrapper: the tile is still one box and the grout is still the only line. */
+.tile-card--shot {
+  padding-top: 0;
+  gap: var(--s-3);
+}
+
+.shot {
+  width: calc(100% + var(--s-4) * 2);
+  margin-inline: calc(var(--s-4) * -1);
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+/* A tile with no honest photograph is a plain tile of the other surface.
+   Three goes at this before the obvious answer:
+
+     1. The floor at full strength, where the photograph would be. A
+        saturated ochre-and-terracotta checkerboard beside a croissant
+        reads as a glitch.
+     2. The same, toned to marble. That tiled into vertical stripes,
+        because leaving 90-270deg transparent in the conic gradient makes
+        bands rather than a checker.
+     3. The checker drawn correctly, as the tile's own background. At
+        marble-2 against marble-3 it is, unmistakably, the transparency
+        grid out of an image editor.
+
+   Every one of them was trying to fill the hole where a picture would be,
+   and that is the mistake: the hole is only a hole if something is
+   supposed to be in it. A plain second surface is the separation method
+   this whole template already runs on, and nothing is missing from it.
+
+   The words sit at the bottom so their names line up with the names on
+   the tiles that do have a photograph. */
+.tile-card--notshot {
+  background: var(--marble-2);
+  justify-content: flex-end;
+}
+
 /* The one the calendar has opened is the reason anybody is here today, so it
    takes the shade. A checkerboard of alternating fills was the first try and
    it fell apart: `auto-fill` means the column count is unknown, so an
@@ -43,13 +83,38 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    gap: var(--s-5);
     /* Laid flat it does not need two tiles of height, and keeping the square
        minimum left it floating in a half-empty box. */
-    min-height: calc(var(--tile-unit) * 1.5);
+    min-height: calc(var(--tile-unit) * 2);
+    padding-top: 0;
+    padding-inline-start: 0;
+  }
+
+  /* Laid flat, the picture is a panel down the left rather than a band
+     across the top. `align-self: stretch` is what makes the tiled fallback
+     fill it: it is a div with no intrinsic height, so without this it
+     collapsed to nothing and sat in the middle of a white gap. */
+  .tile-card--occasion .shot {
+    width: calc(var(--tile-unit) * 3);
+    flex: none;
+    margin: 0;
+    align-self: stretch;
+    aspect-ratio: auto;
+    min-height: calc(var(--tile-unit) * 2);
+  }
+
+  .tile-card--occasion .tile-card__body { padding-block: var(--s-4); }
+
+  /* Only a tile with a picture gives up its left padding to it. */
+  .tile-card--occasion.tile-card--notshot {
+    padding-inline-start: var(--s-4);
+    padding-top: var(--s-4);
   }
 
   .tile-card--occasion .tile-card__price {
     font-size: var(--t-3);
+    padding-inline-end: var(--s-4);
   }
 }
 

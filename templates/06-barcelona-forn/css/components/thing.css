@@ -224,3 +224,25 @@
   background: var(--marble-2);
   color: var(--ink);
 }
+
+/* The picture, or the floor where there is no honest picture. Flush to the
+   top of the column and square-edged, like every other surface here. */
+.thing__shot {
+  margin: 0 0 var(--s-5);
+}
+
+.thing__shot .shot {
+  width: 100%;
+  margin: 0;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  background: var(--marble-3);
+}
+
+.thing__shot .shot--tiled {
+  aspect-ratio: 3 / 1;
+}
+
+/* A thing with no honest photograph renders an empty <figure>, which would
+   otherwise contribute its own bottom margin to nothing at all. */
+.thing__shot:empty { display: none; }
