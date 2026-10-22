@@ -110,7 +110,10 @@
       "subtitle": "Round, with marzipan",
       "price": 18,
       "leadDays": 2,
-      "image": null,
+      "image": {
+        "src": "tortell-marsipan",
+        "alt": "A round tortell topped with marzipan and pine nuts"
+      },
       "allergens": [
         "gluten",
         "egg",
@@ -223,7 +226,10 @@
       "subtitle": "Sponge, chocolate, hard-boiled eggs and feathers",
       "price": 20,
       "leadDays": 4,
-      "image": null,
+      "image": {
+        "src": "mona",
+        "alt": "Ring-shaped mones on a market table, each with a whole egg baked into it"
+      },
       "allergens": [
         "gluten",
         "egg",
@@ -314,7 +320,10 @@
       "subtitle": "Thin neules, torró from Agramunt",
       "price": 20,
       "leadDays": 2,
-      "image": null,
+      "image": {
+        "src": "torro",
+        "alt": "Bars of almond torró on a board, with almonds beside them"
+      },
       "allergens": [
         "gluten",
         "egg",
@@ -479,7 +488,10 @@
       "subtitle": "Espresso cut with a little hot milk",
       "price": 1.6,
       "leadDays": 0,
-      "image": null,
+      "image": {
+        "src": "tallat",
+        "alt": "A tallat in a small glass on a saucer"
+      },
       "allergens": [
         "milk"
       ],
@@ -516,7 +528,10 @@
       "subtitle": "Thick drinking chocolate, spoon included",
       "price": 3.2,
       "leadDays": 0,
-      "image": null,
+      "image": {
+        "src": "xocolata",
+        "alt": "A cup of thick drinking chocolate with a spoon in it, xurros alongside"
+      },
       "allergens": [
         "milk"
       ],

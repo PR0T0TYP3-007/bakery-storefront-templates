@@ -10,7 +10,7 @@
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 import { dateOf, windowOf, occurrences, onNow } from '../js/year.js';
@@ -232,4 +232,29 @@ test('closed weekdays are numbers, and agree with the printed hours', () => {
 
   assert.deepEqual([...shutByNumber].sort(), [...shutByHours].sort(),
     'the days with no opening hours and the days the booking logic refuses are different lists');
+});
+
+/**
+ * Every photograph a product points at actually exists, at all three sizes.
+ *
+ * `picture()` builds the path from `image.src` plus a size suffix, so a typo
+ * or a half-finished download produces a broken image rather than an error.
+ * The page still renders; there is just a hole in it, which is precisely the
+ * thing nobody notices until a client does.
+ */
+test('every product image exists at lg, md and sm', () => {
+  const dir = fileURLToPath(new URL('../assets/img/', import.meta.url));
+
+  for (const p of catalogue.products) {
+    if (!p.image) continue;
+
+    assert.ok(p.image.src, `"${p.id}" has an image block with no src`);
+    assert.ok(p.image.alt && p.image.alt.trim().length > 8,
+      `"${p.id}" has no usable alt text — the alt is what says what is really in the frame`);
+
+    for (const size of ['lg', 'md', 'sm']) {
+      const file = `${p.image.src}-${size}.jpg`;
+      assert.ok(existsSync(dir + file), `"${p.id}" points at ${file}, which is not there`);
+    }
+  }
 });

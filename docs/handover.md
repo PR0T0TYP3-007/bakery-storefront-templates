@@ -588,6 +588,37 @@ opens: `--ink-3` was `#857b6e`, measuring **3.62** on the paper and **3.92** on 
 the 10–11px its meta lines and definition terms are set in. Every entry carried it, 01 to 06.
 Now `#6b6256`: 5.23 and 5.65, still clearly the quiet tier. The listing page sweeps clean.
 
+**23 Oct — the client said products were missing pictures. They were right, and the first
+photography pass was the reason.**
+
+No broken file references; the gap was deliberate. But "no honest photograph exists" was a
+conclusion drawn from a search that was too shallow, not a finding. The queries were English
+and compound — `marzipan-pine-nut-cookies`, `ensaimada-mallorca` — and several of these things
+are heavily photographed under their **Castilian** names. `roscón de reyes` is the same cake as
+a tortell.
+
+Searching the native terms found five that are genuinely what they claim to be, so the
+catalogue went from 9 of 23 to **14 of 23**: a marzipan tortell for Sant Antoni, ring mones
+with eggs baked in, almond torró, a tallat, and a cup of thick xocolata.
+
+**Nine are still blank and should stay blank** until the merchant photographs them —
+`tortell-reis`, the four cocas, `panellets`, `xuixo`, `ensaimada`, `orxata`. Searched under
+Catalan, Castilian and plain description: panellets returns croissants, xuixo returns a street
+in Ensenada, ensaimada returns Mallorcan beaches, orxata returns bottled water. The reasoning
+for each is in `assets/img/CREDITS.md`.
+
+`tortell-reis` is the interesting one: roscón photographs do exist, but they show the
+marzipan-and-pine-nut kind, which is what `tortell-sant-antoni` already is. This shop's Reis
+tortell is the candied-fruit one with a figurine and a bean, so that photograph would
+misdescribe it by its own subtitle.
+
+**A new test and a near miss.** `config.test.js` now asserts every `image.src` resolves to real
+lg/md/sm files and that each has usable alt text — proved by pointing one at a typo and
+watching it fail. And the capture tooling broke silently: at 54 images the headless pass began
+painting before its stylesheets applied, producing a shot of a completely unstyled shop page.
+The live page was fine. `tools/previews.mjs` had the same 20s budget and generates the shipped
+gallery thumbnails, so a blank-CSS thumbnail was one run away; both are at 45s now.
+
 Next:
 1. Template 07 — the concept is written in `docs/07-franco-ontarian.md`, nothing built.
 

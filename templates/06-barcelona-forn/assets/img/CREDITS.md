@@ -1,10 +1,10 @@
 # Photography — Forn de la Plaça
 
-Thirteen photographs, exclusive to this template. The review of the first five
+Eighteen photographs, exclusive to this template. The review of the first five
 templates raised that they share one pool of twelve images in `shared/img/`;
 nothing here is in that pool and nothing here is used by another template.
 
-All thirteen are Unsplash stock under the [Unsplash
+All eighteen are Unsplash stock under the [Unsplash
 licence](https://unsplash.com/license), standing in for the merchant's own
 photography. Each file is `<name>-lg.jpg` (1600–1800px), `-md.jpg` (900px)
 and `-sm.jpg` (480px), fetched from
@@ -25,6 +25,11 @@ and `-sm.jpg` (480px), fetched from
 | `barra` | `photo-1599819055803-717bba43890f` | Thin loaves in a paper bag |
 | `bunyols` | `photo-1651802556013-22e60a3ff853` | Fried rings rolled in sugar |
 | `crema-catalana` | `photo-1554371650-1f19f803c220` | Sugar on a terracotta dish being burnt with a torch |
+| `tortell-marsipan` | `photo-1586716580690-f8418e99e482` | A round tortell topped with marzipan and pine nuts |
+| `mona` | `photo-1590222566750-b19466b991d0` | Ring-shaped mones on a market table, each with a whole egg baked in |
+| `torro` | `photo-1610529540377-3a3ef463346f` | Bars of almond torró on a board |
+| `tallat` | `photo-1534687941688-651ccaafbff8` | A tallat in a small glass on a saucer |
+| `xocolata` | `photo-1590872809871-8a1602d5842d` | A cup of thick drinking chocolate with a spoon, xurros alongside |
 
 Every one was looked at before it was kept — on contact sheets, at size, and
 then again in the page.
@@ -37,7 +42,17 @@ shadow, which is where the type sits.
 `counter` was kept for its palette, which is already this template's: dark
 blue panelling against a pale marble top, with a patterned floor behind it.
 
-## Why only six of the seventeen baked things have a photograph
+## A correction: the first search was too shallow
+
+The first pass concluded that no honest photograph of the Catalan specialities
+existed and left eleven of them blank. That was under-searching, not a finding.
+The queries were English and compound — "marzipan-pine-nut-cookies",
+"ensaimada-mallorca" — and several of these things are heavily photographed
+under their **Castilian** names. `roscón de reyes` is the same cake as a
+tortell. Searching the native terms found five more that are genuinely what
+they claim to be, and they are now in use.
+
+## Why nine things still have no photograph
 
 **D16 — photography never lies about the product.**
 
@@ -79,3 +94,32 @@ They are listed on the home page as a price card rather than a grid of
 tiles. Six coffees at four prices are read top to bottom like the card
 propped against the till; making them the same shape as six cakes would say
 they are the same kind of decision, and they are not.
+
+
+## The nine that are still blank, and why
+
+`tortell-reis`, `coca-llardons`, `coca-sant-jordi`, `coca-sant-joan`,
+`coca-llarga`, `panellets`, `xuixo`, `ensaimada`, `orxata`.
+
+Every one was searched under its Catalan name, its Castilian name and a
+description of the thing itself. What comes back:
+
+- **panellets** → croissants, cinnamon buns and muffins. Nothing crusted in
+  pine nuts.
+- **xuixo** → a street in Ensenada, a shopfront called XICO, an app icon.
+- **ensaimada** → beaches and villages in Mallorca.
+- **orxata** → bottled water and a bottle of Mineragua.
+- **the four cocas** → nothing. A coca is a regional flatbread and the stock
+  libraries do not have one.
+- **tortell-reis** specifically → the roscón photographs that exist show the
+  marzipan-and-pine-nut kind, which is what `tortell-sant-antoni` is. This
+  shop's Reis tortell is the candied-fruit one, with a figurine and a bean.
+  Using the other photograph would misdescribe the product by its own
+  subtitle, so it waits.
+
+These are the ones where a stand-in would be a lie, and that is the whole of
+D16. **The right fix is the merchant's own photography**, which is also true
+of every image in this folder — these are placeholders. Nine real photographs
+taken on one morning would close this, and they would be better than anything
+stock could give, because the thing in the window would actually be the thing
+you get.

@@ -96,7 +96,11 @@ for (const t of TEMPLATES) {
     // for them. 6000 was not enough: Template 05's hero photograph and two
     // of its three morning pictures were still blank when the shutter fell,
     // so the preview showed a flat green band where the shop should be.
-    '--virtual-time-budget=20000',
+    // 20000 was enough for five templates. Template 06 ships 54 images and
+    // at 20s the SECOND pass began painting before its stylesheets applied,
+    // producing a capture of an unstyled page — which is worse than a stale
+    // preview, because it looks like the template itself is broken.
+    '--virtual-time-budget=45000',
     `--window-size=${WIDTH},${HEIGHT}`,
     `--force-device-scale-factor=${SCALE}`,
     ...extra,
@@ -115,8 +119,8 @@ for (const t of TEMPLATES) {
      The first pass loads the page and is thrown away; it exists to fill the
      HTTP cache in a profile the second pass reuses. The second pass then
      has every image locally and nothing to wait for. */
-  await run(chrome, args([]), { timeout: 90000 });
-  await run(chrome, args([`--screenshot=${shot}`]), { timeout: 90000 });
+  await run(chrome, args([]), { timeout: 180000 });
+  await run(chrome, args([`--screenshot=${shot}`]), { timeout: 180000 });
 
   const dest = path.join(root, 'assets', 'previews', `template-${t.slice(0, 2)}.jpg`);
   await run('python', ['-I', '-c', `
