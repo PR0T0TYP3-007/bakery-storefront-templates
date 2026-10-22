@@ -646,3 +646,43 @@ the product page. **A reveal that cannot fire is not an art direction; it is a p
 nobody can see.** Under `@media (hover: none)` the grayscale comes almost all the way off and
 the contrast lift stays. Keyed to `hover` rather than to a width, so a touchscreen laptop
 keeps the version that suits it.
+
+---
+
+### D22 — A card by another name is still a card
+
+**Decision.** Template 05's "Before the doors" section is one band whose three columns run
+from ink to paper — night, the light coming up, the doors. No panels, no borders between
+items, photographs flush to their column edges.
+
+**What it replaced, and why that matters.** The first build mounted each moment on its own
+white rectangle with a 1px hairline border, separated from its caption by another hairline.
+The comment above it argued that a generous mount made them read as *pinned prints* rather
+than as cards. That reasoning was wrong, and it was wrong in a way worth naming: **the test
+is not what the author intends a shape to mean, it is what the shape is made of.** A white
+panel with a hairline border is a card, and hairline-ruled panels is the separation method
+D8 assigns to **Template 01** — so the section was built in another template's vocabulary,
+inside the one template whose entire re-skin exists to get away from Template 01. It was
+reported from outside as "giving vibes of template 1", which it was.
+
+**The second attempt was correct and dull.** One ruled sheet, three equal columns, same
+shapes in each — a metronome. Correct is not the same as designed.
+
+**What fixed it was the content.** The three moments are 03:20, 05:45 and 07:30: a night
+turning into a morning, drawn as three equal things side by side. Letting the band get
+lighter across its width makes the section mean what it looks like, costs nothing but two
+existing tokens, and is measurable — body text on ink is 15.51, and `--green-light` is the
+sign colour's own hue lifted until it reads on ink at 9.70.
+
+**Two smaller rules fell out of it.**
+
+- **Ink is a surface, not only a text colour.** That is consistent with the wall-and-paper
+  rule rather than an exception to it: the rule is that content sits on something that can
+  hold it. What content may never sit on is the painted wall.
+- **A tonal step between two columns is the division.** A rule drawn between two different
+  surfaces is a line nobody needed.
+
+**And a layout note.** The columns are deliberately unequal — the last is widest, because it
+is the one the section counts down to. Unequal columns plus a fixed picture ratio means three
+different picture heights, so the rows live on the band via `grid-template-rows: subgrid` and
+the three columns keep step. Without it the times lined up and the captions did not.

@@ -121,6 +121,11 @@
   --clay: #823826;       /* 7.75 on paper · white on it 8.26 · hue 12 */
   --clay-wash: #efe8e6;
 
+  /* The green lightened until it reads on ink. The morning section runs its
+     first two columns on ink, so the sign colour needs a form that survives
+     there: 9.70 on `--ink`, 7.08 on `--ink-2`. Same hue as everything else. */
+  --green-light: #90d5b9;
+
   /* Ink, not green. A focus ring has to clear 3:1 against whatever is behind
      it, and the green manages 2.46 on the wall. */
   --focus: #10231b;

@@ -423,70 +423,97 @@
 /* ==========================================================================
    The morning
 
-   One sheet of paper, ruled into columns. Not three cards.
+   One band that runs from night to morning.
 
-   The first version mounted each photograph on its own bordered white
-   rectangle and the comment above it argued that a generous mount made them
-   read as pinned prints rather than as cards. That argument was wrong, and
-   the giveaway is what the rectangle is made of: a white panel with a 1px
-   hairline border, divided from its caption by another hairline. Hairline
-   rules around panels is Template 01's separation method, named as such in
-   D8 — so this section was built in another template's vocabulary while
-   claiming to avoid it. Calling a card a mount does not change what it is.
+   Two previous attempts. The first mounted each moment on its own bordered
+   white panel, which is a card, and hairline-ruled panels is Template 01's
+   separation method -- another template's vocabulary inside the one whose
+   re-skin exists to get away from it. The second made it a single ruled
+   sheet, which fixed that and was dull: three identical columns of the same
+   width holding the same shapes, a metronome.
 
-   What this template actually does is a sheet with ruled divisions: the
-   board is one panel with a 2px ink rule across the top and hairlines
-   between its rows. This is that, turned ninety degrees. The section is
-   about times, so it is built as a timetable — the time leads each column
-   in the signage face, the photograph sits flush to the column edges with
-   no mount at all, and the line of text follows.
+   The content was doing something the design was ignoring. These are 03:20,
+   05:45 and 07:30 -- a night turning into a morning -- and they were drawn
+   as three equal things side by side. So the band gets lighter as it goes:
+   the first column is ink, the second the lighter ink, the third paper. The
+   section means what it looks like.
 
-   Flush is the point. A photograph with white margin around it is a print
-   on a wall; a photograph that goes edge to edge in its column is part of
-   the sheet.
+   Three consequences worth stating:
+
+   * The tonal step divides the columns, so there are no dividing rules. A
+     rule between two different surfaces is a line nobody needed.
+   * Ink is a surface here, not just a text colour. That is consistent with
+     the wall-and-paper rule rather than an exception to it: the rule is
+     that content sits on something that can hold it, and body text on ink
+     measures 15.51. What content may never sit on is the painted wall.
+   * The last column is wider. It is the one the whole section is counting
+     down to, and three equal columns is what made the previous version read
+     as a metronome.
    ========================================================================== */
 .morning {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
-  background: var(--surface);
-  border: 1px solid var(--rule);
-  /* The board's own top rule, because this is the board's own grammar. */
-  border-top: 2px solid var(--ink);
+  grid-template-columns: 1fr 1fr 1.25fr;
+  /* The three rows live on the band, not on each column. Each column is its
+     own grid otherwise, and because the columns are different widths a
+     picture with a fixed ratio comes out a different height in each one —
+     so the times lined up and the captions did not. Subgrid hands the rows
+     back to the parent and the three columns keep step. */
+  grid-template-rows: auto 1fr auto;
 }
 
 .morning__step {
   display: grid;
-  grid-template-rows: auto auto 1fr;
+  grid-row: 1 / -1;
+  grid-template-rows: subgrid;
   min-width: 0;
-  border-left: 1px solid var(--rule);
+  background: var(--ink);
+  color: var(--surface);
 }
-.morning__step:first-child { border-left: 0; }
 
-/* The time leads, and it is the one place the signage face behaves like
-   signage: large, tabular, in the shop's own green — legal here because a
-   sheet of paper is where the green is allowed to be. */
+/* Without subgrid each column falls back to its own three rows, which is
+   the misalignment described above rather than a broken layout. */
+@supports not (grid-template-rows: subgrid) {
+  .morning__step { grid-row: auto; grid-template-rows: auto 1fr auto; }
+}
+
+/* Night, then the light coming up, then the doors. */
+.morning__step:nth-child(2) { background: var(--ink-2); }
+.morning__step:nth-child(3) {
+  background: var(--surface);
+  color: var(--ink-2);
+}
+
+/* The time leads, large, in the signage face. The sign green only works on
+   the paper column; the dark two take the lightened form of the same hue. */
 .morning__at {
   margin: 0;
-  padding: var(--s-4) var(--s-4) var(--s-3);
-  border-bottom: 1px solid var(--rule);
+  padding: var(--s-5) var(--s-4) var(--s-4);
   font-family: var(--font-display);
   font-variation-settings: var(--display-settings);
   font-weight: 700;
-  font-size: var(--t-2);
+  font-size: var(--t-1);
   line-height: 1;
   letter-spacing: -0.01em;
   font-variant-numeric: tabular-nums;
-  color: var(--green);
+  color: var(--green-light);
 }
+.morning__step:nth-child(3) .morning__at { color: var(--green); }
 
-/* Flush to the column. No padding, no border, no mount. */
+/* Flush to the column: no padding, no border, no mount. A photograph with
+   white margin round it is a print on a wall; one that runs edge to edge is
+   part of the thing it is in.
+
+   The ratio sets the band's height; the subgrid row then stretches every
+   column to match it, and object-fit on the image covers whatever ends up
+   wider than the ratio asked for. */
 .morning__media {
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 4 / 5;
+  min-height: 100%;
   overflow: hidden;
-  background: var(--surface-3);
+  background: var(--ink-2);
 }
 
 .morning__media img {
@@ -498,23 +525,19 @@
 
 .morning__what {
   margin: 0;
-  padding: var(--s-3) var(--s-4) var(--s-4);
+  padding: var(--s-4);
   font-size: var(--t-sm);
-  line-height: 1.45;
-  color: var(--ink-2);
+  line-height: 1.5;
 }
 
-/* On a phone the sheet scrolls sideways rather than stacking: three stacked
-   columns put the rest of the page a screen and a half further down, and
-   the strip reads as a sequence anyway, which is what a swipe is for.
-
-   The gutter is negated and re-added as padding so the sheet's left edge
-   lines up with the heading above it and its right edge can still clear the
-   screen. */
+/* On a phone the band scrolls sideways rather than stacking: three stacked
+   columns put the rest of the page a screen and a half further down, and a
+   sequence is what a swipe is for. The tones still run dark to light, so
+   swiping through it is still a night becoming a morning. */
 @media (max-width: 52rem) {
   .morning {
     grid-auto-flow: column;
-    grid-auto-columns: 78%;
+    grid-auto-columns: 80%;
     grid-template-columns: none;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -523,8 +546,6 @@
   }
 
   .morning__step { scroll-snap-align: start; }
-
-  /* Wider than it is tall on a phone, so the time, the picture and the line
-     all fit in one screen without the column becoming a tower. */
-  .morning__media { aspect-ratio: 16 / 10; }
+  .morning__media { aspect-ratio: 4 / 3; }
+  .morning__at { padding-top: var(--s-4); font-size: var(--t-2); }
 }
