@@ -18,7 +18,12 @@
     --surface: #fbf8f3;
     --ink: #17140f;
     --ink-2: #574f44;
-    --ink-3: #857b6e;
+    /* Was #857b6e, which measured 3.62 on the paper and 3.92 on the
+       surface — a fail at the 11px and 10px this page sets its meta lines
+       and definition terms in. Every entry on the gallery carried it, and
+       the gallery is the first page anybody opens. #6b6256 is 5.23 and
+       5.70, and still reads as the quiet tier. */
+    --ink-3: #6b6256;
     --line: rgba(23, 20, 15, 0.14);
     --line-2: rgba(23, 20, 15, 0.3);
     --accent: #8a3e2c;
@@ -226,7 +231,7 @@
     <p class="meta">Cake &amp; bakery storefronts</p>
     <h1>Listed Templates</h1>
     <div class="count">
-      <p class="meta" data-count>Five templates available</p>
+      <p class="meta" data-count>Six templates available</p>
       <p class="meta">Select one to view it</p>
     </div>
   </div>
@@ -345,6 +350,28 @@
       </div>
     </li>
 
+    <li class="entry">
+      <div class="entry__preview">
+        <img src="assets/previews/template-06.jpg"
+             alt="Preview of El Calendari: a Barcelona caf&eacute; counter under a deep blue wash, with a band of hydraulic floor tiles beneath it."
+             width="1120" height="700" loading="eager" decoding="async">
+      </div>
+      <div class="entry__body">
+        <p class="meta">Template 06</p>
+        <h2 class="entry__name">
+          <a class="entry__link" href="templates/06-barcelona-forn/index.html">The Barcelona Forn</a>
+        </h2>
+        <dl class="entry__facts">
+          <div><dt>Company</dt><dd>Forn de la Pla&ccedil;a</dd></div>
+          <div><dt>Concept</dt><dd>El Calendari</dd></div>
+        </dl>
+        <div class="entry__foot">
+          <span class="meta">Carrer de Blai, Barcelona</span>
+          <span class="view">View template <span aria-hidden="true">&rarr;</span></span>
+        </div>
+      </div>
+    </li>
+
   </ul>
 <script>
   // Written, not hardcoded: the heading counts the entries below it, so
@@ -352,7 +379,11 @@
   // carries the right word, so nothing breaks if this never runs.
   (function () {
     var n = document.querySelectorAll('.listing .entry').length;
-    var words = ['No', 'One', 'Two', 'Three', 'Four', 'Five'];
+    // Up to twelve, because the list stopped at 'Five' and the sixth
+    // template therefore rendered as "6 templates available" in a line
+    // whose whole point is that it is written out.
+    var words = ['No', 'One', 'Two', 'Three', 'Four', 'Five', 'Six',
+                 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve'];
     var el = document.querySelector('[data-count]');
     if (el && n) {
       el.textContent = (words[n] || n) + ' template' + (n === 1 ? '' : 's') + ' available';
@@ -366,7 +397,7 @@
   <div class="wrap">
     <p class="meta">Demonstration storefronts · No orders are processed</p>
     <p class="footnote">
-      All five shops, their staff and their copy are invented, and the photography is
+      All six shops, their staff and their copy are invented, and the photography is
       stock standing in for merchant photography.
     </p>
   </div>

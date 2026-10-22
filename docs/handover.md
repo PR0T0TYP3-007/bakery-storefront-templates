@@ -573,6 +573,21 @@ meant to be hard to read. `data-contrast-demo` on an element skips it and everyt
 and the number skipped comes back as `__skipped` on the result, so an exemption can never be
 silent. Six on the style guide, zero everywhere else. Nothing but a specimen may use it.
 
+**Shipping 06 turned up four things the template itself was fine about.** A finished template
+is not finished until it is on the listing:
+
+| Found | Fix |
+|---|---|
+| `templates/06-barcelona-forn/package.json` was still named `the-counter-template-05`, description and all — copied from 05 and never renamed | Renamed to `forn-de-la-placa-template-06` |
+| `tools/previews.mjs` listed five templates, so 06's gallery thumbnail could never be generated | 06 added; all six regenerated |
+| 06 was not on `index.html` at all | Entry added, matching the existing markup and the `loading="eager"` the other five use |
+| The listing's footnote said "All five shops", and its count script's word list stopped at `'Five'` — so the sixth rendered as "**6** templates available" in a line whose whole point is being written out | Both corrected; the word list goes to twelve |
+
+**And one pre-existing accessibility fault on the listing page**, which is the first page anyone
+opens: `--ink-3` was `#857b6e`, measuring **3.62** on the paper and **3.92** on the surface, at
+the 10–11px its meta lines and definition terms are set in. Every entry carried it, 01 to 06.
+Now `#6b6256`: 5.23 and 5.65, still clearly the quiet tier. The listing page sweeps clean.
+
 Next:
 1. Template 07 — the concept is written in `docs/07-franco-ontarian.md`, nothing built.
 

@@ -36,6 +36,7 @@ const TEMPLATES = [
   '03-romantic-boutique',
   '04-creative-studio',
   '05-neighbourhood',
+  '06-barcelona-forn',
 ];
 
 const CHROME = [

@@ -1,8 +1,8 @@
 {
-  "name": "the-counter-template-05",
+  "name": "forn-de-la-placa-template-06",
   "private": true,
   "version": "1.0.0",
-  "description": "Template 05 — The Modern Neighbourhood Bakery (our concept name for it: The Counter). Static storefront; this file exists only so Node can run the unit tests as ES modules. Nothing is installed or shipped to the browser.",
+  "description": "Template 06 — The Barcelona Forn (our concept name for it: El Calendari). Static storefront; this file exists only so Node can run the unit tests as ES modules. Nothing is installed or shipped to the browser.",
   "type": "module",
   "scripts": {
     "test": "node --test \"tests/*.test.js\"",
