@@ -446,21 +446,24 @@
      the wall-and-paper rule rather than an exception to it: the rule is
      that content sits on something that can hold it, and body text on ink
      measures 15.51. What content may never sit on is the painted wall.
-   * The last column is wider. It is the one the whole section is counting
-     down to, and three equal columns is what made the previous version read
-     as a metronome.
+   The columns are equal. An earlier version made the last one wider on the
+   theory that it is the moment the section counts down to, which is true
+   and still did not justify it: three photographs of one morning are three
+   views of the same thing, and sizing one of them differently reads as a
+   mistake rather than as emphasis. The tonal run is what carries the
+   sequence; it does not need the widths to say it twice.
    ========================================================================== */
 .morning {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: 1fr 1fr 1.25fr;
-  /* The three rows live on the band, not on each column. Each column is its
-     own grid otherwise, and because the columns are different widths a
-     picture with a fixed ratio comes out a different height in each one —
-     so the times lined up and the captions did not. Subgrid hands the rows
-     back to the parent and the three columns keep step. */
+  grid-template-columns: repeat(3, 1fr);
+  /* The three rows live on the band, not on each column. Each column is
+     its own grid otherwise, so any difference between them — a longer line
+     of text, a different column width — puts the captions at three
+     different heights while the times stay level. Subgrid hands the rows
+     back to the parent and the columns keep step whatever is in them. */
   grid-template-rows: auto 1fr auto;
 }
 
@@ -510,7 +513,7 @@
    column to match it, and object-fit on the image covers whatever ends up
    wider than the ratio asked for. */
 .morning__media {
-  aspect-ratio: 4 / 5;
+  aspect-ratio: 4 / 3;
   min-height: 100%;
   overflow: hidden;
   background: var(--ink-2);

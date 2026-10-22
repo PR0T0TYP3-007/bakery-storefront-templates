@@ -682,7 +682,16 @@ sign colour's own hue lifted until it reads on ink at 9.70.
 - **A tonal step between two columns is the division.** A rule drawn between two different
   surfaces is a line nobody needed.
 
-**And a layout note.** The columns are deliberately unequal — the last is widest, because it
-is the one the section counts down to. Unequal columns plus a fixed picture ratio means three
-different picture heights, so the rows live on the band via `grid-template-rows: subgrid` and
-the three columns keep step. Without it the times lined up and the captions did not.
+**And a layout note, including one thing this entry got wrong.** It first said the columns
+were deliberately unequal — the last widest, because it is the moment the section counts down
+to. That was true as a reason and still did not justify it. Three photographs of one morning
+are three views of the same thing, and sizing one differently reads as a mistake rather than
+as emphasis; it was read that way the moment somebody else saw it. The tonal run already
+carries the sequence and does not need the widths to say it twice. The columns are equal.
+
+The picture ratio went the same way: 4/5 made the band 726px, which is a section demanding
+more of the page than it is worth. At 4/3 it is 463px.
+
+The rows still live on the band via `grid-template-rows: subgrid`. That is not left over from
+the unequal version — each column is its own grid otherwise, so a longer line of text in one
+of them puts the captions at three different heights while the times stay level.
