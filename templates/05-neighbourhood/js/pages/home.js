@@ -163,17 +163,15 @@ function paintMorning(steps) {
     .map(
       (s) => `
       <li class="morning__step">
-        <figure class="pinned">
+        <p class="morning__at">${escape(s.at)}</p>
+        <div class="morning__media">
           <img src="${escape(imgSrc(s.image, 800))}"
                srcset="${escape(imgSrc(s.image, 320))} 240w, ${escape(imgSrc(s.image, 800))} 800w"
                sizes="(min-width: 52rem) 30vw, 88vw"
                alt="${escape(s.alt)}"
                width="800" height="600" decoding="async">
-          <figcaption class="pinned__cap">
-            <span class="morning__at">${escape(s.at)}</span>
-            <span>${escape(s.what)}</span>
-          </figcaption>
-        </figure>
+        </div>
+        <p class="morning__what">${escape(s.what)}</p>
       </li>`
     )
     .join('');

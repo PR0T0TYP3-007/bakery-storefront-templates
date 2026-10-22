@@ -421,68 +421,96 @@
 }
 
 /* ==========================================================================
-   Pinned photographs
-
-   The template separates things with rules, so its photographs are mounted
-   the same way: a square-cornered sheet of paper, the picture sitting on it
-   with a hairline under, and the caption below in the signage face.
-
-   No rounded apertures (Template 03), no overlap (Template 04), no shadow.
-   What makes these read as *pinned* rather than as cards is the mount — the
-   paper is visibly bigger than the picture, the way a photograph tacked to a
-   wall has a border and a wall has a shadowless flatness.
-   ========================================================================== */
-.pinned {
-  margin: 0;
-  background: var(--surface);
-  border: 1px solid var(--rule);
-  padding: var(--s-3) var(--s-3) var(--s-4);
-}
-
-.pinned img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  background: var(--surface-3);
-}
-
-.pinned__cap {
-  display: block;
-  margin-top: var(--s-3);
-  padding-top: var(--s-3);
-  border-top: 1px solid var(--rule);
-  font-size: var(--t-sm);
-  line-height: 1.45;
-  color: var(--ink-2);
-}
-
-/* --------------------------------------------------------------------------
    The morning
-   -------------------------------------------------------------------------- */
+
+   One sheet of paper, ruled into columns. Not three cards.
+
+   The first version mounted each photograph on its own bordered white
+   rectangle and the comment above it argued that a generous mount made them
+   read as pinned prints rather than as cards. That argument was wrong, and
+   the giveaway is what the rectangle is made of: a white panel with a 1px
+   hairline border, divided from its caption by another hairline. Hairline
+   rules around panels is Template 01's separation method, named as such in
+   D8 — so this section was built in another template's vocabulary while
+   claiming to avoid it. Calling a card a mount does not change what it is.
+
+   What this template actually does is a sheet with ruled divisions: the
+   board is one panel with a 2px ink rule across the top and hairlines
+   between its rows. This is that, turned ninety degrees. The section is
+   about times, so it is built as a timetable — the time leads each column
+   in the signage face, the photograph sits flush to the column edges with
+   no mount at all, and the line of text follows.
+
+   Flush is the point. A photograph with white margin around it is a print
+   on a wall; a photograph that goes edge to edge in its column is part of
+   the sheet.
+   ========================================================================== */
 .morning {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  gap: var(--s-4);
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  /* The board's own top rule, because this is the board's own grammar. */
+  border-top: 2px solid var(--ink);
 }
 
 .morning__step {
-  display: flex;
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+  min-width: 0;
+  border-left: 1px solid var(--rule);
+}
+.morning__step:first-child { border-left: 0; }
+
+/* The time leads, and it is the one place the signage face behaves like
+   signage: large, tabular, in the shop's own green — legal here because a
+   sheet of paper is where the green is allowed to be. */
+.morning__at {
+  margin: 0;
+  padding: var(--s-4) var(--s-4) var(--s-3);
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--font-display);
+  font-variation-settings: var(--display-settings);
+  font-weight: 700;
+  font-size: var(--t-2);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+  color: var(--green);
 }
 
-/* On a phone the three pinned sheets stack, and three stacked photographs
-   are 1122px — they put the board 2.5 screens down, on a page whose whole
-   claim is that the board is the hero. So below the split the strip becomes
-   one screen that swipes.
+/* Flush to the column. No padding, no border, no mount. */
+.morning__media {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--surface-3);
+}
 
-   Scroll-snap rather than a carousel: no script, no buttons to mis-label,
-   no state to get wrong, and it still works as a plain scrolling list for
-   anyone whose browser ignores the snapping. The gutter is negated and
-   re-added as padding so the first sheet lines up with the heading above it
-   and the last one can still scroll clear of the edge. */
+.morning__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.morning__what {
+  margin: 0;
+  padding: var(--s-3) var(--s-4) var(--s-4);
+  font-size: var(--t-sm);
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+
+/* On a phone the sheet scrolls sideways rather than stacking: three stacked
+   columns put the rest of the page a screen and a half further down, and
+   the strip reads as a sequence anyway, which is what a swipe is for.
+
+   The gutter is negated and re-added as padding so the sheet's left edge
+   lines up with the heading above it and its right edge can still clear the
+   screen. */
 @media (max-width: 52rem) {
   .morning {
     grid-auto-flow: column;
@@ -491,49 +519,12 @@
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     overscroll-behavior-x: contain;
-    margin-inline: calc(var(--gutter) * -1);
-    padding-inline: var(--gutter);
-    padding-bottom: var(--s-2);
     scrollbar-width: thin;
   }
 
-  .morning__step {
-    scroll-snap-align: start;
-  }
+  .morning__step { scroll-snap-align: start; }
 
-  /* Landscape on the phone. A 4:3 sheet at 78% of 375px is still 220px of
-     picture, which is enough to read and short enough that the caption and
-     the next card's edge are both visible — that edge is the only thing
-     telling anybody there is more to the right. */
-  .morning__step .pinned img {
-    aspect-ratio: 16 / 10;
-  }
-}
-.morning__step .pinned {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-/* 4:3 for the first two and the same for the third keeps the three caption
-   rules on one line across the row, which is the only reason the strip reads
-   as one object rather than three pictures that happen to be adjacent. */
-.morning__step .pinned img {
-  aspect-ratio: 4 / 3;
-}
-
-/* The time is the list marker, and it is the one place the signage face gets
-   to behave like signage: set large, in the shop's own green, on paper where
-   the green is legal (5.14) rather than on the wall where it is not. */
-.morning__at {
-  display: block;
-  font-family: var(--font-display);
-  font-variation-settings: var(--display-settings);
-  font-weight: 700;
-  font-size: var(--t-2);
-  line-height: 1;
-  letter-spacing: -0.01em;
-  color: var(--green);
-  margin-bottom: var(--s-2);
-  font-variant-numeric: tabular-nums;
+  /* Wider than it is tall on a phone, so the time, the picture and the line
+     all fit in one screen without the column becoming a tower. */
+  .morning__media { aspect-ratio: 16 / 10; }
 }
