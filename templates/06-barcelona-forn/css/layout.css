@@ -121,6 +121,31 @@
    place --ochre is allowed — ochre fails as text on both surfaces (2.70 and
    2.42) and is fine as a painted quarter of a tile.
    -------------------------------------------------------------------------- */
+.hero {
+  display: grid;
+  align-items: end;
+  gap: var(--s-5);
+}
+
+/* Narrow, the side panel would be a stripe, and the band under the hero is
+   already doing this job. This sits BEFORE the media query: both rules have
+   the same specificity, so the later one wins whatever the width, and with
+   them the other way round the panel never appeared at all. */
+.hero__pattern { display: none; }
+
+@media (min-width: 60rem) {
+  /* The claim takes the left; the tiling takes the rest. Before this the
+     right-hand sixty per cent of the first screen was flat ground, which
+     read as a page that had not finished loading. */
+  .hero {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+    gap: var(--s-7);
+    align-items: stretch;
+  }
+
+  .hero__pattern { display: block; }
+}
+
 .pattern {
   height: var(--tile-unit);
   background-color: var(--tile-2);
@@ -136,6 +161,12 @@
   background-size: var(--tile-unit) var(--tile-unit);
   background-position: 0 0;
   opacity: 0.9;
+}
+
+/* The same floor, stood on its end beside the claim. */
+.hero__pattern {
+  height: auto;
+  min-height: calc(var(--tile-unit) * 4);
 }
 
 @media (prefers-reduced-motion: no-preference) {

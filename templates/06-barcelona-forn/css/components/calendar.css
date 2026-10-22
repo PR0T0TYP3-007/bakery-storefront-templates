@@ -21,7 +21,7 @@
   flex-direction: column;
   justify-content: space-between;
   gap: var(--s-4);
-  min-height: calc(var(--tile-unit) * 2);
+  min-height: calc(var(--tile-unit) * 1.5);
   padding: var(--s-4);
   background: var(--marble);
   color: var(--ink);
