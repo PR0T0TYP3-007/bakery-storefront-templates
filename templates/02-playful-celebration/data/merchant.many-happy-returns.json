@@ -53,10 +53,10 @@
     ]
   },
   "allergens": ["gluten", "dairy", "egg", "nuts", "soya", "sesame"],
-  "allergenStatement": "Every cake is made in one kitchen that handles gluten, dairy, egg, nuts, soya and sesame. We cannot promise any cake is free from them, so please tell us about allergies when you order and we will talk it through with you.",
+  "allergenStatement": "One kitchen, and gluten, dairy, egg, nuts, soya and sesame all live in it — so we can't keep a cake away from any of them. Put the allergy in the order notes and we'll ring you before we start, not after.",
   "voice": {
     "kicker": "Northdown Road, Margate · Since 2017",
     "headline": "Draw the cake. We'll bake that exact one.",
-    "lede": "Pick the tiers, the sponge, the icing and what goes on top, and watch it get built in front of you. Four days' notice, collected from the shop or driven to your door."
+    "lede": "Pick the tiers, the sponge, the icing and what goes on top, and watch it get built in front of you. Four days' notice for one you build, less for one of ours."
   }
 }

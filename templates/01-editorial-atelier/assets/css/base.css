@@ -258,6 +258,20 @@ table {
   padding-block: clamp(2.5rem, 5vw, 4.5rem);
 }
 
+/* Two sections in a row each bring their own vertical padding, and the
+   browser does not collapse padding the way it collapses margins. Where the
+   occasions strip meets the catalogue that put 66px against 119px — 185px
+   of nothing between the last occasion and "The Catalogue", which reads as
+   a missing section rather than as breathing room.
+
+   The section that follows gives up its top padding, so the gap is set by
+   whichever section ends rather than by both of them added together. Only
+   after `.section-tight`: two full sections in a row are a deliberate
+   change of subject and keep the full measure. */
+.section-tight + .section {
+  padding-top: 0;
+}
+
 .rule {
   border: 0;
   border-top: 1px solid var(--rule);

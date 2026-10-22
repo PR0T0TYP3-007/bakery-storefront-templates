@@ -119,15 +119,15 @@
     "soya",
     "sesame"
   ],
-  "allergenStatement": "It's one small kitchen, and it handles gluten, dairy, egg, nuts, soya and sesame. We can't promise anything is free from them — so tell us about an allergy and we'll talk it through with you.",
+  "allergenStatement": "Small kitchen, and there's gluten, dairy, egg, nuts, soya and sesame all over it. Nothing's free from any of it, so have a word with whoever's on the counter and we'll find you something that works.",
   "voice": {
     "kicker": "Bellevue Road, London · Since 2014",
     "headline": "Your bread's out by half seven.",
-    "lede": "Order by 11 and it's yours today. We bake once, in the morning, and when a thing is gone it is gone until tomorrow.",
+    "lede": "Order by 11 and it's yours today. We only bake in the morning, so the shelf is as full as it gets at half seven.",
     "shopfront": {
       "image": "photo-1738898326912-83ec04de4ccf",
       "alt": "The counter at Hazel & Rye, baskets of bread along the glass and the bench visible behind it",
-      "caption": "Tuesday, about ten past eight."
+      "caption": "The counter, a little after opening."
     },
     "morning": [
       {

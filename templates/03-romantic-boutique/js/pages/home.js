@@ -96,9 +96,14 @@ const headOrder = growAndKeep({
   behind: $('[data-head-back]'),
   front: $('[data-head-front]'),
   seed: merchant.voice.headline,
-  density: 0.5,
-  bloom: 0.8,
-  maxElements: 70,
+  /* Thinner than it was. At 0.5/70 the generator put 176 shapes in the
+     front layer -- the one drawn over the strokes -- and the headline stopped
+     being readable, which is a high price for a flourish on the one sentence
+     the page exists to say. The plant still weaves in front and behind; there
+     is simply less of it over the type. */
+  density: 0.3,
+  bloom: 0.7,
+  maxElements: 38,
   colours: {
     stem: 'var(--leaf)',
     flower: 'var(--blush)',
@@ -225,9 +230,9 @@ $('[data-card-why]').innerHTML = `
   and a character counter will not warn them, because the trouble is never the
   number of characters — it is a long word, or a name that will not sit on one
   line with the rest of the sentence.</p>
-  <p>So the card sets itself while you type. ${esc(merchant.card.stock.toLowerCase())},
-  in the hand it will be written in, broken where the pen will break it. If it
-  will not fit we say so, and we say which word is the problem.</p>`;
+  <p>So the card sets itself while you type — ${esc(merchant.card.stock.toLowerCase())},
+  in the hand it will be written in, broken where the pen will break it. You
+  are reading it roughly as they will.</p>`;
 
 /* ---- Occasions ---------------------------------------------------------- */
 $('[data-occasions]').innerHTML = (catalogue.occasions ?? [])

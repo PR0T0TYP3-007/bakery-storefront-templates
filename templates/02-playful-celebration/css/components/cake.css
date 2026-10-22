@@ -179,6 +179,22 @@
   box-shadow: var(--pop-sm);
   translate: -1px -1px;
 }
+/* The same drawn tick the colour swatches get, and for the same reason
+   already written down beside them: selection must not be carried by border
+   weight alone. The tier buttons were the one control in the builder that
+   signalled "chosen" with nothing but a thicker edge and a 1px nudge, which
+   is invisible next to a sponge choice that ticks itself. */
+.tier input:checked + .tier__face .tier__n::after {
+  content: "";
+  display: inline-block;
+  width: 0.62em; height: 0.34em;
+  margin-left: 0.4em;
+  border-left: 2.5px solid var(--grape);
+  border-bottom: 2.5px solid var(--grape);
+  rotate: -45deg;
+  translate: 0 -0.12em;
+}
+
 .tier__face svg { display: block; }
 .tier__n { font-family: var(--font-display); font-weight: 600; font-size: var(--sm); }
 .tier__serves { font-size: var(--xs); color: var(--ink-2); font-weight: 700; }

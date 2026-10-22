@@ -192,7 +192,21 @@ main { counter-reset: section; }
 .edgemark {
   display: none;
 }
-@media (min-width: 62rem) {
+/* 84rem, not 62rem.
+   
+   The old threshold asked the wrong question. `.page` is
+   `min(100% - 2*gutter, --page)`, so below about 1280px the page has already
+   shrunk to leave exactly one gutter each side -- and a mark positioned one
+   gutter outside it therefore lands 4px from the window edge at every width
+   in that range, never off-screen and never comfortable. Rotated capitals
+   at 0.55em tracking, four pixels from the glass, read as cut off, and were
+   reported as cut off.
+   
+   Real margin only exists once the viewport exceeds `--page` plus its two
+   gutters. Above 84rem the mark sits about 36px clear and grows from there.
+   Below it the mark is simply not shown, which is what the rule was trying
+   to say in the first place. */
+@media (min-width: 84rem) {
   .edgemark {
     display: block;
     position: absolute;

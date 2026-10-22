@@ -68,15 +68,20 @@ export function cardPreview({ card, merchant, compact = false, grow = false }) {
       <figure class="letter letter--blank">
         <div class="letter__sheet" aria-hidden="true">
           <p class="letter__waiting">${
-            laid.state === 'none' ? 'No card with this one' : 'Nothing written yet'
+            laid.state === 'none' ? 'This one goes out unwritten' : 'Nothing written yet'
           }</p>
         </div>
         ${
           compact
             ? ''
             : `<figcaption class="letter__read sm dim">${
+                /* "No card with this one" read as something having gone
+                   wrong, which is a bad thing to tell somebody in the middle
+                   of writing a card. It is not an error — a few cakes are
+                   finished with nothing on them — so it says which cakes do
+                   take one and what to do about it. */
                 laid.state === 'none'
-                  ? 'This cake goes out without a card. That is a complete order.'
+                  ? 'A few of our cakes are finished bare. Choose one of the others and your words set here as you type.'
                   : 'Start typing and the card sets itself, in the hand it will be written in.'
               }</figcaption>`
         }
