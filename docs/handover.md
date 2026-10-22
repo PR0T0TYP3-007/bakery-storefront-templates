@@ -223,6 +223,20 @@ the colour space that D8's floor of 190 allows. An eighth may be impossible with
 lowering the floor or amending D8 to let a template differentiate on axes other than ground.
 Worth saying out loud now rather than discovering it at Template 08.
 
+### 6.4b CONCEPTS WRITTEN (22 Oct)
+
+- `docs/06-barcelona-forn.md` — **"The calendar decides."** Forn de la Plaça, Poble-sec.
+  Catalan-first (the brief said Spanish; Barcelona bakeries write Catalan). Organised by the
+  festival year rather than by product, on a verified calendar with sources. Cobalt tile
+  ground, terracotta accent, humanist slab type, tiled modules as separation.
+- `docs/07-franco-ontarian.md` — **"Two names for the same tart."** Boulangerie Tremblay,
+  Hearst. Built on the fact that the butter tart descends from the tarte au sucre, so the two
+  names are relatives rather than translations and the language switch changes what things
+  *are*, not just what they are called. Wheat-gold ground, wild blueberry accent, condensed
+  enamel-sign type, stacked enamel plates as separation.
+
+Both carry their own open questions at the end. Neither has had any code written.
+
 ### 6.5 Research still to do
 
 Named by the client, not yet visited (visit the Instagram feeds too — they show the interiors
