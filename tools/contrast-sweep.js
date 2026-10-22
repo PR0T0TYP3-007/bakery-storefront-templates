@@ -24,6 +24,13 @@
  *   __contrastSweep()
  *
  * It returns the failures only, so an empty array is the pass.
+ *
+ * ONE ESCAPE HATCH, and it is narrow: an element marked
+ * `data-contrast-demo`, and everything inside it, is skipped. It exists for
+ * a style guide specimen that deliberately shows a banned pairing so a
+ * reader can see why it is banned — text that is meant to be hard to read.
+ * Nothing else may use it. The count of skipped elements comes back on the
+ * result as `__skipped`, so an exemption can never be silent.
  */
 
 window.__contrastSweep = function contrastSweep(root = document.body) {
@@ -96,8 +103,15 @@ window.__contrastSweep = function contrastSweep(root = document.body) {
   };
 
   const fails = [];
+  let skipped = 0;
 
   for (const el of root.querySelectorAll('*')) {
+    /* Deliberate specimens of a banned pairing. Counted, never hidden. */
+    if (el.closest('[data-contrast-demo]')) {
+      skipped += 1;
+      continue;
+    }
+
     /* Only elements that own text. An element whose text is all in children
        would otherwise be scored against the wrong background. */
     const owns = [...el.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim());
@@ -127,5 +141,8 @@ window.__contrastSweep = function contrastSweep(root = document.body) {
     }
   }
 
+  /* Not an entry in the list — a property on it, so `[]` still reads as a
+     pass while the number of exemptions stays visible to anybody looking. */
+  Object.defineProperty(fails, '__skipped', { value: skipped, enumerable: false });
   return fails;
 };

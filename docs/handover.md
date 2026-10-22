@@ -549,15 +549,39 @@ One class removed on the way: the 404 referenced `.btn--on-tile`, which lives in
 and that page does not load. Worth a look if a page ever styles oddly — the CSS is per-page
 here, not one bundle.
 
-Next, in order:
-1. The style guide.
-2. Template 07.
+**23 Oct — `styleguide.html`. Template 06 is complete: ten pages.**
 
+`index`, `shop`, `product`, `basket`, `checkout`, `confirmation`, `calendar`, `visit`, `404`,
+`styleguide`.
 
+Everything with a number in it is read out of the live CSS or the live catalogue — the
+swatches, the full ink × surface contrast grid, the two non-negotiable rules with their
+measurements, the shelf tiles (real products), and the three Easter-derived days resolved for
+the next three years. A ratio typed into a style guide is a claim about the stylesheet; a ratio
+computed in the page is a reading of it, and it goes red on its own when somebody moves a
+token.
+
+**The guide's own contrast table had invisible text.** `.grid td` set `background: var(--marble)`
+and out-specified `.cell--fail`, so every failing cell rendered marble-on-marble — in the one
+table on the site whose entire job is contrast. Found by looking at the page rather than by any
+tool. The selectors are `.grid td.cell--*` now, and the failing band is quiet (grout behind,
+`--gone` text) rather than a wall of red.
+
+**The sweep gained one escape hatch, and it is counted.** The guide deliberately shows the
+banned pairings at their real ratios so a reader can see *why* they are banned — text that is
+meant to be hard to read. `data-contrast-demo` on an element skips it and everything inside it,
+and the number skipped comes back as `__skipped` on the result, so an exemption can never be
+silent. Six on the style guide, zero everywhere else. Nothing but a specimen may use it.
+
+Next:
+1. Template 07 — the concept is written in `docs/07-franco-ontarian.md`, nothing built.
 
 Open design note from the client: *"could need improvement in design"* — accepted, no specifics
-given yet. The weakest thing now is probably the basket line at phone width, where the quantity
-box and the remove link each take a row of their own.
+given yet. The weakest thing is probably the basket line at phone width, where the quantity box
+and the remove link each take a row of their own.
+
+
+
 
 Not started: the Catalan/Spanish/English glossing mechanism. Still unverified: the fonts
 against Catalan glyphs — ç, à, è, í, ï, ú and the interpunct ·. The home page renders

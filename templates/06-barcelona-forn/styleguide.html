@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Style guide — Forn de la Plaça</title>
+<meta name="robots" content="noindex">
+
+<link rel="preload" href="assets/fonts/zillaslab.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/sourcesans.woff2" as="font" type="font/woff2" crossorigin>
+
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/calendar.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/thing.css">
+<link rel="stylesheet" href="css/components/order.css">
+<link rel="stylesheet" href="css/components/year.css">
+<link rel="stylesheet" href="css/components/visit.css">
+<link rel="stylesheet" href="css/components/guide.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to the guide</a>
+<div data-header></div>
+
+<main id="main" class="guide">
+
+  <section class="wrap section">
+    <p class="label dim">Forn de la Plaça</p>
+    <h1 class="t-1" style="margin-top:var(--s-3)">Style guide</h1>
+    <p class="lede" style="margin-top:var(--s-4)">
+      Every surface, every colour pairing and every component, with the
+      numbers read out of the live CSS rather than typed in underneath it.
+    </p>
+  </section>
+
+  <div class="pattern" aria-hidden="true"></div>
+
+  <!-- ====================================================================
+       1. The separation method
+       ==================================================================== -->
+  <section class="band band--marble-2 section" aria-labelledby="g-sep">
+    <div class="wrap">
+      <h2 class="t-1" id="g-sep">1 · The separation method</h2>
+      <p class="prose" style="margin-top:var(--s-4)">
+        Hydraulic floor tiles — <span lang="ca">rajoles hidràuliques</span> —
+        are in every old shop in Barcelona. They are square, they repeat, and
+        they butt against one another: the join is the only division there is.
+        No frame, no shadow, no card.
+      </p>
+      <p class="prose" style="margin-top:var(--s-4)">
+        So content sits in cells that touch, and where one thing ends and the
+        next begins is told by the change of surface plus the hairline of
+        grout. <strong>Nothing in this template is drawn around anything.</strong>
+        The two exceptions are both deliberate and both commented in the CSS:
+        the drinks card and the totals list, where a price is read across a
+        gap and the eye needs a line to cross it.
+      </p>
+
+      <div class="demo" data-demo-tiles></div>
+
+      <p class="sm dim" style="margin-top:var(--s-3)">
+        Each template in the set has its own: hairline rules and cards (01),
+        drawn outlines and offset shadow (02), masked apertures (03), overlap
+        and visible grid (04), ruled rows on pinned paper (05), and these.
+      </p>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       2. Colour
+       ==================================================================== -->
+  <section class="wrap section" aria-labelledby="g-col">
+    <h2 class="t-1" id="g-col">2 · Colour</h2>
+    <p class="prose" style="margin-top:var(--s-4)">
+      A painted tile wall with marble laid on it. The ground is blue because
+      Barcelona's floors are, and because the warm end of the spectrum was
+      already spoken for across the set — see
+      <code>docs/for-client-distance-rule.md</code>.
+    </p>
+
+    <div class="sws" style="margin-top:var(--s-5)" data-swatches></div>
+  </section>
+
+  <section class="band band--marble-2 section" aria-labelledby="g-meas">
+    <div class="wrap">
+      <h2 class="t-2" id="g-meas">Measured, not asserted</h2>
+      <p class="prose" style="margin-top:var(--s-3)">
+        Every ink against every surface, computed in this page from the live
+        token values. Change a token and this table changes with it — including
+        going red, which is the entire point of generating it rather than
+        writing it.
+      </p>
+
+      <div class="tablewrap" style="margin-top:var(--s-5)">
+        <table class="grid" data-contrast>
+          <caption class="vh">Contrast ratio of each ink on each surface</caption>
+        </table>
+      </div>
+
+      <h3 class="t-3" style="margin-top:var(--s-6)">The two rules that cannot be broken</h3>
+      <div class="rules" style="margin-top:var(--s-4)" data-rules></div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       3. Type
+       ==================================================================== -->
+  <section class="wrap section" aria-labelledby="g-type">
+    <h2 class="t-1" id="g-type">3 · Type</h2>
+    <p class="prose" style="margin-top:var(--s-4)">
+      A slab for everything that is painted on — headings, prices, labels,
+      buttons — and a humanist sans for everything that is read. Barcelona
+      shopfronts are lettered by hand, and painted letters carry their weight
+      in the slab rather than in stroke contrast, which is also what keeps
+      this clear of Template 01's high-contrast display serif.
+    </p>
+
+    <div class="scale" style="margin-top:var(--s-5)" data-scale></div>
+  </section>
+
+  <!-- ====================================================================
+       4. Components
+       ==================================================================== -->
+  <section class="band band--marble-2 section" aria-labelledby="g-comp">
+    <div class="wrap">
+      <h2 class="t-1" id="g-comp">4 · Components</h2>
+
+      <h3 class="t-3" style="margin-top:var(--s-6)">Buttons</h3>
+      <p class="row" style="margin-top:var(--s-3)">
+        <button class="btn" type="button">Add to basket</button>
+        <button class="btn btn--quiet" type="button">Change the day</button>
+        <button class="btn" type="button" aria-disabled="true">Cannot do that day</button>
+      </p>
+      <p class="sm dim" style="margin-top:var(--s-3)">
+        The primary action is the deep tile with marble on it, never
+        terracotta — see rule two above.
+      </p>
+
+      <h3 class="t-3" style="margin-top:var(--s-6)">Where a thing sits in the year</h3>
+      <p class="row" style="margin-top:var(--s-3)">
+        <span class="state state--on"><span class="state__dot" aria-hidden="true"></span>On the counter now</span>
+        <span class="state state--coming"><span class="state__dot" aria-hidden="true"></span>In 9 days</span>
+      </p>
+      <p class="sm dim" style="margin-top:var(--s-3)">
+        Colour is never the only carrier: each state says its own words and the
+        dot is decoration on top of a sentence.
+      </p>
+
+      <h3 class="t-3" style="margin-top:var(--s-6)">Shelf tiles</h3>
+      <p class="sm dim" style="margin-top:var(--s-2)">
+        With a photograph and without. Both are real products out of the live
+        catalogue, so this cannot drift from the shop.
+      </p>
+      <div class="tiles" style="margin-top:var(--s-3)" data-tiles></div>
+
+      <h3 class="t-3" style="margin-top:var(--s-6)">A basket line</h3>
+      <div class="order__lines" style="margin-top:var(--s-3)" data-line></div>
+
+      <h3 class="t-3" style="margin-top:var(--s-6)">Form fields</h3>
+      <div class="pay" style="margin-top:var(--s-3);max-width:34rem">
+        <p class="field">
+          <label for="g-ok">Name</label>
+          <input id="g-ok" type="text" value="Marta">
+        </p>
+        <p class="field field--bad">
+          <label for="g-bad">Email</label>
+          <input id="g-bad" type="text" value="marta@" aria-invalid="true">
+          <span class="sm field__bad">That email does not look right.</span>
+        </p>
+      </div>
+
+      <h3 class="t-3" style="margin-top:var(--s-6)">Collection times</h3>
+      <div class="slots" style="margin-top:var(--s-3)">
+        <label class="slot">
+          <input type="radio" name="g-slot" checked>
+          <span class="slot__time">08:00–10:00</span>
+          <span class="slot__left sm">6 left</span>
+        </label>
+        <label class="slot">
+          <input type="radio" name="g-slot">
+          <span class="slot__time">10:00–12:00</span>
+          <span class="slot__left sm">2 left</span>
+        </label>
+        <label class="slot">
+          <input type="radio" name="g-slot" disabled>
+          <span class="slot__time">12:00–14:00</span>
+          <span class="slot__left sm">Full</span>
+        </label>
+      </div>
+
+      <h3 class="t-3" style="margin-top:var(--s-6)">Notices</h3>
+      <p class="note" style="margin-top:var(--s-3);max-width:40rem">
+        The list needs JavaScript. Call us on 93 441 00 00 and we'll tell you
+        what's in today.
+      </p>
+      <div class="declined" role="presentation" style="margin-top:var(--s-3);max-width:40rem">
+        <p class="declined__head">That did not go through.</p>
+        <p>Your bank declined the payment. No money has been taken.</p>
+      </div>
+
+      <h3 class="t-3" style="margin-top:var(--s-6)">Toast</h3>
+      <p class="row" style="margin-top:var(--s-3)">
+        <button class="btn btn--quiet" type="button" data-toast>Show one</button>
+      </p>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       5. Photography
+       ==================================================================== -->
+  <section class="wrap section" aria-labelledby="g-photo">
+    <h2 class="t-1" id="g-photo">5 · Photography</h2>
+    <p class="prose" style="margin-top:var(--s-4)">
+      <strong>D16: the photography never lies about the product.</strong>
+      Six of the baked things and three of the drinks carry a photograph. The
+      rest do not, because no honest photograph of them exists — searching for
+      an <span lang="ca">ensaïmada</span> returns Mallorcan beaches, and a
+      generic ring cake captioned <em>Tortell de Reis</em> would be the
+      template lying about the one subject it is built on.
+    </p>
+    <p class="prose" style="margin-top:var(--s-4)">
+      Those tiles take a plain second surface instead. Three earlier attempts
+      filled the space with the tiled floor at various strengths and every one
+      read as an image that had failed to load. A hole is only a hole if
+      something is supposed to be in it.
+      <code>assets/img/CREDITS.md</code> lists every file and its source.
+    </p>
+    <p class="prose" style="margin-top:var(--s-4)">
+      Images are square-edged and flush, like every other surface: no radius,
+      no shadow, no border. The hero is never lazy and its <code>src</code> is
+      in the markup, not painted on by JavaScript.
+    </p>
+  </section>
+
+  <!-- ====================================================================
+       6. The year
+       ==================================================================== -->
+  <section class="band band--terracotta section" aria-labelledby="g-year">
+    <div class="wrap">
+      <h2 class="t-1" id="g-year">6 · The year</h2>
+      <p class="prose" style="margin-top:var(--s-4)">
+        The mechanic the template exists for. <code>js/year.js</code> is pure
+        and DOM-free, and Easter is computed with the anonymous Gregorian
+        computus because three of the shop's biggest days hang off it — a
+        hardcoded date would be wrong every year but one, and silently.
+      </p>
+      <dl class="card" style="margin-top:var(--s-5)" data-year-demo></dl>
+      <p class="sm" style="margin-top:var(--s-4)">
+        Resolved live for the next three years, which is also how the year
+        page proves the dates are worked out rather than typed in.
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<footer data-footer></footer>
+
+<script type="module" src="js/pages/styleguide.js"></script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+/* ==========================================================================
+   The style guide.
+
+   Its own stylesheet, so nothing here can leak into the shop. Everything it
+   documents is borrowed from the real component files; these rules only lay
+   the specimens out.
+   ========================================================================== */
+
+.guide code {
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 0.875em;
+}
+
+.demo__cell {
+  min-height: calc(var(--tile-unit) * 1.5);
+}
+
+/* --------------------------------------------------------------------------
+   Swatches
+   -------------------------------------------------------------------------- */
+.sws {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr));
+  gap: var(--grout);
+  background: var(--marble-3);
+  outline: var(--grout) solid var(--marble-3);
+}
+
+.sw {
+  margin: 0;
+  background: var(--marble);
+  color: var(--ink);
+}
+
+.sw__chip {
+  height: calc(var(--tile-unit) * 1.1);
+}
+
+.sw figcaption {
+  display: grid;
+  gap: 2px;
+  padding: var(--s-3);
+}
+
+.sw code { color: var(--ink-2); }
+.sw code.dim { color: var(--ink-3); }
+
+/* --------------------------------------------------------------------------
+   The contrast grid
+   -------------------------------------------------------------------------- */
+.tablewrap {
+  overflow-x: auto;
+  background: var(--marble-3);
+  outline: var(--grout) solid var(--marble-3);
+}
+
+.grid {
+  border-collapse: separate;
+  border-spacing: var(--grout);
+  min-width: 46rem;
+}
+
+.grid th,
+.grid td {
+  padding: var(--s-3);
+  background: var(--marble);
+  text-align: left;
+  font-weight: 400;
+}
+
+.grid thead th,
+.grid tbody th {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--t-sm);
+}
+
+.cell {
+  display: table-cell;
+  white-space: nowrap;
+}
+
+.cell__g {
+  display: inline-block;
+  margin-inline-start: var(--s-2);
+  font-family: var(--font-display);
+  font-size: var(--t-label);
+  font-weight: 700;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+}
+
+/* Three gradings. The number is the signal and the tag beside it says which
+   band it falls in; the fill is only the glance.
+
+   `.grid td` had to be in these selectors. Without it the shared `.grid td`
+   rule won on specificity and painted every cell marble — which left the
+   failing cells' marble text on a marble background, invisible, in the one
+   table on the site whose whole job is contrast. Caught by looking at it. */
+.grid td.cell--pass { background: var(--marble); color: var(--ready); }
+.grid td.cell--large { background: var(--marble-2); color: var(--soon); }
+.grid td.cell--fail { background: var(--marble-3); color: var(--gone); }
+
+/* --------------------------------------------------------------------------
+   The rules
+   -------------------------------------------------------------------------- */
+.rules {
+  display: grid;
+  gap: var(--grout);
+  background: var(--marble-3);
+  outline: var(--grout) solid var(--marble-3);
+}
+
+@media (min-width: 52rem) {
+  .rules { grid-template-columns: 1fr 1fr; }
+}
+
+.rule {
+  padding: var(--s-4);
+  background: var(--marble);
+}
+
+.rule__list {
+  list-style: none;
+  margin: var(--s-4) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s-2);
+}
+
+.rule__row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--s-3);
+  margin: 0;
+  font-size: var(--t-sm);
+}
+
+.rule__swatch {
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.rule__n { color: var(--ready); }
+.rule__n.is-bad { color: var(--gone); font-weight: 700; }
+
+/* --------------------------------------------------------------------------
+   Type specimens
+   -------------------------------------------------------------------------- */
+.scale {
+  display: grid;
+  gap: var(--grout);
+  background: var(--marble-3);
+  outline: var(--grout) solid var(--marble-3);
+}
+
+.step {
+  padding: var(--s-4);
+  background: var(--marble);
+  color: var(--ink);
+}
+
+.step__name { margin-bottom: var(--s-2); }
+
+/* The year demo lists three dates in one cell, and `.card__price` is
+   `nowrap` because a price must never break. Three long dates must. */
+[data-year-demo] .card__price {
+  white-space: normal;
+  text-align: right;
+}
+
+@media (max-width: 40rem) {
+  [data-year-demo] .card__row {
+    display: grid;
+    gap: var(--s-2);
+  }
+
+  [data-year-demo] .card__price { text-align: left; }
+}
