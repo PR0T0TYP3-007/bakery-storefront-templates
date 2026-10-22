@@ -1,22 +1,43 @@
 /**
  * @file Home.
  *
- * The shopfront, not the shop. The board and the ticket moved to Our shop:
- * this page's job is to say what the place is and what it makes, and a
- * basket that follows you down a home page is a shop page wearing a
- * photograph. What is left is the claim, the morning, the cakes, and how it
- * works.
+ * The shopfront and then the shop. The photograph says what the place is;
+ * the board, directly under it, says what came out of the oven this morning
+ * and lets you take it. Those two together are the page.
+ *
+ * The board was moved off here once and put back: a home page that opens a
+ * basket on you is a risk worth naming, but a bakery that makes you navigate
+ * to find out what it baked has given up the only thing it has to say today.
  */
 
 import * as session from '../services/session.js';
 import { renderHeader, renderFooter } from '../components/chrome.js';
-import { renderTile, bindAdd, imgSrc } from '../components/board.js';
-import { mountMobileTicket } from '../components/ticket.js';
+import {
+  renderRow,
+  renderTile,
+  boardHead,
+  skeletonRows,
+  bindAdd,
+  imgSrc,
+} from '../components/board.js';
+import { renderTicket, bindTicket, mountMobileTicket } from '../components/ticket.js';
+import { paintUsual } from '../components/usual.js';
 import { toast } from '../components/toast.js';
-import { whenPhrase, dayWordMid, weekdayName } from '../../../../shared/core/format.js';
-import { today } from '../../../../shared/core/dates.js';
+import {
+  dayWord,
+  date as fmtDate,
+  whenPhrase,
+  dayWordMid,
+  weekdayName,
+} from '../../../../shared/core/format.js';
+import { today, sameDay } from '../../../../shared/core/dates.js';
 
 const $ = (s) => document.querySelector(s);
+
+/* Skeleton first, so the row heights are reserved before data lands and the
+   page does not jump when it does. */
+const boardEl = $('[data-board]');
+boardEl.innerHTML = boardHead() + skeletonRows(6);
 
 await session.boot();
 
@@ -29,6 +50,33 @@ mountMobileTicket();
 // advertising Hazel & Rye's bread. Trimmed at the first sentence, because a
 // tagline may be two and a title should not be.
 document.title = `${session.state.merchant.name} — ${session.state.merchant.tagline.split('.')[0]}`;
+
+/* -------------------------------------------------------------------------
+   The board
+   ------------------------------------------------------------------------- */
+function paintBoard() {
+  const { catalogue } = session.state;
+  const when = session.state.when;
+  const isToday = sameDay(when, today());
+
+  $('[data-board-day]').textContent = `${dayWord(when)}, ${fmtDate(when, {
+    day: 'numeric',
+    month: 'long',
+  })}`;
+
+  const everyday = catalogue.products.filter((p) => p.kind === 'everyday');
+
+  boardEl.innerHTML =
+    boardHead(when) +
+    (everyday.length
+      ? everyday.map((p) => renderRow(p, { when })).join('')
+      : `<p class="board__empty">Nothing on the board for that day.</p>`);
+
+  // The note under the board has to match what the column above it means.
+  $('[data-board-foot]').textContent = isToday
+    ? "What's left is what's on the shelf right now, and it goes down through the day."
+    : "We haven't baked these yet. Everything here is made fresh that morning.";
+}
 
 /* -------------------------------------------------------------------------
    Cakes — only if this merchant makes them
@@ -206,8 +254,23 @@ bindAdd(document, (product, movedTo) => {
   });
 });
 
-session.on('when:change', paintCakes);
+/* -------------------------------------------------------------------------
+   Ticket
+   ------------------------------------------------------------------------- */
+const ticketEl = $('[data-ticket]');
+bindTicket(ticketEl);
+
+const paintTicket = () => renderTicket(ticketEl);
+
+session.on('cart:change', paintTicket);
+session.on('when:change', () => {
+  paintBoard();
+  paintCakes();
+});
 
 paintVoice();
+paintBoard();
 paintCakes();
 paintCapabilities();
+paintUsual();
+paintTicket();

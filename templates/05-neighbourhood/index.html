@@ -39,7 +39,7 @@
 </script>
 </head>
 <body>
-<a class="skip" href="#main">Skip to content</a>
+<a class="skip" href="#board">Skip to the board</a>
 <div data-header></div>
 
 <main id="main">
@@ -81,6 +81,65 @@
   </section>
 
   <!-- ====================================================================
+       The Counter: board on the left, ticket on the right
+
+       Second on the page, directly under the shopfront. It came off the
+       home page once on the reasoning that a basket following you down a
+       home page makes it a shop page with a photograph on top. That is a
+       fair description of the risk and the wrong trade: this is a bakery
+       whose whole proposition is what came out of the oven this morning,
+       and making somebody navigate to find out is the cost that matters.
+       The shopfront sets the scene; the board is what the scene is for.
+       ==================================================================== -->
+  <section class="wrap section" id="board">
+    <div class="counter">
+
+      <div>
+        <div class="sechead">
+          <div class="sechead__title">
+            <h2 class="t-1">The board</h2>
+            <p class="label" data-board-day>&mdash;</p>
+          </div>
+          <a class="link" href="shop.html">Everything in the shop</a>
+        </div>
+
+        <div class="board" data-board>
+          <noscript>
+            <p class="note" style="margin-block:var(--s-4)">
+              The live board needs JavaScript. Our
+              <a class="link" href="visit.html">hours and address</a> are still here,
+              or give us a ring on 020 7946 0712.
+            </p>
+          </noscript>
+        </div>
+
+        <p class="sm" style="margin-top:var(--s-3)" data-board-foot></p>
+      </div>
+
+      <aside class="counter__rail" aria-label="Your ticket">
+        <div data-ticket></div>
+
+        <!-- Repeat purchase. Honest framing: it is your own history, kept on
+             your device, not a profile anyone else holds. -->
+        <section class="section--tight" data-usual hidden>
+          <h2 class="label">Your usual</h2>
+          <div class="ticket" style="margin-top:var(--s-2)">
+            <div class="ticket__body">
+              <p class="sm" data-usual-detail></p>
+              <p style="margin-top:var(--s-3)">
+                <button class="btn btn--quiet btn--block" type="button" data-usual-add>
+                  Order it again
+                </button>
+              </p>
+            </div>
+          </div>
+        </section>
+      </aside>
+
+    </div>
+  </section>
+
+  <!-- ====================================================================
        The morning
 
        Three photographs with times under them. Not a gallery: this template's
@@ -101,13 +160,6 @@
     </div>
     <ol class="morning" data-morning></ol>
   </section>
-
-  <!-- The board and the ticket used to sit here, between the morning and
-       the cakes. They are the shop, not the shopfront: a home page that
-       opens a basket on you is a shop page with a photograph on top. Both
-       now live on Our shop, which is the one place in the nav and the one
-       place they belong. The cakes below stay, because a cake takes notice
-       and is the thing worth showing before anybody is ready to buy. -->
 
   <!-- ====================================================================
        Cakes — the one place photography leads
