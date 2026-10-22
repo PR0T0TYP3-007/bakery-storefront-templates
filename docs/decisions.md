@@ -695,3 +695,68 @@ more of the page than it is worth. At 4/3 it is 463px.
 The rows still live on the band via `grid-template-rows: subgrid`. That is not left over from
 the unequal version — each column is its own grid otherwise, so a longer line of text in one
 of them puts the captions at three different heights while the times stay level.
+
+---
+
+### D23 — The distance check, amended for a set larger than five
+
+**Decision.** D8 is replaced, not relaxed. Every **pair** of templates must differ decisively
+on at least **three of the four axes**, and the **ground must always be one of them**.
+
+| Axis | Differs decisively when |
+|---|---|
+| Ground colour | ≥ 190 summed RGB channels. **Always required.** |
+| Display type class | The classification differs (serif, grotesque, incised, rounded geometric, expressive, slab…) |
+| Separation method | The method differs (rules, cards, apertures, overlap, ruled rows…) |
+| Accent chroma | ≥ 190 summed RGB channels |
+
+One further floor: **no two accents may ever be closer than 90 channels**, decisive or not.
+Below that they are the same colour and the page looks related whatever else differs.
+
+**Why D8 had to change.** D8 required all four axes to clear a fixed number. That worked for
+five templates and stops working at seven, because the colour space runs out — and it runs
+out asymmetrically, in the warm end, which is where most bakery cultures live.
+
+Measured, before any of this was designed. Searching every hue for an accent clearing 190
+from all five shipped accents returns:
+
+```
+red/rust  none   orange/amber  none   yellow  none   green  none
+teal      none   crimson       none   blue    3      violet 3     magenta/pink 65
+```
+
+Templates 06 (Barcelona) and 07 (Franco-Ontarian) both call for warm accents. Terracotta
+measures 106 from Template 01's clay, maple amber 97, currant red 30, ochre 155. Under the
+old rule the only accents available to a Catalan bakery and a Franco-Ontarian one were
+magenta, navy and violet — none of which either culture has any claim to.
+
+**The rule had started preventing the thing it was written to protect.** The brief rejects
+"five designs that share essentially the same creative identity". D8 was the guard against
+that. At seven templates it was instead forcing two cultures to adopt colours belonging to
+neither, which produces a different kind of sameness: templates whose palettes were chosen by
+arithmetic.
+
+**Why three of four is the right test.** Going back to the complaint that created D8 — the
+higher-up's note that Template 05 "looks good in style but it seems similar to the spirit of
+the first one" — the failure was never one axis. Template 01 and Template 05 v1 matched on
+**all four**: grounds 25 channels apart, both serif, both muted earth accents, both separated
+by hairline rules. Correlated similarity is what reads as one identity. One shared axis out
+of four does not.
+
+This is checkable rather than asserted:
+
+- **No shipped pair is weakened.** All ten existing pairs still differ on 4 of 4.
+- **The original complaint is still caught.** Template 01 against Template 05 *as first
+  built* scores **0 of 4** and is rejected, which is the test any replacement rule had to
+  pass before it could be trusted.
+- **The two new templates fit.** All 21 pairs across seven templates pass; the closest are
+  01 vs 06 and 05 vs 07 at 3 of 4, each sharing only the accent axis.
+
+**What this permits, precisely.** Template 06 may use a Barcelona terracotta that sits 106
+from Template 01's clay, because its ground (459 away), its display class and its separation
+method are all decisively different. The two will never be mistaken for each other. What it
+does **not** permit is a template that is close on the ground, because that is the axis the
+complaint was about and the one that covers the most pixels.
+
+**Standing requirement.** Every concept document states its four measurements and, where a
+pair differs on only three axes, names which three and why the shared one is safe.

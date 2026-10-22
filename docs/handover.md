@@ -177,57 +177,30 @@ survivor also sits at the top of the saturation range — muted versions do not 
 | tile blue `#2a6f97` | 57 — including olive/mustard `#a88a2e` |
 | indigo `#3f55c6` | 296 — roomiest |
 
-### 6.3b D8 CANNOT ACCOMMODATE 06 AND 07 AS BRIEFED — decision needed
+### 6.3b RESOLVED — D8 amended as D23 (22 Oct)
 
-Extending the measurement to accents closes the question. Searching every hue for an accent
-that clears 190 from all five shipped accents and can carry white text:
+The measurement showed the palette space was full: no accent at all remained in red, rust,
+orange, amber, yellow, green, teal or crimson, and every warm accent both briefs imply is
+taken (terracotta 106 from Template 01's clay, maple amber 97, currant red 30).
 
-| Family | Accents available |
-|---|---|
-| red / rust | **none** |
-| orange / amber | **none** |
-| yellow | **none** |
-| green | **none** |
-| teal | **none** |
-| crimson | **none** |
-| blue | 3 |
-| violet | 3 |
-| magenta / pink | 65 |
+**D8 is replaced by D23** (see `docs/decisions.md`): every pair must differ decisively on at
+least **three of four axes**, with the **ground always one of them**, plus a hard floor of 90
+on accent-to-accent distance. Validated three ways — no shipped pair weakened (all still
+4/4), the pair that caused the original complaint still rejected (0/4), and all 21 pairs
+across seven templates pass.
 
-Every warm accent both briefs imply is taken, mostly by Template 01's clay: terracotta is 106
-from it, maple amber 97, currant red 30, tile ochre 140, ochre 155.
+`docs/for-client-distance-rule.md` is the write-up to send Covenant.
 
-The rule is not being applied unfairly — the shipped set genuinely honours it, with a minimum
-ground distance of 192 and a minimum accent distance of 214. The space really is that full.
+**Agreed palettes:**
 
-**So something has to give, and it is a decision about the rule, not about the designs.**
+| | Ground | Accent | Type class | Separation |
+|---|---|---|---|---|
+| 06 Barcelona | cobalt tile `#1b5e8c` | terracotta `#c4603a` | humanist slab / signpainter | tiled modules + painted panel |
+| 07 Franco-Ontarian | wheat gold `#a88a2e` | wild blueberry `#3f3a7d` | condensed grotesque / enamel | stacked enamel plates + rule |
 
-**Option A — amend D8 for a seven-template set.** D8 was written for five, in response to a
-complaint about two near-identical *grounds* 25 channels apart. A floor that now permits only
-magenta accents has stopped serving the brief's intent ("five different creative identities")
-and started preventing it. Proposal: keep 190 for grounds; replace the flat accent floor with
-a requirement that **any two templates differ decisively on at least three of the four axes**
-(ground, display class, accent, separation method) rather than all four clearing a fixed
-number. Under that rule 06 could take an authentic terracotta accent while differing
-decisively on ground, type and separation.
-*Risk:* D8 exists because the client complained once already. Loosening it without saying so
-invites the same complaint.
-
-**Option B — take only the colours that exist.** 06 gets a cobalt tile-blue ground
-(`#1b5e8c`, clears at 195) with a **magenta** accent — defensible, since Barcelona's
-Modernisme mosaics and Escribà's theatrical cakes genuinely run to strong pinks. 07 then needs
-a ground clearing 190 from cobalt as well; olive/mustard `#a88a2e` survives at 191, which
-reads as wheat and maple. Its accent would have to be violet or navy, neither of which is
-Franco-Ontarian.
-*Risk:* 07's palette would be chosen by arithmetic rather than by the culture, which is the
-failure Template 05 took three passes to climb out of.
-
-**Option C — build 06 only, now.** 06 has a genuine, authentic answer inside the current rule.
-Defer 07 until the rule question is settled.
-
-**Recommendation: Option A, with the amendment written down and shown to the client.** The
-measurements above are the argument for it, and they are reproducible. Option B produces a
-Franco-Ontarian template whose colours have nothing to do with Franco-Ontarians.
+Tightest pairs: 01 vs 06 and 05 vs 07, both 3/4, sharing only the accent axis. Type class and
+separation method above are **provisional** — they satisfy the rule but have not been designed
+yet.
 
 ### 6.4 Proposed direction (to confirm)
 
