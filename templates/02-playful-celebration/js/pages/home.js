@@ -78,7 +78,7 @@ $('[data-hero-cake]').innerHTML = cakeSVG(
    ------------------------------------------------------------------------- */
 const loc = merchant.locations[0];
 $('[data-promises]').innerHTML = [
-  [icons.cake, `${merchant.dailyCapacity} cakes a day`, 'Pick a day and we'll tell you straight away if it's gone.'],
+  [icons.cake, `${merchant.dailyCapacity} cakes a day`, "Pick a day and we'll tell you straight away if it's gone."],
   [icons.van, `Free over £${merchant.delivery.freeOver}`, `${merchant.delivery.zones.length} delivery areas, mornings only, driven flat.`],
   [icons.clock, `4 days' notice`, `Collect from ${loc.name}, or we bring it to you.`],
 ]
