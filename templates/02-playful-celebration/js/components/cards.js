@@ -74,9 +74,9 @@ export function productCard(product, { when, tall = false, flag } = {}) {
         <p class="card__sub">${esc(product.subtitle)}</p>
         <div class="card__foot">
           <p class="card__price">${money(price.unit)}<span>${esc(leadPhrase)}</span></p>
-          <span class="btn btn--sm btn--primary" aria-hidden="true">
+          <a class="btn btn--sm btn--primary" href="${hrefFor(product)}">
             ${product.kind === 'custom' ? 'Build it' : 'Have a look'}
-          </span>
+          </a>
         </div>
       </div>
     </article>`;
