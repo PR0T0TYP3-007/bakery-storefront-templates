@@ -653,6 +653,39 @@ consistency, but it does **not** fix this: the mismatch is composition and setti
 Only the merchant's own photography closes it. A true photograph of a panellet still beats a
 beautiful photograph of a croissant captioned *Panellets*, which was the only alternative.
 
+**23 Oct — the client chose to take the CC BY-SA photographs. 21 of 23.**
+
+Two added, and the obligation is now discharged properly:
+
+| Product | Commons file | Author | Licence |
+|---|---|---|---|
+| `tortell-reis` | `Tortell de reis.jpeg` | Friviere | CC BY-SA 3.0 |
+| `orxata` | `Orxata a Benifaió.jpg` | Francesc Fort | CC BY-SA 4.0 |
+
+**Attribution is in the footer of every page, not in a repo file.** CC BY-SA requires the
+credit to reach the people *using* the work, and `CREDITS.md` does not. `photoCredits()` in
+`components/chrome.js` renders title, author, source link, licence link and the fact that both
+were resized — driven from `merchant.photoCredits`, so it cannot drift from what is in use, and
+deleting that config key removes the line when the merchant supplies their own.
+
+**Share-alike now travels with this template** for as long as those two files are in it. That
+was the client's call, made knowingly against leaving the tiles blank. Replacing both with the
+merchant's own photographs removes it entirely.
+
+**Two more were rejected, one of them on grounds licence does not touch.** The only Commons
+`coca llarga` is a press photograph of a baking competition full of identifiable private
+individuals — recognisable people in a commercial template is a problem no licence solves. The
+alternatives are *coca d'oli i sal* and *coca de pa i sal*: oil and **salt**, where this shop's
+is oil and **sugar**. And `Tortell de Reis - Horno de San Antonio.jpg` is a chocolate ring with
+strawberries: a real modern tortell, but not the one the subtitle describes.
+
+Worth knowing: `Roscon de reyes - tortell de reis.jpg` is **CC BY 2.0** — attribution only, no
+share-alike — and would have been the better licence, but it is 612×612 and too small for the
+tile. Revisit it if the tiles ever shrink.
+
+**Still blank: `coca-sant-jordi` and `coca-llarga`.** Sant Jordi has nothing on Unsplash,
+Pexels or Commons at any licence.
+
 Next:
 1. Template 07 — the concept is written in `docs/07-franco-ontarian.md`, nothing built.
 

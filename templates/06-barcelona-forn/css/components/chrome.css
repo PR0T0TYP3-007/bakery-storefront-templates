@@ -129,3 +129,17 @@
 }
 
 .ftr__fine { margin-top: var(--s-6); }
+
+/* The Creative Commons credit. Small, but it is a licence obligation rather
+   than decoration, so it gets the same ink as the tax note beside it and is
+   never dimmed further. */
+.ftr__credits {
+  margin-top: var(--s-2);
+  max-width: var(--measure);
+}
+
+.ftr__credits a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}

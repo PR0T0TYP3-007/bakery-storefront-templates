@@ -248,5 +248,24 @@
     ],
     "room": "Four marble tables and a counter you can stand at. It fills up between eight and nine with people on their way somewhere, and empties again by half past ten.",
     "phone": "93 441 00 00"
+  },
+  "photoCredits": {
+    "note": "Two photographs here are used under Creative Commons licences and are credited as those licences require. Both were resized and re-encoded for the web.",
+    "items": [
+      {
+        "title": "Tortell de reis",
+        "author": "Friviere",
+        "source": "https://commons.wikimedia.org/wiki/File:Tortell_de_reis.jpeg",
+        "licence": "CC BY-SA 3.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0/"
+      },
+      {
+        "title": "Orxata a Benifaió",
+        "author": "Francesc Fort",
+        "source": "https://commons.wikimedia.org/wiki/File:Orxata_a_Benifai%C3%B3.jpg",
+        "licence": "CC BY-SA 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    ]
   }
 }

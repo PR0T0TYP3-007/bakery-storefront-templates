@@ -84,7 +84,10 @@
       "subtitle": "Marzipan, candied fruit, a figurine and a bean",
       "price": 14,
       "leadDays": 2,
-      "image": null,
+      "image": {
+        "src": "tortell-reis",
+        "alt": "A tortell de Reis under candied fruit and pearl sugar, with its paper crown"
+      },
       "allergens": [
         "gluten",
         "egg",
@@ -581,7 +584,10 @@
       "subtitle": "Tiger nut milk, cold, from June",
       "price": 2.8,
       "leadDays": 0,
-      "image": null,
+      "image": {
+        "src": "orxata",
+        "alt": "A glass of orxata, seen from above"
+      },
       "allergens": [],
       "options": [],
       "defaults": {},

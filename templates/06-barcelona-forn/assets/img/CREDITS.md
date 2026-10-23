@@ -1,11 +1,11 @@
 # Photography — Forn de la Plaça
 
-Twenty-three photographs, exclusive to this template. The review of the first five
+Twenty-five photographs, exclusive to this template. The review of the first five
 templates raised that they share one pool of twelve images in `shared/img/`;
 nothing here is in that pool and nothing here is used by another template.
 
 Eighteen are Unsplash stock under the [Unsplash
-licence](https://unsplash.com/license); five are from Wikimedia Commons and
+licence](https://unsplash.com/license); seven are from Wikimedia Commons and
 are listed separately below with their licences. All of them stand in for the
 merchant's own photography. Each file is `<name>-lg.jpg` (1600–1800px), `-md.jpg` (900px)
 and `-sm.jpg` (480px), fetched from
@@ -120,27 +120,49 @@ beautiful photograph of a croissant captioned *Panellets*, which is the only
 alternative the stock libraries offered. When the merchant shoots their own,
 these are the first to replace.
 
-## The four that are still blank, and why
+## The two under Creative Commons
 
-`tortell-reis`, `coca-sant-jordi`, `coca-llarga`, `orxata`.
+These two carry an attribution obligation, and it is discharged **in the
+footer of every page** — not here. A file in the repository does not reach
+the people using the work, which is what the licences require. Both were
+resized and re-encoded, and the footer says so.
 
-- **tortell-reis** — Commons has good photographs, but every one is CC BY-SA,
-  which carries attribution *and* share-alike into whatever this template
-  becomes. The Unsplash roscón photographs show the marzipan-and-pine-nut
-  kind, which is what `tortell-sant-antoni` already is; this shop's Reis
-  tortell is the candied-fruit one with a figurine and a bean, so using it
-  would misdescribe the product by its own subtitle.
-- **coca-sant-jordi** — nothing on either source. A coca in the colours of
-  the senyera is specific enough that only a Catalan bakery has shot one.
-- **coca-llarga** — nothing. It is the plainest thing in the shop and nobody
-  photographs it.
-- **orxata** — Commons has real Valencian orxata, all CC BY-SA. The CC0
-  results are a cultural centre and a Mexican horchata jar, which is a
-  different drink.
+| File | Commons file | Author | Licence |
+|---|---|---|---|
+| `tortell-reis` | `Tortell de reis.jpeg` | Friviere | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) |
+| `orxata` | `Orxata a Benifaió.jpg` | Francesc Fort | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
 
-Three of these four **could** be filled from CC BY-SA sources. That is a
-licensing decision rather than a design one: share-alike would travel with
-the template to whoever buys it. It is left open deliberately.
+**Share-alike travels with these.** Anyone who takes this template on inherits
+it for as long as those two files are in it. The client chose that knowingly
+over leaving the tiles blank; replacing them with the merchant's own
+photographs removes the obligation entirely, and deleting `photoCredits` from
+the merchant config removes the footer line with it.
 
-**The real fix for all four is the merchant's own photography**, which is
-true of every file in this folder.
+The credit is rendered by `photoCredits()` in `js/components/chrome.js` and
+driven from config, so it cannot drift from what is actually in use.
+
+`tortell-reis` was chosen over two alternatives. One
+(`Tortell de Reis - Horno de San Antonio.jpg`) is a chocolate ring with
+strawberries — a real modern tortell, but not the one this shop's subtitle
+describes. The other (`Roscon de reyes - tortell de reis.jpg`) is **CC BY
+2.0**, a lighter licence with no share-alike, and would have been preferable
+on that ground alone, but it is 612×612 — too small for the tile. It is worth
+revisiting if the tiles ever get smaller.
+
+## The two that are still blank, and why
+
+`coca-sant-jordi` and `coca-llarga`.
+
+- **coca-sant-jordi** — nothing exists on Unsplash, Pexels or Commons, at any
+  licence. A coca in the colours of the senyera is specific enough that only a
+  Catalan bakery has ever photographed one.
+- **coca-llarga** — Commons has one, and it was **rejected on grounds other
+  than licence**: it is a press photograph of a baking competition, full of
+  identifiable private individuals holding the coca up next to a prize sign.
+  Putting recognisable people into a commercial template is a problem no
+  licence solves. The other candidates are `coca d'oli i sal` and
+  `coca de pa i sal` — oil and *salt*, where this shop's coca llarga is oil
+  and *sugar*.
+
+**The real fix for both is the merchant's own photography**, which is true of
+every file in this folder.
