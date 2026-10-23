@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Les deux noms — Boulangerie Tremblay</title>
+<meta name="description" content="Pourquoi la tarte au sucre et la butter tart ne sont pas des traductions l'une de l'autre.">
+
+<link rel="preload" href="assets/fonts/rye.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/librefranklin.woff2" as="font" type="font/woff2" crossorigin>
+
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/plates.css">
+<link rel="stylesheet" href="css/components/glossary.css">
+</head>
+<body>
+<a class="skip" href="#terms" data-skip></a>
+<div data-header></div>
+
+<main id="main">
+
+  <section class="wrap section">
+    <h1 class="t-1 sign" data-head></h1>
+    <p class="lede" style="margin-top:var(--s-4)" data-lede></p>
+  </section>
+
+  <!-- ====================================================================
+       The terms.
+
+       Both names at the same size, as everywhere else. What is different
+       here is that the entries carry their SOURCES: this page makes
+       checkable claims about history, and D13 says do not state a checkable
+       thing you have not checked. The checking is visible.
+       ==================================================================== -->
+  <section class="band band--enamel section" id="terms">
+    <div class="wrap">
+      <dl class="terms" data-terms></dl>
+    </div>
+  </section>
+
+  <section class="band band--rim section on-dark">
+    <div class="wrap">
+      <p class="label dim" data-sources-label></p>
+      <ul class="sources" style="margin-top:var(--s-3)" data-sources></ul>
+    </div>
+  </section>
+
+</main>
+
+<footer data-footer></footer>
+
+<script type="module" src="js/pages/glossary.js"></script>
+</body>
+</html>

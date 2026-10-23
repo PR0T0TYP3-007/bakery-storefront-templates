@@ -235,3 +235,65 @@ test('the savoury line carries no sweet-only machinery', () => {
     assert.ok(Array.isArray(p.options), `"${p.id}" has no options array`);
   }
 });
+
+/* -------------------------------------------------------------------------
+   The glossary
+
+   This is the one page in the whole set that cites anything, because it is
+   the one page making checkable claims about history. D13: do not state a
+   checkable thing you have not checked.
+   ------------------------------------------------------------------------- */
+const glossary = read('../data/glossary.boulangerie-tremblay.json');
+
+test('every glossary entry is written in both languages', () => {
+  for (const e of glossary.entries) {
+    assert.ok(e.fr && e.fr.trim(), `glossary "${e.id}" has no French term`);
+    assert.ok(e.en && e.en.trim(), `glossary "${e.id}" has no English term`);
+
+    for (const lang of LANGS) {
+      assert.ok(
+        e.note?.[lang] && e.note[lang].trim().length > 30,
+        `glossary "${e.id}" has no real ${lang} note`
+      );
+    }
+
+    assert.notEqual(e.note.fr, e.note.en, `glossary "${e.id}" has the same note twice`);
+  }
+});
+
+test('every source referenced by an entry exists, and every source is used', () => {
+  const ids = new Set(Object.keys(glossary.sources));
+
+  const used = new Set();
+  for (const e of glossary.entries) {
+    for (const key of [e.source, e.also]) {
+      if (!key) continue;
+      assert.ok(ids.has(key), `glossary "${e.id}" cites unknown source "${key}"`);
+      used.add(key);
+    }
+  }
+
+  /* A source nobody cites is a source nobody checked. */
+  for (const id of ids) {
+    assert.ok(used.has(id), `source "${id}" is listed but never cited`);
+  }
+});
+
+test('every source has a real title, publisher and https URL', () => {
+  for (const [id, s] of Object.entries(glossary.sources)) {
+    assert.ok(s.title && s.title.trim(), `source "${id}" has no title`);
+    assert.ok(s.where && s.where.trim(), `source "${id}" has no publisher`);
+    assert.match(s.url ?? '', /^https:\/\//, `source "${id}" has no https URL`);
+  }
+});
+
+test('the dated historical claim carries its hedge', () => {
+  /* The 1900 Barrie recipe is the sharpest factual claim on the site, and
+     the source hedges it: the earliest PRINTED recipe anyone has FOUND is
+     not the first one ever made. If the caveat is ever dropped, the page
+     starts asserting something its source does not. */
+  const dated = glossary.entries.find((e) => e.note.en.includes('1900'));
+  assert.ok(dated, 'no entry carries the 1900 claim any more');
+  assert.ok(dated.caveat?.fr && dated.caveat?.en, 'the 1900 claim lost its caveat');
+  assert.ok(dated.source, 'the 1900 claim lost its source');
+});

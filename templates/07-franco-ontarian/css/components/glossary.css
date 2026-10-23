@@ -1,0 +1,60 @@
+/* ==========================================================================
+   The glossary.
+   ========================================================================== */
+
+.terms {
+  display: grid;
+  margin: 0;
+}
+
+/* Plates stacked vertically: each entry rides the edge of the one above,
+   the same move as everywhere else in the template. */
+.term {
+  display: grid;
+  gap: var(--s-3);
+}
+
+.term + .term { margin-top: calc(var(--rim-w) * -1); }
+
+.term__names { margin: 0; }
+
+.term__body {
+  margin: 0;
+  max-width: var(--measure);
+}
+
+/* The hedge, set apart because it is the honest half of the claim above it
+   and not a footnote to be skipped. "The earliest anyone has found" is a
+   different statement from "the first", and the difference is the whole
+   reason this page cites anything. */
+.term__caveat {
+  margin-top: var(--s-3);
+  padding-left: var(--s-4);
+  border-left: var(--rim-w) solid var(--rim);
+  color: var(--ink-2);
+}
+
+.term__caveat .label {
+  display: block;
+  color: var(--ink-3);
+  margin-bottom: 2px;
+}
+
+.term__source {
+  margin-top: var(--s-3);
+  color: var(--ink-2);
+}
+
+.term__source a { color: inherit; }
+
+.sources {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s-2);
+  max-width: var(--measure);
+}
+
+.sources li { margin: 0; }
+.sources a { color: inherit; }

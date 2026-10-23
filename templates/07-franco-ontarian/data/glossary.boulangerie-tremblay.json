@@ -1,0 +1,102 @@
+{
+  "_note": "Every entry that makes a factual claim carries its source. D13: don't state a measurable or checkable thing you haven't checked. These were checked on 23 October 2026 and the hedges in the copy are deliberate — 'the earliest printed recipe anyone has found' is not the same claim as 'the first ever', and the difference matters.",
+  "sources": {
+    "tce-tarte": {
+      "title": "Tarte au sucre",
+      "where": "The Canadian Encyclopedia",
+      "url": "https://www.thecanadianencyclopedia.ca/en/article/tarte-au-sucre"
+    },
+    "dchp-butter-tart": {
+      "title": "butter tart",
+      "where": "Dictionary of Canadianisms on Historical Principles",
+      "url": "https://dchp.arts.ubc.ca/entries/butter%20tart"
+    },
+    "simcoe": {
+      "title": "Mrs Malcolm MacLeod and her recipe for butter tart filling",
+      "where": "Simcoe County Archives",
+      "url": "https://simcoe.ca/simcoe_archives/mrs-malcolm-macleod-and-her-recipe-for-butter-tart-filling/"
+    },
+    "flag": {
+      "title": "Franco-Ontarian flag",
+      "where": "Government of Ontario",
+      "url": "https://www.ontario.ca/page/franco-ontarian-flag"
+    }
+  },
+  "entries": [
+    {
+      "id": "tarte-au-sucre",
+      "fr": "Tarte au sucre",
+      "en": "Sugar pie",
+      "note": {
+        "fr": "Elle vient de France, où elle existe toujours. Les premiers Canadiens l'ont faite avec de l'érable parce que c'était le seul sucre qu'ils avaient. La cassonade a fini par remplacer l'érable, et aujourd'hui une tarte au sucre en contient normalement — celle à l'érable s'appelle une tarte au sucre d'érable, et c'est celle-là qu'on fait ici.",
+        "en": "It came from France, where it still exists. The first Canadiens made it with maple because maple was the only sugar they had. Brown sugar eventually replaced the maple, so a tarte au sucre today usually contains brown sugar — the maple one is called tarte au sucre d'érable, and that is the one we make."
+      },
+      "source": "tce-tarte"
+    },
+    {
+      "id": "butter-tart",
+      "fr": "Butter tart",
+      "en": "Butter tart",
+      "note": {
+        "fr": "Pas de nom français, des deux bords de la ligne. C'est la version anglaise de la tarte au sucre, sucrée à la cassonade : « Butter tarts in English Canada are another version of this, sweetened with brown sugar. » Cousines, donc, et pas des traductions.",
+        "en": "No French name, on either side of the line. It is the English-Canadian version of the tarte au sucre, sweetened with brown sugar: “Butter tarts in English Canada are another version of this, sweetened with brown sugar.” Cousins, then, and not translations."
+      },
+      "source": "tce-tarte"
+    },
+    {
+      "id": "gadelles",
+      "fr": "Gadelles",
+      "en": "Currants",
+      "note": {
+        "fr": "La plus vieille recette imprimée que personne n'a trouvée est de 1900, dans un livre vendu par l'auxiliaire des dames du Royal Victoria Hospital de Barrie, en Ontario. Elle demandait des gadelles, pas des raisins. Le livre se vendait pour financer l'hôpital, qui avait treize lits.",
+        "en": "The earliest printed recipe anyone has found is from 1900, in a cookbook sold by the Women's Auxiliary of the Royal Victoria Hospital in Barrie, Ontario. It called for currants, not raisins. The book was sold to raise money for the hospital, which had thirteen beds."
+      },
+      "caveat": {
+        "fr": "« La plus vieille qu'on a trouvée » n'est pas « la première ». Les recettes de famille se passaient de bouche à oreille ou sur des cartes écrites à la main, et la tarte est sûrement plus vieille que le livre.",
+        "en": "“The earliest anyone has found” is not “the first”. Family recipes were passed on by word of mouth or on handwritten cards, and the tart is almost certainly older than the book."
+      },
+      "source": "dchp-butter-tart",
+      "also": "simcoe"
+    },
+    {
+      "id": "tourtiere",
+      "fr": "Tourtière",
+      "en": "Tourtière",
+      "note": {
+        "fr": "Un mot qui n'a pas d'autre version. Une tourtière est une tourtière en anglais aussi, et ça arrive plus souvent qu'on pense : le mot voyage avec la chose.",
+        "en": "A word with no other version. A tourtière is a tourtière in English too, and that happens more often than people expect: the word travels with the thing."
+      },
+      "source": null
+    },
+    {
+      "id": "grand-pere",
+      "fr": "Grand-père au sirop",
+      "en": "Dumpling in maple syrup",
+      "note": {
+        "fr": "L'anglais n'a pas de nom pour ça, juste une description. C'est l'inverse de butter tart, où c'est le français qui emprunte.",
+        "en": "English has no name for this, only a description. It is the mirror of butter tart, where it is French that borrows."
+      },
+      "source": null
+    },
+    {
+      "id": "franco-ontarien",
+      "fr": "Franco-Ontarien",
+      "en": "Franco-Ontarian",
+      "note": {
+        "fr": "Francophone de l'Ontario — pas Français, pas Québécois. Le drapeau a été dessiné en 1975 à l'Université de Sudbury : vert pour l'été, blanc pour l'hiver, une fleur de lys pour la francophonie et un trille pour l'Ontario. L'Ontario en a fait un emblème officiel en 2020.",
+        "en": "A francophone of Ontario — not French, not Québécois. The flag was designed in 1975 at the University of Sudbury: green for summer, white for winter, a fleur-de-lys for the francophonie and a trillium for Ontario. Ontario made it an official emblem in 2020."
+      },
+      "source": "flag"
+    },
+    {
+      "id": "temps-des-sucres",
+      "fr": "Le temps des sucres",
+      "en": "Maple season",
+      "note": {
+        "fr": "Les quelques semaines du printemps où la sève coule — il faut du gel la nuit et du dégel le jour. « Maple season » dit quand ; « le temps des sucres » dit aussi ce qu'on fait pendant ce temps-là.",
+        "en": "The few weeks in spring when the sap runs — it needs frost at night and thaw by day. “Maple season” says when; le temps des sucres also says what everyone is doing while it lasts."
+      },
+      "source": null
+    }
+  ]
+}

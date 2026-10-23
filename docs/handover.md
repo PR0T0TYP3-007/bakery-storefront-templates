@@ -828,9 +828,39 @@ crowded the last line of the description. It only rides an edge when there is an
 Verified: both pages sweep clean in **both languages** at desktop and 375, no sideways scroll,
 add-to-basket works with a French toast, 253 tests pass, build at 56 pages.
 
+**23 Oct, fourth stretch — `glossary.html`. The one page in the set that cites anything.**
+
+Seven terms, each with both names, a note, and — where it makes a checkable claim — its source.
+Four sources, all linked, all listed again in full at the foot.
+
+**The claims were verified before the page was built, not after.** Two of them matter:
+
+- *The butter tart descends from the tarte au sucre.* The Canadian Encyclopedia says it
+  outright: "Butter tarts in English Canada are another version of this, sweetened with brown
+  sugar." This is the template's whole premise, so it was worth checking rather than repeating
+  from the concept doc.
+- *The 1900 Barrie recipe called for currants.* The Dictionary of Canadianisms has it: the
+  earliest printed recipe anyone has found, in a cookbook sold by the Women's Auxiliary of the
+  Royal Victoria Hospital in Barrie, to raise money for a thirteen-bed hospital.
+
+**And checking changed the copy.** The encyclopedia says maple was the *original* sweetener but
+brown sugar largely replaced it — a tarte au sucre today usually contains brown sugar, and the
+maple one is specifically a *tarte au sucre d'érable*. The glossary says that, which also makes
+this shop's choice of the maple version mean something instead of being decoration.
+
+**The hedge is carried, not smoothed away.** "The earliest printed recipe anyone has found" is
+not "the first ever" — family recipes travelled by word of mouth — and the entry says so in its
+own set-apart caveat. A test asserts the 1900 claim keeps both its caveat and its source,
+proved by deleting the caveat and watching it fail. Two more tests check that every cited
+source exists and that **every listed source is actually cited**, because a source nobody cites
+is a source nobody checked.
+
+Verified: sweeps clean in both languages at desktop and 375, no sideways scroll, 257 tests
+pass, build at 57 pages.
+
 Next:
-1. `glossary.html` — the two-names idea at length, and the place the 1900 fact is properly
-   sourced.
+1. The year section on the home page — maple season, the fête franco-ontarienne, the holidays.
+2. basket / checkout / confirmation / visit / 404, then the style guide.
 2. The year section, then basket/checkout/confirmation/visit/404.
 2. `glossary.html`, the year section, then basket/checkout/confirmation/visit/404.
 3. The style guide. Photography (its own set — see §5).
