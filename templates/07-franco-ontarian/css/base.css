@@ -200,6 +200,19 @@ table {
   flex: none;
 }
 
+/* The rule and the second name travel together.
+
+   As two separate flex items the rule could be the last thing on a line,
+   leaving a bar hanging at the end of "GRAND-PÈRE AU SIROP |" with the
+   English name alone underneath. Wrapped in one item they break as a pair,
+   and the bar leads the second name instead of trailing the first. */
+.names__second {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s-3);
+  min-width: 0;
+}
+
 /* The second name is the same size and the same face. It is dimmed by a
    hair so the current language leads, and that is the only difference
    allowed between them. */

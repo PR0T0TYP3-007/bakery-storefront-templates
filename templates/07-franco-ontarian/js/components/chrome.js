@@ -195,10 +195,25 @@ export function renderFooter() {
                  }" style="margin-top:var(--s-4)">
               <rect width="30" height="40" fill="var(--flag-green)"/>
               <rect x="30" width="30" height="40" fill="var(--enamel)"/>
-              <path d="M15 8 q-3 5 0 9 q-4-2-5 1 q3 2 5 1 v5 h2 v-5 q2 1 5-1 q-1-3-5-1 q3-4 0-9z"
-                    fill="var(--enamel)"/>
-              <path d="M45 30 l-5-8 h3.5 l1.5 2.5 1.5-2.5 H50z M45 26 l-4-7 h8z"
-                    fill="var(--flag-green)"/>
+              <!-- The fleur-de-lys: a centre petal, two side petals that
+                   curl down, a band and a footed stem. The first attempt was
+                   a single clever path and it drew something closer to a map
+                   pin; this is five plain shapes and it reads. -->
+              <g fill="var(--enamel)">
+                <path d="M15 4.6c-3 4-3.4 8.6 0 12.4 3.4-3.8 3-8.4 0-12.4z"/>
+                <path d="M15 17c-3.6-2.6-8.4-1.4-9.6 2.2-.9 2.8 1 5.2 4.2 5.4 2 .1 4-.9 5.4-2.6z"/>
+                <path d="M15 17c3.6-2.6 8.4-1.4 9.6 2.2.9 2.8-1 5.2-4.2 5.4-2 .1-4-.9-5.4-2.6z"/>
+                <rect x="9" y="24.6" width="12" height="1.9"/>
+                <path d="M13.8 26.5h2.4c0 2.8.5 4.6 1.8 6.4h-6c1.3-1.8 1.8-3.6 1.8-6.4z"/>
+              </g>
+
+              <!-- The trillium: three petals at 120 degrees, which is the
+                   whole of the flower anyone recognises. -->
+              <g fill="var(--flag-green)">
+                <path d="M45 9c-4 3.2-4 8 0 10.6 4-2.6 4-7.4 0-10.6z"/>
+                <path d="M44.2 20.4c-1.2 4.8-5.2 7.4-9.2 6.4.6-4.8 4.4-7.4 9.2-6.4z"/>
+                <path d="M45.8 20.4c1.2 4.8 5.2 7.4 9.2 6.4-.6-4.8-4.4-7.4-9.2-6.4z"/>
+              </g>
               <rect width="60" height="40" fill="none"
                     stroke="var(--rim)" stroke-width="2"/>
             </svg>

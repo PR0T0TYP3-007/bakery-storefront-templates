@@ -45,7 +45,14 @@ export function names(product, { tag = 'h3', cls = 't-3' } = {}) {
   return `
     <${tag} class="names ${cls}">
       ${one(here)}
-      ${there && !same ? `<span class="names__rule" aria-hidden="true"></span>${one(there, ' names__other')}` : ''}
+      ${
+        there && !same
+          ? `<span class="names__second">
+               <span class="names__rule" aria-hidden="true"></span>
+               ${one(there, ' names__other')}
+             </span>`
+          : ''
+      }
     </${tag}>`;
 }
 

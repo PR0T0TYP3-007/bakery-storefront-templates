@@ -58,6 +58,11 @@ Fetched from `images.unsplash.com/<id>?w=1800&q=80&fm=jpg&fit=max`.
 | `pain-aux-patates` | [Potato bread.jpeg](https://commons.wikimedia.org/wiki/File:Potato_bread.jpeg) | Sujalajus | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) |
 | `grand-pere` | [Grand-Père au sirop d'érable.JPG](https://commons.wikimedia.org/wiki/File:Grand-P%C3%A8re_au_sirop_d%27%C3%A9rable.JPG) | CoveyHill | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) |
 
+**`grand-pere` is cropped hard, on purpose.** The original is a plate on a
+red gingham tablecloth. The concept doc bans gingham by name — this is not a
+heritage gift shop — so the frame comes down to the plate and the syrup.
+Nothing has been added or altered; there is simply less tablecloth.
+
 ### Two things these pictures are not
 
 **`tarte-au-sucre` is a maple syrup pie photographed in Falmouth, Maine.** The
