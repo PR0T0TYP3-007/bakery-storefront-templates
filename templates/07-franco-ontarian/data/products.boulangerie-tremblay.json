@@ -1,0 +1,376 @@
+{
+  "_note": "Each product has an `fr` face and an `en` face. They are NOT translations of one another — see js/lang.js. Where the two faces name genuinely different things, `kin` says how; where a thing has one name in both languages there is no kin, because inventing a difference would be worse than having none.",
+  "categories": [
+    {
+      "id": "tartes",
+      "label": {
+        "fr": "Les tartes",
+        "en": "Tarts and pies"
+      },
+      "note": {
+        "fr": "Tous les jours",
+        "en": "Every day"
+      }
+    },
+    {
+      "id": "pain",
+      "label": {
+        "fr": "Le pain",
+        "en": "Bread"
+      },
+      "note": {
+        "fr": null,
+        "en": null
+      }
+    },
+    {
+      "id": "sale",
+      "label": {
+        "fr": "Le salé",
+        "en": "Savoury"
+      },
+      "note": {
+        "fr": "À réchauffer",
+        "en": "To reheat"
+      }
+    },
+    {
+      "id": "matin",
+      "label": {
+        "fr": "Le matin",
+        "en": "Mornings"
+      },
+      "note": {
+        "fr": "Jusqu'à dix heures",
+        "en": "Until ten"
+      }
+    }
+  ],
+  "optionGroups": {
+    "raisins": {
+      "id": "raisins",
+      "label": {
+        "fr": "Avec ou sans",
+        "en": "Raisins or not"
+      },
+      "required": true,
+      "options": [
+        {
+          "id": "sans",
+          "label": {
+            "fr": "Sans raisins",
+            "en": "No raisins"
+          },
+          "price": 0
+        },
+        {
+          "id": "avec",
+          "label": {
+            "fr": "Avec raisins",
+            "en": "With raisins"
+          },
+          "price": 0
+        },
+        {
+          "id": "gadelles",
+          "label": {
+            "fr": "Aux gadelles",
+            "en": "With currants"
+          },
+          "price": 1
+        }
+      ]
+    },
+    "taille": {
+      "id": "taille",
+      "label": {
+        "fr": "Grandeur",
+        "en": "Size"
+      },
+      "required": true,
+      "options": [
+        {
+          "id": "six",
+          "label": {
+            "fr": "Six portions",
+            "en": "Serves six"
+          },
+          "price": 0
+        },
+        {
+          "id": "neuf",
+          "label": {
+            "fr": "Neuf portions",
+            "en": "Serves nine"
+          },
+          "price": 7
+        }
+      ]
+    }
+  },
+  "addons": [
+    {
+      "id": "boite",
+      "label": {
+        "fr": "Boîte de la boulangerie",
+        "en": "Bakery box"
+      },
+      "note": {
+        "fr": null,
+        "en": null
+      },
+      "price": 2,
+      "leadDays": 0,
+      "kind": "extra"
+    }
+  ],
+  "products": [
+    {
+      "id": "tarte-au-sucre",
+      "kind": "everyday",
+      "category": "tartes",
+      "price": 18,
+      "leadDays": 1,
+      "options": [
+        "taille"
+      ],
+      "defaults": {
+        "taille": "six"
+      },
+      "addons": [
+        "boite"
+      ],
+      "allergens": [
+        "gluten",
+        "egg",
+        "milk"
+      ],
+      "image": null,
+      "fr": {
+        "name": "Tarte au sucre",
+        "subtitle": "Sirop d'érable, crème, pâte brisée",
+        "description": "Celle de ma grand-mère, au sirop et pas à la cassonade. Plus foncée, plus profonde, et elle prend le goût de l'érable de l'année. On la fait toute l'année mais au temps des sucres elle est meilleure."
+      },
+      "en": {
+        "name": "Butter tart",
+        "subtitle": "Brown sugar, butter, a shallow shell",
+        "description": "The English side of the same family. Brown sugar instead of syrup, shallower, runnier, and sold by the one rather than by the pie. The raisin question comes with it."
+      },
+      "kin": {
+        "fr": "La butter tart en descend. Les femmes de la Nouvelle-France ont adapté la tarte au sucre française à ce qu'elles avaient, c'est-à-dire l'érable ; la version anglaise, à la cassonade, est devenue la butter tart. Ce sont des cousines, pas des traductions.",
+        "en": "The butter tart descends from this. Women in New France adapted French sugar pie to what they had, which was maple; the English version, sweetened with brown sugar, became the butter tart. They are cousins, not translations."
+      }
+    },
+    {
+      "id": "butter-tart",
+      "kind": "everyday",
+      "category": "tartes",
+      "price": 4,
+      "leadDays": 0,
+      "options": [
+        "raisins"
+      ],
+      "defaults": {
+        "raisins": "sans"
+      },
+      "addons": [
+        "boite"
+      ],
+      "allergens": [
+        "gluten",
+        "egg",
+        "milk"
+      ],
+      "image": null,
+      "fr": {
+        "name": "Butter tart",
+        "subtitle": "À l'unité, cassonade et beurre",
+        "description": "On ne traduit pas le nom. Personne ici ne dit « tartelette au beurre » — on dit butter tart, en français comme en anglais, et c'est correct de même."
+      },
+      "en": {
+        "name": "Butter tart",
+        "subtitle": "One at a time, brown sugar and butter",
+        "description": "Sold singly. The first written recipe we know of is from Barrie, Ontario, in 1900, and it called for currants — not raisins. People have been arguing about it ever since, so we make all three and let you settle it yourself."
+      },
+      "kin": {
+        "fr": "Même nom des deux côtés. C'est l'exception : la plupart des choses ici changent de nom, celle-là non.",
+        "en": "Same name on both sides. That is the exception here — most things change their name, this one does not."
+      }
+    },
+    {
+      "id": "tarte-aux-bleuets",
+      "kind": "everyday",
+      "category": "tartes",
+      "price": 22,
+      "leadDays": 1,
+      "options": [
+        "taille"
+      ],
+      "defaults": {
+        "taille": "six"
+      },
+      "addons": [
+        "boite"
+      ],
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
+      "image": null,
+      "fr": {
+        "name": "Tarte aux bleuets",
+        "subtitle": "Bleuets sauvages du nord",
+        "description": "Des petits bleuets sauvages, pas des gros de culture. On les ramasse autour de Hearst au mois d'août et on en gèle assez pour passer l'année."
+      },
+      "en": {
+        "name": "Wild blueberry pie",
+        "subtitle": "Small northern berries",
+        "description": "Wild berries, not the big cultivated kind. They are picked around Hearst in August and we freeze enough to get through the year."
+      },
+      "kin": null
+    },
+    {
+      "id": "tourtiere",
+      "kind": "everyday",
+      "category": "sale",
+      "price": 24,
+      "leadDays": 2,
+      "options": [
+        "taille"
+      ],
+      "defaults": {
+        "taille": "six"
+      },
+      "addons": [
+        "boite"
+      ],
+      "allergens": [
+        "gluten",
+        "egg"
+      ],
+      "image": null,
+      "fr": {
+        "name": "Tourtière",
+        "subtitle": "Porc, bœuf, cannelle et clou de girofle",
+        "description": "Salée, pas sucrée. On la vend crue et congelée : une heure et quart au four à 375. C'est la seule chose ici qui se mange avec un couteau."
+      },
+      "en": {
+        "name": "Tourtière",
+        "subtitle": "Pork, beef, cinnamon and clove",
+        "description": "Savoury, not sweet. Sold raw and frozen: an hour and a quarter at 375. It is the only thing here you eat with a knife."
+      },
+      "kin": {
+        "fr": "Pas de nom anglais. Une tourtière est une tourtière des deux bords, et ça arrive.",
+        "en": "No English name. A tourtière is a tourtière on both sides, and that happens."
+      }
+    },
+    {
+      "id": "pain-de-menage",
+      "kind": "everyday",
+      "category": "pain",
+      "price": 6,
+      "leadDays": 0,
+      "options": [],
+      "defaults": {},
+      "addons": [],
+      "allergens": [
+        "gluten"
+      ],
+      "image": null,
+      "fr": {
+        "name": "Pain de ménage",
+        "subtitle": "Grosse miche, croûte épaisse",
+        "description": "Le pain de tous les jours. Il se garde quatre jours et il fait des rôties jusqu'au bout."
+      },
+      "en": {
+        "name": "Household loaf",
+        "subtitle": "A big round, thick crust",
+        "description": "The everyday bread. It keeps four days and makes toast right to the end."
+      },
+      "kin": null
+    },
+    {
+      "id": "pain-aux-patates",
+      "kind": "everyday",
+      "category": "pain",
+      "price": 7,
+      "leadDays": 0,
+      "options": [],
+      "defaults": {},
+      "addons": [],
+      "allergens": [
+        "gluten",
+        "milk"
+      ],
+      "image": null,
+      "fr": {
+        "name": "Pain aux patates",
+        "subtitle": "Mie jaune, se garde une semaine",
+        "description": "De la patate dans la pâte. Ça donne une mie jaune et molle qui sèche beaucoup moins vite — c'est du pain de coupe à bois."
+      },
+      "en": {
+        "name": "Potato bread",
+        "subtitle": "Yellow crumb, keeps a week",
+        "description": "Potato in the dough. It makes a soft yellow crumb that goes stale far more slowly — this is bush-camp bread."
+      },
+      "kin": null
+    },
+    {
+      "id": "beigne",
+      "kind": "everyday",
+      "category": "matin",
+      "price": 3,
+      "leadDays": 0,
+      "options": [],
+      "defaults": {},
+      "addons": [],
+      "allergens": [
+        "gluten",
+        "egg",
+        "milk"
+      ],
+      "image": null,
+      "fr": {
+        "name": "Beigne",
+        "subtitle": "Frit le matin, roulé dans le sucre",
+        "description": "Fait à six heures, mangé avant dix. Passé ça, ce n'est plus la même chose et on ne le vend pas."
+      },
+      "en": {
+        "name": "Doughnut",
+        "subtitle": "Fried in the morning, rolled in sugar",
+        "description": "Made at six, eaten before ten. After that it is not the same thing and we do not sell it."
+      },
+      "kin": null
+    },
+    {
+      "id": "grand-pere",
+      "kind": "everyday",
+      "category": "matin",
+      "price": 5,
+      "leadDays": 0,
+      "options": [],
+      "defaults": {},
+      "addons": [],
+      "allergens": [
+        "gluten",
+        "egg",
+        "milk"
+      ],
+      "image": null,
+      "fr": {
+        "name": "Grand-père au sirop",
+        "subtitle": "Pâte pochée dans le sirop d'érable",
+        "description": "De la pâte tombée dans le sirop bouillant. Ça s'appelle un grand-père et personne ne sait trop pourquoi."
+      },
+      "en": {
+        "name": "Dumpling in maple syrup",
+        "subtitle": "Dough poached in syrup",
+        "description": "Dough dropped into boiling maple syrup. In French it is called a grand-père — a grandfather — and nobody is quite sure why."
+      },
+      "kin": {
+        "fr": "L'anglais n'a pas de nom pour ça, juste une description.",
+        "en": "English has no name for this, only a description."
+      }
+    }
+  ]
+}

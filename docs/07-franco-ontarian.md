@@ -178,3 +178,68 @@ The usual nine plus the style guide. Two additions specific to this template:
 4. **Tourtière is savoury.** The set has sold only sweet things so far. Check the shared
    commerce layer handles a savoury line with no inscription and no occasion without
    special-casing.
+
+
+---
+
+## 9. Build log
+
+**23 October — scaffold, palette, and the two-names layer.**
+
+**D23 re-derived from the shipped tokens** rather than trusted from this doc, because these
+numbers were worked out before Template 05's ground moved to sage and before 06 shipped:
+
+- Ground `#a88a2e`: closest is **192** (03 plum), floor 190. Passes **by two**. That is a
+  corridor, not slack — wheat gold is boxed in by 02's sun at 196 above and plum below, and
+  nine nearby golds were measured looking for more room. There is none worth having. If
+  anyone moves 02's or 03's ground, re-run the check.
+- Accent `#3f3a7d`: closest **142** (02 grape), floor 90. Comfortable.
+
+**One correction to §3.** This doc said the flag green fails at 142 against Template 04's
+near-black. Measured against `#009b48` that pair is **211 and fine**; the binding failure is
+**156 against Template 06's cobalt**. Right verdict, wrong reason — and the doc never recorded
+which green it measured, which is why it could not be checked. It is recorded now.
+
+**Type: Rye, and the "condensed" could not be honoured.** No condensed wood-type face was
+available. Every condensed candidate turned out to be a grotesque wearing a coat — Fjalla One,
+Bowlby One SC, Saira Condensed all collide with Template 05's class; Bevan, Ultra and Alfa Slab
+One are slabs and collide with 06. Rye is genuinely wood type and genuinely its own class. Its
+risk is the Western register this doc bans, so it is confined to **headings and signs only**,
+with Libre Franklin for everything that is read rather than painted.
+
+**The palette was measured before it was written**, and it produced two non-negotiable rules
+now recorded in `tokens.css`:
+
+1. **On the wheat ground, only `--ink` carries text.** ink 5.63 · ink-2 3.38 (large only) ·
+   ink-3 1.93 (fails) · white 3.31 (large only) · enamel 2.76 (fails). Everything secondary has
+   to sit on an enamel plate — so the contrast constraint and the separation method agree.
+2. **The flag green is never text and never behind text.** Its best reading anywhere in this
+   palette is 3.03. It gets drawn, and that is all.
+
+**`js/lang.js` is the signature layer** — pure, DOM-free, the equivalent of 06's `year.js`.
+`faceOf`, `bothFaces`, `differs`, `kinOf`, `switchLabel`, `bcp47`. It returns `null` for a
+half-built face rather than a blank heading, because a product written in one language and not
+the other is a data bug that looks like a styling bug.
+
+**17 tests**, including guards that are specific to this template: every product complete in
+both languages; the two descriptions never identical (proved by pasting one and watching it
+fail); kin notes in pairs or not at all; at least one product keeping its name in both
+languages, so the catalogue cannot drift into "every item is a clever pun"; and the
+`closedWeekdays`-as-numbers guard that Template 06 shipped broken.
+
+**Open questions, answered:**
+
+1. **Hearst / "Boulangerie Tremblay"** — searched; no bakery of that name found in Hearst.
+   Recorded in the merchant file that *Tremblay* is the commonest francophone surname in
+   Canada, so a collision somewhere is likely and this needs a registry check before any
+   commercial release. Not "verified clear".
+2. **Which language leads** — **French**, with the switch visible immediately. Encoded as
+   `DEFAULT_LANG` and asserted in the tests. Still worth putting to the client.
+3. **How much of the butter-tart argument to stage** — one option group with three choices
+   (no raisins / raisins / currants), and the 1900 Barrie fact in the product description. No
+   festival, no trail, no quiz.
+4. **Tourtière is savoury** — a test asserts the savoury line carries no inscription and no
+   occasions, so the shared commerce layer needs no special-casing for it.
+
+**Not built yet:** all CSS beyond tokens, every page, the services layer, the glossary,
+photography.

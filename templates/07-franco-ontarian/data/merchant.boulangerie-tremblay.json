@@ -1,0 +1,121 @@
+{
+  "id": "boulangerie-tremblay",
+  "name": "Boulangerie Tremblay",
+  "shortName": "Tremblay",
+  "_note": "Invented business in a real town. Searched before writing: no bakery of this name was found in Hearst, Ontario. 'Tremblay' is the most common surname in francophone Canada, so a collision somewhere is likely and this should be re-checked against the Ontario business registry before any commercial release.",
+  "since": "1961",
+  "locale": "fr-CA",
+  "localeAlt": "en-CA",
+  "currency": "CAD",
+  "timeZone": "America/Toronto",
+  "taxRate": 0.13,
+  "taxMode": "exclusive",
+  "taxNote": {
+    "fr": "Les prix sont avant taxes. La TVH de 13 % s'ajoute à la caisse.",
+    "en": "Prices are before tax. 13% HST is added at checkout."
+  },
+  "capabilities": {
+    "delivery": false,
+    "customCakes": false,
+    "gifting": false
+  },
+  "locations": [
+    {
+      "id": "principale",
+      "name": "rue Principale",
+      "default": true,
+      "address": "812 rue Principale, Hearst, ON P0L 1N0",
+      "slots": ["07:00–09:00", "09:00–11:00", "11:00–13:00", "15:00–17:00"]
+    }
+  ],
+  "email": "bonjour@boulangerietremblay.example",
+  "phone": "705 555 0161",
+  "hours": [
+    { "day": "Monday", "open": null },
+    { "day": "Tuesday", "open": "07:00", "close": "17:00" },
+    { "day": "Wednesday", "open": "07:00", "close": "17:00" },
+    { "day": "Thursday", "open": "07:00", "close": "17:00" },
+    { "day": "Friday", "open": "07:00", "close": "18:00" },
+    { "day": "Saturday", "open": "07:00", "close": "16:00" },
+    { "day": "Sunday", "open": null }
+  ],
+  "closedWeekdays": [1, 0],
+  "closedDates": ["2026-12-25", "2026-12-26", "2027-01-01"],
+  "cutoffHour": 14,
+  "maxDaysAhead": 21,
+  "dailyCapacity": 30,
+  "allergens": {
+    "fr": ["gluten", "œuf", "lait", "noix", "soja"],
+    "en": ["gluten", "egg", "milk", "nuts", "soy"]
+  },
+  "allergenStatement": {
+    "fr": "Une seule cuisine. Le gluten, l'œuf, le lait, les noix et le soja y passent tous les jours. Rien ne sort d'ici certifié sans quoi que ce soit. Dites-le-nous en commandant et on vous dira ce qu'on peut faire.",
+    "en": "One kitchen. Gluten, egg, milk, nuts and soy all go through it every day. Nothing leaves here certified free of any of them. Tell us when you order and we will tell you what we can do."
+  },
+  "voice": {
+    "kicker": {
+      "fr": "rue Principale, Hearst · depuis 1961",
+      "en": "rue Principale, Hearst · since 1961"
+    },
+    "headline": {
+      "fr": "Deux noms pour la même tarte.",
+      "en": "Two names for the same tart."
+    },
+    "lede": {
+      "fr": "La tarte au sucre est arrivée de France, a rencontré l'érable, et a changé. Du côté anglais elle est devenue la butter tart. Ce ne sont pas des traductions l'une de l'autre — ce sont des cousines, et on fait les deux.",
+      "en": "Sugar pie came from France, met maple, and changed. On the English side it became the butter tart. They are not translations of each other — they are cousins, and we make both."
+    },
+    "shop": {
+      "head": {
+        "fr": "Ma grand-mère a ouvert en 1961.",
+        "en": "My grandmother opened in 1961."
+      },
+      "body": {
+        "fr": [
+          "Elle servait en français parce que c'est la langue d'ici. Moi aussi, et en anglais quand il le faut, souvent dans la même phrase.",
+          "On ouvre à sept heures. Le pain sort à huit, les tartes à dix. Fermé le dimanche et le lundi, comme toujours."
+        ],
+        "en": [
+          "She served in French because that is the language here. So do I, and in English when it is needed, often in the same sentence.",
+          "We open at seven. The bread is out by eight, the tarts by ten. Closed Sunday and Monday, the way it has always been."
+        ]
+      }
+    }
+  },
+  "year": [
+    {
+      "id": "temps-des-sucres",
+      "productId": "tarte-au-sucre",
+      "on": "03-15",
+      "sells": [21, 30],
+      "day": { "fr": "Le temps des sucres", "en": "Maple season" },
+      "note": {
+        "fr": "Quand la sève coule. Le sirop de cette année-là, pas celui de l'an passé.",
+        "en": "When the sap runs. This year's syrup, not last year's."
+      }
+    },
+    {
+      "id": "fete-franco-ontarienne",
+      "productId": "tarte-aux-bleuets",
+      "on": "09-25",
+      "sells": [3, 1],
+      "day": { "fr": "La fête franco-ontarienne", "en": "Franco-Ontarian Day" },
+      "note": {
+        "fr": "Le drapeau a été dessiné à Sudbury en 1975. Vert pour l'été, blanc pour l'hiver.",
+        "en": "The flag was designed in Sudbury in 1975. Green for summer, white for winter."
+      },
+      "flag": true
+    },
+    {
+      "id": "temps-des-fetes",
+      "productId": "tourtiere",
+      "on": "12-24",
+      "sells": [28, 7],
+      "day": { "fr": "Le temps des fêtes", "en": "The holidays" },
+      "note": {
+        "fr": "On en fait des centaines. Commandez tôt — on manque toujours.",
+        "en": "We make hundreds. Order early — we always run out."
+      }
+    }
+  ]
+}

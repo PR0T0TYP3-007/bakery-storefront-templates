@@ -1,0 +1,170 @@
+/* ==========================================================================
+   BOULANGERIE TREMBLAY — tokens.css
+   Every colour, type step, space, border and duration in the template.
+
+   Rebranding this template for a different boulangerie should mean editing
+   this file and swapping the logo. Nothing else.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Fonts
+
+   The display face is ANTIQUE WOOD TYPE. D23 requires the display class to
+   be unique across the set, and the five before it are spoken for: rounded
+   geometric (02), incised capitals (03), expressive (04), grotesque (05),
+   slab serif (06), with 01 on a high-contrast serif.
+
+   Rye is the pick, and it is a compromise worth writing down. The concept
+   doc asked for "antique wood-type CONDENSED"; no condensed wood-type face
+   was available, and every condensed candidate turned out to be a grotesque
+   wearing a coat — Fjalla One, Bowlby One SC, Saira Condensed all collide
+   with Template 05's class. Bevan, Ultra and Alfa Slab One are slabs and
+   collide with 06. Rye is genuinely wood type and genuinely its own class.
+
+   Its risk is register: wood type drifts Western, and the concept doc bans
+   folksy outright — no gingham, no cartoon maple leaves, not a heritage gift
+   shop. It is therefore confined to HEADINGS AND SIGNS ONLY. Everything that
+   is read rather than painted is Libre Franklin, a plain American gothic.
+   Used that way it reads as an old painted sign, which is what bilingual
+   signage in northern Ontario actually looks like.
+   -------------------------------------------------------------------------- */
+@font-face {
+  font-family: 'Rye';
+  src: url('../assets/fonts/rye.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Libre Franklin';
+  src: url('../assets/fonts/librefranklin.woff2') format('woff2-variations');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ------------------------------------------------------------------------
+     Colour
+
+     Wheat gold ground: grain, maple syrup held to the light, and the mustard
+     of mid-century enamel kitchenware.
+
+     D23, re-derived from the tokens actually shipped rather than trusted
+     from the planning doc:
+
+       ground  #a88a2e  closest 192 (03 plum) — floor is 190
+       accent  #3f3a7d  closest 142 (02 grape) — floor is 90
+
+     THE GROUND PASSES BY TWO. That is not slack, it is a corridor: wheat
+     gold is boxed in by 02's sun above it (196) and 03's plum below (192),
+     and nine nearby golds were measured looking for more room. There is
+     none worth having. If anyone moves 02's or 03's ground, re-run the
+     check before touching this one.
+
+     The Franco-Ontarian flag green was the obvious palette and it fails as a
+     ground: 156 from Template 06's cobalt. (The planning doc said it failed
+     against 04's near-black at 142; measured here against #009b48 that pair
+     is 211 and fine, so the stated reason was wrong even though the verdict
+     was right. The doc did not record which green it measured.)
+
+     TWO RULES, BOTH MEASURED, BOTH NON-NEGOTIABLE:
+
+     1. ON THE WHEAT GROUND, ONLY --ink CARRIES TEXT.
+        ink   5.63  pass
+        ink-2 3.38  large text only
+        ink-3 1.93  fails
+        enamel 2.76 fails
+        white 3.31  large text only
+        Anything secondary therefore has to sit on an enamel plate. The
+        design idea and the contrast constraint agree for once: that IS the
+        separation method.
+
+     2. THE FLAG GREEN IS NEVER TEXT AND NEVER BEHIND TEXT.
+        Its best reading anywhere in this palette is 3.03, on enamel. It is
+        a flag. It gets drawn, in the footer and on the fête franco-
+        ontarienne entry, and that is the whole of its job.
+     ------------------------------------------------------------------------ */
+
+  /* The ground. */
+  --wheat: #a88a2e;
+  --wheat-2: #967a27;      /* banded, ink still 4.54 */
+  --wheat-3: #7d6520;      /* deep; ink is 3.33 here, so large text only */
+
+  /* The enamel plate — the surface that carries text. */
+  --enamel: #f2ead6;
+  --enamel-2: #e8dcc0;
+  --rim: #6b5518;          /* the 2px rim that IS the division */
+
+  /* Ink. */
+  --ink: #171208;          /* 15.55 on enamel · 5.63 on wheat */
+  --ink-2: #443a22;        /* 9.35 on enamel · enamel only for body */
+  --ink-3: #6b5e3c;        /* 5.32 on enamel · 4.69 on enamel-2 · enamel only */
+
+  /* The accent. Blueberry country: Hearst sits in the middle of it, and
+     tarte aux bleuets is a real Franco-Ontarian dessert. */
+  --blueberry: #3f3a7d;        /* white 9.94 · enamel 8.29 */
+  --blueberry-deep: #2e2a5e;   /* white 13.05 */
+  --blueberry-light: #b9b5e0;  /* decoration only */
+
+  /* Status. Information, never the accent — a customer must not have to tell
+     "this is the brand colour" from "this is sold out". All measured on
+     BOTH enamels, because a state lands on whichever plate it is on. */
+  --ok: #1b5f33;           /* 6.41 / 5.65 */
+  --warn: #744b0e;         /* 6.36 / 5.60 */
+  --bad: #9c2f23;          /* 6.16 / 5.42 */
+
+  /* The flag. Drawn only — see rule 2. */
+  --flag-green: #009b48;
+
+  --focus: var(--blueberry);
+  --focus-on-dark: var(--enamel);
+
+  /* ------------------------------------------------------------------------
+     Type
+     ------------------------------------------------------------------------ */
+  --font-display: 'Rye', Georgia, 'Times New Roman', serif;
+  --font-ui: 'Libre Franklin', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --t-hero: clamp(2.25rem, 6.2vw, 4rem);
+  --t-1: clamp(1.75rem, 3.6vw, 2.5rem);
+  --t-2: clamp(1.375rem, 2.4vw, 1.75rem);
+  --t-3: 1.125rem;
+  --t-body: 1rem;
+  --t-sm: 0.875rem;
+  --t-label: 0.6875rem;
+
+  --lh-tight: 1.04;
+  --lh-snug: 1.18;
+  --lh-body: 1.6;
+  --track-label: 0.14em;
+  --measure: 62ch;
+
+  /* ------------------------------------------------------------------------
+     Space, shape, motion
+     ------------------------------------------------------------------------ */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4.5rem;
+
+  --gutter: clamp(1rem, 3vw, 2.25rem);
+  --page: 1280px;
+  --header-h: 4.5rem;
+  --tap: 2.75rem;
+
+  /* Enamelware has a hard rolled edge and a tiny radius. Both are literal:
+     2px of rim, 2px of corner, and nothing softer anywhere. No shadow —
+     01 uses hairline rules, 02 a drawn outline with an offset shadow, and a
+     plate that floats is neither enamel nor this template. */
+  --rim-w: 2px;
+  --r: 2px;
+
+  --t-fast: 140ms;
+  --ease: cubic-bezier(0.2, 0, 0.2, 1);
+}

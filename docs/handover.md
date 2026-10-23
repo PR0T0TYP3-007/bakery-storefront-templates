@@ -719,8 +719,51 @@ food is documented there because the local Wikipedia documents it.
 
 Footer attribution now carries three images: two CC BY-SA and one CC BY.
 
+## 6.8 Template 07 — build progress
+
+**Started 23 Oct.** Palette, fonts, the two-names layer and its tests. No CSS beyond tokens,
+no pages yet. Full log in `docs/07-franco-ontarian.md` §9.
+
+**D23 was re-derived from the shipped tokens, not trusted from the planning doc** — those
+numbers predate 05's move to sage and 06 shipping. Ground `#a88a2e` clears at **192** against
+03's plum, floor 190. **It passes by two.** Wheat gold is boxed in by 02's sun (196) above and
+plum below; nine nearby golds were measured and there is no more room worth having. *If anyone
+moves 02's or 03's ground, re-run the check before touching this one.* Accent `#3f3a7d` clears
+at 142.
+
+The planning doc said the Franco-Ontarian flag green fails against 04's near-black at 142.
+Measured, that pair is **211 and fine** — the real failure is **156 against 06's cobalt**.
+Right verdict, wrong reason, and the doc never recorded which green it used. Corrected.
+
+**Type is Rye, and "condensed" could not be honoured.** No condensed wood-type face exists in
+the available set; every condensed candidate is a grotesque (collides with 05) or a slab
+(collides with 06). Rye is genuinely its own class. It is confined to headings and signs only,
+because wood type drifts Western and the concept bans folksy.
+
+**Two measured rules, in `tokens.css`:**
+1. On the wheat ground **only `--ink` carries text** (5.63). ink-2 is 3.38, ink-3 is 1.93,
+   enamel is 2.76. Everything secondary must sit on an enamel plate — the contrast constraint
+   and the separation method happen to agree.
+2. **The flag green is never text and never behind text.** Best reading anywhere: 3.03.
+
+**`js/lang.js`** is the signature layer, pure and DOM-free like 06's `year.js`. The idea it
+encodes is a fact about the food: the butter tart descends from the tarte au sucre, so the two
+names are **relatives, not translations**. `faceOf()` returns `null` for a half-built face
+rather than rendering a blank heading — a product written in one language and not the other is
+a data bug that otherwise looks like a styling bug.
+
+**17 tests**, 253 across the repo. The template-specific guards: every product complete in both
+languages; the two descriptions never identical (proved by pasting one and watching it fail);
+kin notes in pairs or not at all; at least one product keeping its name in both languages so
+the catalogue cannot drift into "every item is a clever pun"; and the `closedWeekdays`-as-
+numbers guard that 06 shipped broken.
+
+All four of the concept doc's open questions are answered in §9 — including that the Hearst
+business name is "no collision found", **not** "verified clear", and needs a registry check
+before commercial release.
+
 Next:
-1. Template 07 — the concept is written in `docs/07-franco-ontarian.md`, nothing built.
+1. `base.css` and `layout.css` — the stacked enamel plates, then the home page.
 
 Open design note from the client: *"could need improvement in design"* — accepted, no specifics
 given yet. The weakest thing is probably the basket line at phone width, where the quantity box
