@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="css/layout.css">
 <link rel="stylesheet" href="css/components/chrome.css">
 <link rel="stylesheet" href="css/components/calendar.css">
+<link rel="stylesheet" href="css/components/spine.css">
 <link rel="stylesheet" href="css/components/controls.css">
 
 <script type="application/ld+json">
@@ -71,30 +72,52 @@
 
 
   <!-- ====================================================================
-       On the counter now.
+       El calendari.
 
-       This is the shop. Everything the calendar has opened plus everything
-       made every morning, on marble because marble is the surface that
-       carries text here.
+       The counter and the year are ONE section, because at this forn they
+       are one fact: what is on the marble today is whatever the calendar
+       has opened. Splitting them into "On the counter [DATE]" and "What's
+       coming" gave this page the same shape as Template 05's board and
+       Template 07's shelf — three bakeries answering "what do you sell"
+       with a dated heading over a grid.
+
+       So the year runs down the page instead. Today sits at the top of the
+       spine with the counter inside it; the next dates follow below, each
+       with the days until it. The reason the template exists, as a layout.
        ==================================================================== -->
   <section class="band band--marble-2 section" id="now">
     <div class="wrap">
       <div class="sechead">
         <div class="sechead__title">
-          <h2 class="t-1">On the counter</h2>
-          <p class="label dim" data-today>—</p>
+          <h2 class="t-1" lang="ca">El calendari</h2>
+          <p class="label dim">The year, and where we are in it</p>
         </div>
-        <a class="link" href="shop.html">Everything we make</a>
+        <a class="link" href="calendar.html">The whole year</a>
       </div>
 
-      <div class="shelf" data-now>
-        <noscript>
-          <p class="note">
-            Today's counter needs JavaScript. Our
-            <a href="visit.html">hours and address</a> are here either way,
-            or call us on 93 441 00 00.
+      <div class="spine">
+        <article class="spine__now">
+          <p class="spine__when label"><span data-today>—</span> · on the marble</p>
+
+          <div class="shelf" data-now>
+            <noscript>
+              <p class="note">
+                Today's counter needs JavaScript. Our
+                <a href="visit.html">hours and address</a> are here either way,
+                or call us on 93 441 00 00.
+              </p>
+            </noscript>
+          </div>
+
+          <p class="spine__all sm">
+            <a class="link" href="shop.html">Everything we make</a>
           </p>
-        </noscript>
+        </article>
+
+        <section class="spine__next" id="coming">
+          <h3 class="spine__when label">Then</h3>
+          <ol class="coming" data-coming></ol>
+        </section>
       </div>
     </div>
   </section>
@@ -126,23 +149,6 @@
         <figcaption class="sm">Cafè sol, at the counter, standing up.</figcaption>
       </figure>
     </div>
-  </section>
-
-  <!-- ====================================================================
-       What is coming, with the days until it.
-
-       The counterpart to the counter, and the reason the template exists: a
-       Catalan bakery is as much a schedule as a shop. Asking for a tortell
-       in March gets you the date it comes back rather than a "sold out".
-       ==================================================================== -->
-  <section class="wrap section" id="coming">
-    <div class="sechead">
-      <div class="sechead__title">
-        <h2 class="t-1">What's coming</h2>
-      </div>
-      <a class="link" href="calendar.html">The whole year</a>
-    </div>
-    <ol class="coming" data-coming></ol>
   </section>
 
   <!-- ====================================================================

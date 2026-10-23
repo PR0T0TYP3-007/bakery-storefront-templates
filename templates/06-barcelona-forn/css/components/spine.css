@@ -1,0 +1,61 @@
+/* ==========================================================================
+   The spine — the year running down the home page.
+
+   This section used to be two: "On the counter" over a grid of tiles, then
+   "What's coming" further down. That first shape is the one Template 05
+   uses for its board and the one Template 07 used for its shelf, and a
+   reader who saw two of these pages in a sitting read the second as the
+   first repeated.
+
+   Here the counter is an entry IN the year rather than a section above it.
+   Today is the open entry, with the marble inside it; the rest follow,
+   dated. The separation stays what it is everywhere in this template: a
+   grout line between tiled surfaces, never a shadow.
+   ========================================================================== */
+
+.spine {
+  display: grid;
+  gap: var(--s-6);
+}
+
+/* Each entry hangs off a line down the left, which is the year. The line is
+   drawn with a border rather than a pseudo-element so it inherits the
+   section's own rule colour and cannot drift from it. */
+.spine__now,
+.spine__next {
+  border-left: var(--grout) solid var(--tile);
+  padding-left: var(--s-5);
+}
+
+/* The date is a marker on that line: a small square of tile sitting on the
+   rule, the same square the floor is tiled with. */
+.spine__when {
+  position: relative;
+  margin-bottom: var(--s-4);
+  color: var(--ink-2);
+}
+
+.spine__when::before {
+  content: '';
+  position: absolute;
+  left: calc(var(--s-5) * -1 - var(--grout));
+  top: 0.35em;
+  width: 10px;
+  height: 10px;
+  margin-left: -5px;
+  background: var(--tile);
+  /* No radius anywhere in this template: the floor is square tiles. */
+}
+
+.spine__all { margin-top: var(--s-4); }
+
+/* On a wide screen the year reads as one column with today given the room
+   it needs, rather than two sections side by side — side by side would put
+   the counter and the calendar back into separate boxes, which is the
+   thing this was pulled apart to stop. */
+@media (min-width: 60rem) {
+  .spine { gap: var(--s-7); }
+  .spine__now,
+  .spine__next { padding-left: var(--s-6); }
+  .spine__when::before { left: calc(var(--s-6) * -1 - var(--grout)); }
+}

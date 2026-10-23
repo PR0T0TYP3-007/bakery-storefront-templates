@@ -138,3 +138,24 @@
 .btn--on-warm:hover {
   background: color-mix(in srgb, var(--marble) 16%, transparent);
 }
+
+/* --------------------------------------------------------------------------
+   The product photograph, as a band
+
+   Full width above the two columns, tiled at top and bottom like every
+   other surface here. The old inset figure sat at the head of the left
+   column — the same arrangement Template 07 used, and the two pages read
+   as one page twice.
+   -------------------------------------------------------------------------- */
+.thing__band {
+  margin: 0 0 var(--s-6);
+  background: var(--marble-3);
+  outline: var(--grout) solid var(--tile-3);
+}
+
+.thing__band .shot {
+  display: block;
+  width: 100%;
+  height: clamp(13rem, 36vh, 22rem);
+  object-fit: cover;
+}

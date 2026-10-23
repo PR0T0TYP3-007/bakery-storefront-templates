@@ -13,7 +13,7 @@
 
 import * as session from '../services/session.js';
 import { renderHeader, renderFooter, esc } from '../components/chrome.js';
-import { plate, stack, kin } from '../components/plates.js';
+import { plate, kin, money } from '../components/plates.js';
 import { lang, onLang, t, bcp47 } from '../services/locale.js';
 
 const $ = (s) => document.querySelector(s);
@@ -33,7 +33,11 @@ const BUTTER = catalogue.products.find((p) => p.id === 'butter-tart');
 
 const COPY = {
   twoHead: { fr: 'Deux noms, deux tartes', en: 'Two names, two tarts' },
-  todayHead: { fr: 'Aujourd’hui', en: 'Out today' },
+  listHead: { fr: 'Des deux bords', en: 'Both sides' },
+  listSub: {
+    fr: 'Ce qu’on fait, en français et en anglais',
+    en: 'What we make, in French and in English',
+  },
   all: { fr: 'Tout ce qu’on fait', en: 'Everything we make' },
   shopLabel: { fr: 'La boulangerie', en: 'The bakery' },
   skip: { fr: 'Aller aux tartes', en: 'Skip to the tarts' },
@@ -84,23 +88,40 @@ function draw() {
     ${SUGAR ? kin(SUGAR) : ''}`;
 
   /* ---------------------------------------------------------------------
-     Out today
+     The list, in two columns
+
+     The French name, a rule, the English name, the price. No photographs
+     and no date: this section is a sign, and the sign is the concept.
      --------------------------------------------------------------------- */
-  $('[data-today-head]').textContent = t(COPY.todayHead, which);
+  $('[data-list-head]').textContent = t(COPY.listHead, which);
+  $('[data-list-sub]').textContent = t(COPY.listSub, which);
   $('[data-all]').textContent = t(COPY.all, which);
 
-  $('[data-today-date]').textContent = new Intl.DateTimeFormat(bcp47(which), {
-    weekday: 'long',
-    day: 'numeric',
-    month: 'long',
-  }).format(new Date());
+  $('[data-ledger]').innerHTML = catalogue.products
+    .map((p) => {
+      const href = `product.html?id=${encodeURIComponent(p.id)}`;
+      const price = esc(money(p.price, merchant, which));
 
-  /* The two tarts are already above; showing them again here would make the
-     page look like it only sells tarts. */
-  const rest = catalogue.products.filter(
-    (p) => p.id !== 'tarte-au-sucre' && p.id !== 'butter-tart'
-  );
-  $('[data-today]').innerHTML = stack(rest, { merchant });
+      /* One word for both — tourtière, butter tart. It goes across the
+         middle rather than being printed twice with a rule between, which
+         would be the page arguing with itself. */
+      if (p.fr.name === p.en.name) {
+        return `
+          <a class="ledg__row ledg__row--one" href="${href}">
+            <span class="ledg__both sign">${esc(p.fr.name)}</span>
+            <span class="ledg__price money">${price}</span>
+          </a>`;
+      }
+
+      return `
+        <a class="ledg__row" href="${href}">
+          <span class="ledg__fr sign" lang="fr-CA">${esc(p.fr.name)}</span>
+          <span class="ledg__rule" aria-hidden="true"></span>
+          <span class="ledg__en sign" lang="en-CA">${esc(p.en.name)}</span>
+          <span class="ledg__price money">${price}</span>
+        </a>`;
+    })
+    .join('');
 
   /* ---------------------------------------------------------------------
      The bakery

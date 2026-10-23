@@ -97,21 +97,78 @@
   font-size: var(--t-sm);
 }
 
-.thing__grid {
+/* --------------------------------------------------------------------------
+   The product page
+
+   Picture, both names, BOTH DESCRIPTIONS SIDE BY SIDE, then the order
+   controls as a band across the foot. The side-car layout — words left,
+   sticky price card right — is what Template 06 does, and a reader who
+   saw both pages in one sitting read them as the same page twice.
+
+   Here the two faces are the page. You can only check "not translations,
+   cousins" by reading them at the same time.
+   -------------------------------------------------------------------------- */
+.faces {
   display: grid;
-  gap: var(--s-6);
   margin-top: var(--s-5);
-  align-items: start;
+  border-block: var(--rim-w) solid var(--rim);
+}
+
+.face {
+  padding: var(--s-5) 0;
+  min-width: 0;
+}
+
+/* The second face is dimmed by the same hair as the second name, and by
+   nothing else: same size, same face, same width. Dimming it further would
+   turn it into a translation note, which is the one thing it is not. */
+.face--other { opacity: 0.72; }
+
+.face__sub { margin-top: var(--s-3); }
+.face__body { margin-top: var(--s-4); }
+
+@media (min-width: 52rem) {
+  .faces {
+    grid-template-columns: 1fr 1fr;
+    column-gap: var(--s-7);
+  }
+
+  /* The rule between the two faces is the same division as everywhere
+     else, drawn down instead of across. */
+  .face--other {
+    padding-left: var(--s-7);
+    margin-left: calc(var(--s-7) * -1);
+    border-left: var(--rim-w) solid var(--rim);
+  }
+}
+
+@media (max-width: 51.999rem) {
+  .face--other { border-top: var(--rim-w) solid var(--rim); }
+}
+
+/* The order band. */
+.buy {
+  display: grid;
+  gap: var(--s-5);
+  margin-top: var(--s-6);
+  padding: var(--s-5);
+  background: var(--enamel);
+  border: var(--rim-w) solid var(--rim);
+  border-radius: var(--r);
 }
 
 @media (min-width: 60rem) {
-  .thing__grid { grid-template-columns: minmax(0, 1fr) 23rem; gap: var(--s-7); }
-  .thing__buy { position: sticky; top: calc(var(--header-h) + var(--s-5)); }
+  .buy {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: start;
+    column-gap: var(--s-7);
+  }
 }
 
-.thing__buy { display: grid; gap: var(--s-4); }
-.thing__price { font-size: var(--t-1); line-height: 1; }
-.thing__buy [data-lead] { margin-top: calc(var(--s-3) * -1); }
+.buy__head { display: grid; gap: var(--s-1); }
+.buy__price { font-size: var(--t-1); line-height: 1; }
+.buy__choices { display: grid; gap: var(--s-5); min-width: 0; }
+.buy__do { display: grid; gap: var(--s-3); align-content: start; min-width: 14rem; }
 
 .alrg {
   margin-top: var(--s-6);

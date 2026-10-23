@@ -65,10 +65,15 @@ function render(p) {
     .filter(Boolean);
 
   $('[data-thing]').innerHTML = `
+    <!-- The photograph runs the width of the page, with the date and the
+         name under it. It used to be a small figure at the top of the left
+         column, which is the shape Template 07's product page had too; one
+         reader saw the two pages in a sitting and read the second as the
+         first. A forn's window is the width of the shop, so this is. -->
+    <figure class="thing__band">${picture(p, { eager: true, size: 'lg' })}</figure>
+
     <div class="thing__grid">
       <div class="thing__say">
-        <figure class="thing__shot">${picture(p, { eager: true, size: 'lg' })}</figure>
-
         ${stateLine(entry, season)}
 
         <h1 class="t-1" style="margin-top:var(--s-3)" lang="ca">${esc(p.name)}</h1>

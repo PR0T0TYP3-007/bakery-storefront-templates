@@ -121,33 +121,51 @@ function draw() {
     .map((k) => catalogue.addons.find((a) => a.id === k))
     .filter(Boolean);
 
+  const faces = bothFaces(product, which);
+
   $('[data-thing]').innerHTML = `
-    <div class="thing__grid">
-      <div class="thing__say">
-        ${product.image ? `<div class="thing__shot">${shot(product, { eager: true, size: 'lg' })}</div>` : ''}
+    ${product.image ? `<div class="thing__shot">${shot(product, { eager: true, size: 'lg' })}</div>` : ''}
 
-        ${names(product, { tag: 'h1', cls: 't-1' })}
+    ${names(product, { tag: 'h1', cls: 't-1' })}
 
-        <p class="lede" style="margin-top:var(--s-4)" lang="${esc(bcp47(which))}">${esc(
-          here.subtitle
-        )}</p>
+    <!-- Both descriptions, at once, side by side.
 
-        <div class="prose" style="margin-top:var(--s-5)" lang="${esc(bcp47(which))}">
-          <p>${esc(here.description)}</p>
-        </div>
+         06 puts the words in a column with a price card sticky beside
+         them, and so did this page. But the claim here is that the two
+         languages are not translations — and the only way a reader can
+         CHECK that is to see both at the same time. Reading the pair is
+         the argument. -->
+    <div class="faces">
+      ${faces
+        .map(
+          (f, i) => `
+            <section class="face${i ? ' face--other' : ''}" lang="${esc(bcp47(f.lang))}">
+              <p class="label dim">${esc(f.lang === 'fr' ? 'En français' : 'In English')}</p>
+              <p class="face__sub lede">${esc(f.subtitle)}</p>
+              <p class="face__body">${esc(f.description)}</p>
+            </section>`
+        )
+        .join('')}
+    </div>
 
-        ${kin(product)}
+    ${kin(product)}
 
-        ${allergens(which)}
+    ${allergens(which)}
+
+    <!-- The order controls as a band across the foot of the page, not a
+         card down the side. The side card is 06's shape. -->
+    <form class="buy" data-buy>
+      <div class="buy__head">
+        <p class="money buy__price" data-price>${esc(money(product.price, merchant, which))}</p>
+        <p class="sm dim" data-lead></p>
       </div>
 
-      <form class="thing__buy plate" data-buy>
-        <p class="money thing__price" data-price>${esc(money(product.price, merchant, which))}</p>
-        <p class="sm dim" data-lead></p>
-
+      <div class="buy__choices">
         ${options.map((g) => optionGroup(g, which)).join('')}
         ${addons.length ? addonBlock(addons, which) : ''}
+      </div>
 
+      <div class="buy__do">
         <div class="qty">
           <label class="label" for="qty">${esc(t(COPY.howMany, which))}</label>
           <input class="qty__in num" id="qty" name="qty" type="number"
@@ -155,8 +173,8 @@ function draw() {
         </div>
 
         <button class="btn btn--block" type="submit">${esc(t(COPY.add, which))}</button>
-      </form>
-    </div>`;
+      </div>
+    </form>`;
 
   wire(options);
 }

@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="css/layout.css">
 <link rel="stylesheet" href="css/components/chrome.css">
 <link rel="stylesheet" href="css/components/plates.css">
+<link rel="stylesheet" href="css/components/ledger.css">
 
 <script type="application/ld+json">
 {
@@ -83,19 +84,29 @@
   </section>
 
   <!-- ====================================================================
-       What is out today.
+       The list, in two columns.
+
+       Not a grid of cards with today's date over it — every other template
+       in the set has one of those, and two of them have it in the same
+       words. This is the shop's sign: French down one side, English down
+       the other, a rule between them, and the price at the edge. The
+       layout IS the concept, which is the one thing a competitor cannot
+       copy without copying the idea.
+
+       Where both languages use the same word, the row says it once, across
+       the middle. That is the whole argument in one line of markup.
        ==================================================================== -->
   <section class="band band--enamel-2 section" id="today">
     <div class="wrap">
       <div class="sechead">
         <div class="sechead__title">
-          <h2 class="t-1 sign" data-today-head></h2>
-          <p class="label dim" data-today-date></p>
+          <h2 class="t-1 sign" data-list-head></h2>
+          <p class="label dim" data-list-sub></p>
         </div>
         <a class="link" href="shop.html" data-all></a>
       </div>
 
-      <div data-today>
+      <div class="ledg" data-ledger>
         <noscript>
           <p class="plate plate--2">
             Cette page a besoin de JavaScript. Téléphonez-nous au 705 555 0161.

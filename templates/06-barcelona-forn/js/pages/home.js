@@ -74,7 +74,8 @@ renderShelf($('[data-now]'), { merchant, catalogue, today });
 const comingCount = renderComing($('[data-coming]'), { merchant, catalogue, today, limit: 3 });
 
 /* A forn with nothing coming in the next stretch should not show an empty
-   heading. The section removes itself rather than standing there blank. */
+   heading. The entry removes itself from the spine rather than standing
+   there blank — today's entry stays, because there is always a today. */
 if (!comingCount) $('#coming')?.remove();
 
 /* -------------------------------------------------------------------------
