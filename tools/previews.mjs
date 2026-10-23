@@ -37,6 +37,7 @@ const TEMPLATES = [
   '04-creative-studio',
   '05-neighbourhood',
   '06-barcelona-forn',
+  '07-franco-ontarian',
 ];
 
 const CHROME = [
@@ -66,13 +67,23 @@ async function findChrome() {
 }
 
 const port = flag('port', '4321');
+
+/* `--only 07` re-shoots one template. Every earlier run was all-or-nothing,
+   which meant adding a template re-captured six that had not changed and
+   took long enough that the step got skipped. */
+const only = flag('only', null);
+const shooting = only
+  ? TEMPLATES.filter((t) => t.startsWith(only) || t === only)
+  : TEMPLATES;
+
+if (!shooting.length) throw new Error(`--only ${only} matched no template.`);
 const root = path.resolve(import.meta.dirname, '..');
 const chrome = await findChrome();
 
 console.log(`  browser   ${path.basename(chrome)}`);
 console.log(`  capture   ${WIDTH}x${HEIGHT} @${SCALE}x -> ${OUT_W}x${OUT_H}`);
 
-for (const t of TEMPLATES) {
+for (const t of shooting) {
   const url = `http://localhost:${port}/templates/${t}/index.html`;
   const dir = await mkdtemp(path.join(tmpdir(), 'shot-'));
   const shot = path.join(dir, 'out.png');
