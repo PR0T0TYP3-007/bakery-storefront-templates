@@ -50,6 +50,29 @@ export function names(product, { tag = 'h3', cls = 't-3' } = {}) {
 }
 
 /**
+ * The photograph on a plate.
+ *
+ * Enamelware has no bevel and no shadow, so the picture is not inset or
+ * rounded: it runs edge to edge and the rim below it is the division, the
+ * same 2px line that separates everything else here.
+ *
+ * The alt text is bilingual like the names, because a photograph described
+ * only in French is exactly the half-built bilingualism this template is
+ * arguing against.
+ */
+export function shot(product, { eager = false, size = 'md' } = {}) {
+  const img = product.image;
+  if (!img) return '';
+
+  const which = lang();
+
+  return `
+    <img class="shot" src="assets/img/${esc(img.src)}-${esc(size)}.jpg"
+         alt="${esc(t(img.alt, which))}"
+         ${eager ? 'fetchpriority="high"' : 'loading="lazy" decoding="async"'}>`;
+}
+
+/**
  * One product, on a plate.
  *
  * `--bare` on the ground, filled on a band: the caller says which, because
@@ -63,7 +86,10 @@ export function plate(product, { merchant, bare = false } = {}) {
   const [here] = faces;
 
   return `
-    <article class="plate ${bare ? 'plate--bare' : ''} card">
+    <article class="plate ${bare ? 'plate--bare' : ''} card${
+      product.image ? ' card--shot' : ''
+    }">
+      ${shot(product)}
       <div class="card__body">
         ${names(product)}
         ${

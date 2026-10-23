@@ -144,3 +144,12 @@
   width: 5.25rem;
   height: auto;
 }
+
+/* The attribution line. Small, but it is a licence condition, not a
+   footnote — so it is dim, never hidden, and it wraps rather than clips. */
+.ftr__credits {
+  margin-top: var(--s-2);
+  max-width: var(--measure);
+}
+
+.ftr__credits a { color: inherit; }

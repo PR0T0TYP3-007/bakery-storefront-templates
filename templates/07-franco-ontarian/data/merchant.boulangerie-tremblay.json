@@ -231,5 +231,45 @@
       "fr": "On sert en français. En anglais aussi, sans problème — souvent dans la même phrase, comme tout le monde par ici.",
       "en": "We serve in French. In English too, no trouble — often in the same sentence, the way everybody does around here."
     }
+  },
+  "photoCredits": {
+    "note": "Five photographs here are used under Creative Commons licences and are credited as those licences require. All five were cropped, resized and re-encoded for the web.",
+    "items": [
+      {
+        "title": "Cape Breton Bakers Butter Tarts",
+        "author": "Glen.wilkinson",
+        "source": "https://commons.wikimedia.org/wiki/File:Cape_Breton_Bakers_Butter_Tarts.jpg",
+        "licence": "CC BY-SA 3.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0/"
+      },
+      {
+        "title": "Blueberry Pie",
+        "author": "Steve Rainwater",
+        "source": "https://commons.wikimedia.org/wiki/File:Blueberry_Pie_%2852855046320%29.jpg",
+        "licence": "CC BY-SA 2.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0/"
+      },
+      {
+        "title": "Warm Tourtiere",
+        "author": "Craig Dugas",
+        "source": "https://commons.wikimedia.org/wiki/File:Warm_Tourtiere_%28cropped%29.jpg",
+        "licence": "CC BY-SA 2.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0/"
+      },
+      {
+        "title": "Potato bread",
+        "author": "Sujalajus",
+        "source": "https://commons.wikimedia.org/wiki/File:Potato_bread.jpeg",
+        "licence": "CC BY-SA 3.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0/"
+      },
+      {
+        "title": "Grand-père au sirop d'érable",
+        "author": "CoveyHill",
+        "source": "https://commons.wikimedia.org/wiki/File:Grand-P%C3%A8re_au_sirop_d%27%C3%A9rable.JPG",
+        "licence": "CC BY-SA 3.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0/"
+      }
+    ]
   }
 }

@@ -145,7 +145,13 @@
         "egg",
         "milk"
       ],
-      "image": null,
+      "image": {
+        "src": "tarte-au-sucre",
+        "alt": {
+          "fr": "Une tarte au sirop d'érable entière dans son moule, le dessus foncé et craquelé",
+          "en": "A whole maple syrup pie in its dish, the top dark and cracked"
+        }
+      },
       "fr": {
         "name": "Tarte au sucre",
         "subtitle": "Sirop d'érable, crème, pâte brisée",
@@ -181,7 +187,13 @@
         "egg",
         "milk"
       ],
-      "image": null,
+      "image": {
+        "src": "butter-tart",
+        "alt": {
+          "fr": "Des butter tarts qui refroidissent sur une grille, la garniture encore luisante",
+          "en": "Butter tarts cooling on a rack, the filling still glossy"
+        }
+      },
       "fr": {
         "name": "Butter tart",
         "subtitle": "À l'unité, cassonade et beurre",
@@ -216,7 +228,13 @@
         "gluten",
         "milk"
       ],
-      "image": null,
+      "image": {
+        "src": "tarte-aux-bleuets",
+        "alt": {
+          "fr": "Une tarte aux bleuets entière, la croûte dorée fendue par la vapeur",
+          "en": "A whole blueberry pie, its golden crust slit for the steam"
+        }
+      },
       "fr": {
         "name": "Tarte aux bleuets",
         "subtitle": "Bleuets sauvages du nord",
@@ -248,7 +266,13 @@
         "gluten",
         "egg"
       ],
-      "image": null,
+      "image": {
+        "src": "tourtiere",
+        "alt": {
+          "fr": "Une pointe de tourtière, la viande visible sous la croûte",
+          "en": "A slice of tourtière, the meat showing under the crust"
+        }
+      },
       "fr": {
         "name": "Tourtière",
         "subtitle": "Porc, bœuf, cannelle et clou de girofle",
@@ -276,7 +300,13 @@
       "allergens": [
         "gluten"
       ],
-      "image": null,
+      "image": {
+        "src": "pain-de-menage",
+        "alt": {
+          "fr": "Un pain rond sur du papier, la croûte largement fendue",
+          "en": "A round loaf on paper, the crust split wide"
+        }
+      },
       "fr": {
         "name": "Pain de ménage",
         "subtitle": "Grosse miche, croûte épaisse",
@@ -302,7 +332,13 @@
         "gluten",
         "milk"
       ],
-      "image": null,
+      "image": {
+        "src": "pain-aux-patates",
+        "alt": {
+          "fr": "Un pain aux patates tranché sur une planche de bois",
+          "en": "A potato loaf, sliced, on a wooden board"
+        }
+      },
       "fr": {
         "name": "Pain aux patates",
         "subtitle": "Mie jaune, se garde une semaine",
@@ -329,7 +365,13 @@
         "egg",
         "milk"
       ],
-      "image": null,
+      "image": {
+        "src": "beigne",
+        "alt": {
+          "fr": "Des beignes glacés rangés côte à côte",
+          "en": "Glazed ring doughnuts set side by side"
+        }
+      },
       "fr": {
         "name": "Beigne",
         "subtitle": "Frit le matin, roulé dans le sucre",
@@ -356,7 +398,13 @@
         "egg",
         "milk"
       ],
-      "image": null,
+      "image": {
+        "src": "grand-pere",
+        "alt": {
+          "fr": "Un grand-père dans son sirop, dans une assiette creuse",
+          "en": "A dumpling in its syrup, in a shallow dish"
+        }
+      },
       "fr": {
         "name": "Grand-père au sirop",
         "subtitle": "Pâte pochée dans le sirop d'érable",

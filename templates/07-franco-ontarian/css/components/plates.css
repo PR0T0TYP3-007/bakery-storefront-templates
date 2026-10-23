@@ -93,3 +93,69 @@
 }
 
 .hero__claim { max-width: 16ch; }
+
+/* --------------------------------------------------------------------------
+   The photograph
+
+   Flush to the rim, never inset: an enamel plate has no bevel to inset
+   into, and a photograph floating inside a border would be a card from a
+   different template. The rim under the picture is the same 2px line that
+   divides everything else, so the plate's own padding comes off and the
+   text below gets it back.
+   -------------------------------------------------------------------------- */
+.card--shot { padding: 0; }
+
+.shot {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  /* The photographs come from several hands and several kitchens — there is
+     no stock photography of a tourtière — so they are shown as they are,
+     with no filter pretending they were shot together. */
+  border-bottom: var(--rim-w) solid var(--rim);
+}
+
+.card--shot .card__body { padding: var(--s-4) var(--s-5) 0; }
+.card--shot .card__price { padding: 0 var(--s-5) var(--s-5); }
+
+/* A plate on the wheat ground has no fill, so a photograph on it would sit
+   on the ground with nothing under it. The picture brings its own surface. */
+.plate--bare.card--shot { background: var(--enamel); }
+
+/* The two tarts are the argument, so their pictures get more height than a
+   shelf plate's — the fillings are the difference being pointed at. */
+.two .card--shot .shot { aspect-ratio: 3 / 2; }
+
+/* --------------------------------------------------------------------------
+   The hero
+
+   A photograph across the full width with the claim on a plate that rides
+   its bottom edge. The wheat ground shows below and around, so the band
+   reads as a picture laid on the counter rather than a banner.
+   -------------------------------------------------------------------------- */
+.hero { padding-bottom: var(--s-7); }
+
+.hero__shot {
+  display: block;
+  width: 100%;
+  height: clamp(14rem, 38vh, 24rem);
+  object-fit: cover;
+  border-bottom: var(--rim-w) solid var(--rim);
+}
+
+.hero__panel {
+  /* Up by one rim: the plate's top edge and the photograph's bottom edge
+     are the same line. */
+  margin-top: calc(var(--rim-w) * -1);
+  position: relative;
+}
+
+.hero__plate {
+  max-width: 44rem;
+  padding: var(--s-6);
+}
+
+@media (min-width: 60rem) {
+  .hero__plate { padding: var(--s-7); }
+}

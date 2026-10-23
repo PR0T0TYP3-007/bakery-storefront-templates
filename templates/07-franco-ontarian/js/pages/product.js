@@ -12,7 +12,7 @@
 
 import * as session from '../services/session.js';
 import { renderHeader, renderFooter, esc } from '../components/chrome.js';
-import { names, kin, money } from '../components/plates.js';
+import { names, kin, money, shot } from '../components/plates.js';
 import { lang, onLang, t, bcp47 } from '../services/locale.js';
 import { bothFaces } from '../lang.js';
 import { toast } from '../components/toast.js';
@@ -124,6 +124,8 @@ function draw() {
   $('[data-thing]').innerHTML = `
     <div class="thing__grid">
       <div class="thing__say">
+        ${product.image ? `<div class="thing__shot">${shot(product, { eager: true, size: 'lg' })}</div>` : ''}
+
         ${names(product, { tag: 'h1', cls: 't-1' })}
 
         <p class="lede" style="margin-top:var(--s-4)" lang="${esc(bcp47(which))}">${esc(

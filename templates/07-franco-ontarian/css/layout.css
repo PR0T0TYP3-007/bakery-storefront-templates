@@ -169,3 +169,17 @@
   .split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s-7); }
   .split--wide-left { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
 }
+
+/* --------------------------------------------------------------------------
+   A photograph used as a band
+
+   Full width, fixed height, rim top and bottom: the picture becomes one of
+   the stacked surfaces rather than an illustration floating in a column.
+   -------------------------------------------------------------------------- */
+.band-shot {
+  display: block;
+  width: 100%;
+  height: clamp(12rem, 32vh, 20rem);
+  object-fit: cover;
+  border-block: var(--rim-w) solid var(--rim);
+}

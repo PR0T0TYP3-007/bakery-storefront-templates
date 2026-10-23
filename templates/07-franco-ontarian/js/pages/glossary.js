@@ -100,6 +100,14 @@ function draw() {
   $('[data-skip]').textContent = t(COPY.skip, which);
   $('[data-head]').textContent = t(COPY.head, which);
   $('[data-lede]').textContent = t(COPY.lede, which);
+
+  const tireShot = $('[data-tire-shot]');
+  if (tireShot) {
+    tireShot.alt =
+      which === 'fr'
+        ? 'Du sirop bouillant versé sur la neige, à la louche, pour la tire'
+        : 'Boiling syrup ladled onto snow to make taffy';
+  }
   $('[data-sources-label]').textContent = t(COPY.sources, which);
 
   const desc = document.querySelector('meta[name="description"]');

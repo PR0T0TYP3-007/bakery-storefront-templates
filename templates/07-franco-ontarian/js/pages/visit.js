@@ -84,6 +84,14 @@ function draw() {
     }).format(today)
   );
 
+  const roomShot = $('[data-room-shot]');
+  if (roomShot) {
+    roomShot.alt =
+      which === 'fr'
+        ? 'La vitrine depuis la rue en hiver, les grilles de pain derrière le verre'
+        : 'The shop window from the street in winter, racks of bread behind the glass';
+  }
+
   paintHours(which);
   paintPhone();
   paintWays(which);

@@ -53,6 +53,18 @@ function draw() {
      the language switch exists for. */
   $('[data-skip]').textContent = t(COPY.skip, which);
 
+  /* The hero photograph is described in whichever language is showing. An
+     empty alt would be defensible — it is decorative-ish — but the room IS
+     the claim's setting, and a blank alt tells a screen reader nothing
+     about the shop it is standing in. */
+  const heroShot = $('[data-hero-shot]');
+  if (heroShot) {
+    heroShot.alt =
+      which === 'fr'
+        ? 'Le comptoir de la boulangerie en plein jour, les pains et les tartes sortis'
+        : 'The bakery counter in daylight, the breads and tarts set out';
+  }
+
   $('[data-kicker]').textContent = t(voice.kicker, which);
   $('[data-headline]').textContent = t(voice.headline, which);
   $('[data-lede]').textContent = t(voice.lede, which);

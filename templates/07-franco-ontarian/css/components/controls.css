@@ -239,3 +239,14 @@
   .toast[data-out] { opacity: 0; transition: opacity 240ms var(--ease); }
   @keyframes toast-in { from { opacity: 0; transform: translateY(0.5rem); } }
 }
+
+/* The product photograph.
+
+   On its own here rather than on a plate, so it takes the full rim on all
+   four sides instead of only the one it shares with a plate's text. */
+.thing__shot { margin-bottom: var(--s-5); }
+
+.thing__shot .shot {
+  aspect-ratio: 3 / 2;
+  border: var(--rim-w) solid var(--rim);
+}

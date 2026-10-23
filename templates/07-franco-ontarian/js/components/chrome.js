@@ -120,6 +120,43 @@ function paintBasket() {
   if (el) el.textContent = String(session.count());
 }
 
+/**
+ * Photograph credits, in the footer of every page.
+ *
+ * Five of this template's photographs are Creative Commons and carry an
+ * attribution obligation. That obligation runs to the people USING the
+ * work, so a line in a repository file does not discharge it: the credit
+ * goes on the page. The licences also require saying the work was changed,
+ * and it was — every one was cropped, resized and re-encoded.
+ *
+ * The rest is Unsplash or public domain and needs no credit; all of it is
+ * listed in assets/img/CREDITS.md regardless.
+ *
+ * Driven from config, so a merchant who shoots their own photography
+ * deletes `photoCredits` and this line goes with it.
+ */
+function photoCredits(merchant, which) {
+  const credits = merchant.photoCredits;
+  if (!credits?.items?.length) return '';
+
+  const list = credits.items
+    .map(
+      (c) =>
+        `<a href="${esc(c.source)}" rel="noopener noreferrer">${esc(c.title)}</a>` +
+        ` ${which === 'fr' ? 'de' : 'by'} ${esc(c.author)}` +
+        ` (<a href="${esc(c.licenceUrl)}" rel="license noopener noreferrer">${esc(
+          c.licence
+        )}</a>)`
+    )
+    .join(', ');
+
+  return `<p class="sm dim ftr__credits">${
+    which === 'fr'
+      ? `Photographies : ${list}, via Wikimedia Commons, recadrées et redimensionnées.`
+      : `Photography: ${list}, via Wikimedia Commons, cropped and resized.`
+  }</p>`;
+}
+
 export function renderFooter() {
   const mount = document.querySelector('[data-footer]');
   if (!mount) return;
@@ -197,6 +234,7 @@ export function renderFooter() {
 
         <div class="wrap ftr__fine">
           <p class="sm dim">${esc(t(merchant.taxNote, which))}</p>
+          ${photoCredits(merchant, which)}
         </div>
       </div>`;
   };
