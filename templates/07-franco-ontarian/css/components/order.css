@@ -1,0 +1,239 @@
+/* ==========================================================================
+   The basket, the checkout, the confirmation.
+
+   Same system as everywhere else: plates with a rim, stacked so their edges
+   share a line. Nothing floats.
+   ========================================================================== */
+
+.order {
+  display: grid;
+  gap: var(--s-6);
+  margin-top: var(--s-5);
+  align-items: start;
+}
+
+@media (min-width: 62rem) {
+  .order { grid-template-columns: minmax(0, 1fr) 23rem; gap: var(--s-7); }
+  .order__side { position: sticky; top: calc(var(--header-h) + var(--s-5)); }
+}
+
+.order__side { display: grid; }
+.order__side > * + * { margin-top: calc(var(--rim-w) * -1); }
+
+/* --------------------------------------------------------------------------
+   One line
+   -------------------------------------------------------------------------- */
+.order__lines { display: grid; }
+.order__lines > * + * { margin-top: calc(var(--rim-w) * -1); }
+
+.line {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  grid-template-areas:
+    'say qty price'
+    'say drop drop';
+  align-items: start;
+  gap: var(--s-2) var(--s-4);
+}
+
+@media (max-width: 38rem) {
+  .line {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      'say say'
+      'qty price'
+      'drop drop';
+    gap: var(--s-3) var(--s-4);
+  }
+}
+
+.line__say { grid-area: say; }
+.line__qty { grid-area: qty; }
+.line__price { grid-area: price; justify-self: end; font-size: 1.125rem; }
+.line__drop { grid-area: drop; justify-self: end; }
+
+.line__conf { margin-top: var(--s-2); color: var(--ink-2); }
+
+.line__drop {
+  padding: var(--s-2) 0;
+  border: 0;
+  background: none;
+  color: var(--ink-3);
+  font: inherit;
+  font-size: var(--t-sm);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+  cursor: pointer;
+}
+
+.line__drop:hover { color: var(--bad); }
+
+/* --------------------------------------------------------------------------
+   Collecting
+   -------------------------------------------------------------------------- */
+.when__day { margin-top: var(--s-2); }
+
+.when__in {
+  width: 100%;
+  min-height: var(--tap);
+  margin-top: var(--s-3);
+  padding-inline: var(--s-3);
+  background: var(--enamel-2);
+  color: var(--ink);
+  border: var(--rim-w) solid var(--rim);
+  border-radius: var(--r);
+  font-variant-numeric: tabular-nums;
+}
+
+.when__note { margin-top: var(--s-3); color: var(--ink-2); }
+
+/* Not colour alone: the bad state changes the WORDS, which are the actual
+   carrier. This is the emphasis on top of that. */
+.when__note.is-bad { color: var(--bad); font-weight: 700; }
+
+.when__where { margin-top: var(--s-4); }
+
+/* --------------------------------------------------------------------------
+   Totals
+   -------------------------------------------------------------------------- */
+.totals__list { margin: var(--s-3) 0 var(--s-5); }
+
+.totals__row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-4);
+  padding-block: var(--s-2);
+}
+
+.totals__row dd { margin: 0; }
+
+.totals__row--sum {
+  margin-top: var(--s-2);
+  padding-top: var(--s-3);
+  border-top: var(--rim-w) solid color-mix(in srgb, var(--enamel) 40%, transparent);
+  font-size: 1.25rem;
+}
+
+.totals__row--sum dt { font-family: var(--font-display); }
+
+.sum {
+  list-style: none;
+  margin: var(--s-3) 0 0;
+  padding: 0;
+}
+
+.sum__row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: var(--s-3);
+  margin: 0;
+  padding-block: var(--s-2);
+}
+
+.sum__n { color: color-mix(in srgb, var(--enamel) 82%, transparent); }
+.sum__price { white-space: nowrap; }
+
+/* --------------------------------------------------------------------------
+   Checkout
+   -------------------------------------------------------------------------- */
+.pay { display: grid; }
+.pay > * + * { margin-top: calc(var(--rim-w) * -1); }
+
+/* The submit button and the tax note are not plates, so they get real air
+   rather than riding an edge. */
+.pay > [data-declined]:not(:empty),
+.pay > button,
+.pay > p {
+  margin-top: var(--s-5);
+}
+
+.pay label { font-weight: 600; }
+
+.field { display: grid; gap: var(--s-2); }
+
+.field > input,
+.field > textarea {
+  min-height: var(--tap);
+  padding: var(--s-3);
+  background: var(--enamel-2);
+  color: var(--ink);
+  border: var(--rim-w) solid var(--rim);
+  border-radius: var(--r);
+}
+
+.field > textarea { min-height: 6rem; resize: vertical; }
+
+.field__hint { color: var(--ink-3); }
+.field__bad { color: var(--bad); font-weight: 700; }
+
+.field--bad > input,
+.field--bad > textarea { border-color: var(--bad); }
+
+@media (min-width: 44rem) {
+  .pay__pair { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-4); }
+}
+
+/* --------------------------------------------------------------------------
+   Slots
+   -------------------------------------------------------------------------- */
+.slots {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 10rem), 1fr));
+}
+
+.slot {
+  position: relative;
+  display: grid;
+  gap: 2px;
+  min-height: var(--tap);
+  padding: var(--s-3);
+  text-align: left;
+  cursor: pointer;
+  margin-inline-start: calc(var(--rim-w) * -1);
+  margin-block-start: calc(var(--rim-w) * -1);
+}
+
+.slot:first-child { margin-inline-start: 0; }
+
+.slot__left { color: var(--ink-3); }
+
+.slot:has(:checked) {
+  background: var(--blueberry);
+  color: var(--enamel);
+  border-color: var(--blueberry-deep);
+  z-index: 2;
+}
+
+.slot:has(:checked) .slot__left {
+  color: color-mix(in srgb, var(--enamel) 82%, transparent);
+}
+
+.slot:has(:disabled) {
+  background: var(--enamel-2);
+  color: var(--ink-3);
+  cursor: not-allowed;
+}
+
+.slot input { position: absolute; opacity: 0; pointer-events: none; }
+
+/* --------------------------------------------------------------------------
+   The decline, and the reference
+   -------------------------------------------------------------------------- */
+.declined {
+  background: var(--bad);
+  color: var(--enamel);
+  border-color: var(--ink);
+}
+
+.declined__head { font-size: var(--t-3); }
+.declined p { margin-top: var(--s-2); }
+
+.ref {
+  margin-top: var(--s-3);
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 3rem);
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+}

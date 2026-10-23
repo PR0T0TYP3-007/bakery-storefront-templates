@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Caisse — Boulangerie Tremblay</title>
+<meta name="description" content="Quand vous venez, à quel nom, et le paiement.">
+<meta name="robots" content="noindex">
+
+<link rel="preload" href="assets/fonts/rye.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/librefranklin.woff2" as="font" type="font/woff2" crossorigin>
+
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/plates.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/order.css">
+</head>
+<body>
+<a class="skip" href="#checkout" data-skip></a>
+<div data-header></div>
+
+<main id="main">
+  <section class="band band--enamel-2 section" id="checkout">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Fil d'Ariane" data-crumbs>
+        <a class="link" href="basket.html" data-crumb-basket></a>
+        <span aria-hidden="true">·</span>
+        <span data-crumb></span>
+      </nav>
+
+      <h1 class="t-1 sign" style="margin-top:var(--s-4)" data-head></h1>
+
+      <div class="order" data-order hidden>
+        <form class="pay" data-pay novalidate>
+          <!-- Collection only. `capabilities.delivery` is false for this
+               merchant, and a delivery option that cannot be chosen is
+               worse than no option at all. -->
+          <section class="plate">
+            <h2 class="label" data-when-label></h2>
+            <p class="t-3 sign" style="margin-top:var(--s-2)" data-when-day>—</p>
+            <p class="sm dim" style="margin-top:var(--s-2)" data-where></p>
+            <p class="sm" style="margin-top:var(--s-3)">
+              <a class="link" href="basket.html" data-change-day></a>
+            </p>
+          </section>
+
+          <section class="plate">
+            <h2 class="label" id="slot-h" data-slot-label></h2>
+            <p class="sm dim" style="margin-top:var(--s-2)" data-slot-hint></p>
+            <div class="slots" style="margin-top:var(--s-3)" role="radiogroup"
+                 aria-labelledby="slot-h" data-slots></div>
+            <p class="sm field__bad" style="margin-top:var(--s-3)" data-slot-bad hidden></p>
+          </section>
+
+          <section class="plate">
+            <h2 class="label" data-who-label></h2>
+
+            <div class="pay__pair" style="margin-top:var(--s-3)">
+              <p class="field">
+                <label for="name" data-l-name></label>
+                <input id="name" name="name" type="text" autocomplete="name" required>
+                <span class="sm field__bad" data-bad-for="name" hidden></span>
+              </p>
+
+              <p class="field">
+                <label for="phone" data-l-phone></label>
+                <input id="phone" name="phone" type="tel" autocomplete="tel" required>
+                <span class="sm field__hint" data-h-phone></span>
+                <span class="sm field__bad" data-bad-for="phone" hidden></span>
+              </p>
+            </div>
+
+            <p class="field" style="margin-top:var(--s-4)">
+              <label for="email" data-l-email></label>
+              <input id="email" name="email" type="email" autocomplete="email" required>
+              <span class="sm field__hint" data-h-email></span>
+              <span class="sm field__bad" data-bad-for="email" hidden></span>
+            </p>
+
+            <p class="field" style="margin-top:var(--s-4)">
+              <label for="note" data-l-note></label>
+              <textarea id="note" name="note" rows="3"></textarea>
+              <span class="sm field__hint" data-h-note></span>
+            </p>
+          </section>
+
+          <section class="plate">
+            <h2 class="label" data-pay-label></h2>
+            <p class="sm dim" style="margin-top:var(--s-2)" data-card-hint></p>
+
+            <p class="field" style="margin-top:var(--s-3)">
+              <label for="card" data-l-card></label>
+              <input id="card" name="card" type="text" inputmode="numeric"
+                     autocomplete="off" placeholder="4242 4242 4242 4242" required>
+              <span class="sm field__bad" data-bad-for="card" hidden></span>
+            </p>
+          </section>
+
+          <div data-declined></div>
+
+          <button class="btn btn--block" type="submit" data-submit></button>
+          <p class="sm dim" data-tax></p>
+        </form>
+
+        <aside class="order__side">
+          <section class="plate plate--blueberry totals" aria-labelledby="sum-h">
+            <h2 class="label" id="sum-h" data-sum-label></h2>
+            <ul class="sum" data-sum></ul>
+            <dl class="totals__list" data-totals></dl>
+          </section>
+        </aside>
+      </div>
+
+      <div data-empty hidden>
+        <p class="lede" style="margin-top:var(--s-4)" data-empty-text></p>
+        <p style="margin-top:var(--s-5)">
+          <a class="btn" href="shop.html" data-empty-link></a>
+        </p>
+      </div>
+
+      <noscript>
+        <p class="plate" style="margin-top:var(--s-5)">
+          La caisse a besoin de JavaScript. Téléphonez-nous au 705 555 0161.
+          <br>Checkout needs JavaScript. Call us at 705 555 0161.
+        </p>
+      </noscript>
+    </div>
+  </section>
+</main>
+
+<footer data-footer></footer>
+
+<script type="module" src="js/pages/checkout.js"></script>
+</body>
+</html>

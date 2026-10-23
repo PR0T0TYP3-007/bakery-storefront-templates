@@ -297,3 +297,35 @@ test('the dated historical claim carries its hedge', () => {
   assert.ok(dated.caveat?.fr && dated.caveat?.en, 'the 1900 claim lost its caveat');
   assert.ok(dated.source, 'the 1900 claim lost its source');
 });
+
+/* -------------------------------------------------------------------------
+   Tax, which is the opposite of Template 06's
+   ------------------------------------------------------------------------- */
+test('tax is exclusive here, and the note says so in both languages', () => {
+  /* Ontario quotes before tax and adds 13% HST at the till. Barcelona is the
+     other way: the shelf price already contains the IVA, and showing it
+     added would be non-compliant there. Same orderTotals(), opposite
+     presentation — the basket shows this one as a line being ADDED, and
+     getting it backwards would misstate the price. */
+  assert.equal(merchant.taxMode, 'exclusive');
+  assert.equal(merchant.taxRate, 0.13);
+  assert.equal(merchant.currency, 'CAD');
+
+  for (const lang of LANGS) {
+    const note = merchant.taxNote[lang];
+    assert.ok(note && note.trim(), `taxNote has no ${lang}`);
+    assert.ok(/13/.test(note), `the ${lang} tax note does not state the rate`);
+  }
+});
+
+test('this merchant is collection only, and says so by capability', () => {
+  /* A delivery control that cannot be chosen is worse than no control, so
+     the checkout renders none. If delivery is ever switched on, that page
+     needs the option added — this test is the reminder. */
+  assert.equal(merchant.capabilities.delivery, false);
+  assert.ok(merchant.locations.length >= 1);
+  assert.ok(
+    merchant.locations[0].slots?.length >= 2,
+    'collection needs slots to offer'
+  );
+});

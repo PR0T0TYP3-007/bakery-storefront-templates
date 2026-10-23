@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Commande passée — Boulangerie Tremblay</title>
+<meta name="description" content="Votre commande est entrée. Voici quand venir et quoi dire.">
+<meta name="robots" content="noindex">
+
+<link rel="preload" href="assets/fonts/rye.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/librefranklin.woff2" as="font" type="font/woff2" crossorigin>
+
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/plates.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/order.css">
+</head>
+<body>
+<a class="skip" href="#done" data-skip></a>
+<div data-header></div>
+
+<main id="main">
+  <section class="band band--blueberry section on-dark" id="done">
+    <div class="wrap">
+      <p class="label" data-label></p>
+      <h1 class="t-hero sign" style="margin-top:var(--s-3);max-width:18ch" data-head></h1>
+      <p class="lede" style="margin-top:var(--s-4)" data-say></p>
+    </div>
+  </section>
+
+  <section class="band band--enamel-2 section">
+    <div class="wrap split split--wide-left">
+      <div>
+        <h2 class="t-2 sign" data-ref-head></h2>
+        <p class="ref" data-ref>—</p>
+        <p class="sm dim" style="margin-top:var(--s-3)" data-ref-note></p>
+      </div>
+
+      <div class="prose" data-body></div>
+    </div>
+  </section>
+</main>
+
+<footer data-footer></footer>
+
+<script type="module" src="js/pages/confirmation.js"></script>
+</body>
+</html>

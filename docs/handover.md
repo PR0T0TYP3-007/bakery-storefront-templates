@@ -858,9 +858,40 @@ is a source nobody checked.
 Verified: sweeps clean in both languages at desktop and 375, no sideways scroll, 257 tests
 pass, build at 57 pages.
 
+**23 Oct, fifth stretch — basket, checkout, confirmation.** The order path works end to end and
+was driven in both languages, both failure cards included.
+
+**Tax here is the OPPOSITE of Template 06's, and that is the thing to get right.** Ontario
+quotes before tax and adds 13% HST at the till; Barcelona's shelf price already contains the
+IVA, and showing it added there would be non-compliant. Same `orderTotals()`, opposite
+presentation: this basket shows tax as a line being **added** (18 $ + 2,34 $ = 20,34 $), 06's
+shows an amount **contained** in the total. A test pins `taxMode`, the rate and the currency,
+and the totals code branches on `taxIncluded` rather than assuming — if this merchant were ever
+switched to inclusive, a "+ tax" row would overstate the price.
+
+**Validation messages repaint with the language switch, including ones already on screen.**
+Somebody who cannot read the language showing is exactly the person most likely to be stuck on
+a form error, and leaving the complaint in the old language would strand them there. The set of
+currently-complained-about fields is held so the repaint can redo them.
+
+The chosen collection time also survives a repaint, for the same reason the product page's
+options do.
+
+The checkout passes `lang` in the query string to the confirmation, so the receipt opens in the
+language the order was placed in rather than in whatever the browser remembers.
+
+One French copy bug caught by reading the rendered page: the slots said *"7 de place"*, which is
+not French. Now *"7 places"*.
+
+Verified: basket, checkout and confirmation all sweep clean in both languages at desktop and
+375, no sideways scroll; a declined card keeps the basket and a successful one clears it; a
+confirmation opened without a reference says so rather than rendering empty. 259 tests pass,
+build at 60 pages.
+
 Next:
-1. The year section on the home page — maple season, the fête franco-ontarienne, the holidays.
-2. basket / checkout / confirmation / visit / 404, then the style guide.
+1. `visit.html` and `404.html`.
+2. The year section on the home page — maple season, the fête franco-ontarienne, the holidays.
+3. The style guide. Photography (its own set — see §5).
 2. The year section, then basket/checkout/confirmation/visit/404.
 2. `glossary.html`, the year section, then basket/checkout/confirmation/visit/404.
 3. The style guide. Photography (its own set — see §5).
