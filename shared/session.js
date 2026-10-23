@@ -1,7 +1,7 @@
 import * as cartOps from './core/cart.js';
 import { namespaced } from './core/storage.js';
 import { configureFormat } from './core/format.js';
-import { dateKey, keyToDate } from './core/dates.js';
+import { dateKey, keyToDate, startOfDay } from './core/dates.js';
 import { earliestFor, dayState } from './core/fulfilment.js';
 import { leadDaysFor } from './core/rules.js';
 import { priceLine } from './core/pricing.js';
@@ -141,14 +141,33 @@ export function createSession(api) {
    * the chosen collection day cannot accommodate it, rather than failing later.
    * @returns {{line:object, movedTo:Date|null}}
    */
-  function add({ productId, selections, addons = [], inscription = '', qty = 1, meta = null }) {
+  function add({
+    productId,
+    selections,
+    addons = [],
+    inscription = '',
+    qty = 1,
+    meta = null,
+    when: wanted = null,
+  }) {
     const p = product(productId);
     if (!p) throw new Error(`Unknown product: ${productId}`);
 
     const sel = selections ?? { ...p.defaults };
     const lead = leadFor(p, sel);
-    const ok = dayState(state.merchant, state.when, lead) === 'available';
-    const when = ok ? state.when : earliestFor(state.merchant, lead);
+
+    /* A celebration cake is ordered FOR a day — a birthday, a réveillon —
+       so the line can name its own day instead of taking the session's.
+       Everything else keeps the old behaviour exactly: no `when`, no
+       change. The day is still checked, because a cake wanted tomorrow
+       that needs three days' notice is not an order, it is a
+       disappointment with a date on it. */
+    const requested = wanted instanceof Date ? wanted : keyToDate(wanted);
+    const asked = requested ? startOfDay(requested) : null;
+    const target = asked ?? state.when;
+
+    const ok = dayState(state.merchant, target, lead) === 'available';
+    const when = ok ? target : earliestFor(state.merchant, lead);
 
     const unit = priceOf(p, sel, addons, 1).unit;
 
@@ -165,6 +184,13 @@ export function createSession(api) {
       qty,
       addedPrice: unit,
     });
+
+    // A requested celebration date is also the collection day. An order with
+    // several lines can only be collected once, so it must use the latest
+    // per-line ready date rather than whichever product happened to be added
+    // last.
+    const orderDay = cartOps.readyBy(state.cart);
+    if (wanted && orderDay) setWhen(keyToDate(orderDay));
 
     persist();
     return { movedTo: ok ? null : when };

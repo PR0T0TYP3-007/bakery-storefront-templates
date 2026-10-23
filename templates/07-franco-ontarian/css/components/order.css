@@ -134,6 +134,7 @@
 
 .sum__n { color: color-mix(in srgb, var(--enamel) 82%, transparent); }
 .sum__price { white-space: nowrap; }
+.sum__detail { display: block; margin-top: 2px; color: var(--ink-2); font-family: var(--font-ui); font-size: var(--xs); font-weight: 500; }
 
 /* --------------------------------------------------------------------------
    Checkout
@@ -237,3 +238,9 @@
   letter-spacing: 0.02em;
   font-variant-numeric: tabular-nums;
 }
+
+/* The inscription on a basket line. Quoted, in the customer's own words and
+   their own language — this template never translates those. */
+.line__said { margin-top: var(--s-2); }
+.line__quote { font-weight: 600; }
+.line__when { margin-top: var(--s-1); }

@@ -233,7 +233,7 @@
     }
   },
   "photoCredits": {
-    "note": "Five photographs here are used under Creative Commons licences and are credited as those licences require. All five were cropped, resized and re-encoded for the web.",
+    "note": "Six photographs here are used under Creative Commons licences and are credited as those licences require. All six were cropped, resized and re-encoded for the web.",
     "items": [
       {
         "title": "Cape Breton Bakers Butter Tarts",
@@ -269,6 +269,13 @@
         "source": "https://commons.wikimedia.org/wiki/File:Grand-P%C3%A8re_au_sirop_d%27%C3%A9rable.JPG",
         "licence": "CC BY-SA 3.0",
         "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0/"
+      },
+      {
+        "title": "Buche de Noel (Yule Log)",
+        "author": "Mitantig",
+        "source": "https://commons.wikimedia.org/wiki/File:Buche_de_Noel_(Yule_Log).jpg",
+        "licence": "CC BY-SA 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
       }
     ]
   }

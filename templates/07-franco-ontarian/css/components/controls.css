@@ -307,3 +307,20 @@
   aspect-ratio: 3 / 2;
   border: var(--rim-w) solid var(--rim);
 }
+
+/* The inscription and the day. Plain fields on the plate: an input that
+   looks like a card from a different template would be the one place this
+   page stops being this page. */
+.said { display: grid; gap: var(--s-2); }
+
+.said__in {
+  font: inherit;
+  padding: var(--s-3);
+  background: var(--enamel);
+  color: var(--ink);
+  border: var(--rim-w) solid var(--rim);
+  border-radius: var(--r);
+  min-width: 0;
+}
+
+.said__count { justify-self: end; font-variant-numeric: tabular-nums; }

@@ -16,7 +16,7 @@ import { esc, seasonBlocker } from '../components/calendar.js';
 import * as api from '../services/api.js';
 import { orderTotals } from '../../../../shared/core/pricing.js';
 import { slotsFor, dayState } from '../../../../shared/core/fulfilment.js';
-import { dateKey, today as startOfToday } from '../../../../shared/core/dates.js';
+import { dateKey, keyToDate, today as startOfToday } from '../../../../shared/core/dates.js';
 
 const $ = (s) => document.querySelector(s);
 
@@ -104,10 +104,16 @@ function render(when) {
       const p = session.product(l.productId);
       if (!p) return '';
       const price = session.priceOf(p, l.selections, l.addons, l.qty);
+      const detail = [
+        l.inscription ? `Written: “${l.inscription}”` : '',
+        l.readyBy ? `For ${longDate(keyToDate(l.readyBy))}` : '',
+      ].filter(Boolean);
       return `
         <li class="sum__row">
           <span class="sum__n num">${esc(String(l.qty))}×</span>
-          <span class="sum__name" lang="ca">${esc(p.name)}</span>
+          <span class="sum__name" lang="ca">${esc(p.name)}${
+            detail.length ? `<span class="sum__detail">${esc(detail.join(' · '))}</span>` : ''
+          }</span>
           <span class="sum__price money">${esc(money(price.total))}</span>
         </li>`;
     })
@@ -213,6 +219,8 @@ form?.addEventListener('submit', async (e) => {
         productId: l.productId,
         selections: l.selections,
         addons: l.addons,
+        inscription: l.inscription,
+        readyBy: l.readyBy,
         qty: l.qty,
       })),
       payment: { card: form.card.value },

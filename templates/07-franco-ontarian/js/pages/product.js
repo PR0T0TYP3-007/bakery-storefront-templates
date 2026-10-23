@@ -15,6 +15,8 @@ import { renderHeader, renderFooter, esc } from '../components/chrome.js';
 import { names, kin, money, shot } from '../components/plates.js';
 import { lang, onLang, t, bcp47 } from '../services/locale.js';
 import { bothFaces } from '../lang.js';
+import { earliestFor } from '../../../../shared/core/fulfilment.js';
+import { dateKey, addDays } from '../../../../shared/core/dates.js';
 import { toast } from '../components/toast.js';
 
 const $ = (s) => document.querySelector(s);
@@ -46,6 +48,16 @@ const COPY = {
   howMany: { fr: 'Combien', en: 'How many' },
   add: { fr: 'Mettre au panier', en: 'Add to basket' },
   ifYouLike: { fr: 'Si vous voulez', en: 'If you’d like' },
+  saidHead: { fr: 'Qu’est-ce qu’on écrit dessus ?', en: 'What should it say?' },
+  saidNote: {
+    fr: 'Écrit à la main, en chocolat. Dans la langue que vous nous donnez — on ne le traduit pas.',
+    en: 'Piped by hand in chocolate. In whichever language you give us — we do not translate it.',
+  },
+  whenHead: { fr: 'Pour quelle journée ?', en: 'For which day?' },
+  whenNote: {
+    fr: 'On le fait pour cette journée-là. Le plus tôt possible est déjà écrit dans la case.',
+    en: 'We make it for that day. The soonest we can is already in the box.',
+  },
   noNotice: { fr: 'Fait chaque matin ; pas besoin d’avertir.', en: 'Made every morning; no notice needed.' },
   inBasket: { fr: 'au panier.', en: 'in the basket.' },
   moved: {
@@ -162,6 +174,8 @@ function draw() {
 
       <div class="buy__choices">
         ${options.map((g) => optionGroup(g, which)).join('')}
+        ${product.inscription ? inscriptionField(which, chosen?.inscription) : ''}
+        ${product.inscription ? dateField(which, chosen?.when) : ''}
         ${addons.length ? addonBlock(addons, which) : ''}
       </div>
 
@@ -236,6 +250,54 @@ function addonBlock(addons, which) {
     </fieldset>`;
 }
 
+/**
+ * The two things a celebration cake needs that a loaf does not: words, and
+ * a day.
+ *
+ * The inscription is NOT translated when the language switches. On this
+ * template that would be a bug with a point of view: "Bonne fête" is what
+ * the customer wrote, and a page whose whole argument is that the two
+ * languages are not interchangeable must not swap one for the other behind
+ * them. Only the label around it changes.
+ */
+function inscriptionField(which, value) {
+  const spec = product.inscription;
+  const place = esc(t(spec.placeholder, which));
+
+  return `
+    <div class="said">
+      <label class="label" for="said">${esc(t(COPY.saidHead, which))}</label>
+      <p class="sm dim">${esc(t(COPY.saidNote, which))}</p>
+      <input class="said__in" id="said" name="said" type="text"
+             maxlength="${Number(spec.max) || 28}"
+             value="${esc(value ?? '')}" placeholder="${place}"
+             aria-describedby="said-count">
+      <p class="sm dim said__count" id="said-count" data-said-count></p>
+    </div>`;
+}
+
+/**
+ * The day it is wanted for.
+ *
+ * `min` is the soonest the kitchen can manage with this product's notice,
+ * so the picker cannot be used to ask for something impossible. The session
+ * checks it again on the way into the basket — a date typed straight into
+ * the field never reaches the cart unchecked.
+ */
+function dateField(which, value) {
+  const soonest = earliestFor(merchant, product.leadDays ?? 0);
+  const min = dateKey(soonest);
+  const max = dateKey(addDays(soonest, 365));
+
+  return `
+    <div class="said">
+      <label class="label" for="when">${esc(t(COPY.whenHead, which))}</label>
+      <p class="sm dim">${esc(t(COPY.whenNote, which))}</p>
+      <input class="said__in" id="when" name="when" type="date"
+             min="${esc(min)}" max="${esc(max)}" value="${esc(value ?? min)}">
+    </div>`;
+}
+
 function wire(options) {
   const form = $('[data-buy]');
   const which = lang();
@@ -266,12 +328,20 @@ function wire(options) {
     }
     const addons = [...form.querySelectorAll('input[name="addon"]:checked')].map((i) => i.value);
     const qty = Math.max(1, Math.min(20, Number(form.qty.value) || 1));
-    return { selections, addons, qty };
+    const inscription = form.said ? form.said.value : '';
+    const when = form.when ? form.when.value : null;
+    return { selections, addons, qty, inscription, when };
   };
 
   function repaint() {
-    const { selections, addons, qty } = read();
-    chosen = { selections, addons, qty };
+    const { selections, addons, qty, inscription, when } = read();
+    chosen = { selections, addons, qty, inscription, when };
+
+    const count = form.querySelector('[data-said-count]');
+    if (count && form.said) {
+      const max = Number(product.inscription?.max) || 28;
+      count.textContent = `${form.said.value.length} / ${max}`;
+    }
 
     /* priceOf returns a LinePrice, not a number. Template 06 shipped
        "NaN €" by handing the object straight to Intl. */
@@ -296,8 +366,15 @@ function wire(options) {
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const { selections, addons, qty } = read();
-    const { movedTo } = session.add({ productId: product.id, selections, addons, qty });
+    const { selections, addons, qty, inscription, when } = read();
+    const { movedTo } = session.add({
+      productId: product.id,
+      selections,
+      addons,
+      qty,
+      inscription: (inscription ?? '').trim(),
+      when: when || null,
+    });
     const [face] = bothFaces(product, which);
 
     toast({

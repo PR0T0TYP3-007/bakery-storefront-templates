@@ -103,6 +103,25 @@ function lineHTML(line) {
             ? `<p class="line__conf sm">${esc([...chosen, ...extras].join(' · '))}</p>`
             : ''
         }
+
+        <!-- What is written on the cake, exactly as the customer typed it.
+             Quoted, never corrected: it is a name more often than not, and
+             this shop does not know how anyone spells theirs. -->
+        ${
+          line.inscription
+            ? `<p class="line__said sm">Written on it: <q class="line__quote">${esc(
+                line.inscription
+              )}</q></p>`
+            : ''
+        }
+
+        ${
+          line.readyBy
+            ? `<p class="line__when sm">For <time datetime="${esc(line.readyBy)}">${esc(
+                longDate(keyToDate(line.readyBy))
+              )}</time></p>`
+            : ''
+        }
         ${
           next && next.status === 'coming'
             ? `<p class="line__season sm">

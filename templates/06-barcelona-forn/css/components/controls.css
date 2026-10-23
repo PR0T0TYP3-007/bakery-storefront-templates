@@ -159,3 +159,18 @@
   height: clamp(13rem, 36vh, 22rem);
   object-fit: cover;
 }
+
+/* The inscription and the day, on the cakes that take them. Marble, hairline
+   rule, square corners — the same furniture as every other control here. */
+.said { display: grid; gap: var(--s-2); margin-top: var(--s-5); }
+
+.said__in {
+  font: inherit;
+  padding: var(--s-3);
+  background: var(--marble);
+  color: var(--ink);
+  border: 1px solid var(--rule-2);
+  min-width: 0;
+}
+
+.said__count { justify-self: end; font-variant-numeric: tabular-nums; }

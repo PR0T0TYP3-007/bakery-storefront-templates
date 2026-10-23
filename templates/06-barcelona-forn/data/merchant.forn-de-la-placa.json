@@ -250,7 +250,7 @@
     "phone": "93 441 00 00"
   },
   "photoCredits": {
-    "note": "Two photographs here are used under Creative Commons licences and are credited as those licences require. Both were resized and re-encoded for the web.",
+    "note": "Four photographs here are used under Creative Commons licences and are credited as those licences require. All four were cropped, resized and re-encoded for the web.",
     "items": [
       {
         "title": "Tortell de reis",
@@ -272,6 +272,13 @@
         "source": "https://commons.wikimedia.org/wiki/File:147_Pa_de_Sant_Jordi_a_l%27aparador_del_Forn_Sant_Jordi,_c._Llibreteria_8_(Barcelona).jpg",
         "licence": "CC BY 4.0",
         "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
+      },
+      {
+        "title": "Postres uruguayos",
+        "author": "Neurorebel",
+        "source": "https://commons.wikimedia.org/wiki/File:Postres_uruguayos.jpg",
+        "licence": "CC BY-SA 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
       }
     ]
   }

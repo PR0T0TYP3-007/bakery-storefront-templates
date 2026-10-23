@@ -12,6 +12,11 @@
       "note": "When their day comes"
     },
     {
+      "id": "pastissos",
+      "label": "Celebration cakes",
+      "note": "Ordered ahead, written on"
+    },
+    {
       "id": "pa",
       "label": "Bread",
       "note": null
@@ -599,6 +604,71 @@
       "defaults": {},
       "addons": [],
       "description": "From June until it gets cold again. Made with tiger nuts, served so cold it hurts a little."
+    },
+    {
+      "id": "pastis-xocolata",
+      "kind": "everyday",
+      "category": "pastissos",
+      "name": "Pastís de xocolata",
+      "subtitle": "Three layers, chocolate cream, written on",
+      "price": 26,
+      "leadDays": 2,
+      "image": {
+        "src": "pastis-xocolata",
+        "alt": "A chocolate celebration cake on a glass stand, finished in waves of chocolate cream"
+      },
+      "allergens": [
+        "gluten",
+        "egg",
+        "milk",
+        "soy"
+      ],
+      "options": [
+        "mida"
+      ],
+      "defaults": {
+        "mida": "m"
+      },
+      "addons": [
+        "caixa"
+      ],
+      "inscription": {
+        "max": 28,
+        "placeholder": "Per molts anys, Laia"
+      },
+      "description": "The cake most of this neighbourhood grows up on. We write on it by hand in chocolate — whatever you give us, in whichever language you give it to us."
+    },
+    {
+      "id": "massini",
+      "kind": "everyday",
+      "category": "pastissos",
+      "name": "Massini",
+      "subtitle": "Sponge, yolk cream, burnt sugar",
+      "price": 28,
+      "leadDays": 2,
+      "image": {
+        "src": "massini",
+        "alt": "Three caramel-topped Massini cake slices in a pastry case"
+      },
+      "allergens": [
+        "gluten",
+        "egg",
+        "milk"
+      ],
+      "options": [
+        "mida"
+      ],
+      "defaults": {
+        "mida": "m"
+      },
+      "addons": [
+        "caixa"
+      ],
+      "inscription": {
+        "max": 28,
+        "placeholder": "Felicitats, avi"
+      },
+      "description": "Sponge soaked in syrup, a layer of crema catalana, cream, and the top burnt hard with the iron. A Barcelona birthday cake since before any of us, and the one we are asked for most."
     }
   ]
 }

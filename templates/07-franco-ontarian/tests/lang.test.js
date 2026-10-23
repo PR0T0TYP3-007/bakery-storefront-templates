@@ -9,7 +9,7 @@
 
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
 import {
@@ -346,6 +346,20 @@ test('the visit block speaks both languages all the way down', () => {
     for (const lang of LANGS) {
       assert.ok(w.how?.[lang]?.trim(), `a way in has no ${lang} label`);
       assert.ok(w.what?.[lang]?.trim(), `a way in has no ${lang} description`);
+    }
+  }
+});
+
+test('celebration cakes keep their writing fields and responsive photographs', () => {
+  const cakes = catalogue.products.filter((p) => p.category === 'gateaux');
+  const dir = fileURLToPath(new URL('../assets/img/', import.meta.url));
+
+  assert.ok(cakes.length >= 2, 'the celebration-cake category has no real range');
+  for (const cake of cakes) {
+    assert.ok(cake.inscription?.max > 0, `"${cake.id}" cannot carry an inscription`);
+    assert.ok(cake.image?.src, `"${cake.id}" has no photograph`);
+    for (const size of ['lg', 'md', 'sm']) {
+      assert.ok(existsSync(dir + `${cake.image.src}-${size}.jpg`), `"${cake.id}" lacks ${size}`);
     }
   }
 });

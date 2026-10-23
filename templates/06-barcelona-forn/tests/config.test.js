@@ -258,3 +258,17 @@ test('every product image exists at lg, md and sm', () => {
     }
   }
 });
+
+test('every celebration cake is written on and photographed', () => {
+  const cakes = catalogue.products.filter((p) => p.category === 'pastissos');
+  const dir = fileURLToPath(new URL('../assets/img/', import.meta.url));
+
+  assert.ok(cakes.length >= 2, 'the celebration-cake category has no real range');
+  for (const cake of cakes) {
+    assert.ok(cake.inscription?.max > 0, `"${cake.id}" cannot carry an inscription`);
+    assert.ok(cake.image?.src, `"${cake.id}" has no photograph`);
+    for (const size of ['lg', 'md', 'sm']) {
+      assert.ok(existsSync(dir + `${cake.image.src}-${size}.jpg`), `"${cake.id}" lacks ${size}`);
+    }
+  }
+});

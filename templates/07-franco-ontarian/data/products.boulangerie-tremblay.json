@@ -13,6 +13,17 @@
       }
     },
     {
+      "id": "gateaux",
+      "label": {
+        "fr": "Les gâteaux",
+        "en": "Celebration cakes"
+      },
+      "note": {
+        "fr": "Commandés d'avance, écrits dessus",
+        "en": "Ordered ahead, written on"
+      }
+    },
+    {
       "id": "pain",
       "label": {
         "fr": "Le pain",
@@ -418,6 +429,105 @@
       "kin": {
         "fr": "L'anglais n'a pas de nom pour ça, juste une description.",
         "en": "English has no name for this, only a description."
+      }
+    },
+    {
+      "id": "gateau-reine-elisabeth",
+      "kind": "everyday",
+      "category": "gateaux",
+      "price": 32,
+      "leadDays": 2,
+      "options": [
+        "taille"
+      ],
+      "defaults": {
+        "taille": "six"
+      },
+      "addons": [
+        "boite"
+      ],
+      "allergens": [
+        "gluten",
+        "egg",
+        "milk",
+        "nuts"
+      ],
+      "inscription": {
+        "max": 28,
+        "placeholder": {
+          "fr": "Bonne fête, Thérèse",
+          "en": "Happy Birthday, Terry"
+        }
+      },
+      "image": {
+        "src": "gateau-reine-elisabeth",
+        "alt": {
+          "fr": "Un gâteau Reine-Élisabeth, le dessus à la noix de coco et à la cassonade",
+          "en": "A Queen Elizabeth cake under its coconut and brown sugar topping"
+        }
+      },
+      "fr": {
+        "name": "Gâteau Reine-Élisabeth",
+        "subtitle": "Dattes, noix, glaçage coco grillé",
+        "description": "Le gâteau de fête d'ici depuis les années cinquante. Des dattes dans la pâte, un glaçage à la cassonade et à la noix de coco qu'on repasse au four pour qu'il croustille. On l'écrit à la main, dans la langue que vous nous donnez."
+      },
+      "en": {
+        "name": "Queen Elizabeth cake",
+        "subtitle": "Dates, walnuts, grilled coconut topping",
+        "description": "The birthday cake around here since the fifties. Dates in the batter, a brown sugar and coconut topping put back under the heat to crisp. We write on it by hand, in whichever language you hand us."
+      },
+      "kin": {
+        "fr": "Le nom est le même des deux bords, et personne ne sait au juste quelle Élisabeth. Le gâteau, lui, est d'ici.",
+        "en": "The name is the same on both sides, and nobody is sure which Elizabeth. The cake is ours either way."
+      }
+    },
+    {
+      "id": "buche-de-noel",
+      "kind": "everyday",
+      "category": "gateaux",
+      "price": 38,
+      "leadDays": 3,
+      "options": [
+        "taille"
+      ],
+      "defaults": {
+        "taille": "neuf"
+      },
+      "addons": [
+        "boite"
+      ],
+      "allergens": [
+        "gluten",
+        "egg",
+        "milk"
+      ],
+      "inscription": {
+        "max": 28,
+        "placeholder": {
+          "fr": "Joyeux Noël",
+          "en": "Merry Christmas"
+        }
+      },
+      "image": {
+        "src": "buche-de-noel",
+        "alt": {
+          "fr": "Une bûche de Noël au chocolat sur une planche, une tranche coupée",
+          "en": "A chocolate yule log on a board, one slice cut"
+        }
+      },
+      "fr": {
+        "name": "Bûche de Noël",
+        "subtitle": "Gâteau roulé, crème au beurre",
+        "description": "Pour le réveillon. Un gâteau roulé, de la crème au beurre au chocolat, l'écorce faite à la fourchette. On en fait du premier décembre jusqu'au jour de l'An, et pas le reste de l'année."
+      },
+      "en": {
+        "name": "Yule log",
+        "subtitle": "Rolled sponge, chocolate buttercream",
+        "description": "For réveillon. Rolled sponge, chocolate buttercream, the bark drawn with a fork. We make them from the first of December to New Year's Day and not the rest of the year."
+      },
+      "kin": {
+        "fr": "La bûche se dit bûche des deux bords de la rue, mais elle arrive chez les anglophones par Noël et chez nous par le réveillon — la même chose à deux heures différentes de la nuit.",
+        "en": "Both sides call it a log, but it reaches the English table at Christmas and ours at réveillon — the same cake at two different hours of the night."
       }
     }
   ]

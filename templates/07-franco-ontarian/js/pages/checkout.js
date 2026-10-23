@@ -18,7 +18,7 @@ import { bothFaces } from '../lang.js';
 import * as api from '../services/api.js';
 import { orderTotals } from '../../../../shared/core/pricing.js';
 import { slotsFor, dayState } from '../../../../shared/core/fulfilment.js';
-import { dateKey, today as startOfToday } from '../../../../shared/core/dates.js';
+import { dateKey, keyToDate, today as startOfToday } from '../../../../shared/core/dates.js';
 
 const $ = (s) => document.querySelector(s);
 
@@ -215,10 +215,24 @@ function paintSummary(which) {
       if (!p) return '';
       const [face] = bothFaces(p, which);
       const price = session.priceOf(p, l.selections, l.addons, l.qty);
+      const detail = [
+        l.inscription
+          ? `${which === 'fr' ? 'Écrit' : 'Written'}: “${l.inscription}”`
+          : '',
+        l.readyBy
+          ? `${which === 'fr' ? 'Pour le' : 'For'} ${new Intl.DateTimeFormat(bcp47(which), {
+              weekday: 'long',
+              day: 'numeric',
+              month: 'long',
+            }).format(keyToDate(l.readyBy))}`
+          : '',
+      ].filter(Boolean);
       return `
         <li class="sum__row">
           <span class="sum__n num">${esc(String(l.qty))}×</span>
-          <span class="sum__name" lang="${esc(bcp47(face.lang))}">${esc(face.name)}</span>
+          <span class="sum__name" lang="${esc(bcp47(face.lang))}">${esc(face.name)}${
+            detail.length ? `<span class="sum__detail">${esc(detail.join(' · '))}</span>` : ''
+          }</span>
           <span class="sum__price money">${esc(money(price.total, merchant, which))}</span>
         </li>`;
     })
@@ -311,6 +325,8 @@ form?.addEventListener('submit', async (e) => {
         productId: l.productId,
         selections: l.selections,
         addons: l.addons,
+        inscription: l.inscription,
+        readyBy: l.readyBy,
         qty: l.qty,
       })),
       payment: { card: form.card.value },

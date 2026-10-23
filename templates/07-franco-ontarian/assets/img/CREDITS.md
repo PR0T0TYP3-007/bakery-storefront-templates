@@ -1,10 +1,10 @@
 # Photography — Boulangerie Tremblay
 
-Eleven photographs, exclusive to this template. Nothing here is in the shared
+Thirteen photographs, exclusive to this template. Nothing here is in the shared
 pool in `shared/img/`, and nothing here is used by another template.
 
 Five are Unsplash stock under the [Unsplash licence](https://unsplash.com/license).
-Six are from Wikimedia Commons; five of those carry Creative Commons licences
+Eight are from Wikimedia Commons; six of those carry Creative Commons licences
 with an attribution condition, and that attribution is **on every page**, in
 the footer, not only in this file — see `photoCredits` in
 `data/merchant.boulangerie-tremblay.json`. Every file was cropped, resized and
@@ -26,7 +26,7 @@ pumpkin pie; "butter tart" returns nothing at all. These are real dishes
 photographed mostly by the people who ate them, and the honest places to find
 them are Wikimedia Commons and nowhere else.
 
-So five of the eight products are lit by a kitchen window or a flash, at
+So the product photographs are lit by a kitchen window or a flash, at
 whatever angle the cook happened to hold the camera. They are shown as they
 are — no filter, no colour grade, nothing pretending they were shot in one
 session. Captioning a stock meat pie "tourtière" is what D16 bans, and a
@@ -57,6 +57,8 @@ Fetched from `images.unsplash.com/<id>?w=1800&q=80&fm=jpg&fit=max`.
 | `tourtiere` | [Warm Tourtiere (cropped).jpg](https://commons.wikimedia.org/wiki/File:Warm_Tourtiere_(cropped).jpg) | Craig Dugas | [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/) |
 | `pain-aux-patates` | [Potato bread.jpeg](https://commons.wikimedia.org/wiki/File:Potato_bread.jpeg) | Sujalajus | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) |
 | `grand-pere` | [Grand-Père au sirop d'érable.JPG](https://commons.wikimedia.org/wiki/File:Grand-P%C3%A8re_au_sirop_d%27%C3%A9rable.JPG) | CoveyHill | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) |
+| `gateau-reine-elisabeth` | [Gâteau Reine Élisabeth - pointe.jpg](https://commons.wikimedia.org/wiki/File:Gâteau_Reine_Élisabeth_-_pointe.jpg) | Cantons-de-l'Est | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `buche-de-noel` | [Buche de Noel (Yule Log).jpg](https://commons.wikimedia.org/wiki/File:Buche_de_Noel_(Yule_Log).jpg) | Mitantig | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
 
 **`grand-pere` is cropped hard, on purpose.** The original is a plate on a
 red gingham tablecloth. The concept doc bans gingham by name — this is not a

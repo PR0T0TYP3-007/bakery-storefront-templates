@@ -290,6 +290,7 @@
 
 .sum__n { color: color-mix(in srgb, var(--marble) 82%, transparent); }
 .sum__price { white-space: nowrap; }
+.sum__detail { display: block; margin-top: 2px; color: var(--ink-2); font-family: var(--font-ui); font-size: var(--xs); font-weight: 500; }
 
 /* Checkout stacks its sections rather than tiling them: a form is read in
    order, and a grid of equal cells would say the parts are interchangeable. */

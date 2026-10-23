@@ -116,6 +116,32 @@ function lineHTML(line, which) {
             ? `<p class="line__conf sm">${esc([...chosen, ...extras].join(' · '))}</p>`
             : ''
         }
+
+        <!-- What the cake says, exactly as it was typed, in the language it
+             was typed in. It is quoted rather than paraphrased, and it does
+             NOT change when the page switches language: those are the
+             customer's words, not ours to translate. -->
+        ${
+          line.inscription
+            ? `<p class="line__said sm">${
+                which === 'fr' ? 'Écrit dessus :' : 'Written on it:'
+              } <q class="line__quote">${esc(line.inscription)}</q></p>`
+            : ''
+        }
+
+        ${
+          line.readyBy
+            ? `<p class="line__when sm dim">${
+                which === 'fr' ? 'Pour le' : 'For'
+              } ${esc(
+                new Intl.DateTimeFormat(bcp47(which), {
+                  weekday: 'long',
+                  day: 'numeric',
+                  month: 'long',
+                }).format(keyToDate(line.readyBy))
+              )}</p>`
+            : ''
+        }
       </div>
 
       <div class="line__qty">

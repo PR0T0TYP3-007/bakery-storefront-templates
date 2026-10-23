@@ -121,9 +121,9 @@ beautiful photograph of a croissant captioned *Panellets*, which is the only
 alternative the stock libraries offered. When the merchant shoots their own,
 these are the first to replace.
 
-## The two under Creative Commons
+## The four under Creative Commons
 
-These two carry an attribution obligation, and it is discharged **in the
+These four carry an attribution obligation, and it is discharged **in the
 footer of every page** — not here. A file in the repository does not reach
 the people using the work, which is what the licences require. Both were
 resized and re-encoded, and the footer says so.
@@ -132,6 +132,8 @@ resized and re-encoded, and the footer says so.
 |---|---|---|---|
 | `tortell-reis` | `Tortell de reis.jpeg` | Friviere | [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/) |
 | `orxata` | `Orxata a Benifaió.jpg` | Francesc Fort | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
+| `pa-sant-jordi` | `Pa de Sant Jordi a l’aparador del Forn Sant Jordi.jpg` | Enric | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
+| `massini` | `Postres uruguayos.jpg` | Neurorebel | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
 
 **Share-alike travels with these.** Anyone who takes this template on inherits
 it for as long as those two files are in it. The client chose that knowingly
@@ -141,6 +143,11 @@ the merchant config removes the footer line with it.
 
 The credit is rendered by `photoCredits()` in `js/components/chrome.js` and
 driven from config, so it cannot drift from what is actually in use.
+
+`massini` is a crop of the Massini slices in **Postres uruguayos**. It is an
+actual Massini in a pastry case rather than a generic cake renamed to fit the
+catalogue; the crop and three responsive exports are credited in the site
+footer with the other share-alike photographs.
 
 `tortell-reis` was chosen over two alternatives. One
 (`Tortell de Reis - Horno de San Antonio.jpg`) is a chocolate ring with

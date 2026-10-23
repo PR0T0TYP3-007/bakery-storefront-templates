@@ -13,6 +13,8 @@ import { renderHeader, renderFooter } from '../components/chrome.js';
 import { entryFor, seasonLine, dayMonth, isoDate, picture, esc } from '../components/calendar.js';
 import { nextFor, daysBetween, addDays, startOfDay } from '../year.js';
 import { toast } from '../components/toast.js';
+import { earliestFor } from '../../../../shared/core/fulfilment.js';
+import { dateKey } from '../../../../shared/core/dates.js';
 
 const $ = (s) => document.querySelector(s);
 
@@ -95,6 +97,8 @@ function render(p) {
         <p class="sm dim" data-lead></p>
 
         ${options.map((group) => optionGroup(group, p)).join('')}
+        ${p.inscription ? inscriptionField(p) : ''}
+        ${p.inscription ? dateField(p) : ''}
         ${addons.length ? addonBlock(addons) : ''}
 
         <div class="qty">
@@ -108,6 +112,40 @@ function render(p) {
     </div>`;
 
   wire(p, options, entry);
+}
+
+/**
+ * A celebration cake needs words and a day; a barra de pa needs neither.
+ *
+ * Both fields appear only where the catalogue says the cake is written on,
+ * so nothing changes for the twenty-three things that are not.
+ */
+function inscriptionField(p) {
+  const max = Number(p.inscription.max) || 28;
+  return `
+    <div class="said">
+      <label class="label" for="said">What should it say?</label>
+      <p class="sm dim">Piped by hand. Catalan, Spanish or English — we write what you give us.</p>
+      <input class="said__in" id="said" name="said" type="text" maxlength="${max}"
+             placeholder="${esc(p.inscription.placeholder ?? '')}"
+             aria-describedby="said-count">
+      <p class="sm dim said__count" id="said-count" data-said-count>0 / ${max}</p>
+    </div>`;
+}
+
+/**
+ * `min` is the soonest this cake can be ready with its own notice, so the
+ * picker cannot ask for the impossible. The session checks the day again on
+ * the way into the basket.
+ */
+function dateField(p) {
+  const min = dateKey(earliestFor(merchant, p.leadDays ?? 0));
+  return `
+    <div class="said">
+      <label class="label" for="when">Which day is it for?</label>
+      <p class="sm dim">We make it for that morning. The soonest we can is already in the box.</p>
+      <input class="said__in" id="when" name="when" type="date" min="${esc(min)}" value="${esc(min)}">
+    </div>`;
 }
 
 /**
@@ -262,11 +300,18 @@ function wire(p, options, entry) {
     }
     const addons = [...form.querySelectorAll('input[name="addon"]:checked')].map((i) => i.value);
     const qty = Math.max(1, Math.min(20, Number(form.qty.value) || 1));
-    return { selections, addons, qty };
+    const inscription = form.said ? form.said.value : '';
+    const when = form.when ? form.when.value : null;
+    return { selections, addons, qty, inscription, when };
   };
 
   function repaint() {
     const { selections, addons, qty } = read();
+
+    const count = form.querySelector('[data-said-count]');
+    if (count && form.said) {
+      count.textContent = `${form.said.value.length} / ${Number(p.inscription?.max) || 28}`;
+    }
     /* priceOf returns a LinePrice — unit, addons, total and a breakdown —
        not a number. Handing the object to Intl renders "NaN €". */
     form.querySelector('[data-price]').textContent = money(
@@ -288,7 +333,7 @@ function wire(p, options, entry) {
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const { selections, addons, qty } = read();
+    const { selections, addons, qty, inscription, when } = read();
 
     /* The shared fall-forward only knows about lead days and capacity — it
        has never heard of the calendar, so a tortell added in October was
@@ -298,7 +343,14 @@ function wire(p, options, entry) {
     const order = ordering(entry);
     if (order.from) session.setWhen(order.from);
 
-    const { movedTo } = session.add({ productId: p.id, selections, addons, qty });
+    const { movedTo } = session.add({
+      productId: p.id,
+      selections,
+      addons,
+      qty,
+      inscription: inscription.trim(),
+      when: when || null,
+    });
 
     /* `add` moves the collection day forward when the chosen one cannot take
        the order. Saying so here is the only reason it returns that. */
