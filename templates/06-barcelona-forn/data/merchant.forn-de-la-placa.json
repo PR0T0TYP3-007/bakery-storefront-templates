@@ -165,14 +165,14 @@
     },
     {
       "id": "sant-jordi",
-      "productId": "coca-sant-jordi",
+      "productId": "pa-sant-jordi",
       "on": "04-23",
       "sells": [
         5,
         1
       ],
       "day": "Sant Jordi",
-      "note": "A book, a rose and a coca."
+      "note": "A book, a rose and a loaf striped like the flag."
     },
     {
       "id": "mona",
@@ -198,7 +198,7 @@
     },
     {
       "id": "diada",
-      "productId": "coca-llarga",
+      "productId": "coca-sucre",
       "on": "09-11",
       "sells": [
         2,
@@ -265,6 +265,13 @@
         "source": "https://commons.wikimedia.org/wiki/File:Orxata_a_Benifai%C3%B3.jpg",
         "licence": "CC BY-SA 4.0",
         "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
+      },
+      {
+        "title": "Pa de Sant Jordi a l’aparador del Forn Sant Jordi",
+        "author": "Enric",
+        "source": "https://commons.wikimedia.org/wiki/File:147_Pa_de_Sant_Jordi_a_l%27aparador_del_Forn_Sant_Jordi,_c._Llibreteria_8_(Barcelona).jpg",
+        "licence": "CC BY 4.0",
+        "licenceUrl": "https://creativecommons.org/licenses/by/4.0/"
       }
     ]
   }

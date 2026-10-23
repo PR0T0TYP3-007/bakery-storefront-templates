@@ -686,6 +686,39 @@ tile. Revisit it if the tiles ever shrink.
 **Still blank: `coca-sant-jordi` and `coca-llarga`.** Sant Jordi has nothing on Unsplash,
 Pexels or Commons at any licence.
 
+**23 Oct — all 23 products now have a photograph.** The client went to the shop page and the
+last two gaps were still visible. Two blank tiles among twenty-one photographed ones reads as
+broken however good the reasoning behind them is, so they got solved rather than explained.
+
+**The fix needed two renames, not two photographs.**
+
+| Was | Now | Why |
+|---|---|---|
+| `coca-sant-jordi` "Coca de Sant Jordi" | `pa-sant-jordi` **"Pa de Sant Jordi"** | The loaf striped red and yellow like the senyera is what every Barcelona forn actually puts in the window on 23 April. |
+| `coca-llarga` "Coca llarga" | `coca-sucre` **"Coca de sucre"** | The plain flat one — oil, sugar, nothing else — has a real name, and it is this. |
+
+Both old names were invented; this catalogue is fiction. Renaming invented data toward the real
+thing is the **opposite** of bending a product to fit a stock photograph — it makes the
+catalogue and the picture agree on something true. The ids moved with the names and so did the
+`year` entries pointing at them, which `config.test.js` checks. The Sant Jordi note said "a
+book, a rose and a coca" and now says "a loaf striped like the flag".
+
+| File | Commons file | Author | Licence |
+|---|---|---|---|
+| `pa-sant-jordi` | `147 Pa de Sant Jordi a l'aparador del Forn Sant Jordi…` | Enric | CC BY 4.0 — attribution only, **no share-alike** |
+| `coca-sucre` | `Coca de sucre del Priorat.jpg` | Espencat | Public domain |
+
+The Sant Jordi photograph is a Barcelona forn's own window, which is as close to this
+template's subject as any of this gets.
+
+**The lesson, written down so Template 07 does not repeat it.** Over four passes this went 6 →
+9 → 14 → 19 → 21 → 23. Every time the conclusion "no honest photograph of this exists" turned
+out to mean "I searched the English name on a stock library". Search the **native** name, and
+search **Wikimedia Commons** before concluding a thing has never been photographed — regional
+food is documented there because the local Wikipedia documents it.
+
+Footer attribution now carries three images: two CC BY-SA and one CC BY.
+
 Next:
 1. Template 07 — the concept is written in `docs/07-franco-ontarian.md`, nothing built.
 

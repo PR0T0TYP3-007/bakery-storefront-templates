@@ -200,14 +200,17 @@
       "description": "For Sant Josep, the nineteenth of March. Burnt with an iron to order."
     },
     {
-      "id": "coca-sant-jordi",
+      "id": "pa-sant-jordi",
       "kind": "calendar",
       "category": "calendari",
-      "name": "Coca de Sant Jordi",
-      "subtitle": "In the colours of the Catalan flag",
+      "name": "Pa de Sant Jordi",
+      "subtitle": "Striped in the colours of the senyera",
       "price": 8,
       "leadDays": 2,
-      "image": null,
+      "image": {
+        "src": "pa-sant-jordi",
+        "alt": "Loaves of pa de Sant Jordi in a bakery window, striped red and yellow"
+      },
       "allergens": [
         "gluten",
         "egg",
@@ -285,14 +288,17 @@
       "description": "For the night of the twenty-third of June. We make a great many and they all go."
     },
     {
-      "id": "coca-llarga",
+      "id": "coca-sucre",
       "kind": "calendar",
       "category": "calendari",
-      "name": "Coca llarga",
+      "name": "Coca de sucre",
       "subtitle": "Olive oil and sugar",
       "price": 10,
       "leadDays": 1,
-      "image": null,
+      "image": {
+        "src": "coca-sucre",
+        "alt": "A flat coca glazed and dusted with sugar"
+      },
       "allergens": [
         "gluten"
       ],

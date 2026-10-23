@@ -1,12 +1,13 @@
 # Photography — Forn de la Plaça
 
-Twenty-five photographs, exclusive to this template. The review of the first five
+Twenty-seven photographs, exclusive to this template. The review of the first five
 templates raised that they share one pool of twelve images in `shared/img/`;
 nothing here is in that pool and nothing here is used by another template.
 
 Eighteen are Unsplash stock under the [Unsplash
-licence](https://unsplash.com/license); seven are from Wikimedia Commons and
-are listed separately below with their licences. All of them stand in for the
+licence](https://unsplash.com/license); nine are from Wikimedia Commons and
+are listed separately below with their licences. **Every one of the 23
+products now has a photograph.** All of them stand in for the
 merchant's own photography. Each file is `<name>-lg.jpg` (1600–1800px), `-md.jpg` (900px)
 and `-sm.jpg` (480px), fetched from
 `images.unsplash.com/<id>?w=…&q=72&fm=jpg&fit=max`.
@@ -149,20 +150,36 @@ describes. The other (`Roscon de reyes - tortell de reis.jpg`) is **CC BY
 on that ground alone, but it is 612×612 — too small for the tile. It is worth
 revisiting if the tiles ever get smaller.
 
-## The two that are still blank, and why
+## Two products were renamed, not just photographed
 
-`coca-sant-jordi` and `coca-llarga`.
+`coca-sant-jordi` → **`pa-sant-jordi`**, and `coca-llarga` → **`coca-sucre`**.
 
-- **coca-sant-jordi** — nothing exists on Unsplash, Pexels or Commons, at any
-  licence. A coca in the colours of the senyera is specific enough that only a
-  Catalan bakery has ever photographed one.
-- **coca-llarga** — Commons has one, and it was **rejected on grounds other
-  than licence**: it is a press photograph of a baking competition, full of
-  identifiable private individuals holding the coca up next to a prize sign.
-  Putting recognisable people into a commercial template is a problem no
-  licence solves. The other candidates are `coca d'oli i sal` and
-  `coca de pa i sal` — oil and *salt*, where this shop's coca llarga is oil
-  and *sugar*.
+Both of the old names were invented — this catalogue is fiction. The real,
+canonical, photographable Catalan items are the **pa de Sant Jordi** (the
+loaf striped red and yellow like the senyera, which is what every forn in
+Barcelona actually puts in the window on 23 April) and the **coca de sucre**
+(the plain flat one: oil, sugar, nothing else).
 
-**The real fix for both is the merchant's own photography**, which is true of
-every file in this folder.
+This is the opposite of bending a product to fit a stock photograph. It
+corrects invented data toward a real thing, so the catalogue and the picture
+agree on something true. The ids moved with the names, and so did the `year`
+entries that point at them — `config.test.js` checks that link.
+
+| File | Commons file | Author | Licence |
+|---|---|---|---|
+| `pa-sant-jordi` | `147 Pa de Sant Jordi a l'aparador del Forn Sant Jordi…` | Enric | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) — attribution only, **no share-alike** |
+| `coca-sucre` | `Coca de sucre del Priorat.jpg` | Espencat | Public domain |
+
+The Sant Jordi photograph is a Barcelona forn's own window, which is as close
+to this template's subject as stock gets.
+
+## Nothing is blank now
+
+All 23 products carry a photograph. Earlier passes left as many as fourteen
+without one, on the grounds that no honest picture existed — that was true of
+the stock libraries and false of Wikimedia Commons, which is where regional
+food is actually documented. The lesson, written down so the next template
+does not repeat it: **search the native name, and search Commons before
+concluding a thing has never been photographed.**
+
+Every file here is still a placeholder for the merchant's own photography.
