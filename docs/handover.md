@@ -619,6 +619,40 @@ painting before its stylesheets applied, producing a shot of a completely unstyl
 The live page was fine. `tools/previews.mjs` had the same 20s budget and generates the shipped
 gallery thumbnails, so a blank-CSS thumbnail was one run away; both are at 45s now.
 
+**23 Oct — Wikimedia Commons closes five more. 19 of 23.**
+
+Stock libraries were genuinely empty for the Catalan specialities, but **Commons was not** —
+Catalan Wikipedia documents its own food, so a panellet and a xuixo have real photographs there
+even where Unsplash and Pexels return croissants and street scenes. Pexels was checked first and
+behaves like Unsplash: "panellets" returns mooncakes and paella.
+
+Five added, **every one public domain or CC0** — chosen on licence as much as content, because
+share-alike would travel with a template that is sold on:
+
+| Product | Commons file | Licence |
+|---|---|---|
+| `panellets` | `Panellets (surtido).jpg` | Public domain |
+| `xuixo` | `Xuixo.jpg` | Public domain |
+| `ensaimada` | `Ensaïmada.jpg` | CC0 |
+| `coca-llardons` | `Coca de llardons.jpg` | Public domain |
+| `coca-sant-joan` | `Coca de sant joan.jpg` | Public domain |
+
+The panellets tray shows all four varieties the subtitle names; the Sant Joan coca is candied
+fruit and pine nuts, exactly as described. Each was looked at full size before it was kept.
+
+**Four remain, and three of them are a licensing decision, not a design one.** `tortell-reis`,
+`coca-sant-jordi`, `coca-llarga`, `orxata`. Commons has good CC BY-SA photographs of the
+tortell and of real Valencian orxata; using them would carry attribution and share-alike into
+whatever this template becomes. That call is the client's, and it is left open deliberately.
+`coca-sant-jordi` and `coca-llarga` have nothing on any source at any licence.
+
+**An honest note about how it looks.** The documentary photographs are visibly more amateur
+than the stock beside them — a blue plate, a green wall, a paper doily. A light grade
+(`saturate(0.94) contrast(1.02)`, matching the hero) is applied across all images for
+consistency, but it does **not** fix this: the mismatch is composition and setting, not colour.
+Only the merchant's own photography closes it. A true photograph of a panellet still beats a
+beautiful photograph of a croissant captioned *Panellets*, which was the only alternative.
+
 Next:
 1. Template 07 — the concept is written in `docs/07-franco-ontarian.md`, nothing built.
 

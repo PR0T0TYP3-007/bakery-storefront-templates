@@ -1,12 +1,13 @@
 # Photography — Forn de la Plaça
 
-Eighteen photographs, exclusive to this template. The review of the first five
+Twenty-three photographs, exclusive to this template. The review of the first five
 templates raised that they share one pool of twelve images in `shared/img/`;
 nothing here is in that pool and nothing here is used by another template.
 
-All eighteen are Unsplash stock under the [Unsplash
-licence](https://unsplash.com/license), standing in for the merchant's own
-photography. Each file is `<name>-lg.jpg` (1600–1800px), `-md.jpg` (900px)
+Eighteen are Unsplash stock under the [Unsplash
+licence](https://unsplash.com/license); five are from Wikimedia Commons and
+are listed separately below with their licences. All of them stand in for the
+merchant's own photography. Each file is `<name>-lg.jpg` (1600–1800px), `-md.jpg` (900px)
 and `-sm.jpg` (480px), fetched from
 `images.unsplash.com/<id>?w=…&q=72&fm=jpg&fit=max`.
 
@@ -96,30 +97,50 @@ propped against the till; making them the same shape as six cakes would say
 they are the same kind of decision, and they are not.
 
 
-## The nine that are still blank, and why
+## The five from Wikimedia Commons
 
-`tortell-reis`, `coca-llardons`, `coca-sant-jordi`, `coca-sant-joan`,
-`coca-llarga`, `panellets`, `xuixo`, `ensaimada`, `orxata`.
+Stock libraries have nothing for the Catalan specialities — but Commons does,
+because Catalan Wikipedia documents its own food. Every one of these was
+chosen on its licence as much as its content: **all five are public domain or
+CC0**, so there is no attribution to carry and no share-alike to inherit.
+That matters for a template that is sold on.
 
-Every one was searched under its Catalan name, its Castilian name and a
-description of the thing itself. What comes back:
+| File | Commons file | Licence |
+|---|---|---|
+| `panellets` | `Panellets (surtido).jpg` | Public domain |
+| `xuixo` | `Xuixo.jpg` | Public domain |
+| `ensaimada` | `Ensaïmada.jpg` | CC0 |
+| `coca-llardons` | `Coca de llardons.jpg` | Public domain |
+| `coca-sant-joan` | `Coca de sant joan.jpg` | Public domain |
 
-- **panellets** → croissants, cinnamon buns and muffins. Nothing crusted in
-  pine nuts.
-- **xuixo** → a street in Ensenada, a shopfront called XICO, an app icon.
-- **ensaimada** → beaches and villages in Mallorca.
-- **orxata** → bottled water and a bottle of Mineragua.
-- **the four cocas** → nothing. A coca is a regional flatbread and the stock
-  libraries do not have one.
-- **tortell-reis** specifically → the roscón photographs that exist show the
-  marzipan-and-pine-nut kind, which is what `tortell-sant-antoni` is. This
-  shop's Reis tortell is the candied-fruit one, with a figurine and a bean.
-  Using the other photograph would misdescribe the product by its own
-  subtitle, so it waits.
+**These look different from the stock, and deliberately so.** They are
+documentary photographs — a blue plate, a shop counter, a paper doily — not
+studio work. A true photograph of a panellet is worth more here than a
+beautiful photograph of a croissant captioned *Panellets*, which is the only
+alternative the stock libraries offered. When the merchant shoots their own,
+these are the first to replace.
 
-These are the ones where a stand-in would be a lie, and that is the whole of
-D16. **The right fix is the merchant's own photography**, which is also true
-of every image in this folder — these are placeholders. Nine real photographs
-taken on one morning would close this, and they would be better than anything
-stock could give, because the thing in the window would actually be the thing
-you get.
+## The four that are still blank, and why
+
+`tortell-reis`, `coca-sant-jordi`, `coca-llarga`, `orxata`.
+
+- **tortell-reis** — Commons has good photographs, but every one is CC BY-SA,
+  which carries attribution *and* share-alike into whatever this template
+  becomes. The Unsplash roscón photographs show the marzipan-and-pine-nut
+  kind, which is what `tortell-sant-antoni` already is; this shop's Reis
+  tortell is the candied-fruit one with a figurine and a bean, so using it
+  would misdescribe the product by its own subtitle.
+- **coca-sant-jordi** — nothing on either source. A coca in the colours of
+  the senyera is specific enough that only a Catalan bakery has shot one.
+- **coca-llarga** — nothing. It is the plainest thing in the shop and nobody
+  photographs it.
+- **orxata** — Commons has real Valencian orxata, all CC BY-SA. The CC0
+  results are a cultural centre and a Mexican horchata jar, which is a
+  different drink.
+
+Three of these four **could** be filled from CC BY-SA sources. That is a
+licensing decision rather than a design one: share-alike would travel with
+the template to whoever buys it. It is left open deliberately.
+
+**The real fix for all four is the merchant's own photography**, which is
+true of every file in this folder.

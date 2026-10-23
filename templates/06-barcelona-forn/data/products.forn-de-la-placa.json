@@ -139,7 +139,10 @@
       "subtitle": "Pork crackling, sugar and pine nuts",
       "price": 12,
       "leadDays": 1,
-      "image": null,
+      "image": {
+        "src": "coca-llardons",
+        "alt": "A flat coca de llardons, crackling and sugar across the top"
+      },
       "allergens": [
         "gluten",
         "egg",
@@ -257,7 +260,10 @@
       "subtitle": "Candied fruit and pine nuts",
       "price": 10,
       "leadDays": 2,
-      "image": null,
+      "image": {
+        "src": "coca-sant-joan",
+        "alt": "A coca topped with candied fruit and pine nuts"
+      },
       "allergens": [
         "gluten",
         "egg",
@@ -300,7 +306,10 @@
       "subtitle": "Marzipan and pine nuts, and coconut and coffee too",
       "price": 24,
       "leadDays": 2,
-      "image": null,
+      "image": {
+        "src": "panellets",
+        "alt": "A tray of panellets — pine nut, coconut, coffee and cherry"
+      },
       "allergens": [
         "egg",
         "nuts"
@@ -345,7 +354,10 @@
       "price": 3,
       "leadDays": 0,
       "batchSize": 40,
-      "image": null,
+      "image": {
+        "src": "xuixo",
+        "alt": "A fried xuixo dusted with sugar, on a plate"
+      },
       "allergens": [
         "gluten",
         "egg",
@@ -365,7 +377,10 @@
       "price": 3,
       "leadDays": 0,
       "batchSize": 30,
-      "image": null,
+      "image": {
+        "src": "ensaimada",
+        "alt": "A coiled ensaïmada under icing sugar"
+      },
       "allergens": [
         "gluten",
         "egg"

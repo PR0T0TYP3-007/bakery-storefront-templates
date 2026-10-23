@@ -40,6 +40,19 @@
   margin-inline: calc(var(--s-4) * -1);
   aspect-ratio: 4 / 3;
   object-fit: cover;
+  /* The same grade the hero uses, for consistency across the template.
+
+     It does NOT fix the real problem, and it would be dishonest to pretend
+     otherwise: the set comes from two places — polished stock for the
+     everyday things, and documentary photographs from Wikimedia Commons for
+     the Catalan specialities, which are the only honest pictures of those
+     that exist anywhere. The mismatch is composition and setting, not
+     colour. A filter cannot do anything about a green wall behind a tray of
+     panellets or a xuixo on a blue plate.
+
+     Only the merchant's own photography closes that, and it is the reason
+     every file in assets/img/ is a placeholder. */
+  filter: saturate(0.94) contrast(1.02);
 }
 
 /* A tile with no honest photograph is a plain tile of the other surface.
