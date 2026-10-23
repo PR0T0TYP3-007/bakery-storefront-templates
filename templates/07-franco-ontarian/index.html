@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Boulangerie Tremblay — Hearst, Ontario</title>
+<meta name="description" content="Boulangerie de famille à Hearst depuis 1961. Tarte au sucre, butter tarts, tourtière, pain de ménage.">
+
+<link rel="preload" href="assets/fonts/rye.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/librefranklin.woff2" as="font" type="font/woff2" crossorigin>
+
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/plates.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Bakery",
+  "name": "Boulangerie Tremblay",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "812 rue Principale",
+    "addressLocality": "Hearst",
+    "addressRegion": "ON",
+    "postalCode": "P0L 1N0",
+    "addressCountry": "CA"
+  },
+  "servesCuisine": "Bakery",
+  "priceRange": "$"
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#today" data-skip>Aller aux tartes</a>
+<div data-header></div>
+
+<main id="main">
+
+  <!-- ====================================================================
+       The claim.
+
+       "Two names for the same tart" is the template in five words, and it
+       is a fact rather than a slogan: the butter tart descends from the
+       tarte au sucre. The lede says the consequence instead of explaining
+       the charm.
+       ==================================================================== -->
+  <section class="wrap section hero">
+    <p class="label" data-kicker></p>
+    <h1 class="t-hero hero__claim" style="margin-top:var(--s-3)" data-headline></h1>
+    <p class="lede" style="margin-top:var(--s-5)" data-lede></p>
+  </section>
+
+  <!-- ====================================================================
+       The two tarts, side by side.
+
+       The one place the concept is argued rather than stated: the sugar pie
+       and the butter tart on adjacent plates, each with its own filling and
+       its own name, and the kin note underneath saying how they are related.
+       ==================================================================== -->
+  <section class="band band--enamel section" id="two">
+    <div class="wrap">
+      <div class="sechead">
+        <div class="sechead__title">
+          <h2 class="t-1 sign" data-two-head></h2>
+        </div>
+      </div>
+      <div data-two></div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       What is out today.
+       ==================================================================== -->
+  <section class="band band--enamel-2 section" id="today">
+    <div class="wrap">
+      <div class="sechead">
+        <div class="sechead__title">
+          <h2 class="t-1 sign" data-today-head></h2>
+          <p class="label dim" data-today-date></p>
+        </div>
+        <a class="link" href="shop.html" data-all></a>
+      </div>
+
+      <div data-today>
+        <noscript>
+          <p class="plate plate--2">
+            Cette page a besoin de JavaScript. Téléphonez-nous au 705 555 0161.
+            <br>This page needs JavaScript. Call us at 705 555 0161.
+          </p>
+        </noscript>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       The bakery, briefly.
+       ==================================================================== -->
+  <section class="band band--rim section on-dark">
+    <div class="wrap split split--wide-left">
+      <div>
+        <p class="label dim" data-shop-label></p>
+        <p class="t-2 sign" style="margin-top:var(--s-3)" data-shop-head></p>
+      </div>
+      <div class="prose" data-shop-body></div>
+    </div>
+  </section>
+
+</main>
+
+<footer data-footer></footer>
+
+<script type="module" src="js/pages/home.js"></script>
+</body>
+</html>

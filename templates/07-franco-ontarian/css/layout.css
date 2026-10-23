@@ -1,0 +1,171 @@
+/* ==========================================================================
+   BOULANGERIE TREMBLAY — layout.css
+
+   THE SEPARATION METHOD: stacked enamel plates.
+
+   Enamelware — the speckled steel plates and basins in every northern
+   kitchen — has a hard rolled rim in a darker tone and no shadow at all. It
+   does not float. It sits, and when there are several they sit ON one
+   another, overlapping at the edge.
+
+   So content here sits on flat panels with a 2px rim, and a group of panels
+   OVERLAPS by exactly that rim rather than being spaced apart. Where one
+   thing ends and the next begins is told by the rim and by which plate is
+   on top.
+
+   This is the axis D23 requires to be unique, and it is:
+     01 hairline rules and cards     02 drawn outlines and offset shadow
+     03 masked apertures             04 overlap, bleed, visible grid
+     05 ruled rows on pinned paper   06 tiled modules that abut
+     07 stacked plates with a rim
+
+   The one that needs care is 04, which also uses overlap. 04 overlaps
+   *content* across a visible grid and lets things bleed off the page; this
+   overlaps *edges only*, by the width of a rim, and nothing ever crosses
+   another plate's field. Different move, same word.
+   ========================================================================== */
+
+.wrap {
+  width: min(100% - (var(--gutter) * 2), var(--page));
+  margin-inline: auto;
+}
+
+.wrap-read {
+  width: min(100% - (var(--gutter) * 2), 64rem);
+  margin-inline: auto;
+}
+
+.section { padding-block: var(--s-7); }
+.section--tight { padding-block: var(--s-5); }
+
+/* --------------------------------------------------------------------------
+   The plate
+   -------------------------------------------------------------------------- */
+.plate {
+  position: relative;
+  padding: var(--s-5);
+  background: var(--enamel);
+  color: var(--ink);
+  border: var(--rim-w) solid var(--rim);
+  border-radius: var(--r);
+}
+
+.plate--2 { background: var(--enamel-2); }
+
+.plate--blueberry {
+  background: var(--blueberry);
+  color: var(--enamel);
+  border-color: var(--blueberry-deep);
+}
+
+.plate--rim {
+  background: var(--rim);
+  color: var(--enamel);
+  border-color: var(--ink);
+}
+
+/* A plate laid straight on the ground gets no fill — just the rim, so the
+   wheat shows through. Only --ink may sit here; see tokens.css rule one. */
+.plate--bare {
+  background: transparent;
+  color: var(--ink);
+}
+
+.plate__pad { padding: var(--s-5); }
+
+/* --------------------------------------------------------------------------
+   The stack
+
+   The whole idea, in one rule. Plates in a stack pull back by exactly one
+   rim so their edges share a line, and each later plate sits over the one
+   before it. Two rims never double into a 4px bar.
+   -------------------------------------------------------------------------- */
+.stack-plates {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr));
+}
+
+.stack-plates > * {
+  margin-inline-start: calc(var(--rim-w) * -1);
+  margin-block-start: calc(var(--rim-w) * -1);
+}
+
+/* The first in each row keeps its left edge; the top row keeps its top. The
+   negative margins above would otherwise pull the whole group off its
+   container by a rim on two sides. */
+.stack-plates > :first-child {
+  margin-inline-start: 0;
+}
+
+/* Later plates ride over earlier ones, so the shared edge belongs to the
+   newer plate and the stack reads in order. Hover lifts one to the front —
+   no transform, no shadow, just the order changing, which is the only
+   motion a stack of plates has. */
+.stack-plates > * { z-index: 1; }
+.stack-plates > *:hover,
+.stack-plates > *:focus-within { z-index: 3; }
+
+/* --------------------------------------------------------------------------
+   Bands
+   -------------------------------------------------------------------------- */
+.band { padding-inline: var(--gutter); }
+
+.band--enamel { background: var(--enamel); color: var(--ink); }
+.band--enamel-2 { background: var(--enamel-2); color: var(--ink); }
+.band--blueberry { background: var(--blueberry); color: var(--enamel); }
+.band--rim { background: var(--rim); color: var(--enamel); }
+
+/* A rule of rim across the full width — the join between two bands, the way
+   two sheets of enamel meet. */
+.band + .band { border-top: var(--rim-w) solid var(--rim); }
+
+/* --------------------------------------------------------------------------
+   Section heads
+
+   A plate with the sign on it, sitting proud of the content below. No rule
+   under it — a rule is Template 01's division and 05's, not this one.
+   -------------------------------------------------------------------------- */
+.sechead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s-2) var(--s-5);
+  margin-bottom: var(--s-5);
+}
+
+.sechead__title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--s-3);
+}
+
+/* --------------------------------------------------------------------------
+   Helpers
+   -------------------------------------------------------------------------- */
+.stack > * + * { margin-top: var(--s-4); }
+.stack-2 > * + * { margin-top: var(--s-2); }
+.stack-3 > * + * { margin-top: var(--s-3); }
+.stack-5 > * + * { margin-top: var(--s-5); }
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+.row--between { justify-content: space-between; }
+.push { margin-inline-start: auto; }
+
+.split {
+  display: grid;
+  gap: var(--s-5);
+  align-items: start;
+}
+
+@media (min-width: 56rem) {
+  .split { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s-7); }
+  .split--wide-left { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
+}

@@ -1,0 +1,86 @@
+/* ==========================================================================
+   Products on plates.
+   ========================================================================== */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--s-4);
+  min-height: 9rem;
+}
+
+/* The whole plate is the hit area; the link keeps the accessible name. */
+.card__link {
+  position: absolute;
+  inset: 0;
+}
+
+.card:hover { background: var(--wheat); }
+.card--bare:hover,
+.plate--bare.card:hover { background: color-mix(in srgb, var(--enamel) 40%, transparent); }
+
+.card__sub {
+  margin-top: var(--s-2);
+  color: var(--ink-2);
+}
+
+/* On a bare plate the wheat shows through and only --ink reads, so the
+   subtitle cannot be --ink-2 there. Rule one, enforced. */
+.plate--bare .card__sub { color: var(--ink); }
+
+.card__price { font-size: 1.25rem; }
+
+.card__from {
+  font-family: var(--font-ui);
+  font-weight: 400;
+  color: var(--ink-2);
+}
+
+.plate--bare .card__from { color: var(--ink); }
+
+/* --------------------------------------------------------------------------
+   The two names
+
+   Both at the same size, a rule between, neither a subtitle. The concept,
+   as type.
+   -------------------------------------------------------------------------- */
+.names { margin: 0; }
+
+/* --------------------------------------------------------------------------
+   The kin note
+   -------------------------------------------------------------------------- */
+.kin {
+  margin-top: calc(var(--rim-w) * -1);
+  max-width: var(--measure);
+}
+
+.kin__text { color: var(--ink-2); }
+
+/* --------------------------------------------------------------------------
+   The two tarts, side by side
+
+   Two plates sharing an edge: the same stacking move as everywhere else,
+   but at the size where the comparison is the point.
+   -------------------------------------------------------------------------- */
+.two { display: grid; }
+
+@media (min-width: 46rem) {
+  .two { grid-template-columns: 1fr 1fr; }
+  .two__side + .two__side { margin-inline-start: calc(var(--rim-w) * -1); }
+}
+
+@media (max-width: 45.999rem) {
+  .two__side + .two__side { margin-block-start: calc(var(--rim-w) * -1); }
+}
+
+.two .card { min-height: 11rem; }
+
+.link {
+  color: inherit;
+  font-weight: 600;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+}
+
+.hero__claim { max-width: 16ch; }

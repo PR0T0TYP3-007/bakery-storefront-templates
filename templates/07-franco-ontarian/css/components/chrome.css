@@ -1,0 +1,146 @@
+/* ==========================================================================
+   Header and footer.
+   ========================================================================== */
+
+.hdr {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--enamel);
+  color: var(--ink);
+  border-bottom: var(--rim-w) solid var(--rim);
+}
+
+.hdr__bar {
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  min-height: var(--header-h);
+  padding-block: var(--s-2);
+}
+
+.mark {
+  display: grid;
+  text-decoration: none;
+  line-height: 1.05;
+}
+
+.mark__name { font-size: 1.3rem; }
+.mark__since { color: var(--ink-3); }
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-4);
+  margin-inline-start: auto;
+}
+
+.nav a {
+  padding-block: var(--s-2);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.nav a:hover { text-decoration: underline; }
+
+.nav a[aria-current='page'] {
+  color: var(--blueberry);
+  text-decoration: underline;
+  text-decoration-thickness: var(--rim-w);
+  text-underline-offset: 0.35em;
+}
+
+/* The language switch. A plate, like everything else — not a pill, not a
+   flag. It is the only control in the header that changes the page rather
+   than navigating, so it reads as an object you press. */
+.lang {
+  min-height: var(--tap);
+  padding-inline: var(--s-4);
+  background: var(--enamel-2);
+  color: var(--ink);
+  border: var(--rim-w) solid var(--rim);
+  border-radius: var(--r);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease);
+}
+
+.lang:hover { background: var(--wheat); }
+
+.basket {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: var(--tap);
+  padding-inline: var(--s-4);
+  background: var(--blueberry);
+  color: var(--enamel);
+  border: var(--rim-w) solid var(--blueberry-deep);
+  border-radius: var(--r);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: var(--t-sm);
+}
+
+.basket__n {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  padding-inline: 0.3rem;
+  background: var(--enamel);
+  color: var(--ink);
+  border-radius: var(--r);
+  font-weight: 700;
+}
+
+@media (max-width: 54rem) {
+  /* Wrapped onto two rows the bar eats a quarter of a phone screen, so it
+     stops following the page down. Learned on Template 06. */
+  .hdr { position: static; }
+  .hdr__bar { flex-wrap: wrap; gap: var(--s-3); }
+  .nav { margin-inline-start: 0; order: 3; width: 100%; }
+  .lang { margin-inline-start: auto; }
+}
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+.ftr {
+  background: var(--rim);
+  color: var(--enamel);
+  padding-block: var(--s-7) var(--s-5);
+}
+
+.ftr__grid { display: grid; gap: var(--s-6); }
+
+@media (min-width: 52rem) {
+  .ftr__grid { grid-template-columns: 1.4fr 1fr 1fr; }
+}
+
+.ftr .dim { color: color-mix(in srgb, var(--enamel) 86%, transparent); }
+
+.ftr a { color: inherit; }
+
+.ftr__hours {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ftr__hours li {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--s-4);
+  margin: 0;
+  padding-block: 2px;
+  font-variant-numeric: tabular-nums;
+}
+
+.ftr__fine { margin-top: var(--s-6); }
+
+/* The flag is drawn, never a text background — tokens.css rule two. */
+.flag {
+  width: 5.25rem;
+  height: auto;
+}

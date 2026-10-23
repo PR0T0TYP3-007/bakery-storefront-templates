@@ -762,8 +762,48 @@ All four of the concept doc's open questions are answered in §9 — including t
 business name is "no collision found", **not** "verified clear", and needs a registry check
 before commercial release.
 
+**23 Oct, second stretch — layout, the chrome, and the home page.**
+
+`base.css`, `layout.css`, `components/chrome.css`, `components/plates.css`, the services layer
+(`api.js`, `session.js`, `locale.js`), `components/chrome.js`, `components/plates.js`,
+`index.html` and `pages/home.js`.
+
+**The separation method is stacked plates**, and the whole of it is one rule: plates in a group
+pull back by exactly one rim (`margin-inline-start: calc(var(--rim-w) * -1)`) so their edges
+share a line, and each later plate sits over the one before. Two rims never double into a 4px
+bar. The care needed is against **Template 04**, which also uses overlap — 04 overlaps
+*content* across a visible grid and lets things bleed; this overlaps *edges only*, and nothing
+ever crosses another plate's field.
+
+**Two real bugs, both caught by looking at the running page:**
+
+1. **The site opened in English.** `pick()` consulted `navigator.language`, which was `en-US`,
+   so it quietly overrode `DEFAULT_LANG = 'fr'` and undid the premise for most visitors.
+   `navigator.language` is no longer consulted at all — only an explicit `?lang=` or a
+   remembered choice moves it. The trade-off is accepted knowingly and written into
+   `locale.js`: the switch is in the header on every page and says "English" in English.
+
+2. **`<html lang>` disagreed with the page.** `shared/session.js` sets
+   `document.documentElement.lang = merchant.locale` when it boots, which is right for the
+   other six templates where a merchant has one language. Here it lands *after* `locale.js`
+   has painted and stamps `fr-CA` over the reader's choice — so the page served English copy
+   under `lang="fr-CA"`, and every screen reader would have read it in a French voice. Rather
+   than change the shared layer for one template, `chrome.js` calls `syncDocument()` after
+   boot, in the one place every page goes through.
+
+**And a content collision:** the sugar pie's English face was "Butter tart", which put two
+adjacent plates both headed *Butter tart* in English. The English name for a tarte au sucre is
+**sugar pie**; the descent belongs in the kin note, which is what the kin note is for.
+
+Verified: sweep clean in **both languages** at desktop and 375, no sideways scroll, the switch
+flips nav, headline, lede, name order, the kin note and `<html lang>`, 253 tests pass, build at
+54 pages.
+
 Next:
-1. `base.css` and `layout.css` — the stacked enamel plates, then the home page.
+1. The shop and product pages — `product.html` is where the raisin question and the 1900
+   Barrie fact live.
+2. `glossary.html`, the year section, then basket/checkout/confirmation/visit/404.
+3. The style guide. Photography (its own set — see §5).
 
 Open design note from the client: *"could need improvement in design"* — accepted, no specifics
 given yet. The weakest thing is probably the basket line at phone width, where the quantity box
