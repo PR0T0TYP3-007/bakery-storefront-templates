@@ -1,0 +1,216 @@
+/* ==========================================================================
+   The style guide.
+
+   This page is the one place where the template is asked to describe itself,
+   so nothing here invents a new look: the swatches, the specimens and the
+   measured grid all sit on the same enamel plates with the same 2px rim as
+   the shop. A style guide that needs its own styling is describing a
+   different template.
+   ========================================================================== */
+
+.guide .prose { max-width: var(--measure); }
+.guide .prose p + p { margin-top: var(--s-3); }
+
+/* --------------------------------------------------------------------------
+   The specimen cells in section 1
+
+   Deliberately plain and deliberately tall enough to read as surfaces: the
+   point being demonstrated is the overlap, so there must be enough plate on
+   either side of the rim to see which one is on top.
+   -------------------------------------------------------------------------- */
+.demo__cell {
+  padding: var(--s-4);
+  min-height: 5.5rem;
+  display: grid;
+  align-content: start;
+}
+
+/* --------------------------------------------------------------------------
+   Swatches
+   -------------------------------------------------------------------------- */
+/* Swatches stack like everything else: rims shared, nothing spaced. A grid
+   of gapped cards here would be a different template describing this one. */
+.sws {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 14rem), 1fr));
+}
+
+.sws > * {
+  margin-inline-start: calc(var(--rim-w) * -1);
+  margin-block-start: calc(var(--rim-w) * -1);
+}
+
+.sws > :first-child { margin-inline-start: 0; }
+
+/* The plate's own padding comes off: the chip has to run flush to the rim or
+   it reads as a picture of a colour rather than the colour itself. */
+.sw {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  overflow: hidden;
+}
+
+/* The chip is the colour and nothing else. No text on it: half this palette
+   is drawn-only or plate-only, and a swatch carrying a word would be the
+   guide breaking the rule it is there to state. */
+.sw__chip {
+  height: 4.5rem;
+  border-bottom: var(--rim-w) solid var(--rim);
+}
+
+.sw figcaption {
+  padding: var(--s-3);
+  display: grid;
+  gap: 2px;
+}
+
+.sw figcaption p { margin: 0; }
+.sw code { font-size: var(--t-sm); }
+
+/* --------------------------------------------------------------------------
+   The measured grid
+
+   It scrolls sideways on a narrow screen rather than shrinking: eight
+   surfaces by eight inks does not fold, and a number too small to read is
+   worse than a number you have to scroll to.
+   -------------------------------------------------------------------------- */
+.tablewrap {
+  overflow-x: auto;
+  border: var(--rim-w) solid var(--rim);
+  background: var(--enamel);
+}
+
+.grid {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 46rem;
+  font-size: var(--t-sm);
+}
+
+.grid th,
+.grid td {
+  padding: var(--s-2) var(--s-3);
+  text-align: left;
+  border-bottom: 1px solid color-mix(in srgb, var(--rim) 22%, transparent);
+  white-space: nowrap;
+}
+
+.grid thead th {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--t-sm);
+  border-bottom: var(--rim-w) solid var(--rim);
+}
+
+.grid tbody th {
+  font-weight: 600;
+  background: var(--enamel-2);
+  border-right: var(--rim-w) solid var(--rim);
+}
+
+/* The grades are stated in three ways: the number, a word, and a tint.
+   Colour alone would be the guide failing its own accessibility section —
+   and the tints are deliberately pale so --ink stays the text colour and
+   every cell in the table keeps passing whatever the grade inside it says. */
+.grid td.cell { text-align: right; }
+
+.grid td.cell--pass { background: color-mix(in srgb, var(--ok) 14%, var(--enamel)); }
+.grid td.cell--large { background: color-mix(in srgb, var(--warn) 16%, var(--enamel)); }
+.grid td.cell--fail { background: color-mix(in srgb, var(--bad) 14%, var(--enamel)); }
+
+.cell__g {
+  display: inline-block;
+  margin-left: var(--s-2);
+  min-width: 1.5em;
+  font-size: var(--t-label);
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+/* --------------------------------------------------------------------------
+   The two rules
+
+   Each rule shows its own banned pairings at full strength, which means
+   these specimens fail contrast ON PURPOSE. They carry data-contrast-demo so
+   the repo's sweep counts them as exemptions instead of flagging them — the
+   number beside each one is the evidence, and the "Aa" is what the failure
+   actually looks like.
+   -------------------------------------------------------------------------- */
+.rules {
+  display: grid;
+  gap: var(--s-5);
+}
+
+.rule { padding: var(--s-5); }
+.rule h4 { max-width: 34ch; }
+
+.rule__list {
+  list-style: none;
+  margin: var(--s-4) 0 0;
+  padding: 0;
+  display: grid;
+}
+
+.rule__row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--s-3);
+  padding: var(--s-2) 0;
+  border-top: 1px solid color-mix(in srgb, var(--rim) 22%, transparent);
+}
+
+.rule__swatch {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.25rem;
+  font-family: var(--font-display);
+  border: var(--rim-w) solid var(--rim);
+}
+
+.rule__n { font-variant-numeric: tabular-nums; }
+.rule__n.is-bad { color: var(--bad); }
+
+/* --------------------------------------------------------------------------
+   Type scale
+   -------------------------------------------------------------------------- */
+/* Steps stack like every other group of plates here: pulled back by one rim
+   so the shared edge is a single line. A positive gap would double it. */
+.scale { display: grid; }
+.scale > * + * { margin-top: calc(var(--rim-w) * -1); }
+
+.step {
+  padding: var(--s-4);
+  display: grid;
+  gap: var(--s-2);
+}
+
+.step p { margin: 0; }
+.step__name { font-variant-numeric: tabular-nums; }
+.step code { font-size: var(--t-label); }
+
+/* --------------------------------------------------------------------------
+   Narrow screens
+   -------------------------------------------------------------------------- */
+@media (max-width: 34rem) {
+  .rule { padding: var(--s-4); }
+
+  /* The swatch, the pair and the number stop fitting on one line long before
+     the table does. Stack the pair under the swatch rather than letting the
+     token names wrap one character at a time. */
+  .rule__row {
+    grid-template-columns: auto 1fr;
+  }
+
+  .rule__n { grid-column: 2; justify-self: start; }
+}
+
+/* A token name must not break after one of its own leading hyphens: at phone
+   width "--ink" was landing as "-" and "-ink" on two lines. */
+.nb {
+  white-space: nowrap;
+  font-size: inherit;
+}

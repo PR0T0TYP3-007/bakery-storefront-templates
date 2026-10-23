@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guide — Boulangerie Tremblay</title>
+<meta name="robots" content="noindex">
+
+<link rel="preload" href="assets/fonts/rye.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/librefranklin.woff2" as="font" type="font/woff2" crossorigin>
+
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/plates.css">
+<link rel="stylesheet" href="css/components/controls.css">
+<link rel="stylesheet" href="css/components/order.css">
+<link rel="stylesheet" href="css/components/visit.css">
+<link rel="stylesheet" href="css/components/glossary.css">
+<link rel="stylesheet" href="css/components/guide.css">
+</head>
+<body>
+<a class="skip" href="#main" data-skip></a>
+<div data-header></div>
+
+<main id="main" class="guide">
+
+  <section class="wrap section">
+    <p class="label dim">Boulangerie Tremblay</p>
+    <h1 class="t-1 sign" style="margin-top:var(--s-3)" data-head></h1>
+    <p class="lede" style="margin-top:var(--s-4)" data-lede></p>
+  </section>
+
+  <!-- 1 · The separation method -->
+  <section class="band band--enamel section" aria-labelledby="g-sep">
+    <div class="wrap">
+      <h2 class="t-1 sign" id="g-sep" data-h-sep></h2>
+      <div class="prose" style="margin-top:var(--s-4)" data-p-sep></div>
+      <div style="margin-top:var(--s-5)" data-demo-plates></div>
+      <p class="sm dim" style="margin-top:var(--s-3)" data-sep-set></p>
+    </div>
+  </section>
+
+  <!-- 2 · The two names -->
+  <section class="band band--enamel-2 section" aria-labelledby="g-names">
+    <div class="wrap">
+      <h2 class="t-1 sign" id="g-names" data-h-names></h2>
+      <div class="prose" style="margin-top:var(--s-4)" data-p-names></div>
+      <div style="margin-top:var(--s-5)" data-demo-names></div>
+    </div>
+  </section>
+
+  <!-- 3 · Colour -->
+  <section class="wrap section" aria-labelledby="g-col">
+    <h2 class="t-1 sign" id="g-col" data-h-col></h2>
+    <div class="prose" style="margin-top:var(--s-4)" data-p-col></div>
+    <div class="sws" style="margin-top:var(--s-5)" data-swatches></div>
+  </section>
+
+  <section class="band band--enamel section" aria-labelledby="g-meas">
+    <div class="wrap">
+      <h2 class="t-2 sign" id="g-meas" data-h-meas></h2>
+      <div class="prose" style="margin-top:var(--s-3)" data-p-meas></div>
+
+      <div class="tablewrap" style="margin-top:var(--s-5)">
+        <table class="grid" data-contrast>
+          <caption class="vh" data-grid-caption></caption>
+        </table>
+      </div>
+
+      <h3 class="t-3 sign" style="margin-top:var(--s-6)" data-h-rules></h3>
+      <div class="rules" style="margin-top:var(--s-4)" data-rules></div>
+    </div>
+  </section>
+
+  <!-- 4 · Type -->
+  <section class="wrap section" aria-labelledby="g-type">
+    <h2 class="t-1 sign" id="g-type" data-h-type></h2>
+    <div class="prose" style="margin-top:var(--s-4)" data-p-type></div>
+    <div class="scale" style="margin-top:var(--s-5)" data-scale></div>
+  </section>
+
+  <!-- 5 · Components -->
+  <section class="band band--enamel-2 section" aria-labelledby="g-comp">
+    <div class="wrap">
+      <h2 class="t-1 sign" id="g-comp" data-h-comp></h2>
+
+      <h3 class="t-3 sign" style="margin-top:var(--s-6)" data-h-btn></h3>
+      <p class="row" style="margin-top:var(--s-3)">
+        <button class="btn" type="button" data-b-add></button>
+        <button class="btn btn--quiet" type="button" data-b-change></button>
+        <button class="btn" type="button" aria-disabled="true" data-b-off></button>
+      </p>
+
+      <h3 class="t-3 sign" style="margin-top:var(--s-6)" data-h-lang></h3>
+      <div class="prose" style="margin-top:var(--s-3)" data-p-lang></div>
+
+      <h3 class="t-3 sign" style="margin-top:var(--s-6)" data-h-plates></h3>
+      <div style="margin-top:var(--s-3)" data-demo-products></div>
+
+      <h3 class="t-3 sign" style="margin-top:var(--s-6)" data-h-form></h3>
+      <div class="pay" style="margin-top:var(--s-3);max-width:34rem">
+        <p class="field">
+          <label for="g-ok" data-l-ok></label>
+          <input id="g-ok" type="text" value="Marie">
+        </p>
+        <p class="field field--bad">
+          <label for="g-bad" data-l-bad></label>
+          <input id="g-bad" type="text" value="marie@" aria-invalid="true">
+          <span class="sm field__bad" data-msg-bad></span>
+        </p>
+      </div>
+
+      <h3 class="t-3 sign" style="margin-top:var(--s-6)" data-h-slots></h3>
+      <div class="slots" style="margin-top:var(--s-3)" data-demo-slots></div>
+
+      <h3 class="t-3 sign" style="margin-top:var(--s-6)" data-h-toast></h3>
+      <p class="row" style="margin-top:var(--s-3)">
+        <button class="btn btn--quiet" type="button" data-toast></button>
+      </p>
+    </div>
+  </section>
+
+  <!-- 6 · Citing -->
+  <section class="band band--rim section on-dark" aria-labelledby="g-cite">
+    <div class="wrap">
+      <h2 class="t-1 sign" id="g-cite" data-h-cite></h2>
+      <div class="prose" style="margin-top:var(--s-4)" data-p-cite></div>
+    </div>
+  </section>
+
+</main>
+
+<footer data-footer></footer>
+
+<script type="module" src="js/pages/styleguide.js"></script>
+</body>
+</html>
