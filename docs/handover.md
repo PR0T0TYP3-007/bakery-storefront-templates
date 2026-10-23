@@ -888,10 +888,37 @@ Verified: basket, checkout and confirmation all sweep clean in both languages at
 confirmation opened without a reference says so rather than rendering empty. 259 tests pass,
 build at 60 pages.
 
+**23 Oct, sixth stretch — `visit.html` and `404.html`.** Nine of the ten pages are now built;
+only the style guide is left.
+
+**Visit** answers the question people actually arrive with. Today's row in the hours table is
+marked by surface **and** by the word *aujourd'hui* / *today*, because a row that differs only
+in colour is not marked for everybody; and when the shop is shut it says when it opens again
+rather than leaving the table to be read backwards. The map link is a search for the address,
+not a pin — coordinates would have been invented.
+
+It carries one section the other templates have no reason to: **La langue / Language**, saying
+the counter serves in French, and in English, often in the same sentence. That is the shop
+describing itself, not the template explaining itself.
+
+All of it comes from a new bilingual `visit` block in the merchant config, so a second
+boulangerie on a different street gets a different page from the same markup. A test walks it
+and asserts no half-translated entry.
+
+**404** says the one true thing in this shop's voice — *"Ça, on n'en fait pas."* / *"We do not
+make that one."* — and renders the real stack underneath, so it cannot go out of date with the
+shop and a dead end hands somebody a tart.
+
+One inconsistency fixed: the visit page's tab title said *Comment venir* while the nav called
+it *Nous trouver*. The title follows the nav now.
+
+Verified: both pages sweep clean in both languages at desktop and 375, no sideways scroll, 260
+tests pass, build at 62 pages.
+
 Next:
-1. `visit.html` and `404.html`.
+1. The style guide — the last page.
 2. The year section on the home page — maple season, the fête franco-ontarienne, the holidays.
-3. The style guide. Photography (its own set — see §5).
+3. Photography (its own set — see §5), and listing 07 on the gallery.
 2. The year section, then basket/checkout/confirmation/visit/404.
 2. `glossary.html`, the year section, then basket/checkout/confirmation/visit/404.
 3. The style guide. Photography (its own set — see §5).

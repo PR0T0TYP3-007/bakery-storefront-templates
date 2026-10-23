@@ -1,0 +1,84 @@
+/* ==========================================================================
+   Nous trouver / Find us.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Hours
+
+   A table, because it is one, and it sits on a plate like everything else.
+   -------------------------------------------------------------------------- */
+.hours {
+  margin-top: var(--s-4);
+  border-collapse: collapse;
+  padding: 0;
+  overflow: hidden;
+}
+
+.hours__row > * {
+  padding: var(--s-3) var(--s-4);
+  text-align: left;
+  font-weight: 400;
+}
+
+.hours__row + .hours__row > * {
+  border-top: var(--rim-w) solid color-mix(in srgb, var(--rim) 28%, transparent);
+}
+
+.hours__row td {
+  text-align: right;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.hours__row th { font-family: var(--font-display); }
+
+/* Today. The surface changes AND the row says the word — a row that only
+   differs in colour is not marked for everybody. */
+.hours__row.is-today > * {
+  background: var(--blueberry);
+  color: var(--enamel);
+}
+
+.hours__mark {
+  margin-inline-start: var(--s-3);
+  padding: 1px var(--s-2);
+  background: var(--enamel);
+  color: var(--ink);
+  border-radius: var(--r);
+  font-family: var(--font-ui);
+  font-size: var(--t-label);
+  font-weight: 700;
+  letter-spacing: var(--track-label);
+  text-transform: uppercase;
+}
+
+/* --------------------------------------------------------------------------
+   Getting here
+   -------------------------------------------------------------------------- */
+.ways {
+  display: grid;
+  margin: 0;
+}
+
+@media (min-width: 52rem) {
+  .ways { grid-template-columns: repeat(3, 1fr); }
+  .way + .way { margin-inline-start: calc(var(--rim-w) * -1); }
+}
+
+@media (max-width: 51.999rem) {
+  .way + .way { margin-block-start: calc(var(--rim-w) * -1); }
+}
+
+.way {
+  display: grid;
+  align-content: start;
+  gap: var(--s-2);
+}
+
+.way__how { color: var(--enamel); }
+
+.way__what {
+  margin: 0;
+  color: color-mix(in srgb, var(--enamel) 92%, transparent);
+  max-width: 38ch;
+}

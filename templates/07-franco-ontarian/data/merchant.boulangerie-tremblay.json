@@ -25,28 +25,78 @@
       "name": "rue Principale",
       "default": true,
       "address": "812 rue Principale, Hearst, ON P0L 1N0",
-      "slots": ["07:00–09:00", "09:00–11:00", "11:00–13:00", "15:00–17:00"]
+      "slots": [
+        "07:00–09:00",
+        "09:00–11:00",
+        "11:00–13:00",
+        "15:00–17:00"
+      ]
     }
   ],
   "email": "bonjour@boulangerietremblay.example",
   "phone": "705 555 0161",
   "hours": [
-    { "day": "Monday", "open": null },
-    { "day": "Tuesday", "open": "07:00", "close": "17:00" },
-    { "day": "Wednesday", "open": "07:00", "close": "17:00" },
-    { "day": "Thursday", "open": "07:00", "close": "17:00" },
-    { "day": "Friday", "open": "07:00", "close": "18:00" },
-    { "day": "Saturday", "open": "07:00", "close": "16:00" },
-    { "day": "Sunday", "open": null }
+    {
+      "day": "Monday",
+      "open": null
+    },
+    {
+      "day": "Tuesday",
+      "open": "07:00",
+      "close": "17:00"
+    },
+    {
+      "day": "Wednesday",
+      "open": "07:00",
+      "close": "17:00"
+    },
+    {
+      "day": "Thursday",
+      "open": "07:00",
+      "close": "17:00"
+    },
+    {
+      "day": "Friday",
+      "open": "07:00",
+      "close": "18:00"
+    },
+    {
+      "day": "Saturday",
+      "open": "07:00",
+      "close": "16:00"
+    },
+    {
+      "day": "Sunday",
+      "open": null
+    }
   ],
-  "closedWeekdays": [1, 0],
-  "closedDates": ["2026-12-25", "2026-12-26", "2027-01-01"],
+  "closedWeekdays": [
+    1,
+    0
+  ],
+  "closedDates": [
+    "2026-12-25",
+    "2026-12-26",
+    "2027-01-01"
+  ],
   "cutoffHour": 14,
   "maxDaysAhead": 21,
   "dailyCapacity": 30,
   "allergens": {
-    "fr": ["gluten", "œuf", "lait", "noix", "soja"],
-    "en": ["gluten", "egg", "milk", "nuts", "soy"]
+    "fr": [
+      "gluten",
+      "œuf",
+      "lait",
+      "noix",
+      "soja"
+    ],
+    "en": [
+      "gluten",
+      "egg",
+      "milk",
+      "nuts",
+      "soy"
+    ]
   },
   "allergenStatement": {
     "fr": "Une seule cuisine. Le gluten, l'œuf, le lait, les noix et le soja y passent tous les jours. Rien ne sort d'ici certifié sans quoi que ce soit. Dites-le-nous en commandant et on vous dira ce qu'on peut faire.",
@@ -87,8 +137,14 @@
       "id": "temps-des-sucres",
       "productId": "tarte-au-sucre",
       "on": "03-15",
-      "sells": [21, 30],
-      "day": { "fr": "Le temps des sucres", "en": "Maple season" },
+      "sells": [
+        21,
+        30
+      ],
+      "day": {
+        "fr": "Le temps des sucres",
+        "en": "Maple season"
+      },
       "note": {
         "fr": "Quand la sève coule. Le sirop de cette année-là, pas celui de l'an passé.",
         "en": "When the sap runs. This year's syrup, not last year's."
@@ -98,8 +154,14 @@
       "id": "fete-franco-ontarienne",
       "productId": "tarte-aux-bleuets",
       "on": "09-25",
-      "sells": [3, 1],
-      "day": { "fr": "La fête franco-ontarienne", "en": "Franco-Ontarian Day" },
+      "sells": [
+        3,
+        1
+      ],
+      "day": {
+        "fr": "La fête franco-ontarienne",
+        "en": "Franco-Ontarian Day"
+      },
       "note": {
         "fr": "Le drapeau a été dessiné à Sudbury en 1975. Vert pour l'été, blanc pour l'hiver.",
         "en": "The flag was designed in Sudbury in 1975. Green for summer, white for winter."
@@ -110,12 +172,64 @@
       "id": "temps-des-fetes",
       "productId": "tourtiere",
       "on": "12-24",
-      "sells": [28, 7],
-      "day": { "fr": "Le temps des fêtes", "en": "The holidays" },
+      "sells": [
+        28,
+        7
+      ],
+      "day": {
+        "fr": "Le temps des fêtes",
+        "en": "The holidays"
+      },
       "note": {
         "fr": "On en fait des centaines. Commandez tôt — on manque toujours.",
         "en": "We make hundreds. Order early — we always run out."
       }
     }
-  ]
+  ],
+  "visit": {
+    "lede": {
+      "fr": "On est sur la rue Principale, qui est aussi la 11. En hiver il faut pousser la porte fort — elle gèle. Entrez pareil.",
+      "en": "We are on rue Principale, which is also Highway 11. In winter you have to push the door hard — it freezes. Come in anyway."
+    },
+    "getting": [
+      {
+        "how": {
+          "fr": "En char",
+          "en": "Driving"
+        },
+        "what": {
+          "fr": "La 11 traverse Hearst d'un bout à l'autre. On est dessus, du côté nord, avec du stationnement devant.",
+          "en": "Highway 11 runs the length of Hearst. We are on it, north side, with parking out front."
+        }
+      },
+      {
+        "how": {
+          "fr": "À pied",
+          "en": "On foot"
+        },
+        "what": {
+          "fr": "Tout le centre-ville se fait à pied. L'hiver, les trottoirs sont déneigés avant qu'on ouvre.",
+          "en": "The whole downtown is walkable. In winter the sidewalks are cleared before we open."
+        }
+      },
+      {
+        "how": {
+          "fr": "En autobus",
+          "en": "By bus"
+        },
+        "what": {
+          "fr": "L'autocar s'arrête à Hearst sur la route entre Hearst et Cochrane. On est à quelques minutes à pied de l'arrêt.",
+          "en": "The coach stops in Hearst on the Cochrane route. We are a few minutes' walk from the stop."
+        }
+      }
+    ],
+    "room": {
+      "fr": "Un comptoir, trois tables, et le four de ma grand-mère qui est encore là. Ça se remplit entre sept et neuf avec le monde qui s'en va travailler, et ça se vide après.",
+      "en": "A counter, three tables, and my grandmother's oven still in the back. It fills up between seven and nine with people on their way to work, and empties after."
+    },
+    "language": {
+      "fr": "On sert en français. En anglais aussi, sans problème — souvent dans la même phrase, comme tout le monde par ici.",
+      "en": "We serve in French. In English too, no trouble — often in the same sentence, the way everybody does around here."
+    }
+  }
 }

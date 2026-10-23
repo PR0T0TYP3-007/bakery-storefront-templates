@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pas trouvé — Boulangerie Tremblay</title>
+<meta name="robots" content="noindex">
+
+<link rel="preload" href="assets/fonts/rye.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/librefranklin.woff2" as="font" type="font/woff2" crossorigin>
+
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/plates.css">
+<link rel="stylesheet" href="css/components/controls.css">
+</head>
+<body>
+<a class="skip" href="#gone" data-skip></a>
+<div data-header></div>
+
+<main id="main">
+  <!-- ====================================================================
+       The shop's own line, which is also the truth. Short: a 404 that
+       explains itself at length is a 404 nobody reads.
+       ==================================================================== -->
+  <section class="band band--blueberry section on-dark" id="gone">
+    <div class="wrap">
+      <p class="label">404</p>
+      <h1 class="t-hero sign" style="margin-top:var(--s-3);max-width:15ch" data-head></h1>
+      <p class="lede" style="margin-top:var(--s-4)" data-say></p>
+
+      <p class="row" style="margin-top:var(--s-6)">
+        <a class="btn btn--quiet" href="shop.html" data-to-shop></a>
+        <a class="btn btn--quiet" href="glossary.html" data-to-glossary></a>
+      </p>
+    </div>
+  </section>
+
+  <!-- What is actually out today. A dead end that hands somebody a tart
+       beats one that only apologises. -->
+  <section class="band band--enamel-2 section">
+    <div class="wrap">
+      <div class="sechead">
+        <div class="sechead__title">
+          <h2 class="t-1 sign" data-today-head></h2>
+          <p class="label dim" data-today-date></p>
+        </div>
+        <a class="link" href="index.html" data-home-link></a>
+      </div>
+
+      <div data-today></div>
+    </div>
+  </section>
+</main>
+
+<footer data-footer></footer>
+
+<script type="module" src="js/pages/notfound.js"></script>
+</body>
+</html>

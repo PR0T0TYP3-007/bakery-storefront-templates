@@ -329,3 +329,23 @@ test('this merchant is collection only, and says so by capability', () => {
     'collection needs slots to offer'
   );
 });
+
+test('the visit block speaks both languages all the way down', () => {
+  const v = merchant.visit;
+  assert.ok(v, 'no visit block');
+
+  for (const key of ['lede', 'room', 'language']) {
+    for (const lang of LANGS) {
+      assert.ok(v[key]?.[lang]?.trim(), `visit.${key} has no ${lang}`);
+    }
+    assert.notEqual(v[key].fr, v[key].en, `visit.${key} is the same in both languages`);
+  }
+
+  assert.ok(v.getting?.length >= 2, 'visit.getting needs at least two ways in');
+  for (const w of v.getting) {
+    for (const lang of LANGS) {
+      assert.ok(w.how?.[lang]?.trim(), `a way in has no ${lang} label`);
+      assert.ok(w.what?.[lang]?.trim(), `a way in has no ${lang} description`);
+    }
+  }
+});
