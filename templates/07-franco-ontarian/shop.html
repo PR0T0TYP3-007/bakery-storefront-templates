@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La boutique — Boulangerie Tremblay</title>
+<meta name="description" content="Tout ce qu'on fait : tartes, pain, salé, et le matin.">
+
+<link rel="preload" href="assets/fonts/rye.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/librefranklin.woff2" as="font" type="font/woff2" crossorigin>
+
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/plates.css">
+<link rel="stylesheet" href="css/components/controls.css">
+</head>
+<body>
+<a class="skip" href="#list" data-skip></a>
+<div data-header></div>
+
+<main id="main">
+
+  <section class="wrap section section--tight">
+    <h1 class="t-1 sign" data-head></h1>
+    <p class="lede" style="margin-top:var(--s-3)" data-lede></p>
+  </section>
+
+  <!-- The filter. Plates again: the chosen one is the blueberry plate and
+       the rest are enamel. No pill, no underline — the fill is the state. -->
+  <section class="band band--enamel section--tight">
+    <div class="wrap">
+      <nav class="filters stack-plates" data-filters></nav>
+
+      <form class="find" role="search" data-find>
+        <label class="vh" for="q" data-find-label></label>
+        <input class="find__in" id="q" name="q" type="search" autocomplete="off">
+        <button class="btn" type="submit" data-find-go></button>
+      </form>
+    </div>
+  </section>
+
+  <section class="band band--enamel-2 section" id="list">
+    <div class="wrap">
+      <p class="label dim" aria-live="polite" data-count></p>
+      <div style="margin-top:var(--s-4)" data-list>
+        <noscript>
+          <p class="plate">
+            Cette liste a besoin de JavaScript. Téléphonez-nous au 705 555 0161.
+            <br>This list needs JavaScript. Call us at 705 555 0161.
+          </p>
+        </noscript>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer data-footer></footer>
+
+<script type="module" src="js/pages/shop.js"></script>
+</body>
+</html>

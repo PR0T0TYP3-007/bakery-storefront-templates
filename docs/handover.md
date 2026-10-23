@@ -799,9 +799,39 @@ Verified: sweep clean in **both languages** at desktop and 375, no sideways scro
 flips nav, headline, lede, name order, the kin note and `<html lang>`, 253 tests pass, build at
 54 pages.
 
+**23 Oct, third stretch — the shop and the product page.**
+
+`shop.html`, `product.html`, `components/toast.js`, `components/controls.css`.
+
+**Search looks in both languages regardless of which is showing.** Somebody reading the English
+page who types *tourtière* finds it, and somebody reading French who types *blueberry* does
+too. The premise is that the reader lives in both, and making them search one at a time would
+be the one thing this template is least allowed to do.
+
+**The raisin question is on the product page** — one option group, three choices (no raisins /
+raisins / currants), and one sentence: the first written butter tart recipe we know of, Barrie
+1900, called for **currants**. No festival, no trail, no quiz. The concept doc warns this must
+not tip into novelty, so only that group gets a fact; a sentence under every option group would
+be a template that cannot stop talking.
+
+**A real bug the switch created.** `draw()` rebuilds the whole page on a language change — it
+has to, because the two languages are not translations and the *content* differs, not just the
+words. The first version therefore threw the form away: three currant tarts at $15 silently
+became one plain one at 4 $ just for reading the page in the other language. The reader's
+choices are now held in a module variable and re-applied, so the switch is free to use.
+Verified in both directions; only the currency formatting changes (`15 $` ↔ `$15`), which is
+correct for fr-CA against en-CA.
+
+Also fixed: the kin plate used the stacking negative margin unconditionally, so after prose it
+crowded the last line of the description. It only rides an edge when there is an edge to ride.
+
+Verified: both pages sweep clean in **both languages** at desktop and 375, no sideways scroll,
+add-to-basket works with a French toast, 253 tests pass, build at 56 pages.
+
 Next:
-1. The shop and product pages — `product.html` is where the raisin question and the 1900
-   Barrie fact live.
+1. `glossary.html` — the two-names idea at length, and the place the 1900 fact is properly
+   sourced.
+2. The year section, then basket/checkout/confirmation/visit/404.
 2. `glossary.html`, the year section, then basket/checkout/confirmation/visit/404.
 3. The style guide. Photography (its own set — see §5).
 

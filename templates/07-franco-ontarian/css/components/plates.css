@@ -50,9 +50,18 @@
 /* --------------------------------------------------------------------------
    The kin note
    -------------------------------------------------------------------------- */
+/* The negative margin is the stacking idiom: a plate riding the edge of the
+   plate above it. After prose there is no edge to ride, so it just crowded
+   the last line of the description. It only pulls up when it actually
+   follows a plate. */
 .kin {
-  margin-top: calc(var(--rim-w) * -1);
+  margin-top: var(--s-5);
   max-width: var(--measure);
+}
+
+.plate + .kin,
+.stack-plates + .kin {
+  margin-top: calc(var(--rim-w) * -1);
 }
 
 .kin__text { color: var(--ink-2); }

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="fr-CA">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Boulangerie Tremblay</title>
+<meta name="description" content="Une chose, ses deux noms, et ce qu'il y a dedans.">
+
+<link rel="preload" href="assets/fonts/rye.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/librefranklin.woff2" as="font" type="font/woff2" crossorigin>
+
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components/chrome.css">
+<link rel="stylesheet" href="css/components/plates.css">
+<link rel="stylesheet" href="css/components/controls.css">
+</head>
+<body>
+<a class="skip" href="#thing" data-skip></a>
+<div data-header></div>
+
+<main id="main">
+  <section class="band band--enamel-2 section" id="thing">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Fil d'Ariane" data-crumbs>
+        <a class="link" href="shop.html" data-crumb-shop></a>
+        <span aria-hidden="true">·</span>
+        <span data-crumb></span>
+      </nav>
+
+      <div class="thing" data-thing>
+        <noscript>
+          <p class="plate" style="margin-top:var(--s-5)">
+            Cette page a besoin de JavaScript. Téléphonez-nous au 705 555 0161.
+            <br>This page needs JavaScript. Call us at 705 555 0161.
+          </p>
+        </noscript>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer data-footer></footer>
+
+<script type="module" src="js/pages/product.js"></script>
+</body>
+</html>
